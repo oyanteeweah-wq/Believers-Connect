@@ -1,200 +1,12 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0">
-<meta name="theme-color" content="#1877f2">
-<meta name="description" content="Believer Connect — One Community, One Faith">
-
-<title>Believer Connect</title>
-
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-
-<style>
-*{ box-sizing:border-box; margin:0; padding:0; }
-html{ scroll-behavior:smooth; }
-body{
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-  background:#f0f2f5;
-  color:#050505;
-  line-height:1.4;
-  padding-bottom: 60px;
-  overflow-x: hidden;
-}
-button, input, textarea{ font:inherit; }
-button{ border:0; outline:none; }
-img{ max-width:100%; }
-
-:root{
-  --primary:#1877f2;
-  --primary-dark:#0e5aed;
-  --muted:#65676b;
-  --surface:#ffffff;
-  --shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
-  --radius:8px;
-}
-
-.hidden{ display:none !important; }
-.wrap{ width:100%; max-width:680px; margin:auto; }
-.muted{ color:var(--muted); }
-.error{ color:#fa3e3e; }
-
-/* HEADER */
-header{
-  position:sticky; top:0; z-index:1000;
-  background:var(--surface);
-  box-shadow: 0 1px 3px rgba(0,0,0,0.08);
-}
-.header-inner{
-  width:100%; max-width:680px; min-height:56px;
-  margin:auto; padding: 0 12px;
-  display:flex; align-items:center; justify-space-between;
-}
-.logo{ font-size:24px; font-weight:800; letter-spacing:-0.5px; color:var(--primary); }
-.header-user{ display:flex; align-items:center; gap:8px; margin-left:auto;}
-.icon-circle-btn{
-  width:36px; height:36px; border-radius:50%; background:#e4e6eb;
-  display:grid; place-items:center; color:#050505; font-size:16px; cursor:pointer;
-}
-.header-avatar{
-  width:36px; height:36px; border-radius:50%; background:#e4e6eb;
-  display:grid; place-items:center; font-weight:700; overflow:hidden;
-}
-
-/* NAV TABS */
-.nav-wrap{ position:sticky; top:56px; z-index:900; background:var(--surface); border-bottom:1px solid #e4e6eb; }
-.nav{ display:flex; justify-space-between; align-items:center; width:100%; max-width:680px; margin:0 auto; }
-.nav button{
-  flex:1; height:48px; background:transparent; color:var(--muted);
-  border:none; cursor:pointer; font-size:20px; display:flex;
-  align-items:center; justify-content:center; border-bottom:3px solid transparent;
-}
-.nav button.active{ color:var(--primary); border-bottom-color:var(--primary); }
-
-/* MAIN CONTENT */
-main{ padding:8px 0; }
-.card, .composer-card{ background:var(--surface); box-shadow:var(--shadow); margin-bottom:8px; padding:12px; }
-@media(min-width: 680px){ .card, .composer-card{ border-radius:var(--radius); } }
-
-/* COMPOSER */
-.composer-top{ display:flex; align-items:center; gap:10px; }
-.composer-avatar{
-  width:40px; height:40px; border-radius:50%; background:#e4e6eb;
-  display:grid; place-items:center; font-weight:700;
-}
-.mind-button{
-  flex:1; padding:9px 14px; border-radius:20px; background:#f0f2f5;
-  color:var(--text); text-align:left; cursor:pointer; font-size:15px; border:none;
-}
-.composer-textarea{ width:100%; min-height:80px; border:1px solid #ced0d4; border-radius:8px; padding:10px; margin-top:10px; }
-.composer-actions{ display:flex; justify-content:flex-end; gap:8px; margin-top:10px; }
-
-/* BUTTONS */
-.btn{ padding:8px 14px; border-radius:6px; background:var(--primary); color:white; font-weight:600; cursor:pointer; }
-.btn-secondary{ background:#e4e6eb; color:#050505; }
-.btn-full{ width:100%; }
-
-/* AUTH */
-.auth-page{ min-height:100vh; display:grid; place-items:center; padding:20px; background:#f0f2f5; }
-.auth-card{ background:white; border-radius:8px; padding:20px; width:min(100%, 400px); box-shadow:0 4px 12px rgba(0,0,0,0.1); }
-.form-group{ margin-bottom:12px; }
-.form-group label{ display:block; font-size:13px; font-weight:600; margin-bottom:4px; }
-.form-group input{ width:100%; padding:10px; border:1px solid #ced0d4; border-radius:6px; }
-
-/* BOTTOM NAV */
-.bottom-nav{ position:fixed; bottom:0; left:0; right:0; height:50px; background:white; border-top:1px solid #e4e6eb; display:flex; justify-around:space-around; align-items:center; z-index:1000; }
-.bottom-nav-item{ color:var(--muted); font-size:20px; background:transparent; display:flex; flex-direction:column; align-items:center; justify-content:center; width:20%; height:100%; }
-.bottom-nav-item.active{ color:var(--primary); }
-</style>
-</head>
-
-<body>
-
-<!-- AUTHENTICATION SCREEN -->
-<div id="auth" class="auth-page">
-  <div class="auth-card">
-    <h2 style="font-size:20px; margin-bottom:4px;">Welcome Back 👋</h2>
-    <p class="muted" style="font-size:13px; margin-bottom:16px;">Sign in to connect with your faith community.</p>
-
-    <div class="form-group">
-      <label for="loginEmail">Email address</label>
-      <input id="loginEmail" type="email" placeholder="you@example.com">
-    </div>
-
-    <div class="form-group">
-      <label for="loginPass">Password</label>
-      <input id="loginPass" type="password" placeholder="Your password">
-    </div>
-
-    <button id="loginBtn" class="btn btn-full" type="button">🔐 LOG IN</button>
-  </div>
-</div>
-
-<!-- MAIN APPLICATION SCREEN -->
-<div id="app" class="hidden">
-
-  <header>
-    <div class="header-inner">
-      <div class="logo">believer</div>
-      <div class="header-user">
-        <button class="icon-circle-btn" type="button"><i class="fa-solid fa-plus"></i></button>
-        <button class="icon-circle-btn" type="button"><i class="fa-solid fa-magnifying-glass"></i></button>
-        <div id="headerAvatar" class="header-avatar">B</div>
-        <button id="logoutBtn" class="btn btn-secondary" style="padding:4px 8px; font-size:12px;" type="button">Log out</button>
-      </div>
-    </div>
-  </header>
-
-  <div class="nav-wrap">
-    <nav class="nav">
-      <button data-tab="home" onclick="tab('home')" class="active"><i class="fa-solid fa-house"></i></button>
-      <button data-tab="friends" onclick="tab('friends')"><i class="fa-solid fa-user-group"></i></button>
-      <button data-tab="messages" onclick="tab('messages')"><i class="fa-solid fa-comment-dots"></i></button>
-      <button data-tab="notifications" onclick="tab('notifications')"><i class="fa-regular fa-bell"></i></button>
-    </nav>
-  </div>
-
-  <main class="wrap">
-    <div class="composer-card">
-      <div class="composer-top">
-        <div class="composer-avatar" id="userAvatarText">B</div>
-        <button id="mindBtn" class="mind-button" type="button">What's on your mind?</button>
-      </div>
-
-      <div id="postComposerArea" class="hidden">
-        <textarea id="postInput" class="composer-textarea" placeholder="Share your prayer or reflection..."></textarea>
-        <div class="composer-actions">
-          <button id="cancelPostBtn" class="btn btn-secondary" type="button">Cancel</button>
-          <button id="submitPostBtn" class="btn" type="button">Post</button>
-        </div>
-      </div>
-    </div>
-
-    <div id="feed">
-      <div class="card">
-        <p><strong>Welcome to Believer Connect!</strong></p>
-        <p class="muted" style="font-size:14px; margin-top:4px;">You are currently logged in.</p>
-      </div>
-    </div>
-  </main>
-
-  <div class="bottom-nav">
-    <button class="bottom-nav-item active" type="button"><i class="fa-solid fa-house"></i></button>
-    <button class="bottom-nav-item" type="button"><i class="fa-solid fa-compass"></i></button>
-    <button class="bottom-nav-item" type="button"><i class="fa-regular fa-square-plus"></i></button>
-    <button class="bottom-nav-item" type="button"><i class="fa-regular fa-bell"></i></button>
-    <button class="bottom-nav-item" type="button"><i class="fa-solid fa-user"></i></button>
-  </div>
-
-</div>
-
-<!-- JAVASCRIPT INITIALIZATION & SESSION LOGIC -->
 <script>
   // Elements
   const authContainer = document.getElementById('auth');
   const appContainer = document.getElementById('app');
   const loginBtn = document.getElementById('loginBtn');
   const logoutBtn = document.getElementById('logoutBtn');
+  const loginEmail = document.getElementById('loginEmail');
+  const loginPass = document.getElementById('loginPass');
+  const loginMsg = document.getElementById('loginMsg');
   const mindBtn = document.getElementById('mindBtn');
   const cancelPostBtn = document.getElementById('cancelPostBtn');
   const postComposerArea = document.getElementById('postComposerArea');
@@ -211,17 +23,30 @@ main{ padding:8px 0; }
     }
   }
 
-  // Event Handlers
+  // Login handler with basic validation
   loginBtn.addEventListener('click', () => {
+    const email = loginEmail.value.trim();
+    const pass = loginPass.value.trim();
+
+    if (!email || !pass) {
+      loginMsg.textContent = "Please enter both email and password.";
+      return;
+    }
+
+    loginMsg.textContent = "";
     localStorage.setItem('isLoggedIn', 'true');
     checkSession();
   });
 
+  // Logout handler
   logoutBtn.addEventListener('click', () => {
     localStorage.removeItem('isLoggedIn');
+    loginEmail.value = "";
+    loginPass.value = "";
     checkSession();
   });
 
+  // Composer toggles
   mindBtn.addEventListener('click', () => {
     postComposerArea.classList.remove('hidden');
   });
@@ -230,6 +55,7 @@ main{ padding:8px 0; }
     postComposerArea.classList.add('hidden');
   });
 
+  // Tab switcher
   function tab(tabName) {
     document.querySelectorAll('.nav button').forEach(btn => btn.classList.remove('active'));
     const selectedTab = document.querySelector(`.nav button[data-tab="${tabName}"]`);
@@ -239,6 +65,3 @@ main{ padding:8px 0; }
   // Run session check on page load
   checkSession();
 </script>
-
-</body>
-</html>
