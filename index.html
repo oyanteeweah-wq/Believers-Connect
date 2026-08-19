@@ -58,7 +58,7 @@ button {
   cursor: pointer;
 }
 
-img {
+img, video {
   max-width: 100%;
   display: block;
 }
@@ -244,6 +244,7 @@ header {
   display: flex;
   align-items: center;
   gap: 8px;
+  position: relative;
 }
 
 .header-circle-btn {
@@ -257,6 +258,7 @@ header {
   font-size: 15px;
   color: var(--bp-primary);
   transition: background 0.2s;
+  position: relative;
 }
 
 .logout-btn {
@@ -300,14 +302,14 @@ header {
 
 .badge {
   position: absolute;
-  top: 6px;
-  right: 22%;
+  top: 2px;
+  right: 6px;
   background: #e63946;
   color: white;
   font-size: 10px;
   font-weight: bold;
-  padding: 1px 5px;
-  border-radius: 8px;
+  padding: 2px 6px;
+  border-radius: 10px;
 }
 
 /* =========================================================
@@ -402,30 +404,6 @@ header {
   align-items: center;
   border-top: 1px solid var(--bp-border);
   padding-top: 10px;
-}
-
-.post-image-preview {
-  position: relative;
-  margin: 8px 0;
-}
-
-.post-image-preview img {
-  max-height: 220px;
-  border-radius: 10px;
-  width: 100%;
-  object-fit: cover;
-}
-
-.remove-post-image {
-  position: absolute;
-  top: 8px;
-  right: 8px;
-  background: rgba(13, 27, 42, 0.8);
-  color: white;
-  width: 28px;
-  height: 28px;
-  border-radius: 50%;
-  font-weight: bold;
 }
 
 /* =========================================================
@@ -642,6 +620,195 @@ header {
 }
 
 /* =========================================================
+   SEARCH BAR & NOTIFICATIONS & CREATED MODULES
+========================================================= */
+.search-container {
+  padding: 10px 16px;
+  background: white;
+  border-bottom: 1px solid var(--bp-border);
+  position: relative;
+}
+
+.search-input-box {
+  display: flex;
+  align-items: center;
+  background: #f8fafc;
+  border: 1px solid var(--bp-border);
+  border-radius: 20px;
+  padding: 8px 14px;
+  gap: 10px;
+}
+
+.search-input-box input {
+  border: none;
+  background: transparent;
+  outline: none;
+  width: 100%;
+  font-size: 14px;
+}
+
+.search-results-panel {
+  margin-top: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.search-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 12px;
+  background: white;
+  border-radius: 10px;
+  border: 1px solid var(--bp-border);
+  cursor: pointer;
+}
+
+.search-item-info {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.notif-dropdown {
+  position: absolute;
+  top: 50px;
+  right: 16px;
+  width: 320px;
+  max-width: 90vw;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+  border: 1px solid var(--bp-border);
+  z-index: 1001;
+  overflow: hidden;
+}
+
+.notif-header {
+  padding: 12px 14px;
+  background: #f8fafc;
+  border-bottom: 1px solid var(--bp-border);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-weight: 800;
+  font-size: 14px;
+  color: var(--bp-primary);
+}
+
+.notif-header button {
+  font-size: 11px;
+  color: var(--bp-gold-hover);
+  font-weight: 700;
+}
+
+.notif-list {
+  max-height: 320px;
+  overflow-y: auto;
+}
+
+.notif-item {
+  padding: 12px;
+  border-bottom: 1px solid var(--bp-border);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+  background: white;
+}
+
+.notif-item.unread {
+  background: #f0f7ff;
+}
+
+.notif-item:last-child {
+  border-bottom: none;
+}
+
+.empty-state {
+  text-align: center;
+  padding: 24px 16px;
+  color: var(--bp-muted);
+  font-size: 13px;
+}
+
+/* =========================================================
+   FRIENDS & GROUPS COMPONENTS
+========================================================= */
+.friends-list, .groups-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 12px;
+}
+
+.friend-card, .group-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: white;
+  padding: 12px;
+  border-radius: var(--bp-radius);
+  border: 1px solid var(--bp-border);
+  box-shadow: var(--bp-shadow);
+}
+
+.friend-info, .group-info {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.btn-sm {
+  padding: 6px 12px;
+  font-size: 12px;
+  border-radius: 8px;
+  font-weight: 700;
+}
+
+/* =========================================================
+   VIDEO HUB & CONTROLS
+========================================================= */
+.video-card {
+  background: white;
+  border-radius: var(--bp-radius);
+  border: 1px solid var(--bp-border);
+  overflow: hidden;
+  margin-bottom: 14px;
+  box-shadow: var(--bp-shadow);
+}
+
+.video-container {
+  position: relative;
+  background: black;
+  width: 100%;
+  aspect-ratio: 16/9;
+}
+
+.video-container video {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.video-info {
+  padding: 12px;
+}
+
+.video-title {
+  font-size: 15px;
+  font-weight: 800;
+  color: var(--bp-primary);
+  margin-bottom: 4px;
+}
+
+.video-author {
+  font-size: 12px;
+  color: var(--bp-muted);
+}
+
+/* =========================================================
    PROFILE VIEW, COVER PHOTO & PROFILE PHOTO SYSTEM
 ========================================================= */
 .profile-card {
@@ -667,42 +834,6 @@ header {
 
 .profile-header-bg.editable {
   cursor: pointer;
-}
-
-.cover-upload-placeholder {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 6px;
-  color: var(--bp-gold);
-  background: rgba(13, 27, 42, 0.5);
-  padding: 10px 18px;
-  border-radius: 20px;
-  border: 1px dashed var(--bp-gold);
-  font-size: 13px;
-  font-weight: 700;
-  transition: background 0.2s;
-}
-
-.cover-upload-placeholder:hover {
-  background: rgba(13, 27, 42, 0.75);
-}
-
-.cover-action-badge {
-  position: absolute;
-  bottom: 12px;
-  right: 12px;
-  background: rgba(13, 27, 42, 0.85);
-  color: white;
-  padding: 6px 12px;
-  border-radius: 20px;
-  font-size: 12px;
-  font-weight: 700;
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  box-shadow: 0 2px 8px rgba(0,0,0,0.3);
 }
 
 .profile-header-content {
@@ -736,52 +867,10 @@ header {
   position: relative;
 }
 
-.profile-avatar-large.editable {
-  cursor: pointer;
-}
-
 .profile-avatar-large img {
   width: 100%;
   height: 100%;
   object-fit: cover;
-}
-
-.avatar-upload-placeholder {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
-  height: 100%;
-  background: var(--bp-accent);
-  color: var(--bp-gold);
-  font-size: 10px;
-  font-weight: 700;
-  text-align: center;
-  padding: 4px;
-}
-
-.avatar-upload-placeholder i {
-  font-size: 24px;
-  margin-bottom: 2px;
-}
-
-.avatar-edit-badge {
-  position: absolute;
-  bottom: 4px;
-  right: 4px;
-  background: var(--bp-gold);
-  color: var(--bp-primary);
-  width: 30px;
-  height: 30px;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border: 2px solid white;
-  font-size: 13px;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.2);
-  cursor: pointer;
 }
 
 .profile-name {
@@ -794,13 +883,6 @@ header {
   font-size: 13px;
   color: var(--bp-muted);
   margin-bottom: 8px;
-}
-
-.profile-bio {
-  font-size: 14px;
-  color: var(--bp-text);
-  max-width: 450px;
-  margin: 0 auto 14px auto;
 }
 
 .profile-actions-bar {
@@ -843,98 +925,6 @@ header {
   color: var(--bp-primary);
   margin-bottom: 14px;
   text-align: center;
-}
-
-.modal-option-btn {
-  width: 100%;
-  padding: 12px 16px;
-  border-radius: 10px;
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  font-weight: 700;
-  font-size: 14px;
-  color: var(--bp-primary);
-  margin-bottom: 8px;
-  background: #f8fafc;
-  border: 1px solid var(--bp-border);
-  transition: background 0.15s;
-}
-
-.modal-option-btn:hover {
-  background: #f1f5f9;
-}
-
-.modal-option-btn.danger {
-  color: #e63946;
-  background: rgba(230, 57, 70, 0.05);
-  border-color: rgba(230, 57, 70, 0.2);
-}
-
-.modal-cancel-btn {
-  margin-top: 6px;
-  background: transparent;
-  border: none;
-  color: var(--bp-muted);
-}
-
-.profile-section {
-  padding: 16px;
-  border-top: 1px solid var(--bp-border);
-}
-
-.profile-section-title {
-  font-size: 13px;
-  font-weight: 800;
-  color: var(--bp-gold);
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-  margin-bottom: 12px;
-  display: flex;
-  align-items: center;
-  gap: 6px;
-}
-
-.info-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-  gap: 10px;
-}
-
-.info-item {
-  background: #f8fafc;
-  padding: 10px 12px;
-  border-radius: 8px;
-  border: 1px solid var(--bp-border);
-}
-
-.info-label {
-  font-size: 11px;
-  font-weight: 700;
-  color: var(--bp-muted);
-  text-transform: uppercase;
-}
-
-.info-val {
-  font-size: 13px;
-  font-weight: 600;
-  color: var(--bp-primary);
-  margin-top: 2px;
-}
-
-.private-locked {
-  font-size: 12px;
-  color: var(--bp-muted);
-  font-style: italic;
-  display: flex;
-  align-items: center;
-  gap: 4px;
-}
-
-.privacy-select {
-  font-size: 11px;
-  padding: 4px;
-  margin-top: 4px;
 }
 
 /* =========================================================
@@ -1021,12 +1011,12 @@ header {
         </div>
         <div class="form-group">
           <label>Password</label>
-          <input id="pass" type="password" placeholder="At least 6 characters">
+          <input id="pass" type="password" placeholder="••••••••">
         </div>
-        <button id="signupBtn" class="btn btn-gold" type="button">Register</button>
+        <button id="signupBtn" class="btn btn-gold" type="button">Register Account</button>
         <p id="signupMsg" class="msg-error"></p>
         <div class="divider"></div>
-        <button id="showLoginBtn" class="btn" type="button">Back to Login</button>
+        <button id="showLoginBtn" class="btn" type="button">Back to Log In</button>
       </div>
     </div>
   </div>
@@ -1036,1145 +1026,573 @@ header {
      MAIN APPLICATION VIEW
 ======================================================= -->
 <div id="app" class="hidden">
-
-  <!-- HEADER -->
   <header>
     <div class="header-inner">
-      <div class="logo-area" onclick="navigateHome()">
-        <i class="fa-solid fa-cross logo-icon"></i>
-        <span class="logo">Believers<span>+</span></span>
+      <div class="logo-area" id="brandLogoBtn">
+        <div class="logo-icon"><i class="fa-solid fa-cross"></i></div>
+        <div class="logo">Believers<span>+</span></div>
       </div>
       <div class="header-actions">
-        <button class="header-circle-btn" onclick="toggleComposer()"><i class="fa-solid fa-plus"></i></button>
-        <button class="header-circle-btn"><i class="fa-solid fa-magnifying-glass"></i></button>
-        <button id="logoutBtn" class="logout-btn" type="button">Log out</button>
+        <button id="notifBellBtn" class="header-circle-btn" title="Notifications">
+          <i class="fa-solid fa-bell"></i>
+          <span id="notifBadge" class="badge hidden">0</span>
+        </button>
+        <button id="logoutBtn" class="logout-btn"><i class="fa-solid fa-right-from-bracket"></i> Exit</button>
       </div>
     </div>
 
-    <!-- MAIN NAVIGATION TABS -->
+    <!-- NOTIFICATION DROPDOWN PANEL -->
+    <div id="notifDropdown" class="notif-dropdown hidden">
+      <div class="notif-header">
+        <span>Notifications</span>
+        <button id="markAllReadBtn">Mark all as read</button>
+      </div>
+      <div id="notifList" class="notif-list"></div>
+    </div>
+
     <div class="nav-wrap">
       <nav class="nav">
-        <button id="navHomeBtn" class="active" data-tab="home" onclick="navigateHome()">
-          <i class="fa-solid fa-house-chimney"></i>
-        </button>
-        <button data-tab="community" onclick="switchTab('community')">
-          <i class="fa-solid fa-people-group"></i>
-        </button>
-        <button data-tab="messages" onclick="switchTab('messages')">
-          <i class="fa-solid fa-hand-holding-heart"></i>
-        </button>
-        <button data-tab="watch" onclick="switchTab('watch')">
-          <i class="fa-solid fa-circle-play"></i>
-          <span class="badge">4</span>
-        </button>
-        <button data-tab="notifications" onclick="switchTab('notifications')">
-          <i class="fa-solid fa-bell"></i>
-        </button>
+        <button id="tabHome" class="active" title="Home Feed"><i class="fa-solid fa-house"></i></button>
+        <button id="tabFriends" title="Find Friends"><i class="fa-solid fa-user-plus"></i></button>
+        <button id="tabVideos" title="Watch Videos"><i class="fa-solid fa-tv"></i></button>
+        <button id="tabGroups" title="Groups"><i class="fa-solid fa-users"></i></button>
       </nav>
     </div>
   </header>
 
-  <main class="wrap">
-
-    <!-- MAIN FEED CONTAINER -->
-    <div id="feedView">
-      
-      <!-- COMPOSER TRIGGER -->
-      <div class="composer-card">
-        <div id="headerAvatar" class="avatar">B</div>
-        <button class="mind-button" onclick="toggleComposer()">Share a word or encouragement...</button>
-        <label for="postImageInput" class="photo-upload-btn">
-          <i class="fa-solid fa-image"></i>
-          <span>Media</span>
-        </label>
+  <main class="wrap" style="padding: 10px 12px;">
+    
+    <!-- SEARCH BAR SECTION -->
+    <div class="search-container">
+      <div class="search-input-box">
+        <i class="fa-solid fa-magnifying-glass" style="color: var(--bp-muted);"></i>
+        <input type="text" id="globalSearchInput" placeholder="Search friends by name...">
       </div>
-
-      <!-- POST COMPOSER FORM -->
-      <div id="postComposerArea" class="hidden">
-        <textarea id="postText" class="composer-textarea" placeholder="What is on your heart today?"></textarea>
-        <input type="file" id="postImageInput" accept="image/*" class="hidden">
-        
-        <div id="postImagePreview" class="post-image-preview hidden">
-          <img id="previewImg" src="" alt="Preview">
-          <button type="button" class="remove-post-image" id="removeImageBtn">&times;</button>
-        </div>
-
-        <div class="composer-actions">
-          <span style="font-size: 11px; color: var(--bp-muted); font-weight: 600;">Visible to Believers+ Community</span>
-          <button id="submitPostBtn" class="btn btn-gold" style="width: auto; padding: 6px 18px; font-size: 13px;">Publish</button>
-        </div>
-      </div>
-
-      <!-- COMMUNITY UPDATES / STORIES -->
-      <div class="stories-container">
-        <div class="stories-wrapper" id="storiesWrapper"></div>
-      </div>
-
-      <!-- FEED POSTS -->
-      <div id="feedContainer"></div>
-
+      <div id="searchResultsPanel" class="search-results-panel hidden"></div>
     </div>
 
-    <!-- PROFILE DISPLAY / EDIT CONTAINER -->
-    <div id="profileView" class="hidden"></div>
+    <!-- HOME TAB -->
+    <div id="viewHome">
+      <div class="composer-card">
+        <div class="avatar" id="currentUserAvatar">U</div>
+        <button id="openComposerBtn" class="mind-button">What's on your mind?</button>
+      </div>
+
+      <div id="postComposerArea" class="hidden">
+        <textarea id="postText" class="composer-textarea" placeholder="Share a testimony or prayer request..."></textarea>
+        <div class="composer-actions">
+          <button id="submitPostBtn" class="btn btn-gold btn-sm"><i class="fa-solid fa-paper-plane"></i> Post</button>
+        </div>
+      </div>
+
+      <div class="stories-container">
+        <div class="stories-wrapper" id="storiesList"></div>
+      </div>
+
+      <div id="feedList"></div>
+    </div>
+
+    <!-- FRIENDS TAB -->
+    <div id="viewFriends" class="hidden">
+      <h3 style="font-size: 16px; font-weight: 800; color: var(--bp-primary); margin: 10px 0;">Find & Connect with Friends</h3>
+      <div id="friendsList" class="friends-list"></div>
+    </div>
+
+    <!-- VIDEOS TAB -->
+    <div id="viewVideos" class="hidden">
+      <h3 style="font-size: 16px; font-weight: 800; color: var(--bp-primary); margin: 10px 0;">Community Video Hub</h3>
+      <div id="videoFeedList"></div>
+    </div>
+
+    <!-- GROUPS TAB -->
+    <div id="viewGroups" class="hidden">
+      <div style="display: flex; align-items: center; justify-content: space-between; margin: 10px 0;">
+        <h3 style="font-size: 16px; font-weight: 800; color: var(--bp-primary);">Community Groups</h3>
+        <button id="openCreateGroupBtn" class="btn btn-gold btn-sm"><i class="fa-solid fa-plus"></i> Create Group</button>
+      </div>
+
+      <div id="createGroupModal" class="modal-overlay hidden">
+        <div class="modal-sheet">
+          <div class="modal-title">Create New Group</div>
+          <div class="form-group">
+            <label>Group Name</label>
+            <input type="text" id="newGroupName" placeholder="e.g. Youth Fellowship">
+          </div>
+          <div class="form-group">
+            <label>Description</label>
+            <textarea id="newGroupDesc" rows="3" placeholder="What is this group about?"></textarea>
+          </div>
+          <button id="saveGroupBtn" class="btn btn-gold" style="margin-bottom: 8px;">Create Group</button>
+          <button id="closeGroupModalBtn" class="btn btn-outline modal-cancel-btn">Cancel</button>
+        </div>
+      </div>
+
+      <div id="groupsList" class="groups-list"></div>
+    </div>
+
+    <!-- PROFILE VIEW -->
+    <div id="viewProfile" class="hidden">
+      <div class="profile-card">
+        <div class="profile-header-bg" id="profileHeaderBg"></div>
+        <div class="profile-header-content">
+          <div class="profile-avatar-wrapper">
+            <div class="profile-avatar-large" id="profileAvatarLarge">U</div>
+          </div>
+          <div class="profile-name" id="profileName">User Name</div>
+          <div class="profile-handle" id="profileHandle">@user</div>
+          <div class="profile-bio" id="profileBio">Believers+ Community Member</div>
+          
+          <div class="profile-actions-bar" id="profileActionsBar">
+            <button id="profileFriendBtn" class="btn btn-gold btn-sm"><i class="fa-solid fa-user-plus"></i> Add Friend</button>
+          </div>
+        </div>
+      </div>
+    </div>
 
   </main>
 
-  <!-- ACTION MENU MODAL FOR PROFILE / COVER PHOTOS -->
-  <div id="photoActionModal" class="modal-overlay hidden">
-    <div class="modal-sheet">
-      <div id="modalTitle" class="modal-title">Photo Options</div>
-      <button id="modalChangeBtn" class="modal-option-btn">
-        <i class="fa-solid fa-image"></i> <span id="modalChangeLabel">Change Photo</span>
-      </button>
-      <button id="modalRemoveBtn" class="modal-option-btn danger">
-        <i class="fa-solid fa-trash-can"></i> <span id="modalRemoveLabel">Remove Photo</span>
-      </button>
-      <button class="modal-option-btn modal-cancel-btn" onclick="closePhotoModal()">
-        Cancel
-      </button>
-    </div>
-  </div>
-
-  <!-- MOBILE BOTTOM NAVIGATION -->
+  <!-- MOBILE BOTTOM NAV -->
   <div class="bottom-nav">
-    <button id="bNavHome" class="active" onclick="navigateHome()"><i class="fa-solid fa-house-chimney"></i></button>
-    <button onclick="switchTab('community')"><i class="fa-solid fa-people-group"></i></button>
-    <button onclick="toggleComposer()"><i class="fa-solid fa-square-plus" style="color: var(--bp-gold); font-size: 22px;"></i></button>
-    <button onclick="switchTab('notifications')"><i class="fa-solid fa-bell"></i></button>
-    <button id="bNavProfile" onclick="openProfile(currentUserId)"><i class="fa-solid fa-user"></i></button>
+    <button id="bNavHome" class="active"><i class="fa-solid fa-house"></i></button>
+    <button id="bNavFriends"><i class="fa-solid fa-user-plus"></i></button>
+    <button id="bNavVideos"><i class="fa-solid fa-tv"></i></button>
+    <button id="bNavGroups"><i class="fa-solid fa-users"></i></button>
   </div>
-
 </div>
 
-<!-- =======================================================
-     JAVASCRIPT APPLICATION LOGIC & ROUTING SYSTEM
-======================================================= -->
 <script>
-  const svgPlaceholder = "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='400' height='300' viewBox='0 0 400 300'><rect width='100%' height='100%' fill='%231b263b'/><text x='50%' y='50%' dominant-baseline='middle' text-anchor='middle' font-family='sans-serif' font-size='16' fill='%23e0a96d'>Believers+ Media Unavailable</text></svg>";
+/* =========================================================
+   APPLICATION STATE & MOCK DATA Persistence
+========================================================= */
+const state = {
+  currentUser: { id: "u_101", name: "Oyantee Weah", handle: "@oyantee", avatar: "O" },
+  users: [
+    { id: "u_101", name: "Oyantee Weah", handle: "@oyantee", avatar: "O" },
+    { id: "u_102", name: "Sarah Jenkins", handle: "@sjenkins", avatar: "S" },
+    { id: "u_103", name: "David Miller", handle: "@dmiller", avatar: "D" },
+    { id: "u_104", name: "Grace Taylor", handle: "@gtaylor", avatar: "G" }
+  ],
+  friends: [],
+  friendRequests: ["u_102"], // Incoming or sent request tracking
+  notifications: [
+    { id: 1, text: "Sarah Jenkins sent you a friend request.", read: false, time: "10m ago" },
+    { id: 2, text: "David Miller liked your post.", read: false, time: "1h ago" }
+  ],
+  groups: [
+    { id: "g_1", name: "Morning Prayer Warriors", desc: "Daily devotions and fellowship." },
+    { id: "g_2", name: "Choir & Worship", desc: "Rehearsal schedules and media sharing." }
+  ],
+  videos: [
+    {
+      id: "v_1",
+      title: "Sunday Morning Fellowship & Devotion",
+      author: "Grace Taylor",
+      url: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4"
+    },
+    {
+      id: "v_2",
+      title: "Community Outreach Highlights",
+      author: "David Miller",
+      url: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4"
+    }
+  ]
+};
 
-  function handleImageError(img) {
-    img.onerror = null;
-    img.src = svgPlaceholder;
+/* =========================================================
+   CORE NAVIGATION & ROUTING SYSTEM
+========================================================= */
+document.addEventListener('DOMContentLoaded', () => {
+  initApp();
+});
+
+function initApp() {
+  bindAuthEvents();
+  bindNavigationEvents();
+  bindSearchEvents();
+  bindNotificationEvents();
+  bindFriendEvents();
+  bindGroupEvents();
+  bindVideoEvents();
+
+  // Deep-link initial route evaluation
+  handleInitialRoute();
+}
+
+function handleInitialRoute() {
+  const path = window.location.pathname;
+  const profileMatch = path.match(/^\/profile\/([^/]+)$/);
+
+  if (profileMatch) {
+    const userId = profileMatch[1];
+    showApp();
+    openUserProfile(userId, false);
+  } else {
+    showApp();
+    switchTab('viewHome');
+  }
+}
+
+window.addEventListener('popstate', () => {
+  const path = window.location.pathname;
+  const profileMatch = path.match(/^\/profile\/([^/]+)$/);
+  if (profileMatch) {
+    openUserProfile(profileMatch[1], false);
+  } else {
+    switchTab('viewHome', false);
+  }
+});
+
+/* =========================================================
+   UI SWITCHERS
+========================================================= */
+function showApp() {
+  document.getElementById('auth').classList.add('hidden');
+  document.getElementById('app').classList.remove('hidden');
+  renderNotifications();
+  renderFriends();
+  renderGroups();
+  renderVideos();
+}
+
+function switchTab(tabId, pushHistory = true) {
+  ['viewHome', 'viewFriends', 'viewVideos', 'viewGroups', 'viewProfile'].forEach(id => {
+    document.getElementById(id).classList.add('hidden');
+  });
+  document.getElementById(tabId).classList.remove('hidden');
+
+  // Sync Nav highlight
+  const navMap = { viewHome: 'tabHome', viewFriends: 'tabFriends', viewVideos: 'tabVideos', viewGroups: 'tabGroups' };
+  const bNavMap = { viewHome: 'bNavHome', viewFriends: 'bNavFriends', viewVideos: 'bNavVideos', viewGroups: 'bNavGroups' };
+
+  document.querySelectorAll('.nav button, .bottom-nav button').forEach(btn => btn.classList.remove('active'));
+  if (navMap[tabId]) document.getElementById(navMap[tabId])?.classList.add('active');
+  if (bNavMap[tabId]) document.getElementById(bNavMap[tabId])?.classList.add('active');
+
+  if (pushHistory && tabId !== 'viewProfile') {
+    history.pushState(null, '', '/');
+  }
+}
+
+/* =========================================================
+   AUTH LOGIC
+========================================================= */
+function bindAuthEvents() {
+  document.getElementById('loginBtn')?.addEventListener('click', () => showApp());
+  document.getElementById('signupBtn')?.addEventListener('click', () => showApp());
+  document.getElementById('showSignupBtn')?.addEventListener('click', () => {
+    document.getElementById('loginBox').classList.add('hidden');
+    document.getElementById('signupBox').classList.remove('hidden');
+  });
+  document.getElementById('showLoginBtn')?.addEventListener('click', () => {
+    document.getElementById('signupBox').classList.add('hidden');
+    document.getElementById('loginBox').classList.remove('hidden');
+  });
+  document.getElementById('logoutBtn')?.addEventListener('click', () => {
+    document.getElementById('app').classList.add('hidden');
+    document.getElementById('auth').classList.remove('hidden');
+  });
+  document.getElementById('brandLogoBtn')?.addEventListener('click', () => switchTab('viewHome'));
+}
+
+/* =========================================================
+   NAVIGATION BINDINGS
+========================================================= */
+function bindNavigationEvents() {
+  document.getElementById('tabHome')?.addEventListener('click', () => switchTab('viewHome'));
+  document.getElementById('tabFriends')?.addEventListener('click', () => switchTab('viewFriends'));
+  document.getElementById('tabVideos')?.addEventListener('click', () => switchTab('viewVideos'));
+  document.getElementById('tabGroups')?.addEventListener('click', () => switchTab('viewGroups'));
+
+  document.getElementById('bNavHome')?.addEventListener('click', () => switchTab('viewHome'));
+  document.getElementById('bNavFriends')?.addEventListener('click', () => switchTab('viewFriends'));
+  document.getElementById('bNavVideos')?.addEventListener('click', () => switchTab('viewVideos'));
+  document.getElementById('bNavGroups')?.addEventListener('click', () => switchTab('viewGroups'));
+}
+
+/* =========================================================
+   1. FIND FRIENDS / FRIENDS SYSTEM
+========================================================= */
+function bindFriendEvents() {
+  // Handled dynamically via renderFriends
+}
+
+function renderFriends() {
+  const container = document.getElementById('friendsList');
+  if (!container) return;
+
+  const availableUsers = state.users.filter(u => u.id !== state.currentUser.id);
+  
+  if (availableUsers.length === 0) {
+    container.innerHTML = `<div class="empty-state">No available members found.</div>`;
+    return;
   }
 
-  let currentUserId = "u_101";
-  let activeProfileViewUserId = null;
-  let attachedImageBase64 = null;
+  container.innerHTML = availableUsers.map(user => {
+    const isFriend = state.friends.includes(user.id);
+    const isRequested = state.friendRequests.includes(user.id);
 
-  let usersDb = {
-    "u_101": {
-      id: "u_101",
-      name: "Oyantee Weah",
-      username: "oyanteeweah",
-      avatarImg: "",
-      coverImg: "",
-      bio: "Dedicated to fellowship, digital media design, and spreading gospel encouragement.",
-      dob: "1995-08-14",
-      gender: "Male",
-      address: "123 Faith Way",
-      city: "Monrovia",
-      country: "Liberia",
-      phone: "+231 88 000 0000",
-      email: "oyantee@believerplus.org",
-      maritalStatus: "Single",
-      educationLevel: "Bachelor's Degree",
-      institution: "African Bible College University",
-      course: "Mass Communication & Graphic Design",
-      gradYear: "2018",
-      certifications: "Digital Branding Specialist, Web Development",
-      occupation: "Graphic Designer & Media Manager",
-      employer: "Festonic Graphix",
-      position: "Lead Creative Director",
-      skills: "Graphic Design, Mockups, Social Media Strategy",
-      church: "Grace Community Worship Center",
-      department: "Media & Audio-Visual",
-      churchRole: "Department Lead",
-      yearsService: "5 Years",
-      privacy: { dob: "members", address: "only_me", phone: "friends", email: "members", education: "public", employment: "public", church: "public" }
-    },
-    "u_102": {
-      id: "u_102",
-      name: "Festous F. Johnson",
-      username: "festousj",
-      avatarImg: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=300&q=80",
-      coverImg: "https://images.unsplash.com/photo-1501386761578-eac5c94b800a?auto=format&fit=crop&w=800&q=80",
-      bio: "Serving through visual arts and media ministry.",
-      dob: "1992-03-22",
-      gender: "Male",
-      city: "Monrovia",
-      country: "Liberia",
-      phone: "+231 77 111 2222",
-      email: "festous@believerplus.org",
-      maritalStatus: "Married",
-      educationLevel: "Higher National Diploma",
-      institution: "Monrovia Technical Institute",
-      course: "Visual Communications",
-      gradYear: "2015",
-      occupation: "Creative Artist",
-      employer: "Festonic Graphix",
-      position: "Senior Designer",
-      skills: "Branding, Banner Design, Mockup Layouts",
-      church: "Calvary Baptist Fellowship",
-      department: "Youth Ministry",
-      churchRole: "Youth Leader",
-      yearsService: "7 Years",
-      privacy: { dob: "only_me", address: "only_me", phone: "public", email: "members", education: "public", employment: "public", church: "public" }
-    },
-    "u_103": {
-      id: "u_103",
-      name: "Abigail Tor",
-      username: "abigailtor",
-      avatarImg: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=300&q=80",
-      coverImg: "",
-      bio: "Worshipper, prayer group coordinator, and choir member.",
-      city: "Paynesville",
-      country: "Liberia",
-      email: "abigail@believerplus.org",
-      church: "Ebenezer Methodist Church",
-      department: "Choir & Music Ministry",
-      churchRole: "Assistant Director",
-      yearsService: "4 Years",
-      privacy: { dob: "only_me", address: "only_me", phone: "only_me", email: "members", education: "public", employment: "public", church: "public" }
+    let btnHtml = '';
+    if (isFriend) {
+      btnHtml = `<button class="btn btn-outline btn-sm" disabled><i class="fa-solid fa-check"></i> Friends</button>`;
+    } else if (isRequested) {
+      btnHtml = `<button class="btn btn-outline btn-sm" disabled><i class="fa-solid fa-clock"></i> Requested</button>`;
+    } else {
+      btnHtml = `<button class="btn btn-gold btn-sm" onclick="sendFriendRequest('${user.id}')"><i class="fa-solid fa-user-plus"></i> Add Friend</button>`;
     }
+
+    return `
+      <div class="friend-card">
+        <div class="friend-info" onclick="openUserProfile('${user.id}')" style="cursor: pointer;">
+          <div class="avatar">${user.avatar}</div>
+          <div>
+            <div style="font-weight: 800; font-size: 14px; color: var(--bp-primary);">${user.name}</div>
+            <div style="font-size: 12px; color: var(--bp-muted);">${user.handle}</div>
+          </div>
+        </div>
+        <div>${btnHtml}</div>
+      </div>
+    `;
+  }).join('');
+}
+
+function sendFriendRequest(userId) {
+  if (!state.friendRequests.includes(userId) && !state.friends.includes(userId)) {
+    state.friendRequests.push(userId);
+    renderFriends();
+  }
+}
+
+/* =========================================================
+   2. SEARCH SYSTEM
+========================================================= */
+function bindSearchEvents() {
+  const searchInput = document.getElementById('globalSearchInput');
+  const resultsPanel = document.getElementById('searchResultsPanel');
+
+  searchInput?.addEventListener('input', (e) => {
+    const query = e.target.value.trim().toLowerCase();
+    if (!query) {
+      resultsPanel.classList.add('hidden');
+      resultsPanel.innerHTML = '';
+      return;
+    }
+
+    const matchedUsers = state.users.filter(u => u.name.toLowerCase().includes(query) || u.handle.toLowerCase().includes(query));
+    resultsPanel.classList.remove('hidden');
+
+    if (matchedUsers.length === 0) {
+      resultsPanel.innerHTML = `<div class="empty-state">No results found for "${query}"</div>`;
+      return;
+    }
+
+    resultsPanel.innerHTML = matchedUsers.map(u => `
+      <div class="search-item" onclick="openUserProfile('${u.id}'); clearSearch();">
+        <div class="search-item-info">
+          <div class="avatar">${u.avatar}</div>
+          <div>
+            <div style="font-weight: 700; font-size: 13px; color: var(--bp-primary);">${u.name}</div>
+            <div style="font-size: 11px; color: var(--bp-muted);">${u.handle}</div>
+          </div>
+        </div>
+        <i class="fa-solid fa-chevron-right" style="font-size: 12px; color: var(--bp-muted);"></i>
+      </div>
+    `).join('');
+  });
+}
+
+function clearSearch() {
+  const searchInput = document.getElementById('globalSearchInput');
+  const resultsPanel = document.getElementById('searchResultsPanel');
+  if (searchInput) searchInput.value = '';
+  if (resultsPanel) {
+    resultsPanel.classList.add('hidden');
+    resultsPanel.innerHTML = '';
+  }
+}
+
+/* =========================================================
+   3. NOTIFICATIONS 🔔 SYSTEM
+========================================================= */
+function bindNotificationEvents() {
+  const bellBtn = document.getElementById('notifBellBtn');
+  const dropdown = document.getElementById('notifDropdown');
+  const markAllBtn = document.getElementById('markAllReadBtn');
+
+  bellBtn?.addEventListener('click', (e) => {
+    e.stopPropagation();
+    dropdown.classList.toggle('hidden');
+  });
+
+  document.addEventListener('click', (e) => {
+    if (!dropdown.contains(e.target) && !bellBtn.contains(e.target)) {
+      dropdown.classList.add('hidden');
+    }
+  });
+
+  markAllBtn?.addEventListener('click', () => {
+    state.notifications.forEach(n => n.read = true);
+    renderNotifications();
+  });
+}
+
+function renderNotifications() {
+  const list = document.getElementById('notifList');
+  const badge = document.getElementById('notifBadge');
+  if (!list || !badge) return;
+
+  const unreadCount = state.notifications.filter(n => !n.read).length;
+  if (unreadCount > 0) {
+    badge.textContent = unreadCount;
+    badge.classList.remove('hidden');
+  } else {
+    badge.classList.add('hidden');
+  }
+
+  if (state.notifications.length === 0) {
+    list.innerHTML = `<div class="empty-state">No notifications.</div>`;
+    return;
+  }
+
+  list.innerHTML = state.notifications.map(n => `
+    <div class="notif-item ${n.read ? '' : 'unread'}" onclick="markNotifRead(${n.id})">
+      <i class="fa-solid fa-circle-info" style="color: var(--bp-gold);"></i>
+      <div style="flex: 1;">
+        <div style="font-size: 12px; color: var(--bp-text);">${n.text}</div>
+        <div style="font-size: 10px; color: var(--bp-muted); margin-top: 2px;">${n.time}</div>
+      </div>
+    </div>
+  `).join('');
+}
+
+function markNotifRead(id) {
+  const notif = state.notifications.find(n => n.id === id);
+  if (notif) {
+    notif.read = true;
+    renderNotifications();
+  }
+}
+
+/* =========================================================
+   4. CREATE GROUP (+) SYSTEM
+========================================================= */
+function bindGroupEvents() {
+  const openBtn = document.getElementById('openCreateGroupBtn');
+  const closeBtn = document.getElementById('closeGroupModalBtn');
+  const saveBtn = document.getElementById('saveGroupBtn');
+  const modal = document.getElementById('createGroupModal');
+
+  openBtn?.addEventListener('click', () => modal.classList.remove('hidden'));
+  closeBtn?.addEventListener('click', () => modal.classList.add('hidden'));
+
+  saveBtn?.addEventListener('click', () => {
+    const name = document.getElementById('newGroupName').value.trim();
+    const desc = document.getElementById('newGroupDesc').value.trim();
+
+    if (!name) return;
+
+    state.groups.push({
+      id: `g_${Date.now()}`,
+      name,
+      desc: desc || "Community Group"
+    });
+
+    document.getElementById('newGroupName').value = '';
+    document.getElementById('newGroupDesc').value = '';
+    modal.classList.add('hidden');
+    renderGroups();
+  });
+}
+
+function renderGroups() {
+  const container = document.getElementById('groupsList');
+  if (!container) return;
+
+  container.innerHTML = state.groups.map(g => `
+    <div class="group-card">
+      <div class="group-info">
+        <div class="avatar" style="border-radius: 10px;"><i class="fa-solid fa-users"></i></div>
+        <div>
+          <div style="font-weight: 800; font-size: 14px; color: var(--bp-primary);">${g.name}</div>
+          <div style="font-size: 12px; color: var(--bp-muted);">${g.desc}</div>
+        </div>
+      </div>
+      <button class="btn btn-outline btn-sm">Join</button>
+    </div>
+  `).join('');
+}
+
+/* =========================================================
+   5. VIDEOS ▶️ HUB SYSTEM
+========================================================= */
+function bindVideoEvents() {
+  // Handled dynamically via renderVideos
+}
+
+function renderVideos() {
+  const container = document.getElementById('videoFeedList');
+  if (!container) return;
+
+  container.innerHTML = state.videos.map(v => `
+    <div class="video-card">
+      <div class="video-container">
+        <video controls preload="metadata">
+          <source src="${v.url}" type="video/mp4">
+          Your browser does not support video playback.
+        </video>
+      </div>
+      <div class="video-info">
+        <div class="video-title">${v.title}</div>
+        <div class="video-author">Shared by ${v.author}</div>
+      </div>
+    </div>
+  `).join('');
+}
+
+/* =========================================================
+   PROFILE NAVIGATION HANDLER
+========================================================= */
+function openUserProfile(userId, pushHistory = true) {
+  const user = state.users.find(u => u.id === userId) || {
+    id: userId,
+    name: "Member Profile",
+    handle: "@member",
+    avatar: "M"
   };
 
-  let stories = [
-    { id: "s_1", userId: "u_101", count: 0 },
-    { id: "s_2", userId: "u_103", count: 2 },
-    { id: "s_3", userId: "u_102", count: 1 }
-  ];
+  document.getElementById('profileName').textContent = user.name;
+  document.getElementById('profileHandle').textContent = user.handle;
+  document.getElementById('profileAvatarLarge').textContent = user.avatar;
 
-  let posts = [
-    {
-      id: "p_1",
-      userId: "u_102",
-      time: "2 hours ago",
-      status: "blessed at Grace Community",
-      content: "Blessed Sunday to everyone! Excited to share our community graphic updates with the fellowship today.",
-      image: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?auto=format&fit=crop&w=600&q=80",
-      likes: 12,
-      isLiked: false
-    }
-  ];
+  const friendBtn = document.getElementById('profileFriendBtn');
+  if (userId === state.currentUser.id) {
+    friendBtn.classList.add('hidden');
+  } else {
+    friendBtn.classList.remove('hidden');
+    const isFriend = state.friends.includes(userId);
+    const isRequested = state.friendRequests.includes(userId);
 
-  document.addEventListener('DOMContentLoaded', () => {
-    const savedUsers = localStorage.getItem('bp_users');
-    if (savedUsers) {
-      try { usersDb = JSON.parse(savedUsers); } catch(e){}
-    }
-
-    document.getElementById('showSignupBtn').addEventListener('click', () => {
-      document.getElementById('loginBox').classList.add('hidden');
-      document.getElementById('signupBox').classList.remove('hidden');
-      clearMsgs();
-    });
-
-    document.getElementById('showLoginBtn').addEventListener('click', () => {
-      document.getElementById('signupBox').classList.add('hidden');
-      document.getElementById('loginBox').classList.remove('hidden');
-      clearMsgs();
-    });
-
-    document.getElementById('loginBtn').addEventListener('click', () => {
-      const email = document.getElementById('loginEmail').value.trim();
-      const pass = document.getElementById('loginPass').value.trim();
-      const msg = document.getElementById('loginMsg');
-
-      if (!email || !pass) {
-        msg.textContent = "Please provide email and password.";
-        return;
-      }
-
-      let user = Object.values(usersDb).find(u => u.email === email);
-      if (!user) {
-        const newId = 'u_' + Date.now();
-        const derivedName = email.split('@')[0];
-        usersDb[newId] = {
-          id: newId,
-          name: derivedName,
-          username: derivedName.toLowerCase().replace(/[^a-z0-9]/g, ''),
-          email: email,
-          avatarImg: "",
-          coverImg: "",
-          bio: "New Believers+ community member.",
-          privacy: { dob: 'members', address: 'only_me', phone: 'members', email: 'members', education: 'public', employment: 'public', church: 'public' }
-        };
-        currentUserId = newId;
-        saveDb();
-      } else {
-        currentUserId = user.id;
-      }
-
-      loginUser();
-    });
-
-    document.getElementById('signupBtn').addEventListener('click', () => {
-      const name = document.getElementById('name').value.trim();
-      const email = document.getElementById('email').value.trim();
-      const pass = document.getElementById('pass').value.trim();
-      const msg = document.getElementById('signupMsg');
-
-      if (!name || !email || !pass) {
-        msg.textContent = "Please complete all fields.";
-        return;
-      }
-
-      const newId = 'u_' + Date.now();
-      usersDb[newId] = {
-        id: newId,
-        name: name,
-        username: name.toLowerCase().replace(/[^a-z0-9]/g, ''),
-        email: email,
-        avatarImg: "",
-        coverImg: "",
-        bio: "Member of Believers+ fellowship.",
-        privacy: { dob: 'members', address: 'only_me', phone: 'members', email: 'members', education: 'public', employment: 'public', church: 'public' }
+    if (isFriend) {
+      friendBtn.innerHTML = `<i class="fa-solid fa-check"></i> Friends`;
+      friendBtn.disabled = true;
+    } else if (isRequested) {
+      friendBtn.innerHTML = `<i class="fa-solid fa-clock"></i> Requested`;
+      friendBtn.disabled = true;
+    } else {
+      friendBtn.innerHTML = `<i class="fa-solid fa-user-plus"></i> Add Friend`;
+      friendBtn.disabled = false;
+      friendBtn.onclick = () => {
+        sendFriendRequest(userId);
+        openUserProfile(userId, false);
       };
-      currentUserId = newId;
-      saveDb();
-      loginUser();
-    });
-
-    document.getElementById('logoutBtn').addEventListener('click', () => {
-      document.getElementById('app').classList.add('hidden');
-      document.getElementById('auth').classList.remove('hidden');
-      document.getElementById('loginEmail').value = '';
-      document.getElementById('loginPass').value = '';
-      clearMsgs();
-    });
-
-    // Image Upload Handling in Composer
-    const postImageInput = document.getElementById('postImageInput');
-    postImageInput.addEventListener('change', (e) => {
-      const file = e.target.files[0];
-      if (file) {
-        const reader = new FileReader();
-        reader.onload = function(evt) {
-          attachedImageBase64 = evt.target.result;
-          document.getElementById('previewImg').src = attachedImageBase64;
-          document.getElementById('postImagePreview').classList.remove('hidden');
-          document.getElementById('postComposerArea').classList.remove('hidden');
-        };
-        reader.readAsDataURL(file);
-      }
-    });
-
-    document.getElementById('removeImageBtn').addEventListener('click', () => {
-      attachedImageBase64 = null;
-      document.getElementById('postImageInput').value = '';
-      document.getElementById('postImagePreview').classList.add('hidden');
-    });
-
-    document.getElementById('submitPostBtn').addEventListener('click', () => {
-      const text = document.getElementById('postText').value.trim();
-      if (!text && !attachedImageBase64) return;
-
-      const newPost = {
-        id: 'p_' + Date.now(),
-        userId: currentUserId,
-        time: "Just now",
-        status: "sharing with community",
-        content: text,
-        image: attachedImageBase64,
-        likes: 0,
-        isLiked: false
-      };
-
-      posts.unshift(newPost);
-      renderFeed();
-
-      document.getElementById('postText').value = '';
-      attachedImageBase64 = null;
-      document.getElementById('postImageInput').value = '';
-      document.getElementById('postImagePreview').classList.add('hidden');
-      document.getElementById('postComposerArea').classList.add('hidden');
-    });
-
-    // File Input Listeners
-    const coverFileInput = document.getElementById('coverPhotoFileInput');
-    coverFileInput.addEventListener('change', async (e) => {
-      const file = e.target.files[0];
-      if (file) {
-        const previewUrl = await readFileAsBase64(file);
-        await uploadCoverPhotoToSupabase(currentUserId, file, previewUrl);
-        saveDb();
-        updateComposerAvatar();
-        if (activeProfileViewUserId === currentUserId) {
-          openProfile(currentUserId, false);
-        }
-      }
-      coverFileInput.value = '';
-    });
-
-    const profileFileInput = document.getElementById('profilePhotoFileInput');
-    profileFileInput.addEventListener('change', async (e) => {
-      const file = e.target.files[0];
-      if (file) {
-        const previewUrl = await readFileAsBase64(file);
-        await uploadProfilePhotoToSupabase(currentUserId, file, previewUrl);
-        saveDb();
-        updateComposerAvatar();
-        if (activeProfileViewUserId === currentUserId) {
-          openProfile(currentUserId, false);
-        }
-      }
-      profileFileInput.value = '';
-    });
-
-    // Automatically initialize view or handle directly navigated URL
-    loginUser();
-  });
-
-  // DEEP-LINK INITIALIZATION & ROUTING RESOLUTION
-  function initRouteFromURL() {
-    const path = window.location.pathname;
-    const profileMatch = path.match(/^\/profile\/([^/]+)\/?$/);
-
-    if (profileMatch && profileMatch[1]) {
-      const targetUserId = profileMatch[1];
-      if (usersDb[targetUserId]) {
-        openProfile(targetUserId, false);
-      } else {
-        navigateHome(false);
-      }
-    } else {
-      navigateHome(false);
     }
   }
 
-  window.addEventListener('popstate', (e) => {
-    if (e.state && e.state.profileId) {
-      openProfile(e.state.profileId, false);
-    } else {
-      navigateHome(false);
-    }
-  });
-
-  function readFileAsBase64(file) {
-    return new Promise((resolve, reject) => {
-      const reader = new FileReader();
-      reader.onload = (e) => resolve(e.target.result);
-      reader.onerror = (err) => reject(err);
-      reader.readAsDataURL(file);
-    });
+  if (pushHistory) {
+    history.pushState({ userId }, '', `/profile/${userId}`);
   }
 
-  async function uploadCoverPhotoToSupabase(userId, fileObject, previewBase64) {
-    usersDb[userId].coverImg = previewBase64;
-  }
-
-  async function uploadProfilePhotoToSupabase(userId, fileObject, previewBase64) {
-    usersDb[userId].avatarImg = previewBase64;
-  }
-
-  function saveDb() {
-    localStorage.setItem('bp_users', JSON.stringify(usersDb));
-  }
-
-  function loginUser() {
-    document.getElementById('auth').classList.add('hidden');
-    document.getElementById('app').classList.remove('hidden');
-    
-    updateComposerAvatar();
-    initRouteFromURL();
-  }
-
-  function updateComposerAvatar() {
-    const user = usersDb[currentUserId];
-    const headerAvatarEl = document.getElementById('headerAvatar');
-    headerAvatarEl.onclick = () => openProfile(currentUserId);
-
-    if (user && user.avatarImg) {
-      headerAvatarEl.innerHTML = `<img src="${user.avatarImg}" alt="${user.name}" onerror="handleImageError(this)">`;
-    } else {
-      headerAvatarEl.textContent = (user ? user.name : "B").charAt(0).toUpperCase();
-    }
-  }
-
-  function clearMsgs() {
-    document.getElementById('loginMsg').textContent = '';
-    document.getElementById('signupMsg').textContent = '';
-  }
-
-  function toggleComposer() {
-    const area = document.getElementById('postComposerArea');
-    area.classList.toggle('hidden');
-  }
-
-  function navigateHome(shouldPushState = true) {
-    activeProfileViewUserId = null;
-    document.getElementById('profileView').classList.add('hidden');
-    document.getElementById('feedView').classList.remove('hidden');
-    
-    document.getElementById('navHomeBtn').classList.add('active');
-    document.getElementById('bNavHome').classList.add('active');
-    document.getElementById('bNavProfile').classList.remove('active');
-    
-    renderStories();
-    renderFeed();
-
-    if (shouldPushState && window.location.pathname !== '/') {
-      window.history.pushState({}, '', '/');
-    }
-  }
-
-  function switchTab(tabName) {
-    if (tabName === 'home') {
-      navigateHome();
-    } else {
-      alert(`The ${tabName.toUpperCase()} section is active on your feed.`);
-    }
-  }
-
-  function renderStories() {
-    const wrapper = document.getElementById('storiesWrapper');
-    wrapper.innerHTML = '';
-
-    stories.forEach(story => {
-      const user = usersDb[story.userId] || { name: 'Member', avatarImg: '' };
-      const isSelf = story.userId === currentUserId;
-
-      const card = document.createElement('div');
-      card.className = `story-card ${isSelf ? 'create-story' : ''}`;
-      card.onclick = () => openProfile(story.userId);
-
-      if (isSelf) {
-        card.innerHTML = `
-          <div class="top-img">
-            <img src="${user.avatarImg || svgPlaceholder}" alt="${user.name}" onerror="handleImageError(this)">
-            <div class="plus-btn"><i class="fa-solid fa-plus"></i></div>
-          </div>
-          <div class="bottom-text">Update Story</div>
-        `;
-      } else {
-        card.innerHTML = `
-          ${story.count > 0 ? `<div class="story-badge">${story.count}</div>` : ''}
-          <img class="bg-story" src="${user.avatarImg || svgPlaceholder}" alt="${user.name}" onerror="handleImageError(this)">
-          <div class="story-overlay"></div>
-          <div class="story-author">${user.name}</div>
-        `;
-      }
-
-      wrapper.appendChild(card);
-    });
-  }
-
-  function renderFeed() {
-    const feedContainer = document.getElementById('feedContainer');
-    feedContainer.innerHTML = '';
-
-    posts.forEach(post => {
-      const author = usersDb[post.userId] || { name: 'Believers+ Member', avatarImg: '' };
-      const initial = author.name.charAt(0).toUpperCase();
-
-      const card = document.createElement('div');
-      card.className = 'card';
-      
-      const avatarHTML = author.avatarImg 
-        ? `<div class="avatar" onclick="openProfile('${author.id}')"><img src="${author.avatarImg}" alt="${author.name}" onerror="handleImageError(this)"></div>`
-        : `<div class="avatar" onclick="openProfile('${author.id}')">${initial}</div>`;
-
-      card.innerHTML = `
-        <div class="posthead">
-          <div class="posthead-left">
-            ${avatarHTML}
-            <div>
-              <div class="post-author-name clickable-user" onclick="openProfile('${author.id}')">${author.name}</div>
-              <div class="post-meta-line">
-                <span>${post.time}</span> • <span>${post.status}</span>
-              </div>
-            </div>
-          </div>
-          <button style="color:var(--bp-muted);"><i class="fa-solid fa-ellipsis-vertical"></i></button>
-        </div>
-        ${post.content ? `<div class="post-content">${post.content}</div>` : ''}
-        ${post.image ? `<img class="post-photo" src="${post.image}" alt="Community Post" onerror="handleImageError(this)">` : ''}
-        <div class="actions">
-          <button class="action-btn ${post.isLiked ? 'liked' : ''}" onclick="toggleLike('${post.id}')">
-            <i class="${post.isLiked ? 'fa-solid' : 'fa-heart'} fa-heart"></i> 
-            ${post.likes > 0 ? post.likes : ''} Encourage
-          </button>
-          <button class="action-btn"><i class="fa-regular fa-comment-dots"></i> Reply</button>
-          <button class="action-btn"><i class="fa-solid fa-arrow-share-group"></i> Share</button>
-        </div>
-      `;
-
-      feedContainer.appendChild(card);
-    });
-  }
-
-  function toggleLike(postId) {
-    const post = posts.find(p => p.id === postId);
-    if (post) {
-      post.isLiked = !post.isLiked;
-      post.likes += post.isLiked ? 1 : -1;
-      renderFeed();
-    }
-  }
-
-  function openProfile(userId, shouldPushState = true) {
-    const user = usersDb[userId];
-    if (!user) return;
-
-    activeProfileViewUserId = userId;
-
-    if (shouldPushState) {
-      window.history.pushState({ profileId: userId }, '', `/profile/${user.id}`);
-    }
-
-    document.getElementById('feedView').classList.add('hidden');
-    const profileView = document.getElementById('profileView');
-    profileView.classList.remove('hidden');
-
-    document.getElementById('navHomeBtn').classList.remove('active');
-    document.getElementById('bNavHome').classList.remove('active');
-    if (userId === currentUserId) {
-      document.getElementById('bNavProfile').classList.add('active');
-    }
-
-    renderProfileCard(user);
-  }
-
-  function canViewField(user, fieldPrivacyKey) {
-    if (user.id === currentUserId) return true;
-    const setting = (user.privacy && user.privacy[fieldPrivacyKey]) ? user.privacy[fieldPrivacyKey] : 'public';
-    
-    if (setting === 'public') return true;
-    if (setting === 'members' && currentUserId) return true;
-    return false;
-  }
-
-  function triggerCoverPhotoPicker() {
-    document.getElementById('coverPhotoFileInput').click();
-  }
-
-  function triggerProfilePhotoPicker() {
-    document.getElementById('profilePhotoFileInput').click();
-  }
-
-  function openPhotoModal(type) {
-    const modal = document.getElementById('photoActionModal');
-    const title = document.getElementById('modalTitle');
-    const changeBtn = document.getElementById('modalChangeBtn');
-    const removeBtn = document.getElementById('modalRemoveBtn');
-    const changeLabel = document.getElementById('modalChangeLabel');
-    const removeLabel = document.getElementById('modalRemoveLabel');
-
-    if (type === 'cover') {
-      title.textContent = "Cover Photo Options";
-      changeLabel.textContent = "Change Cover Photo";
-      removeLabel.textContent = "Remove Cover Photo";
-      changeBtn.onclick = () => { closePhotoModal(); triggerCoverPhotoPicker(); };
-      removeBtn.onclick = () => { closePhotoModal(); removeCoverPhoto(); };
-    } else if (type === 'profile') {
-      title.textContent = "Profile Photo Options";
-      changeLabel.textContent = "Change Profile Photo";
-      removeLabel.textContent = "Remove Profile Photo";
-      changeBtn.onclick = () => { closePhotoModal(); triggerProfilePhotoPicker(); };
-      removeBtn.onclick = () => { closePhotoModal(); removeProfilePhoto(); };
-    }
-
-    modal.classList.remove('hidden');
-  }
-
-  function closePhotoModal() {
-    document.getElementById('photoActionModal').classList.add('hidden');
-  }
-
-  function removeCoverPhoto() {
-    if (usersDb[currentUserId]) {
-      usersDb[currentUserId].coverImg = "";
-      saveDb();
-      openProfile(currentUserId, false);
-    }
-  }
-
-  function removeProfilePhoto() {
-    if (usersDb[currentUserId]) {
-      usersDb[currentUserId].avatarImg = "";
-      saveDb();
-      updateComposerAvatar();
-      openProfile(currentUserId, false);
-    }
-  }
-
-  function renderProfileCard(user) {
-    const isOwner = (user.id === currentUserId);
-    const initial = user.name.charAt(0).toUpperCase();
-
-    let coverStyle = "";
-    let coverContent = "";
-
-    if (user.coverImg) {
-      coverStyle = `background-image: url('${user.coverImg}');`;
-      if (isOwner) {
-        coverContent = `
-          <div class="cover-action-badge" onclick="event.stopPropagation(); openPhotoModal('cover');">
-            <i class="fa-solid fa-camera"></i> Edit Cover
-          </div>
-        `;
-      }
-    } else {
-      if (isOwner) {
-        coverContent = `
-          <div class="cover-upload-placeholder" onclick="triggerCoverPhotoPicker()">
-            <i class="fa-solid fa-cloud-arrow-up" style="font-size: 20px;"></i>
-            <span>Upload Cover Photo</span>
-          </div>
-        `;
-      }
-    }
-
-    let avatarContent = "";
-    if (user.avatarImg) {
-      avatarContent = `<img src="${user.avatarImg}" alt="${user.name}" onerror="handleImageError(this)">`;
-    } else {
-      if (isOwner) {
-        avatarContent = `
-          <div class="avatar-upload-placeholder" onclick="triggerProfilePhotoPicker()">
-            <i class="fa-solid fa-camera"></i>
-            <span>Upload Photo</span>
-          </div>
-        `;
-      } else {
-        avatarContent = initial;
-      }
-    }
-
-    const profileView = document.getElementById('profileView');
-    profileView.innerHTML = `
-      <div style="margin-top: 10px; margin-bottom: 8px;">
-        <button class="btn btn-outline" style="width: auto; padding: 6px 14px; font-size: 12px;" onclick="navigateHome()">
-          <i class="fa-solid fa-arrow-left"></i> Back to Feed
-        </button>
-      </div>
-
-      <div class="profile-card">
-        
-        <div class="profile-header-bg ${isOwner ? 'editable' : ''}" style="${coverStyle}" ${isOwner && user.coverImg ? 'onclick="openPhotoModal(\'cover\')"' : ''}>
-          ${coverContent}
-        </div>
-
-        <div class="profile-header-content">
-          
-          <div class="profile-avatar-wrapper">
-            <div class="profile-avatar-large ${isOwner ? 'editable' : ''}" ${isOwner && user.avatarImg ? 'onclick="openPhotoModal(\'profile\')"' : ''}>
-              ${avatarContent}
-            </div>
-            ${isOwner && user.avatarImg ? `
-              <div class="avatar-edit-badge" onclick="event.stopPropagation(); openPhotoModal('profile');">
-                <i class="fa-solid fa-pen"></i>
-              </div>
-            ` : ''}
-          </div>
-
-          <div class="profile-name">${user.name} <i class="fa-solid fa-circle-check" style="color: var(--bp-gold); font-size: 16px;"></i></div>
-          <div class="profile-handle">@${user.username || 'believer'}</div>
-          <div class="profile-bio">${user.bio || 'Believers+ Community Member'}</div>
-
-          <div class="profile-actions-bar">
-            ${isOwner ? `
-              <button class="btn btn-gold" style="width: auto; padding: 8px 18px; font-size: 13px;" onclick="renderEditProfileForm('${user.id}')">
-                <i class="fa-solid fa-pen-to-square"></i> Edit Profile
-              </button>
-            ` : `
-              <button class="btn btn-gold" style="width: auto; padding: 8px 18px; font-size: 13px;">
-                <i class="fa-solid fa-message"></i> Message
-              </button>
-              <button class="btn btn-outline" style="width: auto; padding: 8px 18px; font-size: 13px;">
-                <i class="fa-solid fa-user-plus"></i> Connect
-              </button>
-            `}
-          </div>
-        </div>
-
-        <div class="profile-section">
-          <div class="profile-section-title"><i class="fa-solid fa-id-card"></i> Personal Information</div>
-          <div class="info-grid">
-            <div class="info-item">
-              <div class="info-label">Full Name</div>
-              <div class="info-val">${user.name}</div>
-            </div>
-            <div class="info-item">
-              <div class="info-label">Date of Birth</div>
-              <div class="info-val">
-                ${canViewField(user, 'dob') ? (user.dob || 'Not specified') : '<span class="private-locked"><i class="fa-solid fa-lock"></i> Private</span>'}
-              </div>
-            </div>
-            <div class="info-item">
-              <div class="info-label">Gender</div>
-              <div class="info-val">${user.gender || 'Not specified'}</div>
-            </div>
-            <div class="info-item">
-              <div class="info-label">Current Address</div>
-              <div class="info-val">
-                ${canViewField(user, 'address') ? (user.address || 'Not specified') : '<span class="private-locked"><i class="fa-solid fa-lock"></i> Private</span>'}
-              </div>
-            </div>
-            <div class="info-item">
-              <div class="info-label">City / Country</div>
-              <div class="info-val">${user.city || ''} ${user.country ? ', ' + user.country : 'Not specified'}</div>
-            </div>
-            <div class="info-item">
-              <div class="info-label">Marital Status</div>
-              <div class="info-val">${user.maritalStatus || 'Not specified'}</div>
-            </div>
-          </div>
-        </div>
-
-        <div class="profile-section">
-          <div class="profile-section-title"><i class="fa-solid fa-address-book"></i> Contact Details</div>
-          <div class="info-grid">
-            <div class="info-item">
-              <div class="info-label">Phone Number</div>
-              <div class="info-val">
-                ${canViewField(user, 'phone') ? (user.phone || 'Not specified') : '<span class="private-locked"><i class="fa-solid fa-lock"></i> Private</span>'}
-              </div>
-            </div>
-            <div class="info-item">
-              <div class="info-label">Email Address</div>
-              <div class="info-val">
-                ${canViewField(user, 'email') ? (user.email || 'Not specified') : '<span class="private-locked"><i class="fa-solid fa-lock"></i> Private</span>'}
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="profile-section">
-          <div class="profile-section-title"><i class="fa-solid fa-graduation-cap"></i> Education</div>
-          <div class="info-grid">
-            ${canViewField(user, 'education') ? `
-              <div class="info-item">
-                <div class="info-label">Highest Level</div>
-                <div class="info-val">${user.educationLevel || 'Not specified'}</div>
-              </div>
-              <div class="info-item">
-                <div class="info-label">Institution</div>
-                <div class="info-val">${user.institution || 'Not specified'}</div>
-              </div>
-              <div class="info-item">
-                <div class="info-label">Course / Program</div>
-                <div class="info-val">${user.course || 'Not specified'}</div>
-              </div>
-              <div class="info-item">
-                <div class="info-label">Graduation Year</div>
-                <div class="info-val">${user.gradYear || 'Not specified'}</div>
-              </div>
-            ` : `
-              <div class="info-item" style="grid-column: 1/-1;">
-                <span class="private-locked"><i class="fa-solid fa-lock"></i> Education details are private</span>
-              </div>
-            `}
-          </div>
-        </div>
-
-        <div class="profile-section">
-          <div class="profile-section-title"><i class="fa-solid fa-briefcase"></i> Professional Information</div>
-          <div class="info-grid">
-            ${canViewField(user, 'employment') ? `
-              <div class="info-item">
-                <div class="info-label">Occupation</div>
-                <div class="info-val">${user.occupation || 'Not specified'}</div>
-              </div>
-              <div class="info-item">
-                <div class="info-label">Employer / Org</div>
-                <div class="info-val">${user.employer || 'Not specified'}</div>
-              </div>
-              <div class="info-item">
-                <div class="info-label">Position / Role</div>
-                <div class="info-val">${user.position || 'Not specified'}</div>
-              </div>
-              <div class="info-item">
-                <div class="info-label">Skills & Expertise</div>
-                <div class="info-val">${user.skills || 'Not specified'}</div>
-              </div>
-            ` : `
-              <div class="info-item" style="grid-column: 1/-1;">
-                <span class="private-locked"><i class="fa-solid fa-lock"></i> Professional details are private</span>
-              </div>
-            `}
-          </div>
-        </div>
-
-        <div class="profile-section">
-          <div class="profile-section-title"><i class="fa-solid fa-church"></i> Church & Ministry</div>
-          <div class="info-grid">
-            ${canViewField(user, 'church') ? `
-              <div class="info-item">
-                <div class="info-label">Home Church</div>
-                <div class="info-val">${user.church || 'Not specified'}</div>
-              </div>
-              <div class="info-item">
-                <div class="info-label">Department</div>
-                <div class="info-val">${user.department || 'Not specified'}</div>
-              </div>
-              <div class="info-item">
-                <div class="info-label">Role / Position</div>
-                <div class="info-val">${user.churchRole || 'Not specified'}</div>
-              </div>
-              <div class="info-item">
-                <div class="info-label">Years of Service</div>
-                <div class="info-val">${user.yearsService || 'Not specified'}</div>
-              </div>
-            ` : `
-              <div class="info-item" style="grid-column: 1/-1;">
-                <span class="private-locked"><i class="fa-solid fa-lock"></i> Ministry details are private</span>
-              </div>
-            `}
-          </div>
-        </div>
-
-      </div>
-    `;
-  }
-
-  function renderEditProfileForm(userId) {
-    const user = usersDb[userId];
-    if (!user) return;
-
-    const privacy = user.privacy || {};
-
-    const profileView = document.getElementById('profileView');
-    profileView.innerHTML = `
-      <div style="margin-top: 10px; margin-bottom: 8px; display: flex; justify-content: space-between; align-items: center;">
-        <button class="btn btn-outline" style="width: auto; padding: 6px 14px; font-size: 12px;" onclick="openProfile('${user.id}')">
-          <i class="fa-solid fa-xmark"></i> Cancel
-        </button>
-        <h3 style="color: var(--bp-primary); font-size: 16px;">Edit Believers+ Profile</h3>
-      </div>
-
-      <form id="editProfileForm" class="card" onsubmit="saveProfileChanges(event, '${user.id}')">
-        
-        <div class="profile-section-title"><i class="fa-solid fa-user-gear"></i> Basic Account Info</div>
-        <div class="form-group">
-          <label>Profile Picture URL (or use photo picker)</label>
-          <input type="text" id="editAvatarImg" value="${user.avatarImg || ''}" placeholder="https://domain.com/photo.jpg">
-        </div>
-        <div class="form-group">
-          <label>Cover Photo URL (or use photo picker)</label>
-          <input type="text" id="editCoverImg" value="${user.coverImg || ''}" placeholder="https://domain.com/cover.jpg">
-        </div>
-        <div class="form-group">
-          <label>Full Name</label>
-          <input type="text" id="editName" value="${user.name || ''}" required>
-        </div>
-        <div class="form-group">
-          <label>Username</label>
-          <input type="text" id="editUsername" value="${user.username || ''}" required>
-        </div>
-        <div class="form-group">
-          <label>Short Bio</label>
-          <textarea id="editBio" rows="2">${user.bio || ''}</textarea>
-        </div>
-
-        <div class="divider"></div>
-        <div class="profile-section-title"><i class="fa-solid fa-id-card"></i> Personal Details & Privacy</div>
-        
-        <div class="form-group">
-          <label>Date of Birth</label>
-          <input type="date" id="editDob" value="${user.dob || ''}">
-          <select id="privDob" class="privacy-select">
-            <option value="public" ${privacy.dob==='public'?'selected':''}>Visibility: Public</option>
-            <option value="members" ${privacy.dob==='members'?'selected':''}>Visibility: Members Only</option>
-            <option value="only_me" ${privacy.dob==='only_me'?'selected':''}>Visibility: Only Me</option>
-          </select>
-        </div>
-
-        <div class="form-group">
-          <label>Gender</label>
-          <input type="text" id="editGender" value="${user.gender || ''}">
-        </div>
-
-        <div class="form-group">
-          <label>Current Address</label>
-          <input type="text" id="editAddress" value="${user.address || ''}">
-          <select id="privAddress" class="privacy-select">
-            <option value="public" ${privacy.address==='public'?'selected':''}>Visibility: Public</option>
-            <option value="members" ${privacy.address==='members'?'selected':''}>Visibility: Members Only</option>
-            <option value="only_me" ${privacy.address==='only_me'?'selected':''}>Visibility: Only Me</option>
-          </select>
-        </div>
-
-        <div class="form-group">
-          <label>City / Community</label>
-          <input type="text" id="editCity" value="${user.city || ''}">
-        </div>
-
-        <div class="form-group">
-          <label>Country</label>
-          <input type="text" id="editCountry" value="${user.country || ''}">
-        </div>
-
-        <div class="form-group">
-          <label>Marital Status</label>
-          <select id="editMaritalStatus">
-            <option value="Single" ${user.maritalStatus==='Single'?'selected':''}>Single</option>
-            <option value="Married" ${user.maritalStatus==='Married'?'selected':''}>Married</option>
-            <option value="Engaged" ${user.maritalStatus==='Engaged'?'selected':''}>Engaged</option>
-          </select>
-        </div>
-
-        <div class="divider"></div>
-        <div class="profile-section-title"><i class="fa-solid fa-address-book"></i> Contact Settings</div>
-
-        <div class="form-group">
-          <label>Phone Number</label>
-          <input type="text" id="editPhone" value="${user.phone || ''}">
-          <select id="privPhone" class="privacy-select">
-            <option value="public" ${privacy.phone==='public'?'selected':''}>Visibility: Public</option>
-            <option value="members" ${privacy.phone==='members'?'selected':''}>Visibility: Members Only</option>
-            <option value="only_me" ${privacy.phone==='only_me'?'selected':''}>Visibility: Only Me</option>
-          </select>
-        </div>
-
-        <div class="form-group">
-          <label>Email Address</label>
-          <input type="email" id="editEmail" value="${user.email || ''}" required>
-          <select id="privEmail" class="privacy-select">
-            <option value="public" ${privacy.email==='public'?'selected':''}>Visibility: Public</option>
-            <option value="members" ${privacy.email==='members'?'selected':''}>Visibility: Members Only</option>
-            <option value="only_me" ${privacy.email==='only_me'?'selected':''}>Visibility: Only Me</option>
-          </select>
-        </div>
-
-        <div class="divider"></div>
-        <div class="profile-section-title"><i class="fa-solid fa-graduation-cap"></i> Education & Career</div>
-
-        <div class="form-group">
-          <label>Highest Education Level</label>
-          <input type="text" id="editEducationLevel" value="${user.educationLevel || ''}">
-          <select id="privEducation" class="privacy-select">
-            <option value="public" ${privacy.education==='public'?'selected':''}>Visibility: Public</option>
-            <option value="members" ${privacy.education==='members'?'selected':''}>Visibility: Members Only</option>
-            <option value="only_me" ${privacy.education==='only_me'?'selected':''}>Visibility: Only Me</option>
-          </select>
-        </div>
-
-        <div class="form-group">
-          <label>Institution</label>
-          <input type="text" id="editInstitution" value="${user.institution || ''}">
-        </div>
-
-        <div class="form-group">
-          <label>Course / Program</label>
-          <input type="text" id="editCourse" value="${user.course || ''}">
-        </div>
-
-        <div class="form-group">
-          <label>Graduation Year</label>
-          <input type="text" id="editGradYear" value="${user.gradYear || ''}">
-        </div>
-
-        <div class="form-group">
-          <label>Occupation</label>
-          <input type="text" id="editOccupation" value="${user.occupation || ''}">
-          <select id="privEmployment" class="privacy-select">
-            <option value="public" ${privacy.employment==='public'?'selected':''}>Visibility: Public</option>
-            <option value="members" ${privacy.employment==='members'?'selected':''}>Visibility: Members Only</option>
-            <option value="only_me" ${privacy.employment==='only_me'?'selected':''}>Visibility: Only Me</option>
-          </select>
-        </div>
-
-        <div class="form-group">
-          <label>Employer / Organization</label>
-          <input type="text" id="editEmployer" value="${user.employer || ''}">
-        </div>
-
-        <div class="form-group">
-          <label>Position / Role</label>
-          <input type="text" id="editPosition" value="${user.position || ''}">
-        </div>
-
-        <div class="form-group">
-          <label>Key Skills</label>
-          <input type="text" id="editSkills" value="${user.skills || ''}">
-        </div>
-
-        <div class="divider"></div>
-        <div class="profile-section-title"><i class="fa-solid fa-church"></i> Church & Ministry</div>
-
-        <div class="form-group">
-          <label>Home Church / Ministry</label>
-          <input type="text" id="editChurch" value="${user.church || ''}">
-          <select id="privChurch" class="privacy-select">
-            <option value="public" ${privacy.church==='public'?'selected':''}>Visibility: Public</option>
-            <option value="members" ${privacy.church==='members'?'selected':''}>Visibility: Members Only</option>
-            <option value="only_me" ${privacy.church==='only_me'?'selected':''}>Visibility: Only Me</option>
-          </select>
-        </div>
-
-        <div class="form-group">
-          <label>Department</label>
-          <input type="text" id="editDepartment" value="${user.department || ''}">
-        </div>
-
-        <div class="form-group">
-          <label>Role / Ministry Position</label>
-          <input type="text" id="editChurchRole" value="${user.churchRole || ''}">
-        </div>
-
-        <div class="form-group">
-          <label>Years of Service</label>
-          <input type="text" id="editYearsService" value="${user.yearsService || ''}">
-        </div>
-
-        <div style="margin-top: 16px;">
-          <button type="submit" class="btn btn-gold"><i class="fa-solid fa-floppy-disk"></i> Save Profile</button>
-        </div>
-
-      </form>
-    `;
-  }
-
-  function saveProfileChanges(e, userId) {
-    e.preventDefault();
-
-    const user = usersDb[userId];
-    if (!user) return;
-
-    user.avatarImg = document.getElementById('editAvatarImg').value.trim();
-    user.coverImg = document.getElementById('editCoverImg').value.trim();
-    user.name = document.getElementById('editName').value.trim();
-    user.username = document.getElementById('editUsername').value.trim();
-    user.bio = document.getElementById('editBio').value.trim();
-    user.dob = document.getElementById('editDob').value;
-    user.gender = document.getElementById('editGender').value.trim();
-    user.address = document.getElementById('editAddress').value.trim();
-    user.city = document.getElementById('editCity').value.trim();
-    user.country = document.getElementById('editCountry').value.trim();
-    user.maritalStatus = document.getElementById('editMaritalStatus').value;
-    user.phone = document.getElementById('editPhone').value.trim();
-    user.email = document.getElementById('editEmail').value.trim();
-    user.educationLevel = document.getElementById('editEducationLevel').value.trim();
-    user.institution = document.getElementById('editInstitution').value.trim();
-    user.course = document.getElementById('editCourse').value.trim();
-    user.gradYear = document.getElementById('editGradYear').value.trim();
-    user.occupation = document.getElementById('editOccupation').value.trim();
-    user.employer = document.getElementById('editEmployer').value.trim();
-    user.position = document.getElementById('editPosition').value.trim();
-    user.skills = document.getElementById('editSkills').value.trim();
-    user.church = document.getElementById('editChurch').value.trim();
-    user.department = document.getElementById('editDepartment').value.trim();
-    user.churchRole = document.getElementById('editChurchRole').value.trim();
-    user.yearsService = document.getElementById('editYearsService').value.trim();
-
-    user.privacy = {
-      dob: document.getElementById('privDob').value,
-      address: document.getElementById('privAddress').value,
-      phone: document.getElementById('privPhone').value,
-      email: document.getElementById('privEmail').value,
-      education: document.getElementById('privEducation').value,
-      employment: document.getElementById('privEmployment').value,
-      church: document.getElementById('privChurch').value
-    };
-
-    saveDb();
-
-    updateComposerAvatar();
-    openProfile(userId, false);
-  }
+  switchTab('viewProfile', false);
+}
 </script>
-
 </body>
 </html>
