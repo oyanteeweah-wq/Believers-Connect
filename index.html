@@ -45,10 +45,10 @@ body {
   background-color: var(--bp-bg);
   color: var(--bp-text);
   line-height: 1.5;
-  padding-bottom: 70px; /* Buffer for mobile bottom nav */
+  padding-bottom: 70px;
 }
 
-button, input, textarea {
+button, input, textarea, select {
   font: inherit;
 }
 
@@ -74,7 +74,7 @@ img {
 }
 
 /* =========================================================
-   AUTHENTICATION VIEW (Believer+ Custom)
+   AUTHENTICATION VIEW
 ========================================================= */
 .auth-page {
   min-height: 100vh;
@@ -133,17 +133,18 @@ img {
   text-transform: uppercase;
 }
 
-.form-group input {
+.form-group input, .form-group select, .form-group textarea {
   width: 100%;
-  padding: 12px 14px;
+  padding: 10px 12px;
   border: 1px solid var(--bp-border);
   border-radius: 10px;
   background: #f8fafc;
   outline: none;
   transition: border-color 0.2s;
+  color: var(--bp-text);
 }
 
-.form-group input:focus {
+.form-group input:focus, .form-group select:focus, .form-group textarea:focus {
   border-color: var(--bp-gold);
 }
 
@@ -173,6 +174,12 @@ img {
 
 .btn-gold:hover {
   background: var(--bp-gold-hover);
+}
+
+.btn-outline {
+  background: transparent;
+  border: 1px solid var(--bp-border);
+  color: var(--bp-primary);
 }
 
 .divider {
@@ -214,6 +221,7 @@ header {
   display: flex;
   align-items: center;
   gap: 8px;
+  cursor: pointer;
 }
 
 .logo-icon {
@@ -251,10 +259,6 @@ header {
   transition: background 0.2s;
 }
 
-.header-circle-btn:active {
-  background: var(--bp-border);
-}
-
 .logout-btn {
   font-size: 12px;
   font-weight: 700;
@@ -264,7 +268,6 @@ header {
   color: #e63946;
 }
 
-/* NAVIGATION BAR */
 .nav-wrap {
   background: #ffffff;
   border-bottom: 1px solid var(--bp-border);
@@ -337,6 +340,7 @@ header {
   overflow: hidden;
   flex-shrink: 0;
   border: 2px solid var(--bp-gold);
+  cursor: pointer;
 }
 
 .avatar img {
@@ -455,6 +459,7 @@ header {
   flex-shrink: 0;
   box-shadow: var(--bp-shadow);
   border: 1px solid var(--bp-border);
+  cursor: pointer;
 }
 
 .story-card img.bg-story {
@@ -573,6 +578,14 @@ header {
   gap: 10px;
 }
 
+.clickable-user {
+  cursor: pointer;
+}
+
+.clickable-user:hover {
+  text-decoration: underline;
+}
+
 .post-author-name {
   font-weight: 800;
   font-size: 14px;
@@ -629,6 +642,141 @@ header {
 }
 
 /* =========================================================
+   MEMBER PROFILE VIEW & EDIT MODAL
+========================================================= */
+.profile-card {
+  background: var(--bp-card-bg);
+  border-radius: var(--bp-radius);
+  border: 1px solid var(--bp-border);
+  box-shadow: var(--bp-shadow);
+  margin-top: 12px;
+  margin-bottom: 20px;
+  overflow: hidden;
+}
+
+.profile-header-bg {
+  height: 120px;
+  background: linear-gradient(135deg, var(--bp-primary) 0%, var(--bp-accent) 100%);
+  position: relative;
+}
+
+.profile-header-content {
+  padding: 0 16px 16px 16px;
+  position: relative;
+  text-align: center;
+  margin-top: -50px;
+}
+
+.profile-avatar-large {
+  width: 96px;
+  height: 96px;
+  border-radius: 50%;
+  background: var(--bp-primary);
+  color: var(--bp-gold);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 900;
+  font-size: 36px;
+  margin: 0 auto 10px auto;
+  border: 4px solid white;
+  box-shadow: var(--bp-shadow);
+  overflow: hidden;
+}
+
+.profile-avatar-large img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.profile-name {
+  font-size: 20px;
+  font-weight: 800;
+  color: var(--bp-primary);
+}
+
+.profile-handle {
+  font-size: 13px;
+  color: var(--bp-muted);
+  margin-bottom: 8px;
+}
+
+.profile-bio {
+  font-size: 14px;
+  color: var(--bp-text);
+  max-width: 450px;
+  margin: 0 auto 14px auto;
+}
+
+.profile-actions-bar {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 16px;
+}
+
+.profile-section {
+  padding: 16px;
+  border-top: 1px solid var(--bp-border);
+}
+
+.profile-section-title {
+  font-size: 13px;
+  font-weight: 800;
+  color: var(--bp-gold);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 12px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.info-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 10px;
+}
+
+.info-item {
+  background: #f8fafc;
+  padding: 10px 12px;
+  border-radius: 8px;
+  border: 1px solid var(--bp-border);
+}
+
+.info-label {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--bp-muted);
+  text-transform: uppercase;
+}
+
+.info-val {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--bp-primary);
+  margin-top: 2px;
+}
+
+.private-locked {
+  font-size: 12px;
+  color: var(--bp-muted);
+  font-style: italic;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+/* EDIT PROFILE FORM GRID */
+.privacy-select {
+  font-size: 11px;
+  padding: 4px;
+  margin-top: 4px;
+}
+
+/* =========================================================
    BOTTOM MOBILE NAVIGATION
 ========================================================= */
 .bottom-nav {
@@ -669,7 +817,7 @@ header {
 <body>
 
 <!-- =======================================================
-     AUTHENTICATION PAGE (BELIEVER+)
+     AUTHENTICATION PAGE
 ======================================================= -->
 <div id="auth" class="auth-page">
   <div class="auth">
@@ -680,7 +828,6 @@ header {
     </div>
 
     <div class="auth-card">
-      <!-- LOGIN BOX -->
       <div id="loginBox">
         <h2 style="margin-bottom: 14px; font-size: 18px; color: var(--bp-primary);">Welcome Back</h2>
         <div class="form-group">
@@ -697,7 +844,6 @@ header {
         <button id="showSignupBtn" class="btn" type="button">Create Believer+ Account</button>
       </div>
 
-      <!-- SIGNUP BOX -->
       <div id="signupBox" class="hidden">
         <h2 style="margin-bottom: 14px; font-size: 18px; color: var(--bp-primary);">Join Believer+</h2>
         <div class="form-group">
@@ -722,14 +868,14 @@ header {
 </div>
 
 <!-- =======================================================
-     MAIN APPLICATION (BELIEVER+)
+     MAIN APPLICATION VIEW
 ======================================================= -->
 <div id="app" class="hidden">
 
-  <!-- TOP HEADER -->
+  <!-- HEADER -->
   <header>
     <div class="header-inner">
-      <div class="logo-area">
+      <div class="logo-area" onclick="navigateHome()">
         <i class="fa-solid fa-cross logo-icon"></i>
         <span class="logo">Believer<span>+</span></span>
       </div>
@@ -743,7 +889,7 @@ header {
     <!-- MAIN NAVIGATION TABS -->
     <div class="nav-wrap">
       <nav class="nav">
-        <button class="active" data-tab="home" onclick="switchTab('home')">
+        <button id="navHomeBtn" class="active" data-tab="home" onclick="navigateHome()">
           <i class="fa-solid fa-house-chimney"></i>
         </button>
         <button data-tab="community" onclick="switchTab('community')">
@@ -765,96 +911,66 @@ header {
 
   <main class="wrap">
 
-    <!-- COMPOSER TRIGGER -->
-    <div class="composer-card">
-      <div id="headerAvatar" class="avatar">B</div>
-      <button class="mind-button" onclick="toggleComposer()">Share a word or encouragement...</button>
-      <label for="postImageInput" class="photo-upload-btn">
-        <i class="fa-solid fa-image"></i>
-        <span>Media</span>
-      </label>
-    </div>
-
-    <!-- POST COMPOSER FORM -->
-    <div id="postComposerArea" class="hidden">
-      <textarea id="postText" class="composer-textarea" placeholder="What is on your heart today?"></textarea>
-      <input type="file" id="postImageInput" accept="image/*" class="hidden">
+    <!-- MAIN FEED CONTAINER -->
+    <div id="feedView">
       
-      <div id="postImagePreview" class="post-image-preview hidden">
-        <img id="previewImg" src="" alt="Preview">
-        <button type="button" class="remove-post-image" id="removeImageBtn">&times;</button>
+      <!-- COMPOSER TRIGGER -->
+      <div class="composer-card">
+        <div id="headerAvatar" class="avatar">B</div>
+        <button class="mind-button" onclick="toggleComposer()">Share a word or encouragement...</button>
+        <label for="postImageInput" class="photo-upload-btn">
+          <i class="fa-solid fa-image"></i>
+          <span>Media</span>
+        </label>
       </div>
 
-      <div class="composer-actions">
-        <span style="font-size: 11px; color: var(--bp-muted); font-weight: 600;">Visible to Believer+ Community</span>
-        <button id="submitPostBtn" class="btn btn-gold" style="width: auto; padding: 6px 18px; font-size: 13px;">Publish</button>
-      </div>
-    </div>
-
-    <!-- COMMUNITY UPDATES / STORIES -->
-    <div class="stories-container">
-      <div class="stories-wrapper">
+      <!-- POST COMPOSER FORM -->
+      <div id="postComposerArea" class="hidden">
+        <textarea id="postText" class="composer-textarea" placeholder="What is on your heart today?"></textarea>
+        <input type="file" id="postImageInput" accept="image/*" class="hidden">
         
-        <!-- Create Story -->
-        <div class="story-card create-story">
-          <div class="top-img">
-            <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=200&q=80" alt="User" onerror="handleImageError(this)">
-            <div class="plus-btn"><i class="fa-solid fa-plus"></i></div>
-          </div>
-          <div class="bottom-text">Share Update</div>
+        <div id="postImagePreview" class="post-image-preview hidden">
+          <img id="previewImg" src="" alt="Preview">
+          <button type="button" class="remove-post-image" id="removeImageBtn">&times;</button>
         </div>
 
-        <!-- Member Story 1 -->
-        <div class="story-card">
-          <div class="story-badge">2</div>
-          <img class="bg-story" src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=300&q=80" alt="Story" onerror="handleImageError(this)">
-          <div class="story-overlay"></div>
-          <div class="story-author">Abigail Tor</div>
+        <div class="composer-actions">
+          <span style="font-size: 11px; color: var(--bp-muted); font-weight: 600;">Visible to Believer+ Community</span>
+          <button id="submitPostBtn" class="btn btn-gold" style="width: auto; padding: 6px 18px; font-size: 13px;">Publish</button>
         </div>
-
-        <!-- Member Story 2 -->
-        <div class="story-card">
-          <div class="story-badge">1</div>
-          <img class="bg-story" src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=300&q=80" alt="Story" onerror="handleImageError(this)">
-          <div class="story-overlay"></div>
-          <div class="story-author">Rose Kollie</div>
-        </div>
-
-        <!-- Member Story 3 -->
-        <div class="story-card">
-          <div class="story-badge">3</div>
-          <img class="bg-story" src="https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=300&q=80" alt="Story" onerror="handleImageError(this)">
-          <div class="story-overlay"></div>
-          <div class="story-author">Esther W.</div>
-        </div>
-
       </div>
+
+      <!-- COMMUNITY UPDATES / STORIES -->
+      <div class="stories-container">
+        <div class="stories-wrapper" id="storiesWrapper"></div>
+      </div>
+
+      <!-- FEED POSTS -->
+      <div id="feedContainer"></div>
+
     </div>
 
-    <!-- MAIN FEED -->
-    <div id="feedContainer"></div>
+    <!-- PROFILE DISPLAY / EDIT CONTAINER -->
+    <div id="profileView" class="hidden"></div>
 
   </main>
 
   <!-- MOBILE BOTTOM NAVIGATION -->
   <div class="bottom-nav">
-    <button class="active" onclick="switchTab('home')"><i class="fa-solid fa-house-chimney"></i></button>
+    <button id="bNavHome" class="active" onclick="navigateHome()"><i class="fa-solid fa-house-chimney"></i></button>
     <button onclick="switchTab('community')"><i class="fa-solid fa-people-group"></i></button>
     <button onclick="toggleComposer()"><i class="fa-solid fa-square-plus" style="color: var(--bp-gold); font-size: 22px;"></i></button>
     <button onclick="switchTab('notifications')"><i class="fa-solid fa-bell"></i></button>
-    <button onclick="switchTab('profile')"><i class="fa-solid fa-user"></i></button>
+    <button id="bNavProfile" onclick="openProfile(currentUserId)"><i class="fa-solid fa-user"></i></button>
   </div>
 
 </div>
 
 <!-- =======================================================
-     JAVASCRIPT LOGIC
+     JAVASCRIPT APPLICATION LOGIC & DATABASE persistence
 ======================================================= -->
 <script>
-  let currentUser = null;
-  let attachedImageBase64 = null;
-
-  // Reliable SVG Fallback Data URI for Broken Media
+  // SVG Media Fallback
   const svgPlaceholder = "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='400' height='300' viewBox='0 0 400 300'><rect width='100%' height='100%' fill='%231b263b'/><text x='50%' y='50%' dominant-baseline='middle' text-anchor='middle' font-family='sans-serif' font-size='16' fill='%23e0a96d'>Believer+ Media Unavailable</text></svg>";
 
   function handleImageError(img) {
@@ -862,12 +978,123 @@ header {
     img.src = svgPlaceholder;
   }
 
-  // Sample Feed Posts
-  const posts = [
+  // GLOBAL DATABASE & APPLICATION STATE
+  let currentUserId = "u_101"; // Default Logged In User ID
+  let attachedImageBase64 = null;
+
+  // Persistent User Database Store
+  let usersDb = {
+    "u_101": {
+      id: "u_101",
+      name: "Oyantee Weah",
+      username: "oyanteeweah",
+      avatarImg: "",
+      bio: "Dedicated to fellowship, digital media design, and spreading gospel encouragement.",
+      dob: "1995-08-14",
+      gender: "Male",
+      address: "123 Faith Way",
+      city: "Monrovia",
+      country: "Liberia",
+      phone: "+231 88 000 0000",
+      email: "oyantee@believerplus.org",
+      maritalStatus: "Single",
+      educationLevel: "Bachelor's Degree",
+      institution: "African Bible College University",
+      course: "Mass Communication & Graphic Design",
+      gradYear: "2018",
+      certifications: "Digital Branding Specialist, Web Development",
+      occupation: "Graphic Designer & Media Manager",
+      employer: "Festonic Graphix",
+      position: "Lead Creative Director",
+      skills: "Graphic Design, Mockups, Social Media Strategy",
+      church: "Grace Community Worship Center",
+      department: "Media & Audio-Visual",
+      churchRole: "Department Lead",
+      yearsService: "5 Years",
+      memberships: "Youth Fellowship, Ministry Media Guild",
+      ministryAreas: "Digital Evangelism, Choir Support",
+      privacy: {
+        dob: "members",
+        address: "only_me",
+        phone: "friends",
+        email: "members",
+        education: "public",
+        employment: "public",
+        church: "public"
+      }
+    },
+    "u_102": {
+      id: "u_102",
+      name: "Festous F. Johnson",
+      username: "festousj",
+      avatarImg: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=300&q=80",
+      bio: "Serving through visual arts and media ministry.",
+      dob: "1992-03-22",
+      gender: "Male",
+      city: "Monrovia",
+      country: "Liberia",
+      phone: "+231 77 111 2222",
+      email: "festous@believerplus.org",
+      maritalStatus: "Married",
+      educationLevel: "Higher National Diploma",
+      institution: "Monrovia Technical Institute",
+      course: "Visual Communications",
+      gradYear: "2015",
+      occupation: "Creative Artist",
+      employer: "Festonic Graphix",
+      position: "Senior Designer",
+      skills: "Branding, Banner Design, Mockup Layouts",
+      church: "Calvary Baptist Fellowship",
+      department: "Youth Ministry",
+      churchRole: "Youth Leader",
+      yearsService: "7 Years",
+      privacy: {
+        dob: "only_me",
+        address: "only_me",
+        phone: "public",
+        email: "members",
+        education: "public",
+        employment: "public",
+        church: "public"
+      }
+    },
+    "u_103": {
+      id: "u_103",
+      name: "Abigail Tor",
+      username: "abigailtor",
+      avatarImg: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=300&q=80",
+      bio: "Worshipper, prayer group coordinator, and choir member.",
+      city: "Paynesville",
+      country: "Liberia",
+      email: "abigail@believerplus.org",
+      church: "Ebenezer Methodist Church",
+      department: "Choir & Music Ministry",
+      churchRole: "Assistant Director",
+      yearsService: "4 Years",
+      privacy: {
+        dob: "only_me",
+        address: "only_me",
+        phone: "only_me",
+        email: "members",
+        education: "public",
+        employment: "public",
+        church: "public"
+      }
+    }
+  };
+
+  // Persistent Stories Database
+  let stories = [
+    { id: "s_1", userId: "u_101", count: 0 },
+    { id: "s_2", userId: "u_103", count: 2 },
+    { id: "s_3", userId: "u_102", count: 1 }
+  ];
+
+  // Persistent Posts Database
+  let posts = [
     {
-      id: 1,
-      author: "Festous F. Johnson",
-      avatarText: "F",
+      id: "p_1",
+      userId: "u_102",
       time: "2 hours ago",
       status: "blessed at Grace Community",
       content: "Blessed Sunday to everyone! Excited to share our community graphic updates with the fellowship today.",
@@ -877,9 +1104,15 @@ header {
     }
   ];
 
+  // INITIALIZATION & LOCALSTORAGE MANAGEMENT
   document.addEventListener('DOMContentLoaded', () => {
-    
-    // Auth View Switches
+    // Load persisted users if available
+    const savedUsers = localStorage.getItem('bp_users');
+    if (savedUsers) {
+      try { usersDb = JSON.parse(savedUsers); } catch(e){}
+    }
+
+    // Attach Authentication Listeners
     document.getElementById('showSignupBtn').addEventListener('click', () => {
       document.getElementById('loginBox').classList.add('hidden');
       document.getElementById('signupBox').classList.remove('hidden');
@@ -892,7 +1125,6 @@ header {
       clearMsgs();
     });
 
-    // Login Action
     document.getElementById('loginBtn').addEventListener('click', () => {
       const email = document.getElementById('loginEmail').value.trim();
       const pass = document.getElementById('loginPass').value.trim();
@@ -903,11 +1135,28 @@ header {
         return;
       }
 
-      currentUser = email.split('@')[0];
-      loginUser(currentUser);
+      // Check or create account dynamically
+      let user = Object.values(usersDb).find(u => u.email === email);
+      if (!user) {
+        const newId = 'u_' + Date.now();
+        const derivedName = email.split('@')[0];
+        usersDb[newId] = {
+          id: newId,
+          name: derivedName,
+          username: derivedName.toLowerCase().replace(/[^a-z0-9]/g, ''),
+          email: email,
+          bio: "New Believer+ community member.",
+          privacy: { dob: 'members', address: 'only_me', phone: 'members', email: 'members', education: 'public', employment: 'public', church: 'public' }
+        };
+        currentUserId = newId;
+        saveDb();
+      } else {
+        currentUserId = user.id;
+      }
+
+      loginUser();
     });
 
-    // Registration Action
     document.getElementById('signupBtn').addEventListener('click', () => {
       const name = document.getElementById('name').value.trim();
       const email = document.getElementById('email').value.trim();
@@ -919,11 +1168,20 @@ header {
         return;
       }
 
-      currentUser = name;
-      loginUser(currentUser);
+      const newId = 'u_' + Date.now();
+      usersDb[newId] = {
+        id: newId,
+        name: name,
+        username: name.toLowerCase().replace(/[^a-z0-9]/g, ''),
+        email: email,
+        bio: "Member of Believer+ fellowship.",
+        privacy: { dob: 'members', address: 'only_me', phone: 'members', email: 'members', education: 'public', employment: 'public', church: 'public' }
+      };
+      currentUserId = newId;
+      saveDb();
+      loginUser();
     });
 
-    // Logout Action
     document.getElementById('logoutBtn').addEventListener('click', () => {
       document.getElementById('app').classList.add('hidden');
       document.getElementById('auth').classList.remove('hidden');
@@ -932,7 +1190,7 @@ header {
       clearMsgs();
     });
 
-    // Media Upload Handler
+    // Image Upload Handling in Composer
     const postImageInput = document.getElementById('postImageInput');
     postImageInput.addEventListener('change', (e) => {
       const file = e.target.files[0];
@@ -954,15 +1212,14 @@ header {
       document.getElementById('postImagePreview').classList.add('hidden');
     });
 
-    // Submit Post Action
+    // Submit Post Execution
     document.getElementById('submitPostBtn').addEventListener('click', () => {
       const text = document.getElementById('postText').value.trim();
       if (!text && !attachedImageBase64) return;
 
       const newPost = {
-        id: Date.now(),
-        author: currentUser || "Fellow Believer",
-        avatarText: (currentUser || "B").charAt(0).toUpperCase(),
+        id: 'p_' + Date.now(),
+        userId: currentUserId,
         time: "Just now",
         status: "sharing with community",
         content: text,
@@ -974,7 +1231,7 @@ header {
       posts.unshift(newPost);
       renderFeed();
 
-      // Reset composer
+      // Reset composer state
       document.getElementById('postText').value = '';
       attachedImageBase64 = null;
       document.getElementById('postImageInput').value = '';
@@ -984,12 +1241,29 @@ header {
 
   });
 
-  function loginUser(userName) {
-    const initial = userName.charAt(0).toUpperCase();
-    document.getElementById('headerAvatar').textContent = initial;
+  function saveDb() {
+    localStorage.setItem('bp_users', JSON.stringify(usersDb));
+  }
+
+  function loginUser() {
     document.getElementById('auth').classList.add('hidden');
     document.getElementById('app').classList.remove('hidden');
-    renderFeed();
+    
+    // Set Header & Composer Avatar to Current User Profile Photo or Initial
+    updateComposerAvatar();
+    navigateHome();
+  }
+
+  function updateComposerAvatar() {
+    const user = usersDb[currentUserId];
+    const headerAvatarEl = document.getElementById('headerAvatar');
+    headerAvatarEl.onclick = () => openProfile(currentUserId);
+
+    if (user && user.avatarImg) {
+      headerAvatarEl.innerHTML = `<img src="${user.avatarImg}" alt="${user.name}" onerror="handleImageError(this)">`;
+    } else {
+      headerAvatarEl.textContent = (user ? user.name : "B").charAt(0).toUpperCase();
+    }
   }
 
   function clearMsgs() {
@@ -1002,14 +1276,104 @@ header {
     area.classList.toggle('hidden');
   }
 
+  // ROUTING & NAVIGATION
+  function navigateHome() {
+    document.getElementById('profileView').classList.add('hidden');
+    document.getElementById('feedView').classList.remove('hidden');
+    
+    document.getElementById('navHomeBtn').classList.add('active');
+    document.getElementById('bNavHome').classList.add('active');
+    document.getElementById('bNavProfile').classList.remove('active');
+    
+    renderStories();
+    renderFeed();
+    window.history.pushState({}, '', '/');
+  }
+
   function switchTab(tabName) {
-    const navButtons = document.querySelectorAll('.nav button');
-    navButtons.forEach(btn => {
-      if (btn.getAttribute('data-tab') === tabName) {
-        btn.classList.add('active');
+    if (tabName === 'home') {
+      navigateHome();
+    } else {
+      alert(`The ${tabName.toUpperCase()} section is active on your feed.`);
+    }
+  }
+
+  // RENDER STORIES
+  function renderStories() {
+    const wrapper = document.getElementById('storiesWrapper');
+    wrapper.innerHTML = '';
+
+    stories.forEach(story => {
+      const user = usersDb[story.userId] || { name: 'Member', avatarImg: '' };
+      const isSelf = story.userId === currentUserId;
+
+      const card = document.createElement('div');
+      card.className = `story-card ${isSelf ? 'create-story' : ''}`;
+      card.onclick = () => openProfile(story.userId);
+
+      if (isSelf) {
+        card.innerHTML = `
+          <div class="top-img">
+            <img src="${user.avatarImg || svgPlaceholder}" alt="${user.name}" onerror="handleImageError(this)">
+            <div class="plus-btn"><i class="fa-solid fa-plus"></i></div>
+          </div>
+          <div class="bottom-text">Update Story</div>
+        `;
       } else {
-        btn.classList.remove('active');
+        card.innerHTML = `
+          ${story.count > 0 ? `<div class="story-badge">${story.count}</div>` : ''}
+          <img class="bg-story" src="${user.avatarImg || svgPlaceholder}" alt="${user.name}" onerror="handleImageError(this)">
+          <div class="story-overlay"></div>
+          <div class="story-author">${user.name}</div>
+        `;
       }
+
+      wrapper.appendChild(card);
+    });
+  }
+
+  // RENDER FEED POSTS
+  function renderFeed() {
+    const feedContainer = document.getElementById('feedContainer');
+    feedContainer.innerHTML = '';
+
+    posts.forEach(post => {
+      const author = usersDb[post.userId] || { name: 'Believer+ Member', avatarImg: '' };
+      const initial = author.name.charAt(0).toUpperCase();
+
+      const card = document.createElement('div');
+      card.className = 'card';
+      
+      const avatarHTML = author.avatarImg 
+        ? `<div class="avatar" onclick="openProfile('${author.id}')"><img src="${author.avatarImg}" alt="${author.name}" onerror="handleImageError(this)"></div>`
+        : `<div class="avatar" onclick="openProfile('${author.id}')">${initial}</div>`;
+
+      card.innerHTML = `
+        <div class="posthead">
+          <div class="posthead-left">
+            ${avatarHTML}
+            <div>
+              <div class="post-author-name clickable-user" onclick="openProfile('${author.id}')">${author.name}</div>
+              <div class="post-meta-line">
+                <span>${post.time}</span> • <span>${post.status}</span>
+              </div>
+            </div>
+          </div>
+          <button style="color:var(--bp-muted);"><i class="fa-solid fa-ellipsis-vertical"></i></button>
+        </div>
+        ${post.content ? `<div class="post-content">${post.content}</div>` : ''}
+        ${post.image ? `<img class="post-photo" src="${post.image}" alt="Community Post" onerror="handleImageError(this)">` : ''}
+        <div class="actions">
+          <button class="action-btn ${post.isLiked ? 'liked' : ''}" onclick="toggleLike('${post.id}')">
+            <i class="${post.isLiked ? 'fa-solid' : 'fa-heart'} fa-heart"></i> 
+            ${post.likes > 0 ? post.likes : ''} Encourage
+          </button>
+          <button class="action-btn"><i class="fa-regular fa-comment-dots"></i> Reply</button>
+          <button class="action-btn"><i class="fa-solid fa-arrow-share-group"></i> Share</button>
+        </div>
+      `;
+
+      feedContainer.appendChild(card);
     });
   }
 
@@ -1022,41 +1386,469 @@ header {
     }
   }
 
-  function renderFeed() {
-    const feedContainer = document.getElementById('feedContainer');
-    feedContainer.innerHTML = '';
+  // =========================================================
+  // PROFILE ROUTING & VIEW / EDIT SYSTEM
+  // =========================================================
+  function openProfile(userId) {
+    const user = usersDb[userId];
+    if (!user) return;
 
-    posts.forEach(post => {
-      const card = document.createElement('div');
-      card.className = 'card';
-      
-      card.innerHTML = `
-        <div class="posthead">
-          <div class="posthead-left">
-            <div class="avatar">${post.avatarText}</div>
-            <div>
-              <div class="post-author-name">${post.author}</div>
-              <div class="post-meta-line">
-                <span>${post.time}</span> • <span>${post.status}</span>
+    // Push URL State
+    window.history.pushState({ profileId: userId }, '', `/profile/${user.id}`);
+
+    document.getElementById('feedView').classList.add('hidden');
+    const profileView = document.getElementById('profileView');
+    profileView.classList.remove('hidden');
+
+    // Navigation highlight
+    document.getElementById('navHomeBtn').classList.remove('active');
+    document.getElementById('bNavHome').classList.remove('active');
+    if (userId === currentUserId) {
+      document.getElementById('bNavProfile').classList.add('active');
+    }
+
+    renderProfileCard(user);
+  }
+
+  // Helper for Privacy Checks
+  function canViewField(user, fieldPrivacyKey) {
+    if (user.id === currentUserId) return true; // Owner can always view
+    const setting = (user.privacy && user.privacy[fieldPrivacyKey]) ? user.privacy[fieldPrivacyKey] : 'public';
+    
+    if (setting === 'public') return true;
+    if (setting === 'members' && currentUserId) return true; // Any authenticated user
+    return false; // 'only_me' or unauthenticated
+  }
+
+  function renderProfileCard(user) {
+    const isOwner = (user.id === currentUserId);
+    const initial = user.name.charAt(0).toUpperCase();
+
+    const avatarDisplay = user.avatarImg 
+      ? `<img src="${user.avatarImg}" alt="${user.name}" onerror="handleImageError(this)">`
+      : initial;
+
+    const profileView = document.getElementById('profileView');
+    profileView.innerHTML = `
+      <div style="margin-top: 10px; margin-bottom: 8px;">
+        <button class="btn btn-outline" style="width: auto; padding: 6px 14px; font-size: 12px;" onclick="navigateHome()">
+          <i class="fa-solid fa-arrow-left"></i> Back to Feed
+        </button>
+      </div>
+
+      <div class="profile-card">
+        <div class="profile-header-bg"></div>
+        <div class="profile-header-content">
+          <div class="profile-avatar-large">${avatarDisplay}</div>
+          <div class="profile-name">${user.name} <i class="fa-solid fa-circle-check" style="color: var(--bp-gold); font-size: 16px;"></i></div>
+          <div class="profile-handle">@${user.username || 'believer'}</div>
+          <div class="profile-bio">${user.bio || 'Believer+ Community Member'}</div>
+
+          <div class="profile-actions-bar">
+            ${isOwner ? `
+              <button class="btn btn-gold" style="width: auto; padding: 8px 18px; font-size: 13px;" onclick="renderEditProfileForm('${user.id}')">
+                <i class="fa-solid fa-pen-to-square"></i> Edit Profile
+              </button>
+            ` : `
+              <button class="btn btn-gold" style="width: auto; padding: 8px 18px; font-size: 13px;">
+                <i class="fa-solid fa-message"></i> Message
+              </button>
+              <button class="btn btn-outline" style="width: auto; padding: 8px 18px; font-size: 13px;">
+                <i class="fa-solid fa-user-plus"></i> Connect
+              </button>
+            `}
+          </div>
+        </div>
+
+        <!-- PERSONAL INFORMATION -->
+        <div class="profile-section">
+          <div class="profile-section-title"><i class="fa-solid fa-id-card"></i> Personal Information</div>
+          <div class="info-grid">
+            <div class="info-item">
+              <div class="info-label">Full Name</div>
+              <div class="info-val">${user.name}</div>
+            </div>
+            <div class="info-item">
+              <div class="info-label">Date of Birth</div>
+              <div class="info-val">
+                ${canViewField(user, 'dob') ? (user.dob || 'Not specified') : '<span class="private-locked"><i class="fa-solid fa-lock"></i> Private</span>'}
+              </div>
+            </div>
+            <div class="info-item">
+              <div class="info-label">Gender</div>
+              <div class="info-val">${user.gender || 'Not specified'}</div>
+            </div>
+            <div class="info-item">
+              <div class="info-label">Current Address</div>
+              <div class="info-val">
+                ${canViewField(user, 'address') ? (user.address || 'Not specified') : '<span class="private-locked"><i class="fa-solid fa-lock"></i> Private</span>'}
+              </div>
+            </div>
+            <div class="info-item">
+              <div class="info-label">City / Country</div>
+              <div class="info-val">${user.city || ''} ${user.country ? ', ' + user.country : 'Not specified'}</div>
+            </div>
+            <div class="info-item">
+              <div class="info-label">Marital Status</div>
+              <div class="info-val">${user.maritalStatus || 'Not specified'}</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- CONTACT INFORMATION -->
+        <div class="profile-section">
+          <div class="profile-section-title"><i class="fa-solid fa-address-book"></i> Contact Details</div>
+          <div class="info-grid">
+            <div class="info-item">
+              <div class="info-label">Phone Number</div>
+              <div class="info-val">
+                ${canViewField(user, 'phone') ? (user.phone || 'Not specified') : '<span class="private-locked"><i class="fa-solid fa-lock"></i> Private</span>'}
+              </div>
+            </div>
+            <div class="info-item">
+              <div class="info-label">Email Address</div>
+              <div class="info-val">
+                ${canViewField(user, 'email') ? (user.email || 'Not specified') : '<span class="private-locked"><i class="fa-solid fa-lock"></i> Private</span>'}
               </div>
             </div>
           </div>
-          <button style="color:var(--bp-muted);"><i class="fa-solid fa-ellipsis-vertical"></i></button>
         </div>
-        ${post.content ? `<div class="post-content">${post.content}</div>` : ''}
-        ${post.image ? `<img class="post-photo" src="${post.image}" alt="Community Post" onerror="handleImageError(this)">` : ''}
-        <div class="actions">
-          <button class="action-btn ${post.isLiked ? 'liked' : ''}" onclick="toggleLike(${post.id})">
-            <i class="${post.isLiked ? 'fa-solid' : 'fa-regular'} fa-heart"></i> 
-            ${post.likes > 0 ? post.likes : ''} Encourage
-          </button>
-          <button class="action-btn"><i class="fa-regular fa-comment-dots"></i> Reply</button>
-          <button class="action-btn"><i class="fa-solid fa-arrow-share-group"></i> Share</button>
-        </div>
-      `;
 
-      feedContainer.appendChild(card);
-    });
+        <!-- EDUCATION -->
+        <div class="profile-section">
+          <div class="profile-section-title"><i class="fa-solid fa-graduation-cap"></i> Education</div>
+          <div class="info-grid">
+            ${canViewField(user, 'education') ? `
+              <div class="info-item">
+                <div class="info-label">Highest Level</div>
+                <div class="info-val">${user.educationLevel || 'Not specified'}</div>
+              </div>
+              <div class="info-item">
+                <div class="info-label">Institution</div>
+                <div class="info-val">${user.institution || 'Not specified'}</div>
+              </div>
+              <div class="info-item">
+                <div class="info-label">Course / Program</div>
+                <div class="info-val">${user.course || 'Not specified'}</div>
+              </div>
+              <div class="info-item">
+                <div class="info-label">Graduation Year</div>
+                <div class="info-val">${user.gradYear || 'Not specified'}</div>
+              </div>
+            ` : `
+              <div class="info-item" style="grid-column: 1/-1;">
+                <span class="private-locked"><i class="fa-solid fa-lock"></i> Education details are private</span>
+              </div>
+            `}
+          </div>
+        </div>
+
+        <!-- PROFESSIONAL INFORMATION -->
+        <div class="profile-section">
+          <div class="profile-section-title"><i class="fa-solid fa-briefcase"></i> Professional Information</div>
+          <div class="info-grid">
+            ${canViewField(user, 'employment') ? `
+              <div class="info-item">
+                <div class="info-label">Occupation</div>
+                <div class="info-val">${user.occupation || 'Not specified'}</div>
+              </div>
+              <div class="info-item">
+                <div class="info-label">Employer / Org</div>
+                <div class="info-val">${user.employer || 'Not specified'}</div>
+              </div>
+              <div class="info-item">
+                <div class="info-label">Position / Role</div>
+                <div class="info-val">${user.position || 'Not specified'}</div>
+              </div>
+              <div class="info-item">
+                <div class="info-label">Skills & Expertise</div>
+                <div class="info-val">${user.skills || 'Not specified'}</div>
+              </div>
+            ` : `
+              <div class="info-item" style="grid-column: 1/-1;">
+                <span class="private-locked"><i class="fa-solid fa-lock"></i> Professional details are private</span>
+              </div>
+            `}
+          </div>
+        </div>
+
+        <!-- CHURCH & MINISTRY INFORMATION -->
+        <div class="profile-section">
+          <div class="profile-section-title"><i class="fa-solid fa-church"></i> Church & Ministry</div>
+          <div class="info-grid">
+            ${canViewField(user, 'church') ? `
+              <div class="info-item">
+                <div class="info-label">Home Church</div>
+                <div class="info-val">${user.church || 'Not specified'}</div>
+              </div>
+              <div class="info-item">
+                <div class="info-label">Department</div>
+                <div class="info-val">${user.department || 'Not specified'}</div>
+              </div>
+              <div class="info-item">
+                <div class="info-label">Role / Position</div>
+                <div class="info-val">${user.churchRole || 'Not specified'}</div>
+              </div>
+              <div class="info-item">
+                <div class="info-label">Years of Service</div>
+                <div class="info-val">${user.yearsService || 'Not specified'}</div>
+              </div>
+            ` : `
+              <div class="info-item" style="grid-column: 1/-1;">
+                <span class="private-locked"><i class="fa-solid fa-lock"></i> Ministry details are private</span>
+              </div>
+            `}
+          </div>
+        </div>
+
+      </div>
+    `;
+  }
+
+  // EDIT PROFILE FORM RENDER & SAVE LOGIC
+  function renderEditProfileForm(userId) {
+    const user = usersDb[userId];
+    if (!user) return;
+
+    const privacy = user.privacy || {};
+
+    const profileView = document.getElementById('profileView');
+    profileView.innerHTML = `
+      <div style="margin-top: 10px; margin-bottom: 8px; display: flex; justify-content: space-between; align-items: center;">
+        <button class="btn btn-outline" style="width: auto; padding: 6px 14px; font-size: 12px;" onclick="openProfile('${user.id}')">
+          <i class="fa-solid fa-xmark"></i> Cancel
+        </button>
+        <h3 style="color: var(--bp-primary); font-size: 16px;">Edit Believer+ Profile</h3>
+      </div>
+
+      <form id="editProfileForm" class="card" onsubmit="saveProfileChanges(event, '${user.id}')">
+        
+        <div class="profile-section-title"><i class="fa-solid fa-user-gear"></i> Basic Account Info</div>
+        <div class="form-group">
+          <label>Profile Picture URL</label>
+          <input type="text" id="editAvatarImg" value="${user.avatarImg || ''}" placeholder="https://domain.com/photo.jpg">
+        </div>
+        <div class="form-group">
+          <label>Full Name</label>
+          <input type="text" id="editName" value="${user.name || ''}" required>
+        </div>
+        <div class="form-group">
+          <label>Username</label>
+          <input type="text" id="editUsername" value="${user.username || ''}" required>
+        </div>
+        <div class="form-group">
+          <label>Short Bio</label>
+          <textarea id="editBio" rows="2">${user.bio || ''}</textarea>
+        </div>
+
+        <div class="divider"></div>
+        <div class="profile-section-title"><i class="fa-solid fa-id-card"></i> Personal Details & Privacy</div>
+        
+        <div class="form-group">
+          <label>Date of Birth</label>
+          <input type="date" id="editDob" value="${user.dob || ''}">
+          <select id="privDob" class="privacy-select">
+            <option value="public" ${privacy.dob==='public'?'selected':''}>Visibility: Public</option>
+            <option value="members" ${privacy.dob==='members'?'selected':''}>Visibility: Members Only</option>
+            <option value="only_me" ${privacy.dob==='only_me'?'selected':''}>Visibility: Only Me</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label>Gender</label>
+          <input type="text" id="editGender" value="${user.gender || ''}">
+        </div>
+
+        <div class="form-group">
+          <label>Current Address</label>
+          <input type="text" id="editAddress" value="${user.address || ''}">
+          <select id="privAddress" class="privacy-select">
+            <option value="public" ${privacy.address==='public'?'selected':''}>Visibility: Public</option>
+            <option value="members" ${privacy.address==='members'?'selected':''}>Visibility: Members Only</option>
+            <option value="only_me" ${privacy.address==='only_me'?'selected':''}>Visibility: Only Me</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label>City / Community</label>
+          <input type="text" id="editCity" value="${user.city || ''}">
+        </div>
+
+        <div class="form-group">
+          <label>Country</label>
+          <input type="text" id="editCountry" value="${user.country || ''}">
+        </div>
+
+        <div class="form-group">
+          <label>Marital Status</label>
+          <select id="editMaritalStatus">
+            <option value="Single" ${user.maritalStatus==='Single'?'selected':''}>Single</option>
+            <option value="Married" ${user.maritalStatus==='Married'?'selected':''}>Married</option>
+            <option value="Engaged" ${user.maritalStatus==='Engaged'?'selected':''}>Engaged</option>
+          </select>
+        </div>
+
+        <div class="divider"></div>
+        <div class="profile-section-title"><i class="fa-solid fa-address-book"></i> Contact Settings</div>
+
+        <div class="form-group">
+          <label>Phone Number</label>
+          <input type="text" id="editPhone" value="${user.phone || ''}">
+          <select id="privPhone" class="privacy-select">
+            <option value="public" ${privacy.phone==='public'?'selected':''}>Visibility: Public</option>
+            <option value="members" ${privacy.phone==='members'?'selected':''}>Visibility: Members Only</option>
+            <option value="only_me" ${privacy.phone==='only_me'?'selected':''}>Visibility: Only Me</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label>Email Address</label>
+          <input type="email" id="editEmail" value="${user.email || ''}" required>
+          <select id="privEmail" class="privacy-select">
+            <option value="public" ${privacy.email==='public'?'selected':''}>Visibility: Public</option>
+            <option value="members" ${privacy.email==='members'?'selected':''}>Visibility: Members Only</option>
+            <option value="only_me" ${privacy.email==='only_me'?'selected':''}>Visibility: Only Me</option>
+          </select>
+        </div>
+
+        <div class="divider"></div>
+        <div class="profile-section-title"><i class="fa-solid fa-graduation-cap"></i> Education & Career</div>
+
+        <div class="form-group">
+          <label>Highest Education Level</label>
+          <input type="text" id="editEducationLevel" value="${user.educationLevel || ''}">
+          <select id="privEducation" class="privacy-select">
+            <option value="public" ${privacy.education==='public'?'selected':''}>Visibility: Public</option>
+            <option value="members" ${privacy.education==='members'?'selected':''}>Visibility: Members Only</option>
+            <option value="only_me" ${privacy.education==='only_me'?'selected':''}>Visibility: Only Me</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label>Institution</label>
+          <input type="text" id="editInstitution" value="${user.institution || ''}">
+        </div>
+
+        <div class="form-group">
+          <label>Course / Program</label>
+          <input type="text" id="editCourse" value="${user.course || ''}">
+        </div>
+
+        <div class="form-group">
+          <label>Graduation Year</label>
+          <input type="text" id="editGradYear" value="${user.gradYear || ''}">
+        </div>
+
+        <div class="form-group">
+          <label>Occupation</label>
+          <input type="text" id="editOccupation" value="${user.occupation || ''}">
+          <select id="privEmployment" class="privacy-select">
+            <option value="public" ${privacy.employment==='public'?'selected':''}>Visibility: Public</option>
+            <option value="members" ${privacy.employment==='members'?'selected':''}>Visibility: Members Only</option>
+            <option value="only_me" ${privacy.employment==='only_me'?'selected':''}>Visibility: Only Me</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label>Employer / Organization</label>
+          <input type="text" id="editEmployer" value="${user.employer || ''}">
+        </div>
+
+        <div class="form-group">
+          <label>Position / Role</label>
+          <input type="text" id="editPosition" value="${user.position || ''}">
+        </div>
+
+        <div class="form-group">
+          <label>Key Skills</label>
+          <input type="text" id="editSkills" value="${user.skills || ''}">
+        </div>
+
+        <div class="divider"></div>
+        <div class="profile-section-title"><i class="fa-solid fa-church"></i> Church & Ministry</div>
+
+        <div class="form-group">
+          <label>Home Church / Ministry</label>
+          <input type="text" id="editChurch" value="${user.church || ''}">
+          <select id="privChurch" class="privacy-select">
+            <option value="public" ${privacy.church==='public'?'selected':''}>Visibility: Public</option>
+            <option value="members" ${privacy.church==='members'?'selected':''}>Visibility: Members Only</option>
+            <option value="only_me" ${privacy.church==='only_me'?'selected':''}>Visibility: Only Me</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label>Department</label>
+          <input type="text" id="editDepartment" value="${user.department || ''}">
+        </div>
+
+        <div class="form-group">
+          <label>Role / Ministry Position</label>
+          <input type="text" id="editChurchRole" value="${user.churchRole || ''}">
+        </div>
+
+        <div class="form-group">
+          <label>Years of Service</label>
+          <input type="text" id="editYearsService" value="${user.yearsService || ''}">
+        </div>
+
+        <div style="margin-top: 16px;">
+          <button type="submit" class="btn btn-gold"><i class="fa-solid fa-floppy-disk"></i> Save Profile</button>
+        </div>
+
+      </form>
+    `;
+  }
+
+  function saveProfileChanges(e, userId) {
+    e.preventDefault();
+
+    const user = usersDb[userId];
+    if (!user) return;
+
+    // Mutate and update user database object
+    user.avatarImg = document.getElementById('editAvatarImg').value.trim();
+    user.name = document.getElementById('editName').value.trim();
+    user.username = document.getElementById('editUsername').value.trim();
+    user.bio = document.getElementById('editBio').value.trim();
+    user.dob = document.getElementById('editDob').value;
+    user.gender = document.getElementById('editGender').value.trim();
+    user.address = document.getElementById('editAddress').value.trim();
+    user.city = document.getElementById('editCity').value.trim();
+    user.country = document.getElementById('editCountry').value.trim();
+    user.maritalStatus = document.getElementById('editMaritalStatus').value;
+    user.phone = document.getElementById('editPhone').value.trim();
+    user.email = document.getElementById('editEmail').value.trim();
+    user.educationLevel = document.getElementById('editEducationLevel').value.trim();
+    user.institution = document.getElementById('editInstitution').value.trim();
+    user.course = document.getElementById('editCourse').value.trim();
+    user.gradYear = document.getElementById('editGradYear').value.trim();
+    user.occupation = document.getElementById('editOccupation').value.trim();
+    user.employer = document.getElementById('editEmployer').value.trim();
+    user.position = document.getElementById('editPosition').value.trim();
+    user.skills = document.getElementById('editSkills').value.trim();
+    user.church = document.getElementById('editChurch').value.trim();
+    user.department = document.getElementById('editDepartment').value.trim();
+    user.churchRole = document.getElementById('editChurchRole').value.trim();
+    user.yearsService = document.getElementById('editYearsService').value.trim();
+
+    // Privacy Object updates
+    user.privacy = {
+      dob: document.getElementById('privDob').value,
+      address: document.getElementById('privAddress').value,
+      phone: document.getElementById('privPhone').value,
+      email: document.getElementById('privEmail').value,
+      education: document.getElementById('privEducation').value,
+      employment: document.getElementById('privEmployment').value,
+      church: document.getElementById('privChurch').value
+    };
+
+    // Save changes to persistent LocalStorage
+    saveDb();
+
+    // Refresh application state
+    updateComposerAvatar();
+    openProfile(userId);
   }
 </script>
 
