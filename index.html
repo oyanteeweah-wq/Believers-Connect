@@ -440,6 +440,8 @@ header {
   flex-shrink: 0;
   border: 2px solid var(--bp-gold);
   cursor: pointer;
+  background-size: cover;
+  background-position: center;
 }
 
 .mind-button {
@@ -567,6 +569,8 @@ header {
   width: 100%;
   position: relative;
   background: #f1f5f9;
+  background-size: cover;
+  background-position: center;
 }
 
 .story-card.create-story .plus-btn {
@@ -752,21 +756,61 @@ header {
 }
 
 /* =========================================================
-   RESTORED PROFILE / ABOUT ME STYLES
+   RESTORED PROFILE, COVER PHOTO & ABOUT ME STYLES
 ========================================================= */
-.profile-header-card {
+.profile-card {
   background: white;
   border-radius: var(--bp-radius);
   border: 1px solid var(--bp-border);
   box-shadow: var(--bp-shadow);
-  padding: 20px 16px;
-  text-align: center;
+  overflow: hidden;
   margin-bottom: 12px;
+  position: relative;
+}
+
+.profile-cover-area {
+  height: 140px;
+  background: linear-gradient(135deg, var(--bp-primary), var(--bp-accent));
+  background-size: cover;
+  background-position: center;
+  position: relative;
+}
+
+.cover-upload-badge {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: rgba(13, 27, 42, 0.75);
+  color: white;
+  border-radius: 20px;
+  padding: 6px 12px;
+  font-size: 11px;
+  font-weight: 700;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  backdrop-filter: blur(4px);
+  border: 1px solid rgba(255,255,255,0.2);
+}
+
+.profile-header-content {
+  padding: 0 16px 16px 16px;
+  text-align: center;
+  position: relative;
+  margin-top: -40px;
+}
+
+.profile-avatar-wrapper {
+  position: relative;
+  width: 84px;
+  height: 84px;
+  margin: 0 auto 8px auto;
 }
 
 .profile-avatar-large {
-  width: 80px;
-  height: 80px;
+  width: 84px;
+  height: 84px;
   border-radius: 50%;
   background: linear-gradient(135deg, var(--bp-primary), var(--bp-accent));
   color: var(--bp-gold);
@@ -775,8 +819,29 @@ header {
   justify-content: center;
   font-weight: 800;
   font-size: 32px;
-  margin: 0 auto 12px auto;
-  border: 3px solid var(--bp-gold);
+  border: 3px solid white;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+  overflow: hidden;
+  background-size: cover;
+  background-position: center;
+}
+
+.avatar-upload-badge {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: var(--bp-gold);
+  color: var(--bp-primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 13px;
+  border: 2px solid white;
+  cursor: pointer;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.2);
 }
 
 .about-me-card {
@@ -846,6 +911,22 @@ header {
   margin-top: 2px;
 }
 
+.photo-preview-box {
+  width: 100%;
+  height: 120px;
+  border-radius: 10px;
+  border: 2px dashed var(--bp-border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  background-size: cover;
+  background-position: center;
+  margin-top: 6px;
+  color: var(--bp-muted);
+  font-size: 12px;
+}
+
 /* =========================================================
    BOTTOM NAVIGATION BAR
 ========================================================= */
@@ -885,6 +966,10 @@ header {
 </head>
 
 <body>
+
+<!-- HIDDEN FILE INPUTS FOR PHOTOS -->
+<input type="file" id="profilePhotoPicker" accept="image/*" class="hidden">
+<input type="file" id="coverPhotoPicker" accept="image/*" class="hidden">
 
 <!-- =======================================================
      AUTHENTICATION PAGE
@@ -999,7 +1084,7 @@ header {
     <div id="viewHome">
       <!-- POST / ENCOURAGEMENT COMPOSER -->
       <div class="composer-card">
-        <div class="avatar currentUserAvatar" title="View Profile">O</div>
+        <div class="avatar currentUserAvatar" id="composerUserAvatar" title="View Profile">O</div>
         <button id="openComposerBtn" class="mind-button">What is on your heart today?</button>
         <div class="photo-upload-btn" id="mediaUploadTrigger">
           <i class="fa-solid fa-image"></i>
@@ -1020,7 +1105,7 @@ header {
         <div class="stories-wrapper" id="storiesList">
           <!-- Update Story Card -->
           <div class="story-card create-story">
-            <div class="top-img">
+            <div class="top-img" id="storyUserBg">
               <div class="plus-btn"><i class="fa-solid fa-plus"></i></div>
             </div>
             <div class="bottom-text">Update Story</div>
@@ -1084,12 +1169,28 @@ header {
       <div id="groupsList" class="groups-list"></div>
     </div>
 
-    <!-- RESTORED PROFILE & BIO TAB -->
+    <!-- RESTORED PROFILE, COVER & BIO TAB -->
     <div id="viewProfile" class="hidden">
-      <div class="profile-header-card">
-        <div class="profile-avatar-large currentUserAvatar">O</div>
-        <h2 id="profDisplayFullName" style="font-size: 20px; font-weight: 800; color: var(--bp-primary);">Oyantee Weah</h2>
-        <div id="profDisplayHandle" style="font-size: 13px; color: var(--bp-muted); margin-top: 2px;">@oyantee</div>
+      <div class="profile-card">
+        <!-- COVER PHOTO CONTAINER -->
+        <div id="profileCoverBg" class="profile-cover-area">
+          <label for="coverPhotoPicker" class="cover-upload-badge">
+            <i class="fa-solid fa-camera"></i> Change Cover
+          </label>
+        </div>
+
+        <div class="profile-header-content">
+          <!-- PROFILE PHOTO CONTAINER -->
+          <div class="profile-avatar-wrapper">
+            <div id="profileAvatarLarge" class="profile-avatar-large currentUserAvatar">O</div>
+            <label for="profilePhotoPicker" class="avatar-upload-badge" title="Change Profile Photo">
+              <i class="fa-solid fa-camera"></i>
+            </label>
+          </div>
+
+          <h2 id="profDisplayFullName" style="font-size: 20px; font-weight: 800; color: var(--bp-primary);">Oyantee Weah</h2>
+          <div id="profDisplayHandle" style="font-size: 13px; color: var(--bp-muted); margin-top: 2px;">@oyantee</div>
+        </div>
       </div>
 
       <!-- ABOUT ME SECTION WITH RESTORED FIELDS -->
@@ -1155,8 +1256,28 @@ header {
           </div>
         </div>
 
-        <!-- EDIT FORM FOR PROFILE FIELDS -->
+        <!-- EDIT FORM FOR PROFILE FIELDS & PHOTOS -->
         <div id="profileEditFields" class="hidden" style="margin-top: 10px;">
+          <div class="form-group">
+            <label>Profile Photo</label>
+            <div style="display: flex; gap: 10px; align-items: center;">
+              <button type="button" class="btn btn-outline btn-sm" onclick="document.getElementById('profilePhotoPicker').click();" style="width: auto;">
+                <i class="fa-solid fa-upload"></i> Select Profile Image
+              </button>
+            </div>
+            <div id="avatarPreviewBox" class="photo-preview-box">No new avatar selected</div>
+          </div>
+
+          <div class="form-group">
+            <label>Cover Photo</label>
+            <div style="display: flex; gap: 10px; align-items: center;">
+              <button type="button" class="btn btn-outline btn-sm" onclick="document.getElementById('coverPhotoPicker').click();" style="width: auto;">
+                <i class="fa-solid fa-upload"></i> Select Cover Image
+              </button>
+            </div>
+            <div id="coverPreviewBox" class="photo-preview-box">No new cover selected</div>
+          </div>
+
           <div class="form-group">
             <label>Current Address</label>
             <input type="text" id="editAddress" placeholder="City, Country or Street Address">
@@ -1196,7 +1317,7 @@ header {
           </div>
 
           <div style="display: flex; gap: 8px; margin-top: 14px;">
-            <button id="saveProfileBtn" class="btn btn-gold btn-sm" style="flex: 1;"><i class="fa-solid fa-floppy-disk"></i> Save Profile</button>
+            <button id="saveProfileBtn" class="btn btn-gold btn-sm" style="flex: 1;"><i class="fa-solid fa-floppy-disk"></i> Save Changes</button>
             <button id="cancelProfileBtn" class="btn btn-outline btn-sm" style="flex: 1;">Cancel</button>
           </div>
         </div>
@@ -1242,6 +1363,8 @@ const state = {
     name: "Oyantee Weah",
     handle: "@oyantee",
     avatar: "O",
+    photoUrl: "",
+    coverUrl: "",
     profile: {
       address: "",
       workplace: "",
@@ -1251,6 +1374,8 @@ const state = {
       bio: ""
     }
   },
+  tempAvatarUrl: null,
+  tempCoverUrl: null,
   users: [
     { id: "u_101", name: "Oyantee Weah", handle: "@oyantee", avatar: "O" },
     { id: "u_102", name: "Sarah Jenkins", handle: "@sjenkins", avatar: "S" },
@@ -1294,6 +1419,7 @@ document.addEventListener('DOMContentLoaded', () => {
   bindGroupEvents();
   bindVideoEvents();
   bindProfileEvents();
+  bindPhotoUploadEvents();
   showApp();
 });
 
@@ -1401,10 +1527,18 @@ function bindComposerEvents() {
     const feed = document.getElementById('feedList');
     const newPost = document.createElement('div');
     newPost.className = 'card';
+    
+    let avatarStyle = '';
+    let avatarText = state.currentUser.avatar;
+    if (state.currentUser.photoUrl) {
+      avatarStyle = `style="background-image: url('${state.currentUser.photoUrl}'); color: transparent;"`;
+      avatarText = '';
+    }
+
     newPost.innerHTML = `
       <div class="posthead">
         <div class="posthead-left">
-          <div class="avatar currentUserAvatar">${state.currentUser.avatar}</div>
+          <div class="avatar currentUserAvatar" ${avatarStyle}>${avatarText}</div>
           <div>
             <div class="post-author-name">${state.currentUser.name}</div>
             <div class="post-meta-line"><span>Just now</span> • <i class="fa-solid fa-cross"></i></div>
@@ -1674,14 +1808,16 @@ function renderVideos() {
 }
 
 /* =========================================================
-   9. RESTORED PROFILE & BIO MANAGEMENT
+   9. RESTORED PROFILE, PHOTOS & BIO MANAGEMENT
 ========================================================= */
 function loadProfileFromStorage() {
   try {
     const saved = localStorage.getItem('believers_user_profile');
     if (saved) {
       const parsed = JSON.parse(saved);
-      state.currentUser.profile = { ...state.currentUser.profile, ...parsed };
+      state.currentUser.photoUrl = parsed.photoUrl || '';
+      state.currentUser.coverUrl = parsed.coverUrl || '';
+      state.currentUser.profile = { ...state.currentUser.profile, ...(parsed.profile || {}) };
     }
   } catch(e) {
     console.error("Could not load profile from localStorage", e);
@@ -1690,10 +1826,64 @@ function loadProfileFromStorage() {
 
 function saveProfileToStorage() {
   try {
-    localStorage.setItem('believers_user_profile', JSON.stringify(state.currentUser.profile));
+    const dataToSave = {
+      photoUrl: state.currentUser.photoUrl,
+      coverUrl: state.currentUser.coverUrl,
+      profile: state.currentUser.profile
+    };
+    localStorage.setItem('believers_user_profile', JSON.stringify(dataToSave));
   } catch(e) {
     console.error("Could not save profile to localStorage", e);
   }
+}
+
+function bindPhotoUploadEvents() {
+  const profileInput = document.getElementById('profilePhotoPicker');
+  const coverInput = document.getElementById('coverPhotoPicker');
+
+  profileInput?.addEventListener('change', (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = function(evt) {
+        state.tempAvatarUrl = evt.target.result;
+        const preview = document.getElementById('avatarPreviewBox');
+        if (preview) {
+          preview.style.backgroundImage = `url('${state.tempAvatarUrl}')`;
+          preview.textContent = '';
+        }
+        // Direct update if edited from header badge
+        if (document.getElementById('profileEditFields').classList.contains('hidden')) {
+          state.currentUser.photoUrl = state.tempAvatarUrl;
+          saveProfileToStorage();
+          renderProfile();
+        }
+      };
+      reader.readAsDataURL(file);
+    }
+  });
+
+  coverInput?.addEventListener('change', (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = function(evt) {
+        state.tempCoverUrl = evt.target.result;
+        const preview = document.getElementById('coverPreviewBox');
+        if (preview) {
+          preview.style.backgroundImage = `url('${state.tempCoverUrl}')`;
+          preview.textContent = '';
+        }
+        // Direct update if edited from cover badge
+        if (document.getElementById('profileEditFields').classList.contains('hidden')) {
+          state.currentUser.coverUrl = state.tempCoverUrl;
+          saveProfileToStorage();
+          renderProfile();
+        }
+      };
+      reader.readAsDataURL(file);
+    }
+  });
 }
 
 function bindProfileEvents() {
@@ -1704,7 +1894,6 @@ function bindProfileEvents() {
   const editPanel = document.getElementById('profileEditFields');
 
   editBtn?.addEventListener('click', () => {
-    // Populate form with current values
     const p = state.currentUser.profile;
     document.getElementById('editAddress').value = p.address || '';
     document.getElementById('editWorkplace').value = p.workplace || '';
@@ -1712,6 +1901,28 @@ function bindProfileEvents() {
     document.getElementById('editEduLevel').value = p.eduLevel || '';
     document.getElementById('editSchool').value = p.school || '';
     document.getElementById('editBio').value = p.bio || '';
+
+    state.tempAvatarUrl = null;
+    state.tempCoverUrl = null;
+
+    const avatarPrev = document.getElementById('avatarPreviewBox');
+    const coverPrev = document.getElementById('coverPreviewBox');
+
+    if (state.currentUser.photoUrl) {
+      avatarPrev.style.backgroundImage = `url('${state.currentUser.photoUrl}')`;
+      avatarPrev.textContent = '';
+    } else {
+      avatarPrev.style.backgroundImage = 'none';
+      avatarPrev.textContent = 'No avatar selected';
+    }
+
+    if (state.currentUser.coverUrl) {
+      coverPrev.style.backgroundImage = `url('${state.currentUser.coverUrl}')`;
+      coverPrev.textContent = '';
+    } else {
+      coverPrev.style.backgroundImage = 'none';
+      coverPrev.textContent = 'No cover selected';
+    }
 
     viewPanel.classList.add('hidden');
     editPanel.classList.remove('hidden');
@@ -1723,6 +1934,13 @@ function bindProfileEvents() {
   });
 
   saveBtn?.addEventListener('click', () => {
+    if (state.tempAvatarUrl) {
+      state.currentUser.photoUrl = state.tempAvatarUrl;
+    }
+    if (state.tempCoverUrl) {
+      state.currentUser.coverUrl = state.tempCoverUrl;
+    }
+
     state.currentUser.profile.address = document.getElementById('editAddress').value.trim();
     state.currentUser.profile.workplace = document.getElementById('editWorkplace').value.trim();
     state.currentUser.profile.contact = document.getElementById('editContact').value.trim();
@@ -1750,6 +1968,47 @@ function renderProfile() {
   document.getElementById('valEduLevel').textContent = p.eduLevel || "Not specified";
   document.getElementById('valSchool').textContent = p.school || "Not specified";
   document.getElementById('valBio').textContent = p.bio || "Not specified";
+
+  // Update profile photo across app
+  const avatarEl = document.getElementById('profileAvatarLarge');
+  const composerAvatar = document.getElementById('composerUserAvatar');
+  const storyBg = document.getElementById('storyUserBg');
+
+  if (state.currentUser.photoUrl) {
+    if (avatarEl) {
+      avatarEl.style.backgroundImage = `url('${state.currentUser.photoUrl}')`;
+      avatarEl.textContent = '';
+    }
+    if (composerAvatar) {
+      composerAvatar.style.backgroundImage = `url('${state.currentUser.photoUrl}')`;
+      composerAvatar.textContent = '';
+    }
+    if (storyBg) {
+      storyBg.style.backgroundImage = `url('${state.currentUser.photoUrl}')`;
+    }
+  } else {
+    if (avatarEl) {
+      avatarEl.style.backgroundImage = 'none';
+      avatarEl.textContent = state.currentUser.avatar;
+    }
+    if (composerAvatar) {
+      composerAvatar.style.backgroundImage = 'none';
+      composerAvatar.textContent = state.currentUser.avatar;
+    }
+    if (storyBg) {
+      storyBg.style.backgroundImage = 'none';
+    }
+  }
+
+  // Update cover photo
+  const coverBg = document.getElementById('profileCoverBg');
+  if (coverBg) {
+    if (state.currentUser.coverUrl) {
+      coverBg.style.backgroundImage = `url('${state.currentUser.coverUrl}')`;
+    } else {
+      coverBg.style.backgroundImage = 'linear-gradient(135deg, var(--bp-primary), var(--bp-accent))';
+    }
+  }
 }
 </script>
 </body>
