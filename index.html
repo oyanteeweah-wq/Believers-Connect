@@ -3,16 +3,16 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#ffffff">
-<meta name="description" content="Believer Connect — One Community, One Faith">
-<title>Believer Connect</title>
+<meta name="theme-color" content="#0d1b2a">
+<meta name="description" content="Believer+ — Empowering Faith, Fellowship & Community">
+<title>Believer+</title>
 
 <!-- Font Awesome Icons -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
 <style>
 /* =========================================================
-   RESET & GLOBAL VARIABLES
+   BELIEVER+ DESIGN SYSTEM & THEME
 ========================================================= */
 * {
   box-sizing: border-box;
@@ -26,24 +26,26 @@ html {
 }
 
 :root {
-  --fb-blue: #1877f2;
-  --fb-blue-dark: #0d65d9;
-  --fb-bg: #c9ccd1;
-  --fb-card-bg: #ffffff;
-  --fb-text: #050505;
-  --fb-muted: #65676b;
-  --fb-icon-bg: #e4e6eb;
-  --fb-border: #ced0d4;
-  --fb-divider: #e4e6eb;
-  --radius-card: 12px;
+  --bp-primary: #0d1b2a;       /* Deep Sapphire */
+  --bp-accent: #1b263b;        /* Midnight Blue */
+  --bp-gold: #e0a96d;          /* Radiant Gold */
+  --bp-gold-hover: #c89355;
+  --bp-bg: #f4f6f9;            /* Soft Pearl White */
+  --bp-card-bg: #ffffff;
+  --bp-text: #1b1e23;
+  --bp-muted: #6c757d;
+  --bp-icon-bg: #e9ecef;
+  --bp-border: #e2e8f0;
+  --bp-radius: 14px;
+  --bp-shadow: 0 4px 12px rgba(13, 27, 42, 0.05);
 }
 
 body {
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-  background-color: var(--fb-bg);
-  color: var(--fb-text);
-  line-height: 1.4;
-  padding-bottom: 60px;
+  background-color: var(--bp-bg);
+  color: var(--bp-text);
+  line-height: 1.5;
+  padding-bottom: 70px; /* Buffer for mobile bottom nav */
 }
 
 button, input, textarea {
@@ -67,114 +69,142 @@ img {
 
 .wrap {
   width: 100%;
-  max-width: 680px;
+  max-width: 640px;
   margin: 0 auto;
 }
 
 /* =========================================================
-   AUTHENTICATION STYLES
+   AUTHENTICATION VIEW (Believer+ Custom)
 ========================================================= */
 .auth-page {
   min-height: 100vh;
   display: grid;
   place-items: center;
   padding: 20px;
-  background: #f0f2f5;
+  background: linear-gradient(135deg, #0d1b2a 0%, #1b263b 100%);
+  color: white;
 }
 
 .auth {
   width: 100%;
-  max-width: 400px;
+  max-width: 410px;
 }
 
 .auth-brand {
   text-align: center;
-  margin-bottom: 20px;
+  margin-bottom: 24px;
 }
 
 .auth-logo {
-  font-size: 48px;
-  color: var(--fb-blue);
+  font-size: 52px;
+  color: var(--bp-gold);
   margin-bottom: 4px;
 }
 
 .brand {
-  font-size: 24px;
-  font-weight: bold;
-  color: var(--fb-blue);
+  font-size: 32px;
+  font-weight: 800;
+  letter-spacing: -0.5px;
+  color: white;
+}
+
+.brand span {
+  color: var(--bp-gold);
 }
 
 .auth-card {
   background: white;
-  border-radius: 8px;
-  padding: 20px;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  border-radius: 18px;
+  padding: 24px;
+  color: var(--bp-text);
+  box-shadow: 0 10px 25px rgba(0,0,0,0.2);
 }
 
 .form-group {
-  margin-bottom: 12px;
+  margin-bottom: 14px;
+}
+
+.form-group label {
+  display: block;
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--bp-muted);
+  margin-bottom: 4px;
+  text-transform: uppercase;
 }
 
 .form-group input {
   width: 100%;
-  padding: 12px;
-  border: 1px solid var(--fb-border);
-  border-radius: 6px;
-  background: #f5f6f7;
+  padding: 12px 14px;
+  border: 1px solid var(--bp-border);
+  border-radius: 10px;
+  background: #f8fafc;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.form-group input:focus {
+  border-color: var(--bp-gold);
 }
 
 .btn {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  padding: 10px 16px;
-  border-radius: 6px;
-  background: var(--fb-blue);
+  gap: 8px;
+  padding: 12px 18px;
+  border-radius: 10px;
+  background: var(--bp-primary);
   color: white;
-  font-weight: bold;
+  font-weight: 700;
   width: 100%;
   font-size: 15px;
+  transition: opacity 0.2s;
 }
 
-.btn-secondary {
-  background: #42b72a;
+.btn:active {
+  opacity: 0.9;
+}
+
+.btn-gold {
+  background: var(--bp-gold);
+  color: var(--bp-primary);
+}
+
+.btn-gold:hover {
+  background: var(--bp-gold-hover);
 }
 
 .divider {
   height: 1px;
-  background: var(--fb-divider);
-  margin: 16px 0;
+  background: var(--bp-border);
+  margin: 18px 0;
 }
 
 .msg-error {
-  color: #e41e3f;
-  margin-top: 8px;
+  color: #e63946;
+  margin-top: 10px;
   font-size: 13px;
   text-align: center;
-}
-
-.msg-success {
-  color: #31a24c;
-  margin-top: 8px;
-  font-size: 13px;
-  text-align: center;
+  font-weight: 600;
 }
 
 /* =========================================================
-   APP HEADER & NAVIGATION
+   HEADER & NAVIGATION
 ========================================================= */
 header {
   position: sticky;
   top: 0;
   z-index: 1000;
   background: #ffffff;
-  border-bottom: 1px solid var(--fb-divider);
+  border-bottom: 1px solid var(--bp-border);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.03);
 }
 
 .header-inner {
-  max-width: 680px;
+  max-width: 640px;
   margin: 0 auto;
-  padding: 8px 12px 4px 12px;
+  padding: 10px 16px;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -183,19 +213,23 @@ header {
 .logo-area {
   display: flex;
   align-items: center;
-  gap: 6px;
-}
-
-.logo {
-  font-size: 24px;
-  font-weight: 800;
-  color: var(--fb-blue);
-  letter-spacing: -0.5px;
+  gap: 8px;
 }
 
 .logo-icon {
-  font-size: 20px;
-  color: var(--fb-blue);
+  font-size: 22px;
+  color: var(--bp-gold);
+}
+
+.logo {
+  font-size: 22px;
+  font-weight: 900;
+  color: var(--bp-primary);
+  letter-spacing: -0.5px;
+}
+
+.logo span {
+  color: var(--bp-gold);
 }
 
 .header-actions {
@@ -205,93 +239,104 @@ header {
 }
 
 .header-circle-btn {
-  width: 38px;
-  height: 38px;
+  width: 36px;
+  height: 36px;
   border-radius: 50%;
-  background: var(--fb-icon-bg);
+  background: var(--bp-icon-bg);
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 16px;
-  color: #050505;
+  font-size: 15px;
+  color: var(--bp-primary);
+  transition: background 0.2s;
+}
+
+.header-circle-btn:active {
+  background: var(--bp-border);
 }
 
 .logout-btn {
-  font-size: 13px;
-  font-weight: 600;
+  font-size: 12px;
+  font-weight: 700;
   padding: 6px 12px;
-  border-radius: 6px;
-  background: var(--fb-icon-bg);
-  color: var(--fb-text);
+  border-radius: 8px;
+  background: rgba(230, 57, 70, 0.1);
+  color: #e63946;
 }
 
+/* NAVIGATION BAR */
 .nav-wrap {
   background: #ffffff;
-  border-bottom: 1px solid var(--fb-border);
+  border-bottom: 1px solid var(--bp-border);
 }
 
 .nav {
   display: flex;
   justify-content: space-around;
   align-items: center;
-  max-width: 680px;
+  max-width: 640px;
   margin: 0 auto;
 }
 
 .nav button {
   flex: 1;
-  padding: 10px 0;
-  font-size: 20px;
-  color: var(--fb-muted);
+  padding: 12px 0;
+  font-size: 18px;
+  color: var(--bp-muted);
   position: relative;
   display: flex;
   justify-content: center;
   align-items: center;
+  transition: color 0.2s;
 }
 
 .nav button.active {
-  color: var(--fb-blue);
-  border-bottom: 3px solid var(--fb-blue);
+  color: var(--bp-gold);
+  border-bottom: 3px solid var(--bp-gold);
 }
 
 .badge {
   position: absolute;
-  top: 4px;
-  right: 18%;
-  background: #e41e3f;
+  top: 6px;
+  right: 22%;
+  background: #e63946;
   color: white;
-  font-size: 11px;
+  font-size: 10px;
   font-weight: bold;
   padding: 1px 5px;
-  border-radius: 10px;
-  border: 2px solid white;
+  border-radius: 8px;
 }
 
 /* =========================================================
    COMPOSER / CREATE POST AREA
 ========================================================= */
 .composer-card {
-  background: var(--fb-card-bg);
+  background: var(--bp-card-bg);
   padding: 12px 16px;
   display: flex;
   align-items: center;
-  gap: 10px;
-  margin-bottom: 8px;
+  gap: 12px;
+  margin-top: 12px;
+  margin-bottom: 10px;
+  border-radius: var(--bp-radius);
+  box-shadow: var(--bp-shadow);
+  border: 1px solid var(--bp-border);
 }
 
 .avatar {
-  width: 40px;
-  height: 40px;
+  width: 42px;
+  height: 42px;
   border-radius: 50%;
-  background: #dce8ff;
-  color: var(--fb-blue);
+  background: linear-gradient(135deg, var(--bp-primary), var(--bp-accent));
+  color: var(--bp-gold);
   display: flex;
   align-items: center;
   justify-content: center;
-  font-weight: bold;
-  position: relative;
+  font-weight: 800;
+  font-size: 16px;
   overflow: hidden;
   flex-shrink: 0;
+  border: 2px solid var(--bp-gold);
 }
 
 .avatar img {
@@ -302,51 +347,57 @@ header {
 
 .mind-button {
   flex: 1;
-  background: #f0f2f5;
-  border-radius: 20px;
+  background: #f8fafc;
+  border: 1px solid var(--bp-border);
+  border-radius: 25px;
   padding: 10px 16px;
-  color: var(--fb-muted);
-  font-size: 15px;
+  color: var(--bp-muted);
+  font-size: 14px;
   text-align: left;
 }
 
 .photo-upload-btn {
   display: flex;
-  flex-direction: column;
   align-items: center;
-  gap: 2px;
-  color: #45bd62;
-  font-size: 20px;
+  gap: 6px;
+  color: var(--bp-gold);
+  font-size: 18px;
   cursor: pointer;
+  padding: 6px 10px;
+  border-radius: 8px;
+  background: #fff8f0;
 }
 
 .photo-upload-btn span {
-  font-size: 11px;
-  color: var(--fb-muted);
-  font-weight: 600;
+  font-size: 12px;
+  color: var(--bp-primary);
+  font-weight: 700;
 }
 
 #postComposerArea {
   background: white;
-  padding: 12px;
-  margin-bottom: 8px;
+  padding: 14px;
+  margin-bottom: 12px;
+  border-radius: var(--bp-radius);
+  border: 1px solid var(--bp-border);
+  box-shadow: var(--bp-shadow);
 }
 
 .composer-textarea {
   width: 100%;
   border: none;
   outline: none;
-  font-size: 16px;
+  font-size: 15px;
   resize: none;
-  min-height: 80px;
+  min-height: 85px;
 }
 
 .composer-actions {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  border-top: 1px solid var(--fb-divider);
-  padding-top: 8px;
+  border-top: 1px solid var(--bp-border);
+  padding-top: 10px;
 }
 
 .post-image-preview {
@@ -355,8 +406,8 @@ header {
 }
 
 .post-image-preview img {
-  max-height: 200px;
-  border-radius: 8px;
+  max-height: 220px;
+  border-radius: 10px;
   width: 100%;
   object-fit: cover;
 }
@@ -365,24 +416,24 @@ header {
   position: absolute;
   top: 8px;
   right: 8px;
-  background: rgba(0,0,0,0.6);
+  background: rgba(13, 27, 42, 0.8);
   color: white;
-  width: 26px;
-  height: 26px;
+  width: 28px;
+  height: 28px;
   border-radius: 50%;
   font-weight: bold;
 }
 
 /* =========================================================
-   STORIES TRAY
+   COMMUNITY UPDATES / STORIES
 ========================================================= */
 .stories-container {
-  background: var(--fb-card-bg);
-  padding: 12px;
-  margin-bottom: 8px;
+  background: transparent;
+  margin-bottom: 12px;
   overflow-x: auto;
   white-space: nowrap;
   scrollbar-width: none;
+  padding: 2px 0;
 }
 
 .stories-container::-webkit-scrollbar {
@@ -391,18 +442,19 @@ header {
 
 .stories-wrapper {
   display: inline-flex;
-  gap: 8px;
+  gap: 10px;
 }
 
 .story-card {
-  width: 105px;
-  height: 180px;
-  border-radius: 12px;
+  width: 110px;
+  height: 175px;
+  border-radius: 14px;
   position: relative;
   overflow: hidden;
-  background: #000;
+  background: var(--bp-primary);
   flex-shrink: 0;
-  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+  box-shadow: var(--bp-shadow);
+  border: 1px solid var(--bp-border);
 }
 
 .story-card img.bg-story {
@@ -412,46 +464,52 @@ header {
   opacity: 0.85;
 }
 
+.story-card .story-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(13, 27, 42, 0.9) 0%, transparent 60%);
+}
+
 .story-card .story-author {
   position: absolute;
   bottom: 8px;
   left: 8px;
   right: 8px;
   color: white;
-  font-size: 12px;
-  font-weight: 600;
+  font-size: 11px;
+  font-weight: 700;
   white-space: normal;
   line-height: 1.2;
-  text-shadow: 0 1px 2px rgba(0,0,0,0.8);
 }
 
 .story-card .story-badge {
   position: absolute;
   top: 8px;
   left: 8px;
-  background: var(--fb-blue);
-  color: white;
-  font-size: 11px;
-  font-weight: bold;
+  background: var(--bp-gold);
+  color: var(--bp-primary);
+  font-size: 10px;
+  font-weight: 900;
   width: 22px;
   height: 22px;
-  border-radius: 6px;
+  border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
+  z-index: 2;
 }
 
 .story-card.create-story {
-  background: #fff;
-  border: 1px solid var(--fb-divider);
+  background: white;
   display: flex;
   flex-direction: column;
 }
 
 .story-card.create-story .top-img {
-  height: 125px;
+  height: 115px;
   width: 100%;
   position: relative;
+  background: #f1f5f9;
 }
 
 .story-card.create-story .top-img img {
@@ -462,46 +520,51 @@ header {
 
 .story-card.create-story .plus-btn {
   position: absolute;
-  bottom: -14px;
+  bottom: -13px;
   left: 50%;
   transform: translateX(-50%);
-  width: 28px;
-  height: 28px;
+  width: 26px;
+  height: 26px;
   border-radius: 50%;
-  background: var(--fb-blue);
-  color: white;
-  border: 3px solid white;
+  background: var(--bp-gold);
+  color: var(--bp-primary);
+  border: 2px solid white;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 14px;
+  font-size: 13px;
+  font-weight: bold;
 }
 
 .story-card.create-story .bottom-text {
-  height: 55px;
+  height: 60px;
   display: flex;
   align-items: flex-end;
   justify-content: center;
   padding-bottom: 8px;
-  font-size: 12px;
-  font-weight: 600;
-  color: var(--fb-text);
+  font-size: 11px;
+  font-weight: 800;
+  color: var(--bp-primary);
+  text-align: center;
 }
 
 /* =========================================================
-   FEED CARDS
+   FEED POST CARDS
 ========================================================= */
 .card {
-  background: var(--fb-card-bg);
-  margin-bottom: 8px;
-  padding: 12px 0 0 0;
+  background: var(--bp-card-bg);
+  margin-bottom: 12px;
+  padding: 14px;
+  border-radius: var(--bp-radius);
+  border: 1px solid var(--bp-border);
+  box-shadow: var(--bp-shadow);
 }
 
 .posthead {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0 12px 8px 12px;
+  margin-bottom: 10px;
 }
 
 .posthead-left {
@@ -511,39 +574,40 @@ header {
 }
 
 .post-author-name {
-  font-weight: 700;
+  font-weight: 800;
   font-size: 14px;
-  color: var(--fb-text);
+  color: var(--bp-primary);
 }
 
 .post-meta-line {
   display: flex;
   align-items: center;
-  gap: 4px;
-  font-size: 12px;
-  color: var(--fb-muted);
+  gap: 6px;
+  font-size: 11px;
+  color: var(--bp-muted);
 }
 
 .post-content {
-  padding: 4px 12px 10px 12px;
   font-size: 14px;
+  margin-bottom: 10px;
   white-space: pre-wrap;
   overflow-wrap: anywhere;
 }
 
 .post-photo {
   width: 100%;
-  max-height: 500px;
+  max-height: 450px;
   object-fit: cover;
-  display: block;
+  border-radius: 10px;
+  margin-bottom: 10px;
 }
 
 .actions {
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  border-top: 1px solid var(--fb-divider);
-  padding: 4px 6px;
+  justify-content: space-around;
+  border-top: 1px solid var(--bp-border);
+  padding-top: 8px;
   margin-top: 4px;
 }
 
@@ -553,28 +617,28 @@ header {
   align-items: center;
   justify-content: center;
   gap: 6px;
-  padding: 8px 0;
-  color: var(--fb-muted);
+  padding: 6px 0;
+  color: var(--bp-muted);
   font-size: 13px;
-  font-weight: 600;
-  border-radius: 4px;
+  font-weight: 700;
+  border-radius: 6px;
 }
 
 .action-btn.liked {
-  color: var(--fb-blue);
+  color: var(--bp-gold);
 }
 
 /* =========================================================
-   MOBILE BOTTOM NAV
+   BOTTOM MOBILE NAVIGATION
 ========================================================= */
 .bottom-nav {
   position: fixed;
   bottom: 0;
   left: 0;
   right: 0;
-  height: 48px;
-  background: #ffffff;
-  border-top: 1px solid var(--fb-border);
+  height: 54px;
+  background: var(--bp-primary);
+  border-top: 1px solid rgba(255,255,255,0.1);
   display: flex;
   align-items: center;
   justify-content: space-around;
@@ -587,17 +651,17 @@ header {
   display: flex;
   align-items: center;
   justify-content: center;
-  color: var(--fb-muted);
+  color: rgba(255,255,255,0.6);
   font-size: 18px;
 }
 
-@media (min-width: 681px) {
+.bottom-nav button.active {
+  color: var(--bp-gold);
+}
+
+@media (min-width: 641px) {
   body { padding-bottom: 0; }
   .bottom-nav { display: none; }
-  .card, .stories-container, .composer-card, #postComposerArea {
-    border-radius: var(--radius-card);
-    border: 1px solid var(--fb-border);
-  }
 }
 </style>
 </head>
@@ -605,114 +669,115 @@ header {
 <body>
 
 <!-- =======================================================
-     AUTH PAGE (LOGIN & SIGNUP)
+     AUTHENTICATION PAGE (BELIEVER+)
 ======================================================= -->
 <div id="auth" class="auth-page">
   <div class="auth">
     <div class="auth-brand">
-      <div class="auth-logo">✝</div>
-      <div class="brand">BELIEVER CONNECT</div>
-      <div style="color:var(--fb-muted); font-size:14px;">One Community • One Faith</div>
+      <div class="auth-logo"><i class="fa-solid fa-cross"></i></div>
+      <div class="brand">Believer<span>+</span></div>
+      <div style="color: rgba(255,255,255,0.7); font-size: 13px; margin-top: 2px;">One Faith • One Community</div>
     </div>
 
     <div class="auth-card">
       <!-- LOGIN BOX -->
       <div id="loginBox">
-        <h2 style="margin-bottom: 12px; font-size: 18px;">Log Into Believer Connect</h2>
+        <h2 style="margin-bottom: 14px; font-size: 18px; color: var(--bp-primary);">Welcome Back</h2>
         <div class="form-group">
-          <input id="loginEmail" type="email" placeholder="Email address">
+          <label>Email Address</label>
+          <input id="loginEmail" type="email" placeholder="name@domain.com">
         </div>
         <div class="form-group">
-          <input id="loginPass" type="password" placeholder="Password">
+          <label>Password</label>
+          <input id="loginPass" type="password" placeholder="••••••••">
         </div>
-        <button id="loginBtn" class="btn" type="button">Log In</button>
+        <button id="loginBtn" class="btn btn-gold" type="button">Log In to Believer+</button>
         <p id="loginMsg" class="msg-error"></p>
         <div class="divider"></div>
-        <button id="showSignupBtn" class="btn btn-secondary" type="button">Create New Account</button>
+        <button id="showSignupBtn" class="btn" type="button">Create Believer+ Account</button>
       </div>
 
       <!-- SIGNUP BOX -->
       <div id="signupBox" class="hidden">
-        <h2 style="margin-bottom: 12px; font-size: 18px;">Create Account</h2>
+        <h2 style="margin-bottom: 14px; font-size: 18px; color: var(--bp-primary);">Join Believer+</h2>
         <div class="form-group">
-          <input id="name" type="text" placeholder="Full name">
+          <label>Full Name</label>
+          <input id="name" type="text" placeholder="John Doe">
         </div>
         <div class="form-group">
-          <input id="email" type="email" placeholder="Email address">
+          <label>Email Address</label>
+          <input id="email" type="email" placeholder="name@domain.com">
         </div>
         <div class="form-group">
-          <input id="pass" type="password" placeholder="New password">
+          <label>Password</label>
+          <input id="pass" type="password" placeholder="At least 6 characters">
         </div>
-        <button id="signupBtn" class="btn btn-secondary" type="button">Sign Up</button>
+        <button id="signupBtn" class="btn btn-gold" type="button">Register</button>
         <p id="signupMsg" class="msg-error"></p>
         <div class="divider"></div>
-        <button id="showLoginBtn" class="btn" type="button" style="background:#8a8d91;">Already have an account?</button>
+        <button id="showLoginBtn" class="btn" type="button">Back to Login</button>
       </div>
     </div>
   </div>
 </div>
 
 <!-- =======================================================
-     MAIN APPLICATION FEED
+     MAIN APPLICATION (BELIEVER+)
 ======================================================= -->
 <div id="app" class="hidden">
 
-  <!-- HEADER -->
+  <!-- TOP HEADER -->
   <header>
     <div class="header-inner">
       <div class="logo-area">
-        <span class="logo">Believer</span>
-        <span class="logo-icon">✝</span>
+        <i class="fa-solid fa-cross logo-icon"></i>
+        <span class="logo">Believer<span>+</span></span>
       </div>
       <div class="header-actions">
         <button class="header-circle-btn" onclick="toggleComposer()"><i class="fa-solid fa-plus"></i></button>
         <button class="header-circle-btn"><i class="fa-solid fa-magnifying-glass"></i></button>
-        <button class="header-circle-btn"><i class="fa-solid fa-bars"></i></button>
         <button id="logoutBtn" class="logout-btn" type="button">Log out</button>
       </div>
     </div>
 
-    <!-- MAIN TABS -->
+    <!-- MAIN NAVIGATION TABS -->
     <div class="nav-wrap">
       <nav class="nav">
         <button class="active" data-tab="home" onclick="switchTab('home')">
-          <i class="fa-solid fa-house"></i>
+          <i class="fa-solid fa-house-chimney"></i>
         </button>
-        <button data-tab="friends" onclick="switchTab('friends')">
-          <i class="fa-solid fa-user-group"></i>
+        <button data-tab="community" onclick="switchTab('community')">
+          <i class="fa-solid fa-people-group"></i>
         </button>
         <button data-tab="messages" onclick="switchTab('messages')">
-          <i class="fa-solid fa-comment-dots"></i>
+          <i class="fa-solid fa-hand-holding-heart"></i>
         </button>
         <button data-tab="watch" onclick="switchTab('watch')">
-          <i class="fa-solid fa-tv"></i>
-          <span class="badge">15+</span>
+          <i class="fa-solid fa-circle-play"></i>
+          <span class="badge">4</span>
         </button>
         <button data-tab="notifications" onclick="switchTab('notifications')">
           <i class="fa-solid fa-bell"></i>
-        </button>
-        <button data-tab="dashboard" onclick="switchTab('dashboard')">
-          <i class="fa-solid fa-table-cells"></i>
         </button>
       </nav>
     </div>
   </header>
 
-  <main class="wrap" style="padding-top: 8px;">
+  <main class="wrap">
 
     <!-- COMPOSER TRIGGER -->
     <div class="composer-card">
       <div id="headerAvatar" class="avatar">B</div>
-      <button class="mind-button" onclick="toggleComposer()">What's on your mind?</button>
+      <button class="mind-button" onclick="toggleComposer()">Share a word or encouragement...</button>
       <label for="postImageInput" class="photo-upload-btn">
-        <i class="fa-solid fa-images"></i>
-        <span>Photo</span>
+        <i class="fa-solid fa-image"></i>
+        <span>Media</span>
       </label>
     </div>
 
     <!-- POST COMPOSER FORM -->
-    <div id="postComposerArea" class="hidden card">
-      <textarea id="postText" class="composer-textarea" placeholder="What's on your mind?"></textarea>
+    <div id="postComposerArea" class="hidden">
+      <textarea id="postText" class="composer-textarea" placeholder="What is on your heart today?"></textarea>
       <input type="file" id="postImageInput" accept="image/*" class="hidden">
       
       <div id="postImagePreview" class="post-image-preview hidden">
@@ -721,83 +786,100 @@ header {
       </div>
 
       <div class="composer-actions">
-        <span style="font-size:12px; color:var(--fb-muted);">Sharing to Feed</span>
-        <button id="submitPostBtn" class="btn" style="width:auto; padding: 6px 20px;">Post</button>
+        <span style="font-size: 11px; color: var(--bp-muted); font-weight: 600;">Visible to Believer+ Community</span>
+        <button id="submitPostBtn" class="btn btn-gold" style="width: auto; padding: 6px 18px; font-size: 13px;">Publish</button>
       </div>
     </div>
 
-    <!-- STORIES TRAY -->
+    <!-- COMMUNITY UPDATES / STORIES -->
     <div class="stories-container">
       <div class="stories-wrapper">
+        
+        <!-- Create Story -->
         <div class="story-card create-story">
           <div class="top-img">
-            <img src="https://via.placeholder.com/150" alt="User">
+            <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=200&q=80" alt="User" onerror="handleImageError(this)">
             <div class="plus-btn"><i class="fa-solid fa-plus"></i></div>
           </div>
-          <div class="bottom-text">Create story</div>
+          <div class="bottom-text">Share Update</div>
         </div>
 
+        <!-- Member Story 1 -->
         <div class="story-card">
           <div class="story-badge">2</div>
-          <img class="bg-story" src="https://via.placeholder.com/150x250" alt="Story">
+          <img class="bg-story" src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=300&q=80" alt="Story" onerror="handleImageError(this)">
+          <div class="story-overlay"></div>
           <div class="story-author">Abigail Tor</div>
         </div>
 
+        <!-- Member Story 2 -->
         <div class="story-card">
           <div class="story-badge">1</div>
-          <img class="bg-story" src="https://via.placeholder.com/150x250" alt="Story">
+          <img class="bg-story" src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=300&q=80" alt="Story" onerror="handleImageError(this)">
+          <div class="story-overlay"></div>
           <div class="story-author">Rose Kollie</div>
         </div>
 
+        <!-- Member Story 3 -->
         <div class="story-card">
-          <div class="story-badge">1</div>
-          <img class="bg-story" src="https://via.placeholder.com/150x250" alt="Story">
-          <div class="story-author">Esther</div>
+          <div class="story-badge">3</div>
+          <img class="bg-story" src="https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=300&q=80" alt="Story" onerror="handleImageError(this)">
+          <div class="story-overlay"></div>
+          <div class="story-author">Esther W.</div>
         </div>
+
       </div>
     </div>
 
-    <!-- MAIN FEED CONTAINER -->
+    <!-- MAIN FEED -->
     <div id="feedContainer"></div>
 
   </main>
 
   <!-- MOBILE BOTTOM NAVIGATION -->
   <div class="bottom-nav">
-    <button onclick="switchTab('home')"><i class="fa-solid fa-house"></i></button>
-    <button onclick="switchTab('watch')"><i class="fa-solid fa-tv"></i></button>
-    <button onclick="switchTab('friends')"><i class="fa-solid fa-user-group"></i></button>
+    <button class="active" onclick="switchTab('home')"><i class="fa-solid fa-house-chimney"></i></button>
+    <button onclick="switchTab('community')"><i class="fa-solid fa-people-group"></i></button>
+    <button onclick="toggleComposer()"><i class="fa-solid fa-square-plus" style="color: var(--bp-gold); font-size: 22px;"></i></button>
     <button onclick="switchTab('notifications')"><i class="fa-solid fa-bell"></i></button>
-    <button onclick="switchTab('menu')"><i class="fa-solid fa-bars"></i></button>
+    <button onclick="switchTab('profile')"><i class="fa-solid fa-user"></i></button>
   </div>
 
 </div>
 
 <!-- =======================================================
-     FUNCTIONAL JAVASCRIPT LOGIC
+     JAVASCRIPT LOGIC
 ======================================================= -->
 <script>
   let currentUser = null;
   let attachedImageBase64 = null;
 
-  // Initial Posts Data
+  // Reliable SVG Fallback Data URI for Broken Media
+  const svgPlaceholder = "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='400' height='300' viewBox='0 0 400 300'><rect width='100%' height='100%' fill='%231b263b'/><text x='50%' y='50%' dominant-baseline='middle' text-anchor='middle' font-family='sans-serif' font-size='16' fill='%23e0a96d'>Believer+ Media Unavailable</text></svg>";
+
+  function handleImageError(img) {
+    img.onerror = null;
+    img.src = svgPlaceholder;
+  }
+
+  // Sample Feed Posts
   const posts = [
     {
       id: 1,
       author: "Festous F. Johnson",
       avatarText: "F",
-      time: "1h",
-      content: "With Festonic Graphix, you're covered!",
-      image: "https://via.placeholder.com/600x400",
-      likes: 5,
+      time: "2 hours ago",
+      status: "blessed at Grace Community",
+      content: "Blessed Sunday to everyone! Excited to share our community graphic updates with the fellowship today.",
+      image: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?auto=format&fit=crop&w=600&q=80",
+      likes: 12,
       isLiked: false
     }
   ];
 
-  // DOM Loaded Event Listeners
   document.addEventListener('DOMContentLoaded', () => {
     
-    // Auth View Toggles
+    // Auth View Switches
     document.getElementById('showSignupBtn').addEventListener('click', () => {
       document.getElementById('loginBox').classList.add('hidden');
       document.getElementById('signupBox').classList.remove('hidden');
@@ -810,23 +892,22 @@ header {
       clearMsgs();
     });
 
-    // Login Execution
+    // Login Action
     document.getElementById('loginBtn').addEventListener('click', () => {
       const email = document.getElementById('loginEmail').value.trim();
       const pass = document.getElementById('loginPass').value.trim();
       const msg = document.getElementById('loginMsg');
 
       if (!email || !pass) {
-        msg.textContent = "Please fill in all fields.";
+        msg.textContent = "Please provide email and password.";
         return;
       }
 
-      // Successful Login
       currentUser = email.split('@')[0];
       loginUser(currentUser);
     });
 
-    // Signup Execution
+    // Registration Action
     document.getElementById('signupBtn').addEventListener('click', () => {
       const name = document.getElementById('name').value.trim();
       const email = document.getElementById('email').value.trim();
@@ -834,11 +915,10 @@ header {
       const msg = document.getElementById('signupMsg');
 
       if (!name || !email || !pass) {
-        msg.textContent = "Please fill in all fields.";
+        msg.textContent = "Please complete all fields.";
         return;
       }
 
-      // Successful Registration
       currentUser = name;
       loginUser(currentUser);
     });
@@ -852,7 +932,7 @@ header {
       clearMsgs();
     });
 
-    // Image Upload Preview Handling
+    // Media Upload Handler
     const postImageInput = document.getElementById('postImageInput');
     postImageInput.addEventListener('change', (e) => {
       const file = e.target.files[0];
@@ -881,9 +961,10 @@ header {
 
       const newPost = {
         id: Date.now(),
-        author: currentUser || "Anonymous Believer",
-        avatarText: (currentUser || "A").charAt(0).toUpperCase(),
+        author: currentUser || "Fellow Believer",
+        avatarText: (currentUser || "B").charAt(0).toUpperCase(),
         time: "Just now",
+        status: "sharing with community",
         content: text,
         image: attachedImageBase64,
         likes: 0,
@@ -904,8 +985,8 @@ header {
   });
 
   function loginUser(userName) {
-    const firstInitial = userName.charAt(0).toUpperCase();
-    document.getElementById('headerAvatar').firstChild.textContent = firstInitial;
+    const initial = userName.charAt(0).toUpperCase();
+    document.getElementById('headerAvatar').textContent = initial;
     document.getElementById('auth').classList.add('hidden');
     document.getElementById('app').classList.remove('hidden');
     renderFeed();
@@ -956,21 +1037,21 @@ header {
             <div>
               <div class="post-author-name">${post.author}</div>
               <div class="post-meta-line">
-                <span>${post.time}</span> • <i class="fa-solid fa-earth-americas"></i>
+                <span>${post.time}</span> • <span>${post.status}</span>
               </div>
             </div>
           </div>
-          <button style="color:var(--fb-muted);"><i class="fa-solid fa-ellipsis"></i></button>
+          <button style="color:var(--bp-muted);"><i class="fa-solid fa-ellipsis-vertical"></i></button>
         </div>
         ${post.content ? `<div class="post-content">${post.content}</div>` : ''}
-        ${post.image ? `<img class="post-photo" src="${post.image}" alt="Post image">` : ''}
+        ${post.image ? `<img class="post-photo" src="${post.image}" alt="Community Post" onerror="handleImageError(this)">` : ''}
         <div class="actions">
           <button class="action-btn ${post.isLiked ? 'liked' : ''}" onclick="toggleLike(${post.id})">
-            <i class="${post.isLiked ? 'fa-solid' : 'fa-regular'} fa-thumbs-up"></i> 
-            ${post.likes > 0 ? post.likes : ''} Like
+            <i class="${post.isLiked ? 'fa-solid' : 'fa-regular'} fa-heart"></i> 
+            ${post.likes > 0 ? post.likes : ''} Encourage
           </button>
-          <button class="action-btn"><i class="fa-regular fa-comment"></i> Comment</button>
-          <button class="action-btn"><i class="fa-solid fa-share"></i> Share</button>
+          <button class="action-btn"><i class="fa-regular fa-comment-dots"></i> Reply</button>
+          <button class="action-btn"><i class="fa-solid fa-arrow-share-group"></i> Share</button>
         </div>
       `;
 
