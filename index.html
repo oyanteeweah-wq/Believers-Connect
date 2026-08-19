@@ -2,51 +2,48 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0">
-
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="theme-color" content="#ffffff">
 <meta name="description" content="Believer Connect — One Community, One Faith">
-
 <title>Believer Connect</title>
 
-<!-- Font Awesome for Social Media Icons -->
+<!-- Font Awesome Icons -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
 <style>
 /* =========================================================
-   RESET & VARIABLES
+   RESET & GLOBAL VARIABLES
 ========================================================= */
-*{
-  box-sizing:border-box;
-  margin:0;
-  padding:0;
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
   -webkit-tap-highlight-color: transparent;
 }
 
-html{
-  scroll-behavior:smooth;
+html {
+  scroll-behavior: smooth;
 }
 
-:root{
-  --fb-blue:#1877f2;
-  --fb-blue-dark:#0d65d9;
-  --fb-bg:#c9ccd1;
-  --fb-card-bg:#ffffff;
-  --fb-text:#050505;
-  --fb-muted:#65676b;
-  --fb-icon-bg:#e4e6eb;
-  --fb-border:#ced0d4;
-  --fb-divider:#e4e6eb;
-  --radius-card:12px;
-  --radius-btn:8px;
+:root {
+  --fb-blue: #1877f2;
+  --fb-blue-dark: #0d65d9;
+  --fb-bg: #c9ccd1;
+  --fb-card-bg: #ffffff;
+  --fb-text: #050505;
+  --fb-muted: #65676b;
+  --fb-icon-bg: #e4e6eb;
+  --fb-border: #ced0d4;
+  --fb-divider: #e4e6eb;
+  --radius-card: 12px;
 }
 
-body{
+body {
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
   background-color: var(--fb-bg);
   color: var(--fb-text);
   line-height: 1.4;
-  padding-bottom: 60px; /* Space for bottom nav on mobile */
+  padding-bottom: 60px;
 }
 
 button, input, textarea {
@@ -64,9 +61,6 @@ img {
   display: block;
 }
 
-/* =========================================================
-   UTILITIES
-========================================================= */
 .hidden {
   display: none !important;
 }
@@ -77,11 +71,97 @@ img {
   margin: 0 auto;
 }
 
-.muted { color: var(--fb-muted); }
-.meta { color: var(--fb-muted); font-size: 12px; }
+/* =========================================================
+   AUTHENTICATION STYLES
+========================================================= */
+.auth-page {
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  padding: 20px;
+  background: #f0f2f5;
+}
+
+.auth {
+  width: 100%;
+  max-width: 400px;
+}
+
+.auth-brand {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.auth-logo {
+  font-size: 48px;
+  color: var(--fb-blue);
+  margin-bottom: 4px;
+}
+
+.brand {
+  font-size: 24px;
+  font-weight: bold;
+  color: var(--fb-blue);
+}
+
+.auth-card {
+  background: white;
+  border-radius: 8px;
+  padding: 20px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.form-group {
+  margin-bottom: 12px;
+}
+
+.form-group input {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid var(--fb-border);
+  border-radius: 6px;
+  background: #f5f6f7;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 16px;
+  border-radius: 6px;
+  background: var(--fb-blue);
+  color: white;
+  font-weight: bold;
+  width: 100%;
+  font-size: 15px;
+}
+
+.btn-secondary {
+  background: #42b72a;
+}
+
+.divider {
+  height: 1px;
+  background: var(--fb-divider);
+  margin: 16px 0;
+}
+
+.msg-error {
+  color: #e41e3f;
+  margin-top: 8px;
+  font-size: 13px;
+  text-align: center;
+}
+
+.msg-success {
+  color: #31a24c;
+  margin-top: 8px;
+  font-size: 13px;
+  text-align: center;
+}
 
 /* =========================================================
-   HEADER (Top App Bar - Facebook Style)
+   APP HEADER & NAVIGATION
 ========================================================= */
 header {
   position: sticky;
@@ -107,11 +187,10 @@ header {
 }
 
 .logo {
-  font-size: 26px;
+  font-size: 24px;
   font-weight: 800;
   color: var(--fb-blue);
   letter-spacing: -0.5px;
-  font-family: Arial, Helvetica, sans-serif;
 }
 
 .logo-icon {
@@ -137,23 +216,15 @@ header {
   color: #050505;
 }
 
-.header-circle-btn:active {
-  background: #d8dadf;
-}
-
-/* Header logout adapter */
 .logout-btn {
   font-size: 13px;
   font-weight: 600;
-  padding: 6px 10px;
+  padding: 6px 12px;
   border-radius: 6px;
   background: var(--fb-icon-bg);
   color: var(--fb-text);
 }
 
-/* =========================================================
-   NAVIGATION ROW (Tabs with badges)
-========================================================= */
 .nav-wrap {
   background: #ffffff;
   border-bottom: 1px solid var(--fb-border);
@@ -197,7 +268,7 @@ header {
 }
 
 /* =========================================================
-   CREATE POST / COMPOSER SECTION
+   COMPOSER / CREATE POST AREA
 ========================================================= */
 .composer-card {
   background: var(--fb-card-bg);
@@ -208,7 +279,7 @@ header {
   margin-bottom: 8px;
 }
 
-.avatar, .composer-avatar, .header-avatar {
+.avatar {
   width: 40px;
   height: 40px;
   border-radius: 50%;
@@ -223,21 +294,10 @@ header {
   flex-shrink: 0;
 }
 
-.avatar img, .composer-avatar img, .header-avatar img {
+.avatar img {
   width: 100%;
   height: 100%;
   object-fit: cover;
-}
-
-.status-indicator {
-  position: absolute;
-  bottom: 0;
-  right: 0;
-  width: 12px;
-  height: 12px;
-  background: #31a24c;
-  border: 2px solid white;
-  border-radius: 50%;
 }
 
 .mind-button {
@@ -248,7 +308,6 @@ header {
   color: var(--fb-muted);
   font-size: 15px;
   text-align: left;
-  border: none;
 }
 
 .photo-upload-btn {
@@ -258,7 +317,7 @@ header {
   gap: 2px;
   color: #45bd62;
   font-size: 20px;
-  padding: 0 4px;
+  cursor: pointer;
 }
 
 .photo-upload-btn span {
@@ -267,11 +326,10 @@ header {
   font-weight: 600;
 }
 
-/* Expanded Post Box Styles */
 #postComposerArea {
   background: white;
   padding: 12px;
-  border-top: 1px solid var(--fb-divider);
+  margin-bottom: 8px;
 }
 
 .composer-textarea {
@@ -291,6 +349,30 @@ header {
   padding-top: 8px;
 }
 
+.post-image-preview {
+  position: relative;
+  margin: 8px 0;
+}
+
+.post-image-preview img {
+  max-height: 200px;
+  border-radius: 8px;
+  width: 100%;
+  object-fit: cover;
+}
+
+.remove-post-image {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  background: rgba(0,0,0,0.6);
+  color: white;
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  font-weight: bold;
+}
+
 /* =========================================================
    STORIES TRAY
 ========================================================= */
@@ -300,11 +382,11 @@ header {
   margin-bottom: 8px;
   overflow-x: auto;
   white-space: nowrap;
-  scrollbar-width: none; /* Firefox */
+  scrollbar-width: none;
 }
 
 .stories-container::-webkit-scrollbar {
-  display: none; /* Chrome/Safari */
+  display: none;
 }
 
 .stories-wrapper {
@@ -327,7 +409,7 @@ header {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  opacity: 0.9;
+  opacity: 0.85;
 }
 
 .story-card .story-author {
@@ -359,7 +441,6 @@ header {
   justify-content: center;
 }
 
-/* Create Story Card Specifics */
 .story-card.create-story {
   background: #fff;
   border: 1px solid var(--fb-divider);
@@ -405,11 +486,10 @@ header {
   font-size: 12px;
   font-weight: 600;
   color: var(--fb-text);
-  text-align: center;
 }
 
 /* =========================================================
-   POST / FEED CARD
+   FEED CARDS
 ========================================================= */
 .card {
   background: var(--fb-card-bg);
@@ -458,7 +538,6 @@ header {
   display: block;
 }
 
-/* Facebook Interaction Bar */
 .actions {
   display: flex;
   align-items: center;
@@ -481,16 +560,12 @@ header {
   border-radius: 4px;
 }
 
-.action-btn:active {
-  background: #f0f2f5;
-}
-
-.action-btn.like-active {
+.action-btn.liked {
   color: var(--fb-blue);
 }
 
 /* =========================================================
-   BOTTOM NAVIGATION BAR (Mobile Fixed)
+   MOBILE BOTTOM NAV
 ========================================================= */
 .bottom-nav {
   position: fixed;
@@ -516,60 +591,13 @@ header {
   font-size: 18px;
 }
 
-/* =========================================================
-   AUTH PAGE & BUTTON STYLES
-========================================================= */
-.auth-page {
-  min-height: 100vh;
-  display: grid;
-  place-items: center;
-  padding: 20px;
-  background: #f0f2f5;
-}
-.auth { width: 100%; max-width: 400px; }
-.auth-brand { text-align: center; margin-bottom: 20px; }
-.auth-logo {
-  font-size: 48px;
-  color: var(--fb-blue);
-  margin-bottom: 8px;
-}
-.brand { font-size: 24px; font-weight: bold; color: var(--fb-blue); }
-.auth-card {
-  background: white;
-  border-radius: 8px;
-  padding: 20px;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-}
-.form-group { margin-bottom: 12px; }
-.form-group input {
-  width: 100%;
-  padding: 12px;
-  border: 1px solid var(--fb-border);
-  border-radius: 6px;
-  background: #f5f6f7;
-}
-.btn {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  padding: 10px 16px;
-  border-radius: 6px;
-  background: var(--fb-blue);
-  color: white;
-  font-weight: bold;
-  width: 100%;
-  font-size: 15px;
-}
-.btn-secondary { background: #42b72a; }
-.divider { height: 1px; background: var(--fb-divider); margin: 16px 0; }
-
-/* Desktop adjustments */
 @media (min-width: 681px) {
   body { padding-bottom: 0; }
   .bottom-nav { display: none; }
-  .card { border-radius: var(--radius-card); border: 1px solid var(--fb-border); }
-  .stories-container { border-radius: var(--radius-card); border: 1px solid var(--fb-border); }
-  .composer-card { border-radius: var(--radius-card); border: 1px solid var(--fb-border); }
+  .card, .stories-container, .composer-card, #postComposerArea {
+    border-radius: var(--radius-card);
+    border: 1px solid var(--fb-border);
+  }
 }
 </style>
 </head>
@@ -577,64 +605,59 @@ header {
 <body>
 
 <!-- =======================================================
-     TOAST CONTAINER
-======================================================= -->
-<div id="toastContainer"></div>
-
-<!-- =======================================================
-     AUTH PAGE
+     AUTH PAGE (LOGIN & SIGNUP)
 ======================================================= -->
 <div id="auth" class="auth-page">
   <div class="auth">
     <div class="auth-brand">
       <div class="auth-logo">✝</div>
       <div class="brand">BELIEVER CONNECT</div>
-      <div class="muted">One Community • One Faith</div>
+      <div style="color:var(--fb-muted); font-size:14px;">One Community • One Faith</div>
     </div>
 
     <div class="auth-card">
-      <!-- LOGIN -->
+      <!-- LOGIN BOX -->
       <div id="loginBox">
         <h2 style="margin-bottom: 12px; font-size: 18px;">Log Into Believer Connect</h2>
         <div class="form-group">
-          <input id="loginEmail" type="email" autocomplete="email" placeholder="Email address">
+          <input id="loginEmail" type="email" placeholder="Email address">
         </div>
         <div class="form-group">
-          <input id="loginPass" type="password" autocomplete="current-password" placeholder="Password">
+          <input id="loginPass" type="password" placeholder="Password">
         </div>
         <button id="loginBtn" class="btn" type="button">Log In</button>
+        <p id="loginMsg" class="msg-error"></p>
         <div class="divider"></div>
         <button id="showSignupBtn" class="btn btn-secondary" type="button">Create New Account</button>
-        <p id="loginMsg" style="color:red; margin-top:8px; font-size:13px;"></p>
       </div>
 
-      <!-- SIGN UP -->
+      <!-- SIGNUP BOX -->
       <div id="signupBox" class="hidden">
         <h2 style="margin-bottom: 12px; font-size: 18px;">Create Account</h2>
         <div class="form-group">
-          <input id="name" autocomplete="name" placeholder="Full name">
+          <input id="name" type="text" placeholder="Full name">
         </div>
         <div class="form-group">
-          <input id="email" type="email" autocomplete="email" placeholder="Email address">
+          <input id="email" type="email" placeholder="Email address">
         </div>
         <div class="form-group">
-          <input id="pass" type="password" autocomplete="new-password" placeholder="New password">
+          <input id="pass" type="password" placeholder="New password">
         </div>
         <button id="signupBtn" class="btn btn-secondary" type="button">Sign Up</button>
+        <p id="signupMsg" class="msg-error"></p>
         <div class="divider"></div>
         <button id="showLoginBtn" class="btn" type="button" style="background:#8a8d91;">Already have an account?</button>
-        <p id="signupMsg" style="margin-top:8px; font-size:13px;"></p>
       </div>
     </div>
   </div>
 </div>
 
 <!-- =======================================================
-     MAIN APPLICATION
+     MAIN APPLICATION FEED
 ======================================================= -->
 <div id="app" class="hidden">
 
-  <!-- TOP HEADER -->
+  <!-- HEADER -->
   <header>
     <div class="header-inner">
       <div class="logo-area">
@@ -642,47 +665,44 @@ header {
         <span class="logo-icon">✝</span>
       </div>
       <div class="header-actions">
-        <button class="header-circle-btn" id="quickPostBtn"><i class="fa-solid fa-plus"></i></button>
+        <button class="header-circle-btn" onclick="toggleComposer()"><i class="fa-solid fa-plus"></i></button>
         <button class="header-circle-btn"><i class="fa-solid fa-magnifying-glass"></i></button>
         <button class="header-circle-btn"><i class="fa-solid fa-bars"></i></button>
         <button id="logoutBtn" class="logout-btn" type="button">Log out</button>
       </div>
     </div>
 
-    <!-- MAIN NAVIGATION ROW -->
+    <!-- MAIN TABS -->
     <div class="nav-wrap">
       <nav class="nav">
-        <button class="active" data-tab="home" onclick="tab('home')">
+        <button class="active" data-tab="home" onclick="switchTab('home')">
           <i class="fa-solid fa-house"></i>
         </button>
-        <button data-tab="friends" onclick="tab('friends')">
+        <button data-tab="friends" onclick="switchTab('friends')">
           <i class="fa-solid fa-user-group"></i>
         </button>
-        <button data-tab="messages" onclick="tab('messages')">
+        <button data-tab="messages" onclick="switchTab('messages')">
           <i class="fa-solid fa-comment-dots"></i>
         </button>
-        <button data-tab="watch" onclick="tab('watch')">
+        <button data-tab="watch" onclick="switchTab('watch')">
           <i class="fa-solid fa-tv"></i>
           <span class="badge">15+</span>
         </button>
-        <button data-tab="notifications" onclick="tab('notifications')">
+        <button data-tab="notifications" onclick="switchTab('notifications')">
           <i class="fa-solid fa-bell"></i>
         </button>
-        <button data-tab="dashboard" onclick="tab('dashboard')">
+        <button data-tab="dashboard" onclick="switchTab('dashboard')">
           <i class="fa-solid fa-table-cells"></i>
         </button>
       </nav>
     </div>
   </header>
 
-  <main class="wrap">
+  <main class="wrap" style="padding-top: 8px;">
 
-    <!-- CREATE POST BOX -->
+    <!-- COMPOSER TRIGGER -->
     <div class="composer-card">
-      <div id="headerAvatar" class="avatar">
-        B
-        <div class="status-indicator"></div>
-      </div>
+      <div id="headerAvatar" class="avatar">B</div>
       <button class="mind-button" onclick="toggleComposer()">What's on your mind?</button>
       <label for="postImageInput" class="photo-upload-btn">
         <i class="fa-solid fa-images"></i>
@@ -690,7 +710,7 @@ header {
       </label>
     </div>
 
-    <!-- EXPANDABLE POST COMPOSER FORM (Functional bindings maintained) -->
+    <!-- POST COMPOSER FORM -->
     <div id="postComposerArea" class="hidden card">
       <textarea id="postText" class="composer-textarea" placeholder="What's on your mind?"></textarea>
       <input type="file" id="postImageInput" accept="image/*" class="hidden">
@@ -701,115 +721,260 @@ header {
       </div>
 
       <div class="composer-actions">
-        <span class="meta">Share with Community</span>
+        <span style="font-size:12px; color:var(--fb-muted);">Sharing to Feed</span>
         <button id="submitPostBtn" class="btn" style="width:auto; padding: 6px 20px;">Post</button>
       </div>
     </div>
 
-    <!-- HORIZONTAL STORIES TRAY -->
+    <!-- STORIES TRAY -->
     <div class="stories-container">
       <div class="stories-wrapper">
-        
-        <!-- Create Story Card -->
         <div class="story-card create-story">
           <div class="top-img">
-            <img src="https://via.placeholder.com/150" alt="User Profile">
+            <img src="https://via.placeholder.com/150" alt="User">
             <div class="plus-btn"><i class="fa-solid fa-plus"></i></div>
           </div>
           <div class="bottom-text">Create story</div>
         </div>
 
-        <!-- Story Item 1 -->
         <div class="story-card">
           <div class="story-badge">2</div>
           <img class="bg-story" src="https://via.placeholder.com/150x250" alt="Story">
           <div class="story-author">Abigail Tor</div>
         </div>
 
-        <!-- Story Item 2 -->
         <div class="story-card">
           <div class="story-badge">1</div>
           <img class="bg-story" src="https://via.placeholder.com/150x250" alt="Story">
           <div class="story-author">Rose Kollie</div>
         </div>
 
-        <!-- Story Item 3 -->
         <div class="story-card">
           <div class="story-badge">1</div>
           <img class="bg-story" src="https://via.placeholder.com/150x250" alt="Story">
           <div class="story-author">Esther</div>
         </div>
-
       </div>
     </div>
 
-    <!-- MAIN FEED POSTS AREA -->
-    <div id="feedContainer">
+    <!-- MAIN FEED CONTAINER -->
+    <div id="feedContainer"></div>
+
+  </main>
+
+  <!-- MOBILE BOTTOM NAVIGATION -->
+  <div class="bottom-nav">
+    <button onclick="switchTab('home')"><i class="fa-solid fa-house"></i></button>
+    <button onclick="switchTab('watch')"><i class="fa-solid fa-tv"></i></button>
+    <button onclick="switchTab('friends')"><i class="fa-solid fa-user-group"></i></button>
+    <button onclick="switchTab('notifications')"><i class="fa-solid fa-bell"></i></button>
+    <button onclick="switchTab('menu')"><i class="fa-solid fa-bars"></i></button>
+  </div>
+
+</div>
+
+<!-- =======================================================
+     FUNCTIONAL JAVASCRIPT LOGIC
+======================================================= -->
+<script>
+  let currentUser = null;
+  let attachedImageBase64 = null;
+
+  // Initial Posts Data
+  const posts = [
+    {
+      id: 1,
+      author: "Festous F. Johnson",
+      avatarText: "F",
+      time: "1h",
+      content: "With Festonic Graphix, you're covered!",
+      image: "https://via.placeholder.com/600x400",
+      likes: 5,
+      isLiked: false
+    }
+  ];
+
+  // DOM Loaded Event Listeners
+  document.addEventListener('DOMContentLoaded', () => {
+    
+    // Auth View Toggles
+    document.getElementById('showSignupBtn').addEventListener('click', () => {
+      document.getElementById('loginBox').classList.add('hidden');
+      document.getElementById('signupBox').classList.remove('hidden');
+      clearMsgs();
+    });
+
+    document.getElementById('showLoginBtn').addEventListener('click', () => {
+      document.getElementById('signupBox').classList.add('hidden');
+      document.getElementById('loginBox').classList.remove('hidden');
+      clearMsgs();
+    });
+
+    // Login Execution
+    document.getElementById('loginBtn').addEventListener('click', () => {
+      const email = document.getElementById('loginEmail').value.trim();
+      const pass = document.getElementById('loginPass').value.trim();
+      const msg = document.getElementById('loginMsg');
+
+      if (!email || !pass) {
+        msg.textContent = "Please fill in all fields.";
+        return;
+      }
+
+      // Successful Login
+      currentUser = email.split('@')[0];
+      loginUser(currentUser);
+    });
+
+    // Signup Execution
+    document.getElementById('signupBtn').addEventListener('click', () => {
+      const name = document.getElementById('name').value.trim();
+      const email = document.getElementById('email').value.trim();
+      const pass = document.getElementById('pass').value.trim();
+      const msg = document.getElementById('signupMsg');
+
+      if (!name || !email || !pass) {
+        msg.textContent = "Please fill in all fields.";
+        return;
+      }
+
+      // Successful Registration
+      currentUser = name;
+      loginUser(currentUser);
+    });
+
+    // Logout Action
+    document.getElementById('logoutBtn').addEventListener('click', () => {
+      document.getElementById('app').classList.add('hidden');
+      document.getElementById('auth').classList.remove('hidden');
+      document.getElementById('loginEmail').value = '';
+      document.getElementById('loginPass').value = '';
+      clearMsgs();
+    });
+
+    // Image Upload Preview Handling
+    const postImageInput = document.getElementById('postImageInput');
+    postImageInput.addEventListener('change', (e) => {
+      const file = e.target.files[0];
+      if (file) {
+        const reader = new FileReader();
+        reader.onload = function(evt) {
+          attachedImageBase64 = evt.target.result;
+          document.getElementById('previewImg').src = attachedImageBase64;
+          document.getElementById('postImagePreview').classList.remove('hidden');
+          document.getElementById('postComposerArea').classList.remove('hidden');
+        };
+        reader.readAsDataURL(file);
+      }
+    });
+
+    document.getElementById('removeImageBtn').addEventListener('click', () => {
+      attachedImageBase64 = null;
+      document.getElementById('postImageInput').value = '';
+      document.getElementById('postImagePreview').classList.add('hidden');
+    });
+
+    // Submit Post Action
+    document.getElementById('submitPostBtn').addEventListener('click', () => {
+      const text = document.getElementById('postText').value.trim();
+      if (!text && !attachedImageBase64) return;
+
+      const newPost = {
+        id: Date.now(),
+        author: currentUser || "Anonymous Believer",
+        avatarText: (currentUser || "A").charAt(0).toUpperCase(),
+        time: "Just now",
+        content: text,
+        image: attachedImageBase64,
+        likes: 0,
+        isLiked: false
+      };
+
+      posts.unshift(newPost);
+      renderFeed();
+
+      // Reset composer
+      document.getElementById('postText').value = '';
+      attachedImageBase64 = null;
+      document.getElementById('postImageInput').value = '';
+      document.getElementById('postImagePreview').classList.add('hidden');
+      document.getElementById('postComposerArea').classList.add('hidden');
+    });
+
+  });
+
+  function loginUser(userName) {
+    const firstInitial = userName.charAt(0).toUpperCase();
+    document.getElementById('headerAvatar').firstChild.textContent = firstInitial;
+    document.getElementById('auth').classList.add('hidden');
+    document.getElementById('app').classList.remove('hidden');
+    renderFeed();
+  }
+
+  function clearMsgs() {
+    document.getElementById('loginMsg').textContent = '';
+    document.getElementById('signupMsg').textContent = '';
+  }
+
+  function toggleComposer() {
+    const area = document.getElementById('postComposerArea');
+    area.classList.toggle('hidden');
+  }
+
+  function switchTab(tabName) {
+    const navButtons = document.querySelectorAll('.nav button');
+    navButtons.forEach(btn => {
+      if (btn.getAttribute('data-tab') === tabName) {
+        btn.classList.add('active');
+      } else {
+        btn.classList.remove('active');
+      }
+    });
+  }
+
+  function toggleLike(postId) {
+    const post = posts.find(p => p.id === postId);
+    if (post) {
+      post.isLiked = !post.isLiked;
+      post.likes += post.isLiked ? 1 : -1;
+      renderFeed();
+    }
+  }
+
+  function renderFeed() {
+    const feedContainer = document.getElementById('feedContainer');
+    feedContainer.innerHTML = '';
+
+    posts.forEach(post => {
+      const card = document.createElement('div');
+      card.className = 'card';
       
-      <!-- DEMO SOCIAL MEDIA POST ITEM -->
-      <div class="card">
+      card.innerHTML = `
         <div class="posthead">
           <div class="posthead-left">
-            <div class="avatar">F</div>
+            <div class="avatar">${post.avatarText}</div>
             <div>
-              <div class="post-author-name">Festous F. Johnson <span style="font-weight:normal;">🥰 feeling in love with</span> Benjamin Fruitful Scott Sr.</div>
+              <div class="post-author-name">${post.author}</div>
               <div class="post-meta-line">
-                <span>1h</span> • <i class="fa-solid fa-earth-americas"></i>
+                <span>${post.time}</span> • <i class="fa-solid fa-earth-americas"></i>
               </div>
             </div>
           </div>
           <button style="color:var(--fb-muted);"><i class="fa-solid fa-ellipsis"></i></button>
         </div>
-
-        <div class="post-content">
-          With Festonic Graphix, you're covered!
-        </div>
-
-        <!-- Media Placeholder -->
-        <img class="post-photo" src="https://via.placeholder.com/600x600" alt="Post content image">
-
-        <!-- Action Row -->
+        ${post.content ? `<div class="post-content">${post.content}</div>` : ''}
+        ${post.image ? `<img class="post-photo" src="${post.image}" alt="Post image">` : ''}
         <div class="actions">
-          <button class="action-btn"><i class="fa-regular fa-thumbs-up"></i> Like</button>
+          <button class="action-btn ${post.isLiked ? 'liked' : ''}" onclick="toggleLike(${post.id})">
+            <i class="${post.isLiked ? 'fa-solid' : 'fa-regular'} fa-thumbs-up"></i> 
+            ${post.likes > 0 ? post.likes : ''} Like
+          </button>
           <button class="action-btn"><i class="fa-regular fa-comment"></i> Comment</button>
           <button class="action-btn"><i class="fa-solid fa-share"></i> Share</button>
         </div>
-      </div>
+      `;
 
-    </div>
-
-  </main>
-
-  <!-- MOBILE FIXED BOTTOM NAVIGATION BAR -->
-  <div class="bottom-nav">
-    <button onclick="tab('home')"><i class="fa-solid fa-house"></i></button>
-    <button onclick="tab('watch')"><i class="fa-solid fa-tv"></i></button>
-    <button onclick="tab('friends')"><i class="fa-solid fa-user-group"></i></button>
-    <button onclick="tab('notifications')"><i class="fa-solid fa-bell"></i></button>
-    <button onclick="tab('menu')"><i class="fa-solid fa-bars"></i></button>
-  </div>
-
-</div>
-
-<script>
-  // Helper script to toggle the inline post creation card
-  function toggleComposer() {
-    const area = document.getElementById('postComposerArea');
-    if (area) {
-      area.classList.toggle('hidden');
-    }
-  }
-
-  // Placeholder function for tabs as referenced in HTML onclick attributes
-  function tab(tabName) {
-    console.log("Navigating to tab:", tabName);
-    const navButtons = document.querySelectorAll('.nav button');
-    navButtons.forEach(btn => {
-      if(btn.getAttribute('data-tab') === tabName) {
-        btn.classList.add('active');
-      } else {
-        btn.classList.remove('active');
-      }
+      feedContainer.appendChild(card);
     });
   }
 </script>
