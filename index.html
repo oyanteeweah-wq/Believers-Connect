@@ -207,6 +207,159 @@ button.danger{
   padding:8px 12px;
 }
 
+/* =========================================================
+   FACEBOOK STYLE POST COMPOSER
+========================================================= */
+
+.composer-card{
+  background:#fff;
+  border-radius:16px;
+  padding:14px;
+  margin-bottom:16px;
+  box-shadow:0 2px 10px #00000012;
+}
+
+.composer-top{
+  display:flex;
+  align-items:center;
+  gap:10px;
+}
+
+.composer-avatar{
+  width:46px;
+  height:46px;
+  min-width:46px;
+  border-radius:50%;
+  background:#dce8ff;
+  color:#0645a8;
+  display:grid;
+  place-items:center;
+  font-weight:800;
+  font-size:18px;
+  overflow:hidden;
+}
+
+.composer-avatar img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+}
+
+.mind-button{
+  flex:1;
+  background:#f0f2f5;
+  color:#65676b;
+  border-radius:25px;
+  padding:13px 18px;
+  text-align:left;
+  font-size:15px;
+  font-weight:400;
+}
+
+.mind-button:hover{
+  background:#e6e8eb;
+}
+
+#postComposerArea{
+  margin-top:12px;
+}
+
+.composer-textarea{
+  width:100%;
+  border:1px solid #d7deea;
+  border-radius:12px;
+  padding:13px;
+  resize:vertical;
+  font-size:15px;
+  font-family:inherit;
+}
+
+.composer-textarea:focus{
+  outline:2px solid #0756d9;
+  border-color:#0756d9;
+}
+
+.composer-actions{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:10px;
+  border-top:1px solid #e5e7eb;
+  margin-top:12px;
+  padding-top:10px;
+}
+
+.photo-upload{
+  display:flex;
+  align-items:center;
+  gap:7px;
+  padding:9px 14px;
+  border-radius:10px;
+  color:#1877f2;
+  font-weight:700;
+  font-size:14px;
+  cursor:pointer;
+}
+
+.photo-upload:hover{
+  background:#f0f2f5;
+}
+
+.composer-buttons{
+  display:flex;
+  gap:8px;
+}
+
+.composer-buttons button{
+  padding:9px 16px;
+}
+
+/* PHOTO PREVIEW */
+
+.post-image-preview{
+  position:relative;
+  margin-top:12px;
+  border-radius:12px;
+  overflow:hidden;
+  background:#f3f6fb;
+}
+
+.post-image-preview img{
+  display:block;
+  width:100%;
+  max-height:400px;
+  object-fit:cover;
+}
+
+.remove-post-image{
+  position:absolute;
+  top:10px;
+  right:10px;
+  width:34px;
+  height:34px;
+  padding:0;
+  border-radius:50%;
+  background:#fff;
+  color:#222;
+  font-size:22px;
+  box-shadow:0 2px 8px #0003;
+}
+
+/* PHOTO INSIDE POSTS */
+
+.post-photo{
+  display:block;
+  width:100%;
+  max-height:600px;
+  object-fit:cover;
+  border-radius:12px;
+  margin-top:12px;
+}
+
+/* =========================================================
+   PROFILE
+========================================================= */
+
 .profile-card{
   background:#fff;
   border-radius:16px;
@@ -428,6 +581,19 @@ label{
   .actions button:last-child{
     grid-column:1 / -1;
   }
+
+  .composer-actions{
+    align-items:flex-start;
+  }
+
+  .composer-buttons{
+    flex:1;
+    justify-content:flex-end;
+  }
+
+  .photo-upload span{
+    display:none;
+  }
 }
 </style>
 </head>
@@ -484,7 +650,6 @@ label{
       </button>
 
     </div>
-
 
     <div id="signupBox" class="hidden">
 
@@ -555,29 +720,12 @@ label{
 
   <div class="nav">
 
-    <button onclick="tab('home')">
-      🏠 Home
-    </button>
-
-    <button onclick="tab('bible')">
-      📖 Bible
-    </button>
-
-    <button onclick="tab('prayer')">
-      🙏 Prayer
-    </button>
-
-    <button onclick="tab('groups')">
-      👥 Groups
-    </button>
-
-    <button onclick="tab('messages')">
-      💬 Messages
-    </button>
-
-    <button onclick="tab('profile')">
-      👤 Profile
-    </button>
+    <button onclick="tab('home')">🏠 Home</button>
+    <button onclick="tab('bible')">📖 Bible</button>
+    <button onclick="tab('prayer')">🙏 Prayer</button>
+    <button onclick="tab('groups')">👥 Groups</button>
+    <button onclick="tab('messages')">💬 Messages</button>
+    <button onclick="tab('profile')">👤 Profile</button>
 
   </div>
 
@@ -586,24 +734,89 @@ label{
 
   <section id="home">
 
-    <div class="card">
+    <div class="composer-card">
 
-      <h3>
-        What is on your heart today?
-      </h3>
+      <div class="composer-top">
 
-      <textarea
-        id="postText"
-        rows="3"
-        placeholder="Share with the Christian community..."
-      ></textarea>
+        <div
+          class="composer-avatar"
+          id="composerAvatar"
+        >
+          B
+        </div>
 
-      <button
-        id="postBtn"
-        onclick="addPost()"
+        <button
+          type="button"
+          class="mind-button"
+          onclick="openPostComposer()"
+        >
+          What's on your mind?
+        </button>
+
+      </div>
+
+
+      <div
+        id="postComposerArea"
+        class="hidden"
       >
-        POST
-      </button>
+
+        <textarea
+          id="postText"
+          class="composer-textarea"
+          rows="4"
+          placeholder="What's on your mind?"
+        ></textarea>
+
+
+        <div
+          id="postImagePreview"
+          class="post-image-preview hidden"
+        ></div>
+
+
+        <div class="composer-actions">
+
+          <label
+            for="postImageFile"
+            class="photo-upload"
+          >
+            📷 <span>Photo</span>
+          </label>
+
+          <input
+            id="postImageFile"
+            type="file"
+            accept="image/*"
+            class="hidden"
+            onchange="previewPostImage(this)"
+          >
+
+
+          <div class="composer-buttons">
+
+            <button
+              type="button"
+              class="secondary"
+              onclick="closePostComposer()"
+            >
+              CANCEL
+            </button>
+
+            <button
+              id="postBtn"
+              type="button"
+              onclick="addPost()"
+            >
+              POST
+            </button>
+
+          </div>
+
+        </div>
+
+      </div>
+
 
       <p id="postMsg"></p>
 
@@ -629,9 +842,7 @@ label{
 
       <h2>📖 Bible</h2>
 
-      <h3>
-        Philippians 4:13
-      </h3>
+      <h3>Philippians 4:13</h3>
 
       <p>
         “I can do all things through Christ which strengtheneth me.”
@@ -700,10 +911,7 @@ label{
         CREATE GROUP
       </button>
 
-      <div
-        id="groupsList"
-        style="margin-top:16px"
-      ></div>
+      <div id="groupsList" style="margin-top:16px"></div>
 
     </div>
 
@@ -758,9 +966,7 @@ label{
         class="profile-cover"
         id="profileCover"
       >
-        <div class="cover-placeholder">
-          ✝
-        </div>
+        <div class="cover-placeholder">✝</div>
       </div>
 
 
@@ -824,8 +1030,6 @@ label{
 
     </div>
 
-
-    <!-- PROFILE EDITOR -->
 
     <div
       id="profileEditor"
@@ -1019,13 +1223,15 @@ let currentProfile = null;
 
 function setMsg(id,text,type="error"){
 
-  const el=document.getElementById(id);
+  const el =
+    document.getElementById(id);
 
   if(!el)return;
 
-  el.className=type;
+  el.className = type;
 
-  el.textContent=text;
+  el.textContent = text;
+
 }
 
 
@@ -1051,13 +1257,14 @@ function formatDate(value){
 
   if(!value)return "Just now";
 
-  return new Date(value).toLocaleString();
+  return new Date(value)
+    .toLocaleString();
 
 }
 
 
 /* =========================================================
-   AUTH SCREEN
+   AUTH
 ========================================================= */
 
 function showSignup(){
@@ -1092,16 +1299,16 @@ function showLogin(){
 
 async function signup(){
 
-  const name=
+  const name =
     document.getElementById("name")
       .value.trim();
 
-  const email=
+  const email =
     document.getElementById("email")
       .value.trim()
       .toLowerCase();
 
-  const password=
+  const password =
     document.getElementById("pass")
       .value;
 
@@ -1115,6 +1322,7 @@ async function signup(){
     );
 
     return;
+
   }
 
 
@@ -1127,6 +1335,7 @@ async function signup(){
     );
 
     return;
+
   }
 
 
@@ -1171,7 +1380,9 @@ async function signup(){
         email
       );
 
-      await loadApp(data.user);
+      await loadApp(
+        data.user
+      );
 
     }else{
 
@@ -1181,7 +1392,10 @@ async function signup(){
         "success"
       );
 
-      setTimeout(showLogin,1500);
+      setTimeout(
+        showLogin,
+        1500
+      );
 
     }
 
@@ -1192,7 +1406,8 @@ async function signup(){
 
     setMsg(
       "signupMsg",
-      "SIGN-UP ERROR: "+error.message,
+      "SIGN-UP ERROR: " +
+      error.message,
       "error"
     );
 
@@ -1207,12 +1422,12 @@ async function signup(){
 
 async function login(){
 
-  const email=
+  const email =
     document.getElementById("loginEmail")
       .value.trim()
       .toLowerCase();
 
-  const password=
+  const password =
     document.getElementById("loginPass")
       .value;
 
@@ -1226,15 +1441,19 @@ async function login(){
     );
 
     return;
+
   }
 
 
-  const button=
-    document.getElementById("loginBtn");
+  const button =
+    document.getElementById(
+      "loginBtn"
+    );
 
-  button.disabled=true;
+  button.disabled = true;
 
-  button.textContent="LOGGING IN...";
+  button.textContent =
+    "LOGGING IN...";
 
 
   try{
@@ -1243,19 +1462,22 @@ async function login(){
       data,
       error
     } =
-    await supabaseClient.auth.signInWithPassword({
+    await supabaseClient.auth
+      .signInWithPassword({
 
-      email:email,
+        email:email,
 
-      password:password
+        password:password
 
-    });
+      });
 
 
     if(error)throw error;
 
 
-    await loadApp(data.user);
+    await loadApp(
+      data.user
+    );
 
 
   }catch(error){
@@ -1264,15 +1486,18 @@ async function login(){
 
     setMsg(
       "loginMsg",
-      "LOGIN ERROR: "+error.message,
+      "LOGIN ERROR: " +
+      error.message,
       "error"
     );
 
+
   }finally{
 
-    button.disabled=false;
+    button.disabled = false;
 
-    button.textContent="LOG IN";
+    button.textContent =
+      "LOG IN";
 
   }
 
@@ -1289,7 +1514,7 @@ async function ensureProfile(
   fallbackEmail
 ){
 
-  const name=
+  const name =
     user.user_metadata?.full_name ||
     fallbackName ||
     "Believer";
@@ -1307,9 +1532,10 @@ async function ensureProfile(
 
       full_name:name,
 
-      email:user.email ||
-            fallbackEmail ||
-            null
+      email:
+        user.email ||
+        fallbackEmail ||
+        null
 
     },{
       onConflict:"id"
@@ -1321,7 +1547,7 @@ async function ensureProfile(
   if(error)throw error;
 
 
-  currentProfile=data;
+  currentProfile = data;
 
   return data;
 
@@ -1337,7 +1563,7 @@ async function loadApp(user){
   if(!user)return;
 
 
-  currentUser=user;
+  currentUser = user;
 
 
   try{
@@ -1348,6 +1574,7 @@ async function loadApp(user){
       user.email
     );
 
+
   }catch(error){
 
     console.error(
@@ -1357,11 +1584,13 @@ async function loadApp(user){
 
     setMsg(
       "loginMsg",
-      "Login worked, but profile could not be loaded: "+error.message,
+      "Login worked, but profile could not be loaded: " +
+      error.message,
       "error"
     );
 
     return;
+
   }
 
 
@@ -1375,13 +1604,6 @@ async function loadApp(user){
     .classList.remove("hidden");
 
 
-  /* IMPORTANT:
-     There is no profileInfo element anymore.
-     The old code was trying to access a
-     missing element here and could stop execution.
-  */
-
-
   await render();
 
 }
@@ -1393,13 +1615,318 @@ async function loadApp(user){
 
 async function logout(){
 
-  await supabaseClient.auth.signOut();
+  await supabaseClient
+    .auth
+    .signOut();
 
-  currentUser=null;
+  currentUser = null;
 
-  currentProfile=null;
+  currentProfile = null;
 
   location.reload();
+
+}
+
+
+/* =========================================================
+   FACEBOOK STYLE COMPOSER
+========================================================= */
+
+function openPostComposer(){
+
+  const area =
+    document.getElementById(
+      "postComposerArea"
+    );
+
+
+  if(area){
+
+    area.classList.remove(
+      "hidden"
+    );
+
+
+    setTimeout(function(){
+
+      document
+        .getElementById("postText")
+        ?.focus();
+
+    },50);
+
+  }
+
+}
+
+
+function closePostComposer(){
+
+  const area =
+    document.getElementById(
+      "postComposerArea"
+    );
+
+  const text =
+    document.getElementById(
+      "postText"
+    );
+
+
+  if(text){
+
+    text.value = "";
+
+  }
+
+
+  removePostImage();
+
+
+  if(area){
+
+    area.classList.add(
+      "hidden"
+    );
+
+  }
+
+}
+
+
+/* =========================================================
+   COMPOSER PROFILE PHOTO
+========================================================= */
+
+function renderComposer(){
+
+  if(!currentProfile)return;
+
+
+  const avatar =
+    document.getElementById(
+      "composerAvatar"
+    );
+
+
+  if(!avatar)return;
+
+
+  const name =
+    currentProfile.full_name ||
+    "Believer";
+
+
+  if(currentProfile.avatar_url){
+
+    avatar.innerHTML = `
+
+      <img
+        src="${escapeHtml(
+          currentProfile.avatar_url
+        )}"
+        alt="Your profile photo"
+      >
+
+    `;
+
+  }else{
+
+    avatar.textContent =
+      name
+        .charAt(0)
+        .toUpperCase();
+
+  }
+
+}
+
+
+/* =========================================================
+   POST IMAGE PREVIEW
+========================================================= */
+
+function previewPostImage(input){
+
+  const file =
+    input.files?.[0];
+
+  const preview =
+    document.getElementById(
+      "postImagePreview"
+    );
+
+
+  if(!file){
+
+    preview.innerHTML = "";
+
+    preview.classList.add(
+      "hidden"
+    );
+
+    return;
+
+  }
+
+
+  if(!file.type.startsWith("image/")){
+
+    alert(
+      "Please select an image file."
+    );
+
+    input.value = "";
+
+    return;
+
+  }
+
+
+  if(file.size > 10 * 1024 * 1024){
+
+    alert(
+      "The image must be smaller than 10 MB."
+    );
+
+    input.value = "";
+
+    return;
+
+  }
+
+
+  const url =
+    URL.createObjectURL(file);
+
+
+  preview.innerHTML = `
+
+    <img
+      src="${url}"
+      alt="Post photo preview"
+    >
+
+    <button
+      type="button"
+      class="remove-post-image"
+      onclick="removePostImage()"
+    >
+      ×
+    </button>
+
+  `;
+
+
+  preview.classList.remove(
+    "hidden"
+  );
+
+}
+
+
+function removePostImage(){
+
+  const input =
+    document.getElementById(
+      "postImageFile"
+    );
+
+  const preview =
+    document.getElementById(
+      "postImagePreview"
+    );
+
+
+  if(input){
+
+    input.value = "";
+
+  }
+
+
+  if(preview){
+
+    preview.innerHTML = "";
+
+    preview.classList.add(
+      "hidden"
+    );
+
+  }
+
+}
+
+
+/* =========================================================
+   UPLOAD POST IMAGE
+========================================================= */
+
+async function uploadPostImage(file){
+
+  if(!file || !currentUser){
+
+    return null;
+
+  }
+
+
+  const extension =
+    (
+      file.name
+        .split(".")
+        .pop() ||
+      "jpg"
+    )
+    .toLowerCase()
+    .replace(
+      /[^a-z0-9]/g,
+      ""
+    );
+
+
+  const path =
+    currentUser.id +
+    "/post-" +
+    crypto.randomUUID() +
+    "." +
+    extension;
+
+
+  const {
+    error
+  } =
+  await supabaseClient
+    .storage
+    .from("post-media")
+    .upload(
+      path,
+      file,
+      {
+        contentType:file.type,
+        cacheControl:"31536000",
+        upsert:false
+      }
+    );
+
+
+  if(error){
+
+    throw error;
+
+  }
+
+
+  const {
+    data
+  } =
+  supabaseClient
+    .storage
+    .from("post-media")
+    .getPublicUrl(path);
+
+
+  return data.publicUrl;
 
 }
 
@@ -1412,40 +1939,73 @@ async function addPost(){
 
   if(!currentUser){
 
-    alert("Please log in first.");
+    alert(
+      "Please log in first."
+    );
 
     return;
+
   }
 
 
-  const textarea=
-    document.getElementById("postText");
+  const textarea =
+    document.getElementById(
+      "postText"
+    );
 
-  const text=
+  const text =
     textarea.value.trim();
 
 
-  if(!text){
+  const imageInput =
+    document.getElementById(
+      "postImageFile"
+    );
+
+  const imageFile =
+    imageInput.files?.[0] ||
+    null;
+
+
+  if(!text && !imageFile){
 
     setMsg(
       "postMsg",
-      "Please write something before posting.",
+      "Write something or select a photo before posting.",
       "error"
     );
 
     return;
+
   }
 
 
-  const button=
-    document.getElementById("postBtn");
+  const button =
+    document.getElementById(
+      "postBtn"
+    );
 
-  button.disabled=true;
 
-  button.textContent="POSTING...";
+  button.disabled = true;
+
+  button.textContent =
+    "POSTING...";
 
 
   try{
+
+    let image_url = null;
+
+
+    if(imageFile){
+
+      image_url =
+        await uploadPostImage(
+          imageFile
+        );
+
+    }
+
 
     const {
       data,
@@ -1455,19 +2015,30 @@ async function addPost(){
       .from("posts")
       .insert({
 
-        user_id:currentUser.id,
+        user_id:
+          currentUser.id,
 
-        content:text
+        content:
+          text,
+
+        image_url:
+          image_url
 
       })
       .select()
       .single();
 
 
-    if(error)throw error;
+    if(error){
+
+      throw error;
+
+    }
 
 
-    textarea.value="";
+    textarea.value = "";
+
+    removePostImage();
 
 
     setMsg(
@@ -1477,13 +2048,22 @@ async function addPost(){
     );
 
 
-    /*
-      IMPORTANT:
-      We reload the posts directly from Supabase.
-      The post is not kept only in browser memory.
-    */
-
     await renderPosts();
+
+
+    const area =
+      document.getElementById(
+        "postComposerArea"
+      );
+
+
+    if(area){
+
+      area.classList.add(
+        "hidden"
+      );
+
+    }
 
 
   }catch(error){
@@ -1493,17 +2073,21 @@ async function addPost(){
       error
     );
 
+
     setMsg(
       "postMsg",
-      "Could not post: "+error.message,
+      "Could not post: " +
+      error.message,
       "error"
     );
 
+
   }finally{
 
-    button.disabled=false;
+    button.disabled = false;
 
-    button.textContent="POST";
+    button.textContent =
+      "POST";
 
   }
 
@@ -1516,22 +2100,17 @@ async function addPost(){
 
 async function renderPosts(){
 
-  const feed=
-    document.getElementById("feed");
+  const feed =
+    document.getElementById(
+      "feed"
+    );
 
 
-  feed.innerHTML=
+  feed.innerHTML =
     '<div class="loading">Loading posts...</div>';
 
 
   try{
-
-    /*
-      THIS IS THE IMPORTANT PART.
-
-      Every time the page opens or refreshes,
-      posts are retrieved from Supabase.
-    */
 
     const {
       data:posts,
@@ -1540,39 +2119,45 @@ async function renderPosts(){
     await supabaseClient
       .from("posts")
       .select(
-        "id,content,created_at,user_id"
+        "id,content,image_url,created_at,user_id"
       )
       .order(
         "created_at",
-        {ascending:false}
+        {
+          ascending:false
+        }
       );
 
 
     if(error)throw error;
 
 
-    if(!posts || posts.length===0){
+    if(!posts ||
+       posts.length===0){
 
-      feed.innerHTML=
-        '<div class="card empty">'+
-        'No posts yet. Be the first to share something.'+
+      feed.innerHTML =
+        '<div class="card empty">' +
+        'No posts yet. Be the first to share something.' +
         '</div>';
 
       return;
+
     }
 
 
-    const userIds=
+    const userIds =
       [
         ...new Set(
           posts
-            .map(p=>p.user_id)
+            .map(
+              p=>p.user_id
+            )
             .filter(Boolean)
         )
       ];
 
 
-    let profilesById={};
+    let profilesById = {};
 
 
     if(userIds.length){
@@ -1586,7 +2171,10 @@ async function renderPosts(){
         .select(
           "id,full_name,avatar_url"
         )
-        .in("id",userIds);
+        .in(
+          "id",
+          userIds
+        );
 
 
       if(profileError){
@@ -1598,14 +2186,15 @@ async function renderPosts(){
 
       }else{
 
-        profilesById=
+        profilesById =
           Object.fromEntries(
-            (profiles||[]).map(
-              profile=>[
-                profile.id,
-                profile
-              ]
-            )
+            (profiles || [])
+              .map(
+                profile=>[
+                  profile.id,
+                  profile
+                ]
+              )
           );
 
       }
@@ -1613,15 +2202,15 @@ async function renderPosts(){
     }
 
 
-    const postIds=
+    const postIds =
       posts.map(
         post=>post.id
       );
 
 
-    let likesByPost={};
+    let likesByPost = {};
 
-    let myLikedPosts=
+    let myLikedPosts =
       new Set();
 
 
@@ -1636,168 +2225,214 @@ async function renderPosts(){
         .select(
           "post_id,user_id"
         )
-        .in("post_id",postIds);
+        .in(
+          "post_id",
+          postIds
+        );
 
 
       if(!likeError){
 
-        (likes||[]).forEach(like=>{
+        (likes || [])
+          .forEach(
+            like=>{
 
-          likesByPost[like.post_id]=
-            (likesByPost[like.post_id]||0)+1;
+              likesByPost[
+                like.post_id
+              ] =
+                (
+                  likesByPost[
+                    like.post_id
+                  ] || 0
+                ) + 1;
 
 
-          if(
-            currentUser &&
-            like.user_id===currentUser.id
-          ){
+              if(
+                currentUser &&
+                like.user_id ===
+                currentUser.id
+              ){
 
-            myLikedPosts.add(
-              like.post_id
-            );
+                myLikedPosts.add(
+                  like.post_id
+                );
 
-          }
+              }
 
-        });
+            }
+          );
 
       }
 
     }
 
 
-    feed.innerHTML=
-      posts.map(post=>{
+    feed.innerHTML =
+      posts.map(
+        post=>{
 
-        const profile=
-          profilesById[post.user_id] ||
-          {};
-
-
-        const name=
-          profile.full_name ||
-          "Believer";
+          const profile =
+            profilesById[
+              post.user_id
+            ] || {};
 
 
-        const avatar=
-          profile.avatar_url;
+          const name =
+            profile.full_name ||
+            "Believer";
 
 
-        const liked=
-          myLikedPosts.has(
-            post.id
-          );
+          const avatar =
+            profile.avatar_url;
 
 
-        const count=
-          likesByPost[post.id]||0;
+          const liked =
+            myLikedPosts.has(
+              post.id
+            );
 
 
-        const isMine=
-          currentUser &&
-          post.user_id===
-          currentUser.id;
+          const count =
+            likesByPost[
+              post.id
+            ] || 0;
 
 
-        return `
-
-        <div
-          class="card"
-          id="post-${escapeHtml(post.id)}"
-        >
-
-          <div class="posthead">
-
-            <div class="avatar">
-
-              ${
-                avatar
-                ?
-                `<img
-                  src="${escapeHtml(avatar)}"
-                  alt="Profile"
-                >`
-                :
-                escapeHtml(
-                  name
-                    .charAt(0)
-                    .toUpperCase()
-                )
-              }
-
-            </div>
+          const isMine =
+            currentUser &&
+            post.user_id ===
+            currentUser.id;
 
 
-            <div>
+          return `
 
-              <b>
-                ${escapeHtml(name)}
-              </b>
+          <div
+            class="card"
+            id="post-${escapeHtml(post.id)}"
+          >
 
-              <div class="meta">
-                ${formatDate(post.created_at)}
-                • Public
+            <div class="posthead">
+
+              <div class="avatar">
+
+                ${
+                  avatar
+                  ?
+                  `
+                  <img
+                    src="${escapeHtml(avatar)}"
+                    alt="Profile"
+                  >
+                  `
+                  :
+                  escapeHtml(
+                    name
+                      .charAt(0)
+                      .toUpperCase()
+                  )
+                }
+
+              </div>
+
+
+              <div>
+
+                <b>
+                  ${escapeHtml(name)}
+                </b>
+
+                <div class="meta">
+                  ${formatDate(post.created_at)}
+                  • Public
+                </div>
+
               </div>
 
             </div>
 
+
+            ${
+              post.content
+              ?
+              `
+              <p class="post-content">
+                ${escapeHtml(post.content)}
+              </p>
+              `
+              :
+              ""
+            }
+
+
+            ${
+              post.image_url
+              ?
+              `
+              <img
+                class="post-photo"
+                src="${escapeHtml(post.image_url)}"
+                alt="Post photo"
+                loading="lazy"
+              >
+              `
+              :
+              ""
+            }
+
+
+            <div class="actions">
+
+              <button
+                id="like-${escapeHtml(post.id)}"
+                class="${liked ? "like-active" : ""}"
+                onclick="likePost('${escapeHtml(post.id)}')"
+              >
+                ${liked ? "❤️ Liked" : "🤍 Like"}
+
+                <span class="like-count">
+                  ${count}
+                </span>
+
+              </button>
+
+
+              <button
+                onclick="commentPost('${escapeHtml(post.id)}')"
+              >
+                💬 Comment
+              </button>
+
+
+              <button
+                onclick="sharePost('${escapeHtml(post.id)}')"
+              >
+                ↗ Share
+              </button>
+
+            </div>
+
+
+            ${
+              isMine
+              ?
+              `
+              <button
+                class="danger delete-post"
+                onclick="deletePost('${escapeHtml(post.id)}')"
+              >
+                🗑️ Delete Post
+              </button>
+              `
+              :
+              ""
+            }
+
           </div>
 
+          `;
 
-          <p class="post-content">
-            ${escapeHtml(post.content)}
-          </p>
-
-
-          <div class="actions">
-
-            <button
-              id="like-${escapeHtml(post.id)}"
-              class="${liked?'like-active':''}"
-              onclick="likePost('${escapeHtml(post.id)}')"
-            >
-              ${liked?'❤️ Liked':'🤍 Like'}
-              <span class="like-count">
-                ${count}
-              </span>
-            </button>
-
-
-            <button
-              onclick="commentPost('${escapeHtml(post.id)}')"
-            >
-              💬 Comment
-            </button>
-
-
-            <button
-              onclick="sharePost('${escapeHtml(post.id)}')"
-            >
-              ↗ Share
-            </button>
-
-          </div>
-
-
-          ${
-            isMine
-            ?
-            `
-            <button
-              class="danger delete-post"
-              onclick="deletePost('${escapeHtml(post.id)}')"
-            >
-              🗑️ Delete Post
-            </button>
-            `
-            :
-            ""
-          }
-
-        </div>
-
-        `;
-
-      }).join("");
+        }
+      ).join("");
 
 
   }catch(error){
@@ -1808,8 +2443,8 @@ async function renderPosts(){
     );
 
 
-    feed.innerHTML=
-      `
+    feed.innerHTML = `
+
       <div class="card">
 
         <div class="error">
@@ -1827,7 +2462,8 @@ async function renderPosts(){
         </button>
 
       </div>
-      `;
+
+    `;
 
   }
 
@@ -1835,20 +2471,23 @@ async function renderPosts(){
 
 
 /* =========================================================
-   DELETE OWN POST
+   DELETE POST
 ========================================================= */
 
 async function deletePost(postId){
 
   if(!currentUser){
 
-    alert("Please log in first.");
+    alert(
+      "Please log in first."
+    );
 
     return;
+
   }
 
 
-  const confirmDelete=
+  const confirmDelete =
     confirm(
       "Are you sure you want to delete this post?"
     );
@@ -1886,7 +2525,7 @@ async function deletePost(postId){
     console.error(error);
 
     alert(
-      "Could not delete post: "+
+      "Could not delete post: " +
       error.message
     );
 
@@ -1903,9 +2542,12 @@ async function likePost(postId){
 
   if(!currentUser){
 
-    alert("Please log in first.");
+    alert(
+      "Please log in first."
+    );
 
     return;
+
   }
 
 
@@ -1918,8 +2560,14 @@ async function likePost(postId){
     await supabaseClient
       .from("post_likes")
       .select("post_id")
-      .eq("post_id",postId)
-      .eq("user_id",currentUser.id)
+      .eq(
+        "post_id",
+        postId
+      )
+      .eq(
+        "user_id",
+        currentUser.id
+      )
       .maybeSingle();
 
 
@@ -1956,9 +2604,11 @@ async function likePost(postId){
         .from("post_likes")
         .insert({
 
-          post_id:postId,
+          post_id:
+            postId,
 
-          user_id:currentUser.id
+          user_id:
+            currentUser.id
 
         });
 
@@ -1976,7 +2626,7 @@ async function likePost(postId){
     console.error(error);
 
     alert(
-      "Could not update like: "+
+      "Could not update like: " +
       error.message
     );
 
@@ -1993,20 +2643,29 @@ async function commentPost(postId){
 
   if(!currentUser){
 
-    alert("Please log in first.");
+    alert(
+      "Please log in first."
+    );
 
     return;
+
   }
 
 
-  const comment=
+  const comment =
     prompt(
       "Write your comment:"
     );
 
 
-  if(!comment || !comment.trim())
+  if(
+    !comment ||
+    !comment.trim()
+  ){
+
     return;
+
+  }
 
 
   try{
@@ -2018,11 +2677,14 @@ async function commentPost(postId){
       .from("post_comments")
       .insert({
 
-        post_id:postId,
+        post_id:
+          postId,
 
-        user_id:currentUser.id,
+        user_id:
+          currentUser.id,
 
-        content:comment.trim()
+        content:
+          comment.trim()
 
       });
 
@@ -2038,7 +2700,7 @@ async function commentPost(postId){
   }catch(error){
 
     alert(
-      "Could not add comment: "+
+      "Could not add comment: " +
       error.message
     );
 
@@ -2053,19 +2715,22 @@ async function commentPost(postId){
 
 async function sharePost(postId){
 
-  const url=
-    window.location.origin+
-    window.location.pathname+
-    "#post-"+postId;
+  const url =
+    window.location.origin +
+    window.location.pathname +
+    "#post-" +
+    postId;
 
 
   try{
 
-    await navigator.clipboard.writeText(url);
+    await navigator.clipboard
+      .writeText(url);
 
     alert(
       "↗ Post link copied."
     );
+
 
   }catch(error){
 
@@ -2088,7 +2753,7 @@ async function addPrayer(){
   if(!currentUser)return;
 
 
-  const text=
+  const text =
     document.getElementById(
       "prayerText"
     ).value.trim();
@@ -2104,9 +2769,11 @@ async function addPrayer(){
     .from("prayer_requests")
     .insert({
 
-      user_id:currentUser.id,
+      user_id:
+        currentUser.id,
 
-      content:text
+      content:
+        text
 
     });
 
@@ -2114,7 +2781,7 @@ async function addPrayer(){
   if(error){
 
     alert(
-      "Could not post prayer: "+
+      "Could not post prayer: " +
       error.message
     );
 
@@ -2125,7 +2792,7 @@ async function addPrayer(){
 
   document.getElementById(
     "prayerText"
-  ).value="";
+  ).value = "";
 
 
   await renderPrayers();
@@ -2135,7 +2802,7 @@ async function addPrayer(){
 
 async function renderPrayers(){
 
-  const box=
+  const box =
     document.getElementById(
       "prayers"
     );
@@ -2152,13 +2819,15 @@ async function renderPrayers(){
     )
     .order(
       "created_at",
-      {ascending:false}
+      {
+        ascending:false
+      }
     );
 
 
   if(error){
 
-    box.innerHTML=
+    box.innerHTML =
       `<div class="card error">
         Could not load prayer requests:
         ${escapeHtml(error.message)}
@@ -2169,35 +2838,37 @@ async function renderPrayers(){
   }
 
 
-  box.innerHTML=
-    (data||[]).map(
-      prayer=>`
+  box.innerHTML =
+    (data || [])
+      .map(
+        prayer=>`
 
-      <div class="card">
+        <div class="card">
 
-        <p class="post-content">
-          ${escapeHtml(prayer.content)}
-        </p>
+          <p class="post-content">
+            ${escapeHtml(prayer.content)}
+          </p>
 
-        <div class="meta">
-          ${prayer.prayer_count||0}
-          people are praying
+          <div class="meta">
+            ${prayer.prayer_count || 0}
+            people are praying
+          </div>
+
+          <br>
+
+          <button
+            onclick="pray('${escapeHtml(prayer.id)}',${prayer.prayer_count || 0})"
+          >
+            🙏 I am praying
+          </button>
+
         </div>
 
-        <br>
-
-        <button
-          onclick="pray('${escapeHtml(prayer.id)}',${prayer.prayer_count||0})"
-        >
-          🙏 I am praying
-        </button>
-
-      </div>
-
-      `
-    ).join("")
-    ||
-    '<div class="card empty">No prayer requests yet.</div>';
+        `
+      )
+      .join("")
+      ||
+      '<div class="card empty">No prayer requests yet.</div>';
 
 }
 
@@ -2212,7 +2883,7 @@ async function pray(id,count){
     .update({
 
       prayer_count:
-        (count||0)+1
+        (count || 0) + 1
 
     })
     .eq(
@@ -2224,7 +2895,7 @@ async function pray(id,count){
   if(error){
 
     alert(
-      "Could not record prayer: "+
+      "Could not record prayer: " +
       error.message
     );
 
@@ -2247,13 +2918,13 @@ async function createGroup(){
   if(!currentUser)return;
 
 
-  const name=
+  const name =
     document.getElementById(
       "groupName"
     ).value.trim();
 
 
-  const description=
+  const description =
     document.getElementById(
       "groupDescription"
     ).value.trim();
@@ -2281,7 +2952,8 @@ async function createGroup(){
 
       description:description,
 
-      created_by:currentUser.id
+      created_by:
+        currentUser.id
 
     });
 
@@ -2289,7 +2961,7 @@ async function createGroup(){
   if(error){
 
     alert(
-      "Could not create group: "+
+      "Could not create group: " +
       error.message
     );
 
@@ -2300,12 +2972,12 @@ async function createGroup(){
 
   document.getElementById(
     "groupName"
-  ).value="";
+  ).value = "";
 
 
   document.getElementById(
     "groupDescription"
-  ).value="";
+  ).value = "";
 
 
   await renderGroups();
@@ -2315,7 +2987,7 @@ async function createGroup(){
 
 async function renderGroups(){
 
-  const box=
+  const box =
     document.getElementById(
       "groupsList"
     );
@@ -2332,13 +3004,15 @@ async function renderGroups(){
     )
     .order(
       "created_at",
-      {ascending:false}
+      {
+        ascending:false
+      }
     );
 
 
   if(error){
 
-    box.innerHTML=
+    box.innerHTML =
       `<div class="error">
         Could not load groups:
         ${escapeHtml(error.message)}
@@ -2349,33 +3023,35 @@ async function renderGroups(){
   }
 
 
-  box.innerHTML=
-    (data||[]).map(
-      group=>`
+  box.innerHTML =
+    (data || [])
+      .map(
+        group=>`
 
-      <div class="card">
+        <div class="card">
 
-        <h3>
-          👥 ${escapeHtml(group.name)}
-        </h3>
+          <h3>
+            👥 ${escapeHtml(group.name)}
+          </h3>
 
-        <p>
-          ${escapeHtml(
-            group.description ||
-            "Christian community group"
-          )}
-        </p>
+          <p>
+            ${escapeHtml(
+              group.description ||
+              "Christian community group"
+            )}
+          </p>
 
-        <div class="meta">
-          ${formatDate(group.created_at)}
+          <div class="meta">
+            ${formatDate(group.created_at)}
+          </div>
+
         </div>
 
-      </div>
-
-      `
-    ).join("")
-    ||
-    '<div class="card empty">No groups yet.</div>';
+        `
+      )
+      .join("")
+      ||
+      '<div class="card empty">No groups yet.</div>';
 
 }
 
@@ -2389,19 +3065,19 @@ async function sendMessage(){
   if(!currentUser)return;
 
 
-  const email=
+  const email =
     document.getElementById(
       "messageUserEmail"
     ).value.trim().toLowerCase();
 
 
-  const content=
+  const content =
     document.getElementById(
       "messageText"
     ).value.trim();
 
 
-  if(!email||!content){
+  if(!email || !content){
 
     alert(
       "Enter recipient email and message."
@@ -2429,7 +3105,7 @@ async function sendMessage(){
   if(recipientError){
 
     alert(
-      "Could not find recipient: "+
+      "Could not find recipient: " +
       recipientError.message
     );
 
@@ -2456,11 +3132,14 @@ async function sendMessage(){
     .from("messages")
     .insert({
 
-      sender_id:currentUser.id,
+      sender_id:
+        currentUser.id,
 
-      recipient_id:recipient.id,
+      recipient_id:
+        recipient.id,
 
-      content:content
+      content:
+        content
 
     });
 
@@ -2468,7 +3147,7 @@ async function sendMessage(){
   if(error){
 
     alert(
-      "Could not send message: "+
+      "Could not send message: " +
       error.message
     );
 
@@ -2479,7 +3158,7 @@ async function sendMessage(){
 
   document.getElementById(
     "messageText"
-  ).value="";
+  ).value = "";
 
 
   alert(
@@ -2494,7 +3173,7 @@ async function sendMessage(){
 
 async function renderMessages(){
 
-  const box=
+  const box =
     document.getElementById(
       "messagesList"
     );
@@ -2517,13 +3196,15 @@ async function renderMessages(){
     )
     .order(
       "created_at",
-      {ascending:false}
+      {
+        ascending:false
+      }
     );
 
 
   if(error){
 
-    box.innerHTML=
+    box.innerHTML =
       `<div class="error">
         Could not load messages:
         ${escapeHtml(error.message)}
@@ -2534,38 +3215,45 @@ async function renderMessages(){
   }
 
 
-  box.innerHTML=
-    (data||[]).map(
-      message=>`
+  box.innerHTML =
+    (data || [])
+      .map(
+        message=>`
 
-      <div class="card">
+        <div class="card">
 
-        <div class="meta">
+          <div class="meta">
 
-          ${
-            message.sender_id===
-            currentUser.id
-            ?
-            "You"
-            :
-            "Received"
-          }
+            ${
+              message.sender_id ===
+              currentUser.id
+              ?
+              "You"
+              :
+              "Received"
+            }
 
-          •
-          ${formatDate(message.created_at)}
+            •
+
+            ${formatDate(
+              message.created_at
+            )}
+
+          </div>
+
+          <p>
+            ${escapeHtml(
+              message.content
+            )}
+          </p>
 
         </div>
 
-        <p>
-          ${escapeHtml(message.content)}
-        </p>
-
-      </div>
-
-      `
-    ).join("")
-    ||
-    '<div class="card empty">No messages yet.</div>';
+        `
+      )
+      .join("")
+      ||
+      '<div class="card empty">No messages yet.</div>';
 
 }
 
@@ -2576,14 +3264,16 @@ async function renderMessages(){
 
 function toggleProfileEditor(){
 
-  const editor=
+  const editor =
     document.getElementById(
       "profileEditor"
     );
 
+
   editor.classList.toggle(
     "hidden"
   );
+
 
   if(
     !editor.classList.contains(
@@ -2605,44 +3295,51 @@ function fillProfileEditor(){
 
   document.getElementById(
     "profileNameEdit"
-  ).value=
-    currentProfile.full_name||"";
+  ).value =
+    currentProfile.full_name ||
+    "";
 
 
   document.getElementById(
     "profileUsernameEdit"
-  ).value=
-    currentProfile.username||"";
+  ).value =
+    currentProfile.username ||
+    "";
 
 
   document.getElementById(
     "profileBioEdit"
-  ).value=
-    currentProfile.bio||"";
+  ).value =
+    currentProfile.bio ||
+    "";
 
 
   document.getElementById(
     "profileLocationEdit"
-  ).value=
-    currentProfile.location||"";
+  ).value =
+    currentProfile.location ||
+    "";
 
 
   document.getElementById(
     "profileWebsiteEdit"
-  ).value=
-    currentProfile.website||"";
+  ).value =
+    currentProfile.website ||
+    "";
 
 
   document.getElementById(
     "profileAvatarEdit"
-  ).value=
-    currentProfile.avatar_url||"";
+  ).value =
+    currentProfile.avatar_url ||
+    "";
 
 
   document.getElementById(
     "profileCoverEdit"
-  ).value=
-    currentProfile.cover_url||"";
+  ).value =
+    currentProfile.cover_url ||
+    "";
 
 }
 
@@ -2656,15 +3353,15 @@ function renderProfile(){
   if(!currentProfile)return;
 
 
-  const name=
+  const name =
     currentProfile.full_name ||
     "Believer";
 
 
-  const username=
+  const username =
     currentProfile.username
     ?
-    "@"+
+    "@" +
     currentProfile.username
       .replace(/^@/,"")
     :
@@ -2673,47 +3370,51 @@ function renderProfile(){
 
   document.getElementById(
     "profileDisplayName"
-  ).textContent=name;
+  ).textContent =
+    name;
 
 
   document.getElementById(
     "profileDisplayUsername"
-  ).textContent=username;
+  ).textContent =
+    username;
 
 
   document.getElementById(
     "profileDisplayBio"
-  ).textContent=
+  ).textContent =
     currentProfile.bio ||
     "Add a short bio about yourself.";
 
 
   document.getElementById(
     "profileDisplayLocation"
-  ).textContent=
+  ).textContent =
     currentProfile.location
     ?
-    "📍 "+currentProfile.location
+    "📍 " +
+    currentProfile.location
     :
     "";
 
 
   document.getElementById(
     "profileDisplayWebsite"
-  ).textContent=
+  ).textContent =
     currentProfile.website
     ?
-    "🌐 "+currentProfile.website
+    "🌐 " +
+    currentProfile.website
     :
     "";
 
 
   document.getElementById(
     "profileJoined"
-  ).textContent=
+  ).textContent =
     currentProfile.created_at
     ?
-    "🗓️ Joined "+
+    "🗓️ Joined " +
     new Date(
       currentProfile.created_at
     ).toLocaleDateString()
@@ -2721,40 +3422,51 @@ function renderProfile(){
     "";
 
 
-  const avatar=
+  const avatar =
     document.getElementById(
       "profileAvatar"
     );
 
 
-  avatar.innerHTML=
+  avatar.innerHTML =
     currentProfile.avatar_url
     ?
     `<img
-      src="${escapeHtml(currentProfile.avatar_url)}"
+      src="${escapeHtml(
+        currentProfile.avatar_url
+      )}"
       alt="Profile photo"
     >`
     :
     escapeHtml(
-      name.charAt(0).toUpperCase()
+      name
+        .charAt(0)
+        .toUpperCase()
     );
 
 
-  const cover=
+  const cover =
     document.getElementById(
       "profileCover"
     );
 
 
-  cover.innerHTML=
+  cover.innerHTML =
     currentProfile.cover_url
     ?
     `<img
-      src="${escapeHtml(currentProfile.cover_url)}"
+      src="${escapeHtml(
+        currentProfile.cover_url
+      )}"
       alt="Cover photo"
     >`
     :
     '<div class="cover-placeholder">✝</div>';
+
+
+  /* Update Home composer photo */
+
+  renderComposer();
 
 }
 
@@ -2768,11 +3480,11 @@ function previewProfileImage(
   targetId
 ){
 
-  const file=
+  const file =
     input.files?.[0];
 
 
-  const target=
+  const target =
     document.getElementById(
       targetId
     );
@@ -2780,7 +3492,7 @@ function previewProfileImage(
 
   if(!file){
 
-    target.innerHTML="";
+    target.innerHTML = "";
 
     return;
 
@@ -2806,7 +3518,7 @@ function previewProfileImage(
 
   if(
     file.size >
-    5*1024*1024
+    5 * 1024 * 1024
   ){
 
     setMsg(
@@ -2820,11 +3532,11 @@ function previewProfileImage(
   }
 
 
-  const url=
+  const url =
     URL.createObjectURL(file);
 
 
-  target.innerHTML=
+  target.innerHTML =
     `<img
       src="${url}"
       alt="Preview"
@@ -2834,7 +3546,7 @@ function previewProfileImage(
 
 
 /* =========================================================
-   UPLOAD PROFILE IMAGE
+   UPLOAD PROFILE MEDIA
 ========================================================= */
 
 async function uploadProfileMedia(
@@ -2842,11 +3554,14 @@ async function uploadProfileMedia(
   kind
 ){
 
-  if(!file||!currentUser)
+  if(!file || !currentUser){
+
     return null;
 
+  }
 
-  const extension=
+
+  const extension =
     (
       file.name
         .split(".")
@@ -2860,13 +3575,13 @@ async function uploadProfileMedia(
     );
 
 
-  const path=
-    currentUser.id+
-    "/"+
-    kind+
-    "-"+
-    crypto.randomUUID()+
-    "."+
+  const path =
+    currentUser.id +
+    "/" +
+    kind +
+    "-" +
+    crypto.randomUUID() +
+    "." +
     extension;
 
 
@@ -2913,13 +3628,13 @@ async function updateProfile(){
   if(!currentUser)return;
 
 
-  const name=
+  const name =
     document.getElementById(
       "profileNameEdit"
     ).value.trim();
 
 
-  const username=
+  const username =
     document.getElementById(
       "profileUsernameEdit"
     ).value
@@ -2928,43 +3643,43 @@ async function updateProfile(){
       .toLowerCase();
 
 
-  const bio=
+  const bio =
     document.getElementById(
       "profileBioEdit"
     ).value.trim();
 
 
-  const location=
+  const location =
     document.getElementById(
       "profileLocationEdit"
     ).value.trim();
 
 
-  const website=
+  const website =
     document.getElementById(
       "profileWebsiteEdit"
     ).value.trim();
 
 
-  let avatar_url=
+  let avatar_url =
     document.getElementById(
       "profileAvatarEdit"
     ).value.trim();
 
 
-  let cover_url=
+  let cover_url =
     document.getElementById(
       "profileCoverEdit"
     ).value.trim();
 
 
-  const avatarFile=
+  const avatarFile =
     document.getElementById(
       "profileAvatarFile"
     ).files?.[0];
 
 
-  const coverFile=
+  const coverFile =
     document.getElementById(
       "profileCoverFile"
     ).files?.[0];
@@ -3005,7 +3720,7 @@ async function updateProfile(){
 
     if(avatarFile){
 
-      avatar_url=
+      avatar_url =
         await uploadProfileMedia(
           avatarFile,
           "avatar"
@@ -3016,7 +3731,7 @@ async function updateProfile(){
 
     if(coverFile){
 
-      cover_url=
+      cover_url =
         await uploadProfileMedia(
           coverFile,
           "cover"
@@ -3036,22 +3751,22 @@ async function updateProfile(){
         full_name:name,
 
         username:
-          username||null,
+          username || null,
 
         bio:
-          bio||null,
+          bio || null,
 
         location:
-          location||null,
+          location || null,
 
         website:
-          website||null,
+          website || null,
 
         avatar_url:
-          avatar_url||null,
+          avatar_url || null,
 
         cover_url:
-          cover_url||null
+          cover_url || null
 
       })
       .eq(
@@ -3065,10 +3780,13 @@ async function updateProfile(){
     if(error)throw error;
 
 
-    currentProfile=data;
+    currentProfile = data;
 
 
     renderProfile();
+
+
+    renderComposer();
 
 
     setMsg(
@@ -3098,7 +3816,7 @@ async function updateProfile(){
 
     setMsg(
       "profileMsg",
-      "Could not update profile: "+
+      "Could not update profile: " +
       error.message,
       "error"
     );
@@ -3124,6 +3842,8 @@ async function render(){
 
   renderProfile();
 
+  renderComposer();
+
 }
 
 
@@ -3136,14 +3856,14 @@ function tab(id){
   document
     .querySelectorAll("section")
     .forEach(
-      section=>
+      section =>
         section.classList.add(
           "hidden"
         )
     );
 
 
-  const section=
+  const section =
     document.getElementById(id);
 
 
@@ -3156,35 +3876,37 @@ function tab(id){
   }
 
 
-  if(id==="home"){
+  if(id === "home"){
 
     renderPosts();
+
+    renderComposer();
 
   }
 
 
-  if(id==="prayer"){
+  if(id === "prayer"){
 
     renderPrayers();
 
   }
 
 
-  if(id==="groups"){
+  if(id === "groups"){
 
     renderGroups();
 
   }
 
 
-  if(id==="messages"){
+  if(id === "messages"){
 
     renderMessages();
 
   }
 
 
-  if(id==="profile"){
+  if(id === "profile"){
 
     renderProfile();
 
@@ -3211,7 +3933,9 @@ async function startBelieverConnect(){
       data,
       error
     } =
-    await supabaseClient.auth.getSession();
+    await supabaseClient
+      .auth
+      .getSession();
 
 
     if(error){
@@ -3226,13 +3950,16 @@ async function startBelieverConnect(){
     }
 
 
-    if(data?.session?.user){
+    if(
+      data?.session?.user
+    ){
 
       await loadApp(
         data.session.user
       );
 
     }
+
 
   }catch(error){
 
@@ -3290,7 +4017,9 @@ document
   );
 
 
-/* START */
+/* =========================================================
+   START
+========================================================= */
 
 startBelieverConnect();
 
