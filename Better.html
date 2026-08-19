@@ -1,0 +1,678 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Believer Connect</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;font-family:Arial,sans-serif;background:#f3f6fb;color:#14213d}
+header{background:#063b91;color:#fff;padding:18px 22px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:5}
+.logo{font-size:22px;font-weight:800}.tag{font-size:11px;opacity:.85}
+.wrap{max-width:900px;margin:auto;padding:18px}
+.card{background:#fff;border-radius:16px;padding:18px;margin-bottom:16px;box-shadow:0 2px 10px #00000012}
+input,textarea{width:100%;padding:13px;margin:7px 0;border:1px solid #d7deea;border-radius:10px;font-size:15px}
+button{border:0;border-radius:10px;padding:12px 18px;background:#0756d9;color:#fff;font-weight:700;cursor:pointer}
+button:disabled{opacity:.65;cursor:not-allowed}
+button.secondary{background:#e9effb;color:#0645a8}
+.nav{display:flex;gap:8px;overflow:auto;margin-bottom:16px}.nav button{white-space:nowrap}
+.hidden{display:none}
+.posthead{display:flex;gap:10px;align-items:center}
+.avatar{width:44px;height:44px;border-radius:50%;background:#dce8ff;display:grid;place-items:center;font-weight:800;color:#0645a8}
+.meta{color:#6d7788;font-size:13px}
+.actions{display:flex;gap:8px;margin-top:12px}
+.actions button{background:#f0f4fa;color:#27364f;flex:1}
+.like-active{background:#ffe8ec!important;color:#c2183b!important}
+.auth{max-width:430px;margin:50px auto}
+.brand{text-align:center;font-size:30px;font-weight:900;color:#063b91}
+.error{color:#b00020;font-size:14px}.success{color:#087443;font-size:14px}
+.like-count{font-size:12px;margin-left:5px;color:#6d7788}
+.profile-card{background:#fff;border-radius:16px;overflow:hidden;margin-bottom:16px;box-shadow:0 2px 10px #00000012}
+.profile-cover{height:210px;background:linear-gradient(135deg,#063b91,#0756d9);position:relative;display:grid;place-items:center;overflow:hidden}
+.profile-cover img{width:100%;height:100%;object-fit:cover}
+.cover-placeholder{font-size:55px;color:#fff;opacity:.35}
+.profile-main{display:flex;align-items:center;gap:14px;padding:0 20px 12px;position:relative}
+.profile-avatar-wrap{margin-top:-52px}
+.profile-avatar{width:104px;height:104px;border-radius:50%;border:5px solid #fff;background:#dce8ff;color:#0645a8;display:grid;place-items:center;font-size:38px;font-weight:800;overflow:hidden}
+.profile-avatar img{width:100%;height:100%;object-fit:cover}
+.profile-heading{flex:1;min-width:0}
+.profile-heading h2{margin:12px 0 2px;font-size:25px}
+.profile-username{color:#6d7788}
+.profile-edit-btn{background:#e9effb;color:#0645a8}
+.profile-bio-area{padding:0 20px 20px}
+.profile-bio-area p{margin:8px 0 12px;white-space:pre-wrap}
+.profile-details{display:flex;flex-wrap:wrap;gap:12px;color:#6d7788;font-size:13px}
+.profile-details span:empty{display:none}
+.profile-tabs{display:flex;gap:8px;border-bottom:1px solid #e5eaf2;margin:-18px -18px 14px;padding:0 18px}
+.profile-tab{background:transparent;color:#526078;border-radius:0;border-bottom:3px solid transparent}
+.profile-tab.active{color:#0645a8;border-bottom-color:#0756d9}
+.profile-card + .card label{display:block;font-size:13px;font-weight:700;color:#526078;margin-top:10px}
+.upload-preview{margin:8px 0 12px;width:110px;height:110px;border-radius:50%;overflow:hidden;background:#eef3fb;display:grid;place-items:center}
+.upload-preview img{width:100%;height:100%;object-fit:cover}
+.cover-upload-preview{margin:8px 0 12px;width:100%;max-width:520px;height:130px;border-radius:12px;overflow:hidden;background:#eef3fb}
+.cover-upload-preview img{width:100%;height:100%;object-fit:cover}
+.url-fallback{margin:10px 0}
+.url-fallback summary{cursor:pointer;color:#0645a8;font-weight:700;margin-bottom:8px}
+
+@media(max-width:650px){
+  .profile-cover{height:160px}
+  .profile-main{align-items:flex-start;flex-wrap:wrap}
+  .profile-heading{padding-top:4px}
+  .profile-edit-btn{width:100%}
+}
+
+</style>
+</head>
+<body>
+
+<div id="auth" class="wrap auth">
+  <div class="card">
+    <div class="brand">✝ BELIEVER CONNECT</div>
+    <p style="text-align:center">One Community • One Faith</p>
+
+    <div id="loginBox">
+      <h2>Welcome Back</h2>
+      <input id="loginEmail" type="email" placeholder="Email address">
+      <input id="loginPass" type="password" placeholder="Password">
+      <button id="loginBtn" type="button">LOG IN</button>
+      <p id="loginMsg" class="error"></p>
+      <hr>
+      <button class="secondary" id="showSignupBtn" type="button">CREATE ACCOUNT</button>
+    </div>
+
+    <div id="signupBox" class="hidden">
+      <h2>Create Account</h2>
+      <input id="name" placeholder="Full name">
+      <input id="email" type="email" placeholder="Email address">
+      <input id="pass" type="password" placeholder="Password">
+      <button id="signupBtn" type="button">CREATE ACCOUNT</button>
+      <p id="signupMsg"></p>
+      <button class="secondary" id="showLoginBtn" type="button">BACK TO LOGIN</button>
+    </div>
+  </div>
+</div>
+
+<div id="app" class="hidden">
+<header>
+  <div><div class="logo">✝ BELIEVER CONNECT</div><div class="tag">One Community • One Faith</div></div>
+  <button onclick="logout()">Log out</button>
+</header>
+
+<div class="wrap">
+  <div class="nav">
+    <button onclick="tab('home')">🏠 Home</button>
+    <button onclick="tab('bible')">📖 Bible</button>
+    <button onclick="tab('prayer')">🙏 Prayer</button>
+    <button onclick="tab('groups')">👥 Groups</button>
+    <button onclick="tab('messages')">💬 Messages</button>
+    <button onclick="tab('profile')">👤 Profile</button>
+  </div>
+
+  <section id="home">
+    <div class="card">
+      <h3>What is on your heart today?</h3>
+      <textarea id="postText" rows="3" placeholder="Share with the Christian community..."></textarea>
+      <button onclick="addPost()">POST</button>
+    </div>
+    <div id="feed"></div>
+  </section>
+
+  <section id="bible" class="hidden">
+    <div class="card"><h2>📖 Bible</h2><h3>Philippians 4:13</h3><p>“I can do all things through Christ which strengtheneth me.”</p>
+    <button onclick="alert('Bible search will be added in the next version.')">Search Bible</button></div>
+  </section>
+
+  <section id="prayer" class="hidden">
+    <div class="card"><h2>🙏 Prayer Wall</h2><p>Share a prayer request and encourage other believers.</p>
+      <textarea id="prayerText" placeholder="What would you like us to pray about?"></textarea>
+      <button onclick="addPrayer()">POST PRAYER REQUEST</button>
+    </div>
+    <div id="prayers"></div>
+  </section>
+
+  <section id="groups" class="hidden">
+    <div class="card">
+      <h2>👥 Christian Groups</h2>
+      <input id="groupName" placeholder="Group name">
+      <textarea id="groupDescription" rows="2" placeholder="What is this group about?"></textarea>
+      <button onclick="createGroup()">CREATE GROUP</button>
+      <div id="groupsList" style="margin-top:16px"></div>
+    </div>
+  </section>
+
+  <section id="messages" class="hidden">
+    <div class="card">
+      <h2>💬 Messages</h2>
+      <p>Private messaging between registered believers.</p>
+      <input id="messageUserEmail" type="email" placeholder="Recipient's email address">
+      <textarea id="messageText" rows="3" placeholder="Write a private message..."></textarea>
+      <button onclick="sendMessage()">SEND MESSAGE</button>
+      <div id="messagesList" style="margin-top:16px"></div>
+    </div>
+  </section>
+
+  <section id="profile" class="hidden">
+    <div class="profile-card">
+      <div class="profile-cover" id="profileCover">
+        <div class="cover-placeholder">✝</div>
+      </div>
+      <div class="profile-main">
+        <div class="profile-avatar-wrap">
+          <div class="profile-avatar" id="profileAvatar">B</div>
+        </div>
+        <div class="profile-heading">
+          <h2 id="profileDisplayName">Believer</h2>
+          <div class="profile-username" id="profileDisplayUsername">@username</div>
+        </div>
+        <button class="profile-edit-btn" onclick="toggleProfileEditor()">✏️ Edit Profile</button>
+      </div>
+      <div class="profile-bio-area">
+        <p id="profileDisplayBio">Add a short bio about yourself.</p>
+        <div class="profile-details">
+          <span id="profileDisplayLocation"></span>
+          <span id="profileDisplayWebsite"></span>
+          <span id="profileJoined"></span>
+        </div>
+      </div>
+    </div>
+
+    <div id="profileEditor" class="card hidden">
+      <h2>✏️ Edit Profile</h2>
+      <p class="meta">Update the information people see on your Believer Connect profile.</p>
+
+      <label>Full name</label>
+      <input id="profileNameEdit" placeholder="Full name">
+
+      <label>Username</label>
+      <input id="profileUsernameEdit" placeholder="username" maxlength="30">
+
+      <label>Bio</label>
+      <textarea id="profileBioEdit" rows="4" maxlength="300" placeholder="Tell the community a little about yourself..."></textarea>
+
+      <label>Location</label>
+      <input id="profileLocationEdit" placeholder="City, Country">
+
+      <label>Website</label>
+      <input id="profileWebsiteEdit" type="url" placeholder="https://example.com">
+
+      <label>Profile photo</label>
+      <input id="profileAvatarFile" type="file" accept="image/*" onchange="previewProfileImage(this,'profileAvatarPreview')">
+      <div id="profileAvatarPreview" class="upload-preview"></div>
+
+      <label>Cover photo</label>
+      <input id="profileCoverFile" type="file" accept="image/*" onchange="previewProfileImage(this,'profileCoverPreview')">
+      <div id="profileCoverPreview" class="cover-upload-preview"></div>
+
+      <details class="url-fallback">
+        <summary>Use an image URL instead</summary>
+        <input id="profileAvatarEdit" type="url" placeholder="Profile photo URL">
+        <input id="profileCoverEdit" type="url" placeholder="Cover photo URL">
+      </details>
+
+      <div class="actions">
+        <button onclick="updateProfile()">💾 SAVE PROFILE</button>
+        <button class="secondary" onclick="toggleProfileEditor()">CANCEL</button>
+      </div>
+      <p id="profileMsg"></p>
+    </div>
+
+    <div class="card">
+      <div class="profile-tabs">
+        <button class="profile-tab active">Posts</button>
+        <button class="profile-tab">About</button>
+        <button class="profile-tab">Connections</button>
+      </div>
+      <p class="meta">Your profile activity will appear here as we build the next parts of Believer Connect.</p>
+    </div>
+  </section>
+</div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+const SUPABASE_URL = "https://zupbqtnqbsmlwbidsddk.supabase.co";
+const SUPABASE_PUBLISHABLE_KEY = "sb_publishable_NtyX9tGZ7vAmLB73ylIasw_RZZf7P2o";
+const supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_PUBLISHABLE_KEY);
+
+let currentUser = null;
+let currentProfile = null;
+
+function setMsg(id,text,type='error'){
+  const el=document.getElementById(id); el.className=type; el.textContent=text;
+}
+function setMessage(id,text,type){ setMsg(id,text,type); }
+
+function showSignup(){
+  document.getElementById('loginBox').classList.add('hidden');
+  document.getElementById('signupBox').classList.remove('hidden');
+  document.getElementById('loginMsg').textContent='';
+}
+function showLogin(){
+  document.getElementById('signupBox').classList.add('hidden');
+  document.getElementById('loginBox').classList.remove('hidden');
+  document.getElementById('signupMsg').textContent='';
+}
+
+async function signup(){
+  try{
+    const n=document.getElementById('name').value.trim();
+    const e=document.getElementById('email').value.trim().toLowerCase();
+    const p=document.getElementById('pass').value;
+    if(!n||!e||!p) return setMsg('signupMsg','Please complete all required fields.','error');
+    if(p.length<6) return setMsg('signupMsg','Password must be at least 6 characters.','error');
+
+    const {data,error}=await supabaseClient.auth.signUp({email:e,password:p,options:{data:{full_name:n}}});
+    if(error) throw error;
+    if(!data?.user) throw new Error('Supabase did not return a user.');
+
+    if(data.session){
+      await ensureProfile(data.user,n,e);
+      setMsg('signupMsg','Account created successfully. Opening Believer Connect...','success');
+      await loadApp(data.user);
+    }else{
+      setMsg('signupMsg','Account created. Please log in now.','success');
+      setTimeout(showLogin,1200);
+    }
+  }catch(err){
+    console.error(err);
+    setMsg('signupMsg','SIGN-UP ERROR: '+(err.message||String(err)),'error');
+  }
+}
+
+async function login(){
+  try{
+    const e=document.getElementById('loginEmail').value.trim().toLowerCase();
+    const p=document.getElementById('loginPass').value;
+    if(!e||!p) return setMsg('loginMsg','Please enter your email and password.','error');
+
+    const {data,error}=await supabaseClient.auth.signInWithPassword({email:e,password:p});
+    if(error) throw error;
+    await loadApp(data.user);
+  }catch(err){
+    console.error(err);
+    setMsg('loginMsg','LOGIN ERROR: '+(err.message||String(err)),'error');
+  }
+}
+
+async function ensureProfile(user,fallbackName,fallbackEmail){
+  const fullName=user.user_metadata?.full_name||fallbackName||'Believer';
+  const {data,error}=await supabaseClient.from('profiles').upsert({
+    id:user.id, full_name:fullName, email:user.email||fallbackEmail||null
+  },{onConflict:'id'}).select().single();
+  if(error) throw error;
+  currentProfile=data;
+  return data;
+}
+
+async function loadApp(user){
+  currentUser=user;
+  try{ await ensureProfile(user,user.user_metadata?.full_name,user.email); }
+  catch(error){ setMsg('loginMsg','Login worked, but your profile could not be saved: '+error.message,'error'); return; }
+
+  document.getElementById('auth').classList.add('hidden');
+  document.getElementById('app').classList.remove('hidden');
+  document.getElementById('profileInfo').textContent=(currentProfile.full_name||'Believer')+' • '+(currentUser.email||'');
+  await render();
+}
+
+async function logout(){
+  await supabaseClient.auth.signOut();
+  currentUser=null; currentProfile=null; location.reload();
+}
+
+async function addPost(){
+  const t=document.getElementById('postText').value.trim();
+  if(!t||!currentUser) return;
+  const {error}=await supabaseClient.from('posts').insert({user_id:currentUser.id,content:t});
+  if(error) return alert('Could not post: '+error.message);
+  document.getElementById('postText').value='';
+  await renderPosts();
+}
+
+async function addPrayer(){
+  const t=document.getElementById('prayerText').value.trim();
+  if(!t||!currentUser) return;
+  const {error}=await supabaseClient.from('prayer_requests').insert({user_id:currentUser.id,content:t});
+  if(error) return alert('Could not post prayer request: '+error.message);
+  document.getElementById('prayerText').value='';
+  await renderPrayers();
+}
+
+async function likePost(postId){
+  if(!currentUser){ alert('Please log in first.'); return; }
+
+  const button=document.getElementById('like-'+postId);
+  if(button){ button.disabled=true; }
+
+  try{
+    const {data:existingLike,error:checkError}=await supabaseClient
+      .from('post_likes')
+      .select('post_id')
+      .eq('post_id',postId)
+      .eq('user_id',currentUser.id)
+      .maybeSingle();
+
+    if(checkError) throw checkError;
+
+    if(existingLike){
+      const {error:deleteError}=await supabaseClient
+        .from('post_likes')
+        .delete()
+        .eq('post_id',postId)
+        .eq('user_id',currentUser.id);
+      if(deleteError) throw deleteError;
+    }else{
+      const {error:insertError}=await supabaseClient
+        .from('post_likes')
+        .insert({post_id:postId,user_id:currentUser.id});
+      if(insertError) throw insertError;
+    }
+
+    await renderPosts();
+  }catch(error){
+    console.error('Like error:',error);
+    alert('Could not update like: '+(error.message||'Unknown error'));
+  }finally{
+    if(button) button.disabled=false;
+  }
+}
+
+async function commentPost(postId){
+  if(!currentUser) return;
+  const comment=prompt('Write your comment:');
+  if(!comment||!comment.trim()) return;
+  const {error}=await supabaseClient.from('post_comments').insert({
+    post_id:postId,user_id:currentUser.id,content:comment.trim()
+  });
+  if(error) return alert('Could not add comment: '+error.message);
+  alert('💬 Comment added.');
+}
+
+async function sharePost(postId){
+  const url=window.location.href.split('#')[0]+'#post-'+postId;
+  try{ await navigator.clipboard.writeText(url); alert('↗ Post link copied.'); }
+  catch(e){ prompt('Copy this post link:',url); }
+}
+
+async function createGroup(){
+  if(!currentUser) return;
+  const name=document.getElementById('groupName').value.trim();
+  const description=document.getElementById('groupDescription').value.trim();
+  if(!name) return alert('Please enter a group name.');
+  const {error}=await supabaseClient.from('groups').insert({name,description,created_by:currentUser.id});
+  if(error) return alert('Could not create group: '+error.message);
+  document.getElementById('groupName').value='';
+  document.getElementById('groupDescription').value='';
+  await renderGroups();
+}
+
+async function renderGroups(){
+  const box=document.getElementById('groupsList');
+  const {data,error}=await supabaseClient.from('groups').select('id,name,description,created_at').order('created_at',{ascending:false});
+  if(error){ box.innerHTML='<div class="card error">Could not load groups: '+escapeHtml(error.message)+'</div>'; return; }
+  box.innerHTML=(data||[]).map(g=>`<div class="card"><h3>👥 ${escapeHtml(g.name)}</h3><p>${escapeHtml(g.description||'Christian community group')}</p><div class="meta">${formatDate(g.created_at)}</div></div>`).join('')||'<div class="card">No groups yet. Create the first one.</div>';
+}
+
+async function sendMessage(){
+  if(!currentUser) return;
+  const email=document.getElementById('messageUserEmail').value.trim().toLowerCase();
+  const content=document.getElementById('messageText').value.trim();
+  if(!email||!content) return alert('Enter the recipient email and your message.');
+
+  const {data:recipient,error:recipientError}=await supabaseClient.from('profiles').select('id,email').eq('email',email).maybeSingle();
+  if(recipientError) return alert('Could not find recipient: '+recipientError.message);
+  if(!recipient) return alert('No Believer Connect account was found for that email.');
+
+  const {error}=await supabaseClient.from('messages').insert({sender_id:currentUser.id,recipient_id:recipient.id,content});
+  if(error) return alert('Could not send message: '+error.message);
+  document.getElementById('messageText').value='';
+  alert('💬 Message sent.');
+  await renderMessages();
+}
+
+async function renderMessages(){
+  const box=document.getElementById('messagesList');
+  if(!currentUser) return;
+  const {data,error}=await supabaseClient.from('messages')
+    .select('id,sender_id,recipient_id,content,created_at')
+    .or(`sender_id.eq.${currentUser.id},recipient_id.eq.${currentUser.id}`)
+    .order('created_at',{ascending:false});
+  if(error){ box.innerHTML='<div class="card error">Could not load messages: '+escapeHtml(error.message)+'</div>'; return; }
+  box.innerHTML=(data||[]).map(m=>`<div class="card"><div class="meta">${m.sender_id===currentUser.id?'You':'Received'} • ${formatDate(m.created_at)}</div><p>${escapeHtml(m.content)}</p></div>`).join('')||'<div class="card">No messages yet.</div>';
+}
+
+function toggleProfileEditor(){
+  document.getElementById('profileEditor').classList.toggle('hidden');
+}
+
+function fillProfileEditor(){
+  if(!currentProfile) return;
+  document.getElementById('profileNameEdit').value=currentProfile.full_name||'';
+  document.getElementById('profileUsernameEdit').value=currentProfile.username||'';
+  document.getElementById('profileBioEdit').value=currentProfile.bio||'';
+  document.getElementById('profileLocationEdit').value=currentProfile.location||'';
+  document.getElementById('profileWebsiteEdit').value=currentProfile.website||'';
+  document.getElementById('profileAvatarEdit').value=currentProfile.avatar_url||'';
+  document.getElementById('profileCoverEdit').value=currentProfile.cover_url||'';
+  const avatarPreview=document.getElementById('profileAvatarPreview');
+  const coverPreview=document.getElementById('profileCoverPreview');
+  avatarPreview.innerHTML=currentProfile.avatar_url
+    ? '<img src="'+escapeHtml(currentProfile.avatar_url)+'" alt="Current profile photo">'
+    : '';
+  coverPreview.innerHTML=currentProfile.cover_url
+    ? '<img src="'+escapeHtml(currentProfile.cover_url)+'" alt="Current cover photo">'
+    : '';
+}
+
+function renderProfile(){
+  if(!currentProfile) return;
+
+  const name=currentProfile.full_name||'Believer';
+  const username=currentProfile.username ? '@'+currentProfile.username.replace(/^@/,'') : '@username';
+  const bio=currentProfile.bio||'Add a short bio about yourself.';
+  const location=currentProfile.location ? '📍 '+currentProfile.location : '';
+  const website=currentProfile.website ? '🌐 '+currentProfile.website : '';
+  const joined=currentProfile.created_at ? '🗓️ Joined '+new Date(currentProfile.created_at).toLocaleDateString() : '';
+
+  document.getElementById('profileDisplayName').textContent=name;
+  document.getElementById('profileDisplayUsername').textContent=username;
+  document.getElementById('profileDisplayBio').textContent=bio;
+
+  const loc=document.getElementById('profileDisplayLocation');
+  const web=document.getElementById('profileDisplayWebsite');
+  const join=document.getElementById('profileJoined');
+  loc.textContent=location;
+  web.textContent=website;
+  join.textContent=joined;
+
+  const avatar=document.getElementById('profileAvatar');
+  avatar.innerHTML=currentProfile.avatar_url
+    ? '<img src="'+escapeHtml(currentProfile.avatar_url)+'" alt="Profile photo">'
+    : escapeHtml(name.charAt(0).toUpperCase());
+
+  const cover=document.getElementById('profileCover');
+  cover.innerHTML=currentProfile.cover_url
+    ? '<img src="'+escapeHtml(currentProfile.cover_url)+'" alt="Cover photo">'
+    : '<div class="cover-placeholder">✝</div>';
+
+  fillProfileEditor();
+}
+
+
+function previewProfileImage(input, targetId){
+  const file=input.files?.[0];
+  const target=document.getElementById(targetId);
+  if(!file){ target.innerHTML=''; return; }
+  if(!file.type.startsWith('image/')) return setMsg('profileMsg','Please select an image file.','error');
+  if(file.size>5*1024*1024) return setMsg('profileMsg','Please choose an image smaller than 5 MB.','error');
+  const url=URL.createObjectURL(file);
+  target.innerHTML='<img src="'+url+'" alt="Selected image preview">';
+}
+
+async function uploadProfileMedia(file, kind){
+  if(!file || !currentUser) return null;
+  if(!file.type.startsWith('image/')) throw new Error('Please select an image file.');
+  if(file.size>5*1024*1024) throw new Error('Image must be smaller than 5 MB.');
+
+  const extension=(file.name.split('.').pop()||'jpg').toLowerCase().replace(/[^a-z0-9]/g,'') || 'jpg';
+  const path=currentUser.id+'/'+kind+'-'+crypto.randomUUID()+'.'+extension;
+
+  const {error:uploadError}=await supabaseClient.storage
+    .from('profile-media')
+    .upload(path,file,{contentType:file.type,cacheControl:'31536000',upsert:false});
+
+  if(uploadError) throw uploadError;
+
+  const {data}=supabaseClient.storage.from('profile-media').getPublicUrl(path);
+  return data.publicUrl;
+}
+
+async function removeOldProfileMedia(url){
+  if(!url || !url.includes('/storage/v1/object/public/profile-media/')) return;
+  const marker='/storage/v1/object/public/profile-media/';
+  const path=decodeURIComponent(url.split(marker)[1]||'');
+  if(path && path.startsWith(currentUser.id+'/')){
+    const {error}=await supabaseClient.storage.from('profile-media').remove([path]);
+    if(error) console.warn('Old profile image could not be removed:',error);
+  }
+}
+
+async function updateProfile(){
+  if(!currentUser) return;
+
+  const name=document.getElementById('profileNameEdit').value.trim();
+  const username=document.getElementById('profileUsernameEdit').value.trim().replace(/^@/,'').toLowerCase();
+  const bio=document.getElementById('profileBioEdit').value.trim();
+  const location=document.getElementById('profileLocationEdit').value.trim();
+  const website=document.getElementById('profileWebsiteEdit').value.trim();
+  let avatar_url=document.getElementById('profileAvatarEdit').value.trim();
+  let cover_url=document.getElementById('profileCoverEdit').value.trim();
+  const avatarFile=document.getElementById('profileAvatarFile').files?.[0];
+  const coverFile=document.getElementById('profileCoverFile').files?.[0];
+
+  if(!name) return setMsg('profileMsg','Please enter your full name.','error');
+  if(username && !/^[a-z0-9._-]{3,30}$/.test(username))
+    return setMsg('profileMsg','Username must be 3–30 characters and use letters, numbers, dots, underscores, or hyphens.','error');
+
+  try{
+    if(avatarFile){
+      avatar_url=await uploadProfileMedia(avatarFile,'avatar');
+    }
+    if(coverFile){
+      cover_url=await uploadProfileMedia(coverFile,'cover');
+    }
+  }catch(uploadError){
+    return setMsg('profileMsg','Photo upload failed: '+(uploadError.message||String(uploadError)),'error');
+  }
+
+  const oldAvatar=currentProfile.avatar_url;
+  const oldCover=currentProfile.cover_url;
+
+  const {data,error}=await supabaseClient.from('profiles')
+    .update({full_name:name,username:username||null,bio:bio||null,location:location||null,website:website||null,avatar_url:avatar_url||null,cover_url:cover_url||null})
+    .eq('id',currentUser.id)
+    .select()
+    .single();
+
+  if(error){
+    if(error.code==='23505') return setMsg('profileMsg','That username is already being used. Please choose another.','error');
+    return setMsg('profileMsg','Could not update profile: '+error.message,'error');
+  }
+
+  if(avatarFile && oldAvatar && oldAvatar!==avatar_url) removeOldProfileMedia(oldAvatar);
+  if(coverFile && oldCover && oldCover!==cover_url) removeOldProfileMedia(oldCover);
+
+  document.getElementById('profileAvatarFile').value='';
+  document.getElementById('profileCoverFile').value='';
+
+  currentProfile=data;
+  renderProfile();
+  setMsg('profileMsg','Profile updated successfully.','success');
+  setTimeout(()=>document.getElementById('profileEditor').classList.add('hidden'),700);
+}
+
+async function render(){
+  await Promise.all([renderPosts(),renderPrayers(),renderGroups(),renderMessages()]);
+  renderProfile();
+}
+
+async function renderPosts(){
+  const feed=document.getElementById('feed');
+  const {data:posts,error}=await supabaseClient.from('posts').select('id,content,created_at,user_id').order('created_at',{ascending:false});
+  if(error){ feed.innerHTML='<div class="card error">Could not load posts: '+escapeHtml(error.message)+'</div>'; return; }
+
+  const postIds=(posts||[]).map(p=>p.id);
+  const userIds=[...new Set((posts||[]).map(p=>p.user_id).filter(Boolean))];
+  let profilesById={}, likesByPost={}, myLikedPosts=new Set();
+
+  if(userIds.length){
+    const {data:profiles}=await supabaseClient.from('profiles').select('id,full_name').in('id',userIds);
+    profilesById=Object.fromEntries((profiles||[]).map(p=>[p.id,p]));
+  }
+
+  if(postIds.length){
+    const {data:likes,error:likesError}=await supabaseClient.from('post_likes').select('post_id,user_id').in('post_id',postIds);
+    if(likesError){
+      console.error('Like lookup error:',likesError);
+    }else{
+      (likes||[]).forEach(like=>{
+        likesByPost[like.post_id]=(likesByPost[like.post_id]||0)+1;
+        if(currentUser&&like.user_id===currentUser.id) myLikedPosts.add(like.post_id);
+      });
+    }
+  }
+
+  feed.innerHTML=(posts||[]).map(p=>{
+    const name=profilesById[p.user_id]?.full_name||'Believer';
+    const liked=myLikedPosts.has(p.id);
+    const count=likesByPost[p.id]||0;
+    return `<div class="card" id="post-${p.id}">
+      <div class="posthead">
+        <div class="avatar">${escapeHtml(name[0].toUpperCase())}</div>
+        <div><b>${escapeHtml(name)}</b><div class="meta">${formatDate(p.created_at)} • Public</div></div>
+      </div>
+      <p>${escapeHtml(p.content)}</p>
+      <div class="actions">
+        <button id="like-${p.id}" class="${liked?'like-active':''}" onclick="likePost('${p.id}')">${liked?'❤️ Liked':'🤍 Like'} <span class="like-count">${count}</span></button>
+        <button onclick="commentPost('${p.id}')">💬 Comment</button>
+        <button onclick="sharePost('${p.id}')">↗ Share</button>
+      </div>
+    </div>`;
+  }).join('')||'<div class="card">Welcome to Believer Connect. Be the first to share something.</div>';
+}
+
+async function renderPrayers(){
+  const box=document.getElementById('prayers');
+  const {data,error}=await supabaseClient.from('prayer_requests').select('id,content,prayer_count,created_at,user_id').order('created_at',{ascending:false});
+  if(error){ box.innerHTML='<div class="card error">Could not load prayer requests: '+escapeHtml(error.message)+'</div>'; return; }
+  box.innerHTML=(data||[]).map(p=>`<div class="card"><p>${escapeHtml(p.content)}</p><div class="meta">${p.prayer_count||0} people are praying</div><br><button onclick="pray('${p.id}',${p.prayer_count||0})">🙏 I am praying</button></div>`).join('')||'<div class="card">No prayer requests yet.</div>';
+}
+
+async function pray(id,count){
+  const {error}=await supabaseClient.from('prayer_requests').update({prayer_count:(count||0)+1}).eq('id',id);
+  if(error) return alert('Could not record prayer: '+error.message);
+  await renderPrayers();
+}
+
+function tab(id){
+  document.querySelectorAll('section').forEach(s=>s.classList.add('hidden'));
+  document.getElementById(id).classList.remove('hidden');
+  if(id==='profile') renderProfile();
+  window.scrollTo(0,0);
+}
+function formatDate(value){ return value?new Date(value).toLocaleString():'Just now'; }
+function escapeHtml(s){ return String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[c])); }
+
+async function startBelieverConnect(){
+  const {data:{session}}=await supabaseClient.auth.getSession();
+  if(session?.user) await loadApp(session.user);
+}
+
+document.getElementById('showSignupBtn').addEventListener('click',showSignup);
+document.getElementById('showLoginBtn').addEventListener('click',showLogin);
+document.getElementById('signupBtn').addEventListener('click',signup);
+document.getElementById('loginBtn').addEventListener('click',login);
+startBelieverConnect();
+</script>
+</body>
+</html>
