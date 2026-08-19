@@ -4,7 +4,6 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="theme-color" content="#0d1b2a">
-<meta name="description" content="Believers+ — Empowering Faith, Fellowship & Community">
 <title>Believers+</title>
 
 <!-- Font Awesome Icons -->
@@ -12,7 +11,7 @@
 
 <style>
 /* =========================================================
-   BELIEVERS+ DESIGN SYSTEM & THEME
+   ORIGINAL BELIEVERS+ DESIGN SYSTEM & THEME
 ========================================================= */
 * {
   box-sizing: border-box;
@@ -313,7 +312,105 @@ header {
 }
 
 /* =========================================================
-   COMPOSER / CREATE POST AREA
+   SEARCH BAR & NOTIFICATIONS
+========================================================= */
+.search-modal-box {
+  background: white;
+  padding: 12px 16px;
+  border-bottom: 1px solid var(--bp-border);
+}
+
+.search-input-wrapper {
+  display: flex;
+  align-items: center;
+  background: #f8fafc;
+  border: 1px solid var(--bp-border);
+  border-radius: 20px;
+  padding: 8px 14px;
+  gap: 10px;
+}
+
+.search-input-wrapper input {
+  border: none;
+  background: transparent;
+  outline: none;
+  width: 100%;
+  font-size: 14px;
+}
+
+.search-results-list {
+  margin-top: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  max-height: 250px;
+  overflow-y: auto;
+}
+
+.search-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 12px;
+  background: white;
+  border-radius: 10px;
+  border: 1px solid var(--bp-border);
+  cursor: pointer;
+}
+
+.notif-dropdown {
+  position: absolute;
+  top: 50px;
+  right: 16px;
+  width: 320px;
+  max-width: 90vw;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+  border: 1px solid var(--bp-border);
+  z-index: 1001;
+  overflow: hidden;
+}
+
+.notif-header {
+  padding: 12px 14px;
+  background: #f8fafc;
+  border-bottom: 1px solid var(--bp-border);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-weight: 800;
+  font-size: 14px;
+  color: var(--bp-primary);
+}
+
+.notif-header button {
+  font-size: 11px;
+  color: var(--bp-gold-hover);
+  font-weight: 700;
+}
+
+.notif-list {
+  max-height: 320px;
+  overflow-y: auto;
+}
+
+.notif-item {
+  padding: 12px;
+  border-bottom: 1px solid var(--bp-border);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+  background: white;
+}
+
+.notif-item.unread {
+  background: #f0f7ff;
+}
+
+/* =========================================================
+   COMPOSER / WHAT IS ON YOUR HEART TODAY
 ========================================================= */
 .composer-card {
   background: var(--bp-card-bg);
@@ -343,12 +440,6 @@ header {
   flex-shrink: 0;
   border: 2px solid var(--bp-gold);
   cursor: pointer;
-}
-
-.avatar img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
 }
 
 .mind-button {
@@ -465,23 +556,6 @@ header {
   line-height: 1.2;
 }
 
-.story-card .story-badge {
-  position: absolute;
-  top: 8px;
-  left: 8px;
-  background: var(--bp-gold);
-  color: var(--bp-primary);
-  font-size: 10px;
-  font-weight: 900;
-  width: 22px;
-  height: 22px;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 2;
-}
-
 .story-card.create-story {
   background: white;
   display: flex;
@@ -493,12 +567,6 @@ header {
   width: 100%;
   position: relative;
   background: #f1f5f9;
-}
-
-.story-card.create-story .top-img img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
 }
 
 .story-card.create-story .plus-btn {
@@ -532,7 +600,7 @@ header {
 }
 
 /* =========================================================
-   FEED POST CARDS
+   FEED POST CARDS & HEART/SUPPORT
 ========================================================= */
 .card {
   background: var(--bp-card-bg);
@@ -556,14 +624,6 @@ header {
   gap: 10px;
 }
 
-.clickable-user {
-  cursor: pointer;
-}
-
-.clickable-user:hover {
-  text-decoration: underline;
-}
-
 .post-author-name {
   font-weight: 800;
   font-size: 14px;
@@ -582,15 +642,6 @@ header {
   font-size: 14px;
   margin-bottom: 10px;
   white-space: pre-wrap;
-  overflow-wrap: anywhere;
-}
-
-.post-photo {
-  width: 100%;
-  max-height: 450px;
-  object-fit: cover;
-  border-radius: 10px;
-  margin-bottom: 10px;
 }
 
 .actions {
@@ -616,125 +667,11 @@ header {
 }
 
 .action-btn.liked {
-  color: var(--bp-gold);
+  color: #e63946;
 }
 
 /* =========================================================
-   SEARCH BAR & NOTIFICATIONS & CREATED MODULES
-========================================================= */
-.search-container {
-  padding: 10px 16px;
-  background: white;
-  border-bottom: 1px solid var(--bp-border);
-  position: relative;
-}
-
-.search-input-box {
-  display: flex;
-  align-items: center;
-  background: #f8fafc;
-  border: 1px solid var(--bp-border);
-  border-radius: 20px;
-  padding: 8px 14px;
-  gap: 10px;
-}
-
-.search-input-box input {
-  border: none;
-  background: transparent;
-  outline: none;
-  width: 100%;
-  font-size: 14px;
-}
-
-.search-results-panel {
-  margin-top: 10px;
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-}
-
-.search-item {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 10px 12px;
-  background: white;
-  border-radius: 10px;
-  border: 1px solid var(--bp-border);
-  cursor: pointer;
-}
-
-.search-item-info {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-
-.notif-dropdown {
-  position: absolute;
-  top: 50px;
-  right: 16px;
-  width: 320px;
-  max-width: 90vw;
-  background: white;
-  border-radius: 12px;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.15);
-  border: 1px solid var(--bp-border);
-  z-index: 1001;
-  overflow: hidden;
-}
-
-.notif-header {
-  padding: 12px 14px;
-  background: #f8fafc;
-  border-bottom: 1px solid var(--bp-border);
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  font-weight: 800;
-  font-size: 14px;
-  color: var(--bp-primary);
-}
-
-.notif-header button {
-  font-size: 11px;
-  color: var(--bp-gold-hover);
-  font-weight: 700;
-}
-
-.notif-list {
-  max-height: 320px;
-  overflow-y: auto;
-}
-
-.notif-item {
-  padding: 12px;
-  border-bottom: 1px solid var(--bp-border);
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  cursor: pointer;
-  background: white;
-}
-
-.notif-item.unread {
-  background: #f0f7ff;
-}
-
-.notif-item:last-child {
-  border-bottom: none;
-}
-
-.empty-state {
-  text-align: center;
-  padding: 24px 16px;
-  color: var(--bp-muted);
-  font-size: 13px;
-}
-
-/* =========================================================
-   FRIENDS & GROUPS COMPONENTS
+   FRIENDS & GROUPS & VIDEO MODULES
 ========================================================= */
 .friends-list, .groups-list {
   display: flex;
@@ -767,9 +704,6 @@ header {
   font-weight: 700;
 }
 
-/* =========================================================
-   VIDEO HUB & CONTROLS
-========================================================= */
 .video-card {
   background: white;
   border-radius: var(--bp-radius);
@@ -796,102 +730,6 @@ header {
   padding: 12px;
 }
 
-.video-title {
-  font-size: 15px;
-  font-weight: 800;
-  color: var(--bp-primary);
-  margin-bottom: 4px;
-}
-
-.video-author {
-  font-size: 12px;
-  color: var(--bp-muted);
-}
-
-/* =========================================================
-   PROFILE VIEW, COVER PHOTO & PROFILE PHOTO SYSTEM
-========================================================= */
-.profile-card {
-  background: var(--bp-card-bg);
-  border-radius: var(--bp-radius);
-  border: 1px solid var(--bp-border);
-  box-shadow: var(--bp-shadow);
-  margin-top: 12px;
-  margin-bottom: 20px;
-  overflow: hidden;
-}
-
-.profile-header-bg {
-  height: 180px;
-  background: linear-gradient(135deg, var(--bp-primary) 0%, var(--bp-accent) 100%);
-  position: relative;
-  background-size: cover;
-  background-position: center;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.profile-header-bg.editable {
-  cursor: pointer;
-}
-
-.profile-header-content {
-  padding: 0 16px 16px 16px;
-  position: relative;
-  text-align: center;
-  margin-top: -60px;
-}
-
-.profile-avatar-wrapper {
-  position: relative;
-  width: 110px;
-  height: 110px;
-  margin: 0 auto 10px auto;
-}
-
-.profile-avatar-large {
-  width: 110px;
-  height: 110px;
-  border-radius: 50%;
-  background: var(--bp-primary);
-  color: var(--bp-gold);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-weight: 900;
-  font-size: 40px;
-  border: 4px solid white;
-  box-shadow: var(--bp-shadow);
-  overflow: hidden;
-  position: relative;
-}
-
-.profile-avatar-large img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-.profile-name {
-  font-size: 20px;
-  font-weight: 800;
-  color: var(--bp-primary);
-}
-
-.profile-handle {
-  font-size: 13px;
-  color: var(--bp-muted);
-  margin-bottom: 8px;
-}
-
-.profile-actions-bar {
-  display: flex;
-  justify-content: center;
-  gap: 10px;
-  margin-bottom: 16px;
-}
-
 .modal-overlay {
   position: fixed;
   inset: 0;
@@ -911,24 +749,10 @@ header {
   border-top-right-radius: 20px;
   padding: 20px;
   box-shadow: 0 -4px 20px rgba(0,0,0,0.15);
-  animation: slideUp 0.25s ease-out;
-}
-
-@keyframes slideUp {
-  from { transform: translateY(100%); }
-  to { transform: translateY(0); }
-}
-
-.modal-title {
-  font-size: 16px;
-  font-weight: 800;
-  color: var(--bp-primary);
-  margin-bottom: 14px;
-  text-align: center;
 }
 
 /* =========================================================
-   BOTTOM MOBILE NAVIGATION
+   BOTTOM NAVIGATION BAR
 ========================================================= */
 .bottom-nav {
   position: fixed;
@@ -966,10 +790,6 @@ header {
 </head>
 
 <body>
-
-<!-- HIDDEN FILE INPUTS -->
-<input type="file" id="coverPhotoFileInput" accept="image/*" class="hidden">
-<input type="file" id="profilePhotoFileInput" accept="image/*" class="hidden">
 
 <!-- =======================================================
      AUTHENTICATION PAGE
@@ -1023,7 +843,7 @@ header {
 </div>
 
 <!-- =======================================================
-     MAIN APPLICATION VIEW
+     MAIN APPLICATION VIEW (ORIGINAL LAYOUT RESTORED)
 ======================================================= -->
 <div id="app" class="hidden">
   <header>
@@ -1033,10 +853,16 @@ header {
         <div class="logo">Believers<span>+</span></div>
       </div>
       <div class="header-actions">
+        <!-- TOP + BUTTON -->
+        <button id="topPlusBtn" class="header-circle-btn" title="Create Group"><i class="fa-solid fa-plus"></i></button>
+        <!-- SEARCH BUTTON -->
+        <button id="topSearchBtn" class="header-circle-btn" title="Search"><i class="fa-solid fa-magnifying-glass"></i></button>
+        <!-- NOTIFICATION BELL -->
         <button id="notifBellBtn" class="header-circle-btn" title="Notifications">
           <i class="fa-solid fa-bell"></i>
           <span id="notifBadge" class="badge hidden">0</span>
         </button>
+        <!-- LOGOUT BUTTON -->
         <button id="logoutBtn" class="logout-btn"><i class="fa-solid fa-right-from-bracket"></i> Exit</button>
       </div>
     </div>
@@ -1050,6 +876,17 @@ header {
       <div id="notifList" class="notif-list"></div>
     </div>
 
+    <!-- SEARCH PANEL OVERLAY -->
+    <div id="searchBarOverlay" class="search-modal-box hidden">
+      <div class="search-input-wrapper">
+        <i class="fa-solid fa-magnifying-glass" style="color: var(--bp-muted);"></i>
+        <input type="text" id="globalSearchInput" placeholder="Search friends by name...">
+        <button id="closeSearchBtn"><i class="fa-solid fa-xmark"></i></button>
+      </div>
+      <div id="searchResultsPanel" class="search-results-list hidden"></div>
+    </div>
+
+    <!-- TOP NAVIGATION MENU -->
     <div class="nav-wrap">
       <nav class="nav">
         <button id="tabHome" class="active" title="Home Feed"><i class="fa-solid fa-house"></i></button>
@@ -1061,44 +898,81 @@ header {
   </header>
 
   <main class="wrap" style="padding: 10px 12px;">
-    
-    <!-- SEARCH BAR SECTION -->
-    <div class="search-container">
-      <div class="search-input-box">
-        <i class="fa-solid fa-magnifying-glass" style="color: var(--bp-muted);"></i>
-        <input type="text" id="globalSearchInput" placeholder="Search friends by name...">
-      </div>
-      <div id="searchResultsPanel" class="search-results-panel hidden"></div>
-    </div>
 
-    <!-- HOME TAB -->
+    <!-- HOME TAB FEED VIEW -->
     <div id="viewHome">
+      <!-- POST / ENCOURAGEMENT COMPOSER -->
       <div class="composer-card">
-        <div class="avatar" id="currentUserAvatar">U</div>
-        <button id="openComposerBtn" class="mind-button">What's on your mind?</button>
-      </div>
-
-      <div id="postComposerArea" class="hidden">
-        <textarea id="postText" class="composer-textarea" placeholder="Share a testimony or prayer request..."></textarea>
-        <div class="composer-actions">
-          <button id="submitPostBtn" class="btn btn-gold btn-sm"><i class="fa-solid fa-paper-plane"></i> Post</button>
+        <div class="avatar" id="currentUserAvatar">O</div>
+        <button id="openComposerBtn" class="mind-button">What is on your heart today?</button>
+        <div class="photo-upload-btn" id="mediaUploadTrigger">
+          <i class="fa-solid fa-image"></i>
+          <span>Media</span>
         </div>
       </div>
 
-      <div class="stories-container">
-        <div class="stories-wrapper" id="storiesList"></div>
+      <div id="postComposerArea" class="hidden">
+        <textarea id="postText" class="composer-textarea" placeholder="Share a testimony, prayer request, or encouragement..."></textarea>
+        <div class="composer-actions">
+          <div style="font-size: 12px; color: var(--bp-muted);"><i class="fa-solid fa-earth-americas"></i> Public</div>
+          <button id="submitPostBtn" class="btn btn-gold btn-sm"><i class="fa-solid fa-paper-plane"></i> Publish</button>
+        </div>
       </div>
 
-      <div id="feedList"></div>
+      <!-- STORIES / COMMUNITY UPDATES SECTION -->
+      <div class="stories-container">
+        <div class="stories-wrapper" id="storiesList">
+          <!-- Update Story Card -->
+          <div class="story-card create-story">
+            <div class="top-img">
+              <div class="plus-btn"><i class="fa-solid fa-plus"></i></div>
+            </div>
+            <div class="bottom-text">Update Story</div>
+          </div>
+          <!-- Friend Story Cards -->
+          <div class="story-card">
+            <div class="story-overlay"></div>
+            <div class="story-author">Sarah Jenkins</div>
+          </div>
+          <div class="story-card">
+            <div class="story-overlay"></div>
+            <div class="story-author">David Miller</div>
+          </div>
+          <div class="story-card">
+            <div class="story-overlay"></div>
+            <div class="story-author">Grace Taylor</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- FEED POSTS LIST -->
+      <div id="feedList">
+        <div class="card">
+          <div class="posthead">
+            <div class="posthead-left">
+              <div class="avatar">G</div>
+              <div>
+                <div class="post-author-name">Grace Taylor</div>
+                <div class="post-meta-line"><span>2 hours ago</span> • <i class="fa-solid fa-cross"></i></div>
+              </div>
+            </div>
+          </div>
+          <div class="post-content">Welcoming everyone to our weekly digital fellowship! Let's uplift each other in prayer today.</div>
+          <div class="actions">
+            <button class="action-btn heart-btn" onclick="toggleHeart(this)"><i class="fa-solid fa-heart"></i> Support (<span>12</span>)</button>
+            <button class="action-btn"><i class="fa-solid fa-comment"></i> Encourage</button>
+          </div>
+        </div>
+      </div>
     </div>
 
-    <!-- FRIENDS TAB -->
+    <!-- COMMUNITY / FRIENDS TAB -->
     <div id="viewFriends" class="hidden">
       <h3 style="font-size: 16px; font-weight: 800; color: var(--bp-primary); margin: 10px 0;">Find & Connect with Friends</h3>
       <div id="friendsList" class="friends-list"></div>
     </div>
 
-    <!-- VIDEOS TAB -->
+    <!-- VIDEO HUB TAB -->
     <div id="viewVideos" class="hidden">
       <h3 style="font-size: 16px; font-weight: 800; color: var(--bp-primary); margin: 10px 0;">Community Video Hub</h3>
       <div id="videoFeedList"></div>
@@ -1111,47 +985,29 @@ header {
         <button id="openCreateGroupBtn" class="btn btn-gold btn-sm"><i class="fa-solid fa-plus"></i> Create Group</button>
       </div>
 
-      <div id="createGroupModal" class="modal-overlay hidden">
-        <div class="modal-sheet">
-          <div class="modal-title">Create New Group</div>
-          <div class="form-group">
-            <label>Group Name</label>
-            <input type="text" id="newGroupName" placeholder="e.g. Youth Fellowship">
-          </div>
-          <div class="form-group">
-            <label>Description</label>
-            <textarea id="newGroupDesc" rows="3" placeholder="What is this group about?"></textarea>
-          </div>
-          <button id="saveGroupBtn" class="btn btn-gold" style="margin-bottom: 8px;">Create Group</button>
-          <button id="closeGroupModalBtn" class="btn btn-outline modal-cancel-btn">Cancel</button>
-        </div>
-      </div>
-
       <div id="groupsList" class="groups-list"></div>
-    </div>
-
-    <!-- PROFILE VIEW -->
-    <div id="viewProfile" class="hidden">
-      <div class="profile-card">
-        <div class="profile-header-bg" id="profileHeaderBg"></div>
-        <div class="profile-header-content">
-          <div class="profile-avatar-wrapper">
-            <div class="profile-avatar-large" id="profileAvatarLarge">U</div>
-          </div>
-          <div class="profile-name" id="profileName">User Name</div>
-          <div class="profile-handle" id="profileHandle">@user</div>
-          <div class="profile-bio" id="profileBio">Believers+ Community Member</div>
-          
-          <div class="profile-actions-bar" id="profileActionsBar">
-            <button id="profileFriendBtn" class="btn btn-gold btn-sm"><i class="fa-solid fa-user-plus"></i> Add Friend</button>
-          </div>
-        </div>
-      </div>
     </div>
 
   </main>
 
-  <!-- MOBILE BOTTOM NAV -->
+  <!-- CREATE GROUP MODAL CONTAINER -->
+  <div id="createGroupModal" class="modal-overlay hidden">
+    <div class="modal-sheet">
+      <div style="font-size: 16px; font-weight: 800; color: var(--bp-primary); margin-bottom: 14px; text-align: center;">Create New Group</div>
+      <div class="form-group">
+        <label>Group Name</label>
+        <input type="text" id="newGroupName" placeholder="e.g. Youth Fellowship">
+      </div>
+      <div class="form-group">
+        <label>Description</label>
+        <textarea id="newGroupDesc" rows="3" placeholder="What is this group about?"></textarea>
+      </div>
+      <button id="saveGroupBtn" class="btn btn-gold" style="margin-bottom: 8px;">Create Group</button>
+      <button id="closeGroupModalBtn" class="btn btn-outline">Cancel</button>
+    </div>
+  </div>
+
+  <!-- BOTTOM NAVIGATION BAR -->
   <div class="bottom-nav">
     <button id="bNavHome" class="active"><i class="fa-solid fa-house"></i></button>
     <button id="bNavFriends"><i class="fa-solid fa-user-plus"></i></button>
@@ -1160,10 +1016,10 @@ header {
   </div>
 </div>
 
+<!-- =======================================================
+     APPLICATION LOGIC & BEHAVIOR
+======================================================= -->
 <script>
-/* =========================================================
-   APPLICATION STATE & MOCK DATA Persistence
-========================================================= */
 const state = {
   currentUser: { id: "u_101", name: "Oyantee Weah", handle: "@oyantee", avatar: "O" },
   users: [
@@ -1173,10 +1029,10 @@ const state = {
     { id: "u_104", name: "Grace Taylor", handle: "@gtaylor", avatar: "G" }
   ],
   friends: [],
-  friendRequests: ["u_102"], // Incoming or sent request tracking
+  friendRequests: ["u_102"],
   notifications: [
     { id: 1, text: "Sarah Jenkins sent you a friend request.", read: false, time: "10m ago" },
-    { id: 2, text: "David Miller liked your post.", read: false, time: "1h ago" }
+    { id: 2, text: "David Miller supported your encouraging message.", read: false, time: "1h ago" }
   ],
   groups: [
     { id: "g_1", name: "Morning Prayer Warriors", desc: "Daily devotions and fellowship." },
@@ -1198,53 +1054,18 @@ const state = {
   ]
 };
 
-/* =========================================================
-   CORE NAVIGATION & ROUTING SYSTEM
-========================================================= */
 document.addEventListener('DOMContentLoaded', () => {
-  initApp();
-});
-
-function initApp() {
   bindAuthEvents();
   bindNavigationEvents();
+  bindComposerEvents();
   bindSearchEvents();
   bindNotificationEvents();
   bindFriendEvents();
   bindGroupEvents();
   bindVideoEvents();
-
-  // Deep-link initial route evaluation
-  handleInitialRoute();
-}
-
-function handleInitialRoute() {
-  const path = window.location.pathname;
-  const profileMatch = path.match(/^\/profile\/([^/]+)$/);
-
-  if (profileMatch) {
-    const userId = profileMatch[1];
-    showApp();
-    openUserProfile(userId, false);
-  } else {
-    showApp();
-    switchTab('viewHome');
-  }
-}
-
-window.addEventListener('popstate', () => {
-  const path = window.location.pathname;
-  const profileMatch = path.match(/^\/profile\/([^/]+)$/);
-  if (profileMatch) {
-    openUserProfile(profileMatch[1], false);
-  } else {
-    switchTab('viewHome', false);
-  }
+  showApp();
 });
 
-/* =========================================================
-   UI SWITCHERS
-========================================================= */
 function showApp() {
   document.getElementById('auth').classList.add('hidden');
   document.getElementById('app').classList.remove('hidden');
@@ -1254,27 +1075,44 @@ function showApp() {
   renderVideos();
 }
 
-function switchTab(tabId, pushHistory = true) {
-  ['viewHome', 'viewFriends', 'viewVideos', 'viewGroups', 'viewProfile'].forEach(id => {
+/* =========================================================
+   1. NAVIGATION & TAB SWITCHING
+========================================================= */
+function bindNavigationEvents() {
+  const tabs = {
+    tabHome: 'viewHome',
+    tabFriends: 'viewFriends',
+    tabVideos: 'viewVideos',
+    tabGroups: 'viewGroups',
+    bNavHome: 'viewHome',
+    bNavFriends: 'viewFriends',
+    bNavVideos: 'viewVideos',
+    bNavGroups: 'viewGroups'
+  };
+
+  Object.keys(tabs).forEach(btnId => {
+    document.getElementById(btnId)?.addEventListener('click', () => switchTab(tabs[btnId]));
+  });
+
+  document.getElementById('brandLogoBtn')?.addEventListener('click', () => switchTab('viewHome'));
+}
+
+function switchTab(viewId) {
+  ['viewHome', 'viewFriends', 'viewVideos', 'viewGroups'].forEach(id => {
     document.getElementById(id).classList.add('hidden');
   });
-  document.getElementById(tabId).classList.remove('hidden');
+  document.getElementById(viewId).classList.remove('hidden');
 
-  // Sync Nav highlight
   const navMap = { viewHome: 'tabHome', viewFriends: 'tabFriends', viewVideos: 'tabVideos', viewGroups: 'tabGroups' };
   const bNavMap = { viewHome: 'bNavHome', viewFriends: 'bNavFriends', viewVideos: 'bNavVideos', viewGroups: 'bNavGroups' };
 
   document.querySelectorAll('.nav button, .bottom-nav button').forEach(btn => btn.classList.remove('active'));
-  if (navMap[tabId]) document.getElementById(navMap[tabId])?.classList.add('active');
-  if (bNavMap[tabId]) document.getElementById(bNavMap[tabId])?.classList.add('active');
-
-  if (pushHistory && tabId !== 'viewProfile') {
-    history.pushState(null, '', '/');
-  }
+  if (navMap[viewId]) document.getElementById(navMap[viewId])?.classList.add('active');
+  if (bNavMap[viewId]) document.getElementById(bNavMap[viewId])?.classList.add('active');
 }
 
 /* =========================================================
-   AUTH LOGIC
+   2. AUTHENTICATION BINDINGS
 ========================================================= */
 function bindAuthEvents() {
   document.getElementById('loginBtn')?.addEventListener('click', () => showApp());
@@ -1291,41 +1129,72 @@ function bindAuthEvents() {
     document.getElementById('app').classList.add('hidden');
     document.getElementById('auth').classList.remove('hidden');
   });
-  document.getElementById('brandLogoBtn')?.addEventListener('click', () => switchTab('viewHome'));
 }
 
 /* =========================================================
-   NAVIGATION BINDINGS
+   3. COMPOSER & POSTING LOGIC
 ========================================================= */
-function bindNavigationEvents() {
-  document.getElementById('tabHome')?.addEventListener('click', () => switchTab('viewHome'));
-  document.getElementById('tabFriends')?.addEventListener('click', () => switchTab('viewFriends'));
-  document.getElementById('tabVideos')?.addEventListener('click', () => switchTab('viewVideos'));
-  document.getElementById('tabGroups')?.addEventListener('click', () => switchTab('viewGroups'));
+function bindComposerEvents() {
+  const openBtn = document.getElementById('openComposerBtn');
+  const mediaBtn = document.getElementById('mediaUploadTrigger');
+  const composerArea = document.getElementById('postComposerArea');
+  const submitBtn = document.getElementById('submitPostBtn');
 
-  document.getElementById('bNavHome')?.addEventListener('click', () => switchTab('viewHome'));
-  document.getElementById('bNavFriends')?.addEventListener('click', () => switchTab('viewFriends'));
-  document.getElementById('bNavVideos')?.addEventListener('click', () => switchTab('viewVideos'));
-  document.getElementById('bNavGroups')?.addEventListener('click', () => switchTab('viewGroups'));
+  openBtn?.addEventListener('click', () => composerArea.classList.toggle('hidden'));
+  mediaBtn?.addEventListener('click', () => composerArea.classList.remove('hidden'));
+
+  submitBtn?.addEventListener('click', () => {
+    const textInput = document.getElementById('postText');
+    const content = textInput.value.trim();
+    if (!content) return;
+
+    const feed = document.getElementById('feedList');
+    const newPost = document.createElement('div');
+    newPost.className = 'card';
+    newPost.innerHTML = `
+      <div class="posthead">
+        <div class="posthead-left">
+          <div class="avatar">${state.currentUser.avatar}</div>
+          <div>
+            <div class="post-author-name">${state.currentUser.name}</div>
+            <div class="post-meta-line"><span>Just now</span> • <i class="fa-solid fa-cross"></i></div>
+          </div>
+        </div>
+      </div>
+      <div class="postcontent">${content}</div>
+      <div class="actions">
+        <button class="action-btn heart-btn" onclick="toggleHeart(this)"><i class="fa-solid fa-heart"></i> Support (<span>0</span>)</button>
+        <button class="action-btn"><i class="fa-solid fa-comment"></i> Encourage</button>
+      </div>
+    `;
+
+    feed.prepend(newPost);
+    textInput.value = '';
+    composerArea.classList.add('hidden');
+  });
+}
+
+function toggleHeart(btn) {
+  btn.classList.toggle('liked');
+  const countSpan = btn.querySelector('span');
+  let count = parseInt(countSpan.textContent) || 0;
+  if (btn.classList.contains('liked')) {
+    countSpan.textContent = count + 1;
+  } else {
+    countSpan.textContent = Math.max(0, count - 1);
+  }
 }
 
 /* =========================================================
-   1. FIND FRIENDS / FRIENDS SYSTEM
+   4. FIND FRIENDS SYSTEM
 ========================================================= */
-function bindFriendEvents() {
-  // Handled dynamically via renderFriends
-}
+function bindFriendEvents() {}
 
 function renderFriends() {
   const container = document.getElementById('friendsList');
   if (!container) return;
 
   const availableUsers = state.users.filter(u => u.id !== state.currentUser.id);
-  
-  if (availableUsers.length === 0) {
-    container.innerHTML = `<div class="empty-state">No available members found.</div>`;
-    return;
-  }
 
   container.innerHTML = availableUsers.map(user => {
     const isFriend = state.friends.includes(user.id);
@@ -1342,7 +1211,7 @@ function renderFriends() {
 
     return `
       <div class="friend-card">
-        <div class="friend-info" onclick="openUserProfile('${user.id}')" style="cursor: pointer;">
+        <div class="friend-info">
           <div class="avatar">${user.avatar}</div>
           <div>
             <div style="font-weight: 800; font-size: 14px; color: var(--bp-primary);">${user.name}</div>
@@ -1363,11 +1232,27 @@ function sendFriendRequest(userId) {
 }
 
 /* =========================================================
-   2. SEARCH SYSTEM
+   5. SEARCH FUNCTIONALITY
 ========================================================= */
 function bindSearchEvents() {
+  const searchBtn = document.getElementById('topSearchBtn');
+  const searchOverlay = document.getElementById('searchBarOverlay');
+  const closeBtn = document.getElementById('closeSearchBtn');
   const searchInput = document.getElementById('globalSearchInput');
   const resultsPanel = document.getElementById('searchResultsPanel');
+
+  searchBtn?.addEventListener('click', () => {
+    searchOverlay.classList.toggle('hidden');
+    if (!searchOverlay.classList.contains('hidden')) {
+      searchInput.focus();
+    }
+  });
+
+  closeBtn?.addEventListener('click', () => {
+    searchOverlay.classList.add('hidden');
+    searchInput.value = '';
+    resultsPanel.classList.add('hidden');
+  });
 
   searchInput?.addEventListener('input', (e) => {
     const query = e.target.value.trim().toLowerCase();
@@ -1377,17 +1262,17 @@ function bindSearchEvents() {
       return;
     }
 
-    const matchedUsers = state.users.filter(u => u.name.toLowerCase().includes(query) || u.handle.toLowerCase().includes(query));
+    const matched = state.users.filter(u => u.name.toLowerCase().includes(query) || u.handle.toLowerCase().includes(query));
     resultsPanel.classList.remove('hidden');
 
-    if (matchedUsers.length === 0) {
-      resultsPanel.innerHTML = `<div class="empty-state">No results found for "${query}"</div>`;
+    if (matched.length === 0) {
+      resultsPanel.innerHTML = `<div style="text-align: center; padding: 12px; color: var(--bp-muted); font-size: 13px;">No friends found matching "${query}"</div>`;
       return;
     }
 
-    resultsPanel.innerHTML = matchedUsers.map(u => `
-      <div class="search-item" onclick="openUserProfile('${u.id}'); clearSearch();">
-        <div class="search-item-info">
+    resultsPanel.innerHTML = matched.map(u => `
+      <div class="search-item" onclick="switchTab('viewFriends'); document.getElementById('searchBarOverlay').classList.add('hidden');">
+        <div style="display: flex; align-items: center; gap: 10px;">
           <div class="avatar">${u.avatar}</div>
           <div>
             <div style="font-weight: 700; font-size: 13px; color: var(--bp-primary);">${u.name}</div>
@@ -1400,18 +1285,8 @@ function bindSearchEvents() {
   });
 }
 
-function clearSearch() {
-  const searchInput = document.getElementById('globalSearchInput');
-  const resultsPanel = document.getElementById('searchResultsPanel');
-  if (searchInput) searchInput.value = '';
-  if (resultsPanel) {
-    resultsPanel.classList.add('hidden');
-    resultsPanel.innerHTML = '';
-  }
-}
-
 /* =========================================================
-   3. NOTIFICATIONS 🔔 SYSTEM
+   6. NOTIFICATIONS BELL & DROPDOWN
 ========================================================= */
 function bindNotificationEvents() {
   const bellBtn = document.getElementById('notifBellBtn');
@@ -1448,11 +1323,6 @@ function renderNotifications() {
     badge.classList.add('hidden');
   }
 
-  if (state.notifications.length === 0) {
-    list.innerHTML = `<div class="empty-state">No notifications.</div>`;
-    return;
-  }
-
   list.innerHTML = state.notifications.map(n => `
     <div class="notif-item ${n.read ? '' : 'unread'}" onclick="markNotifRead(${n.id})">
       <i class="fa-solid fa-circle-info" style="color: var(--bp-gold);"></i>
@@ -1473,15 +1343,22 @@ function markNotifRead(id) {
 }
 
 /* =========================================================
-   4. CREATE GROUP (+) SYSTEM
+   7. CREATE GROUP (+) MODAL SYSTEM
 ========================================================= */
 function bindGroupEvents() {
+  const topPlusBtn = document.getElementById('topPlusBtn');
   const openBtn = document.getElementById('openCreateGroupBtn');
   const closeBtn = document.getElementById('closeGroupModalBtn');
   const saveBtn = document.getElementById('saveGroupBtn');
   const modal = document.getElementById('createGroupModal');
 
-  openBtn?.addEventListener('click', () => modal.classList.remove('hidden'));
+  const openModal = () => {
+    switchTab('viewGroups');
+    modal.classList.remove('hidden');
+  };
+
+  topPlusBtn?.addEventListener('click', openModal);
+  openBtn?.addEventListener('click', openModal);
   closeBtn?.addEventListener('click', () => modal.classList.add('hidden'));
 
   saveBtn?.addEventListener('click', () => {
@@ -1516,17 +1393,15 @@ function renderGroups() {
           <div style="font-size: 12px; color: var(--bp-muted);">${g.desc}</div>
         </div>
       </div>
-      <button class="btn btn-outline btn-sm">Join</button>
+      <button class="btn btn-outline btn-sm">Join Group</button>
     </div>
   `).join('');
 }
 
 /* =========================================================
-   5. VIDEOS ▶️ HUB SYSTEM
+   8. VIDEO HUB PLAYBACK
 ========================================================= */
-function bindVideoEvents() {
-  // Handled dynamically via renderVideos
-}
+function bindVideoEvents() {}
 
 function renderVideos() {
   const container = document.getElementById('videoFeedList');
@@ -1541,57 +1416,11 @@ function renderVideos() {
         </video>
       </div>
       <div class="video-info">
-        <div class="video-title">${v.title}</div>
-        <div class="video-author">Shared by ${v.author}</div>
+        <div style="font-size: 15px; font-weight: 800; color: var(--bp-primary); margin-bottom: 4px;">${v.title}</div>
+        <div style="font-size: 12px; color: var(--bp-muted);">Shared by ${v.author}</div>
       </div>
     </div>
   `).join('');
-}
-
-/* =========================================================
-   PROFILE NAVIGATION HANDLER
-========================================================= */
-function openUserProfile(userId, pushHistory = true) {
-  const user = state.users.find(u => u.id === userId) || {
-    id: userId,
-    name: "Member Profile",
-    handle: "@member",
-    avatar: "M"
-  };
-
-  document.getElementById('profileName').textContent = user.name;
-  document.getElementById('profileHandle').textContent = user.handle;
-  document.getElementById('profileAvatarLarge').textContent = user.avatar;
-
-  const friendBtn = document.getElementById('profileFriendBtn');
-  if (userId === state.currentUser.id) {
-    friendBtn.classList.add('hidden');
-  } else {
-    friendBtn.classList.remove('hidden');
-    const isFriend = state.friends.includes(userId);
-    const isRequested = state.friendRequests.includes(userId);
-
-    if (isFriend) {
-      friendBtn.innerHTML = `<i class="fa-solid fa-check"></i> Friends`;
-      friendBtn.disabled = true;
-    } else if (isRequested) {
-      friendBtn.innerHTML = `<i class="fa-solid fa-clock"></i> Requested`;
-      friendBtn.disabled = true;
-    } else {
-      friendBtn.innerHTML = `<i class="fa-solid fa-user-plus"></i> Add Friend`;
-      friendBtn.disabled = false;
-      friendBtn.onclick = () => {
-        sendFriendRequest(userId);
-        openUserProfile(userId, false);
-      };
-    }
-  }
-
-  if (pushHistory) {
-    history.pushState({ userId }, '', `/profile/${userId}`);
-  }
-
-  switchTab('viewProfile', false);
 }
 </script>
 </body>
