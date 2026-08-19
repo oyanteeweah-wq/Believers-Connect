@@ -654,7 +654,6 @@ header {
   overflow: hidden;
 }
 
-/* COVER PHOTO CONTAINER */
 .profile-header-bg {
   height: 180px;
   background: linear-gradient(135deg, var(--bp-primary) 0%, var(--bp-accent) 100%);
@@ -706,7 +705,6 @@ header {
   box-shadow: 0 2px 8px rgba(0,0,0,0.3);
 }
 
-/* PROFILE PHOTO CONTAINER */
 .profile-header-content {
   padding: 0 16px 16px 16px;
   position: relative;
@@ -812,7 +810,6 @@ header {
   margin-bottom: 16px;
 }
 
-/* PHOTO ACTION MODAL / MENU */
 .modal-overlay {
   position: fixed;
   inset: 0;
@@ -934,7 +931,6 @@ header {
   gap: 4px;
 }
 
-/* EDIT PROFILE FORM GRID */
 .privacy-select {
   font-size: 11px;
   padding: 4px;
@@ -981,7 +977,7 @@ header {
 
 <body>
 
-<!-- HIDDEN NATIVE FILE INPUTS FOR MOBILE PHOTO SELECTION -->
+<!-- HIDDEN FILE INPUTS -->
 <input type="file" id="coverPhotoFileInput" accept="image/*" class="hidden">
 <input type="file" id="profilePhotoFileInput" accept="image/*" class="hidden">
 
@@ -1152,10 +1148,9 @@ header {
 </div>
 
 <!-- =======================================================
-     JAVASCRIPT APPLICATION LOGIC & DATABASE PERSISTENCE
+     JAVASCRIPT APPLICATION LOGIC & ROUTING SYSTEM
 ======================================================= -->
 <script>
-  // SVG Media Fallback
   const svgPlaceholder = "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='400' height='300' viewBox='0 0 400 300'><rect width='100%' height='100%' fill='%231b263b'/><text x='50%' y='50%' dominant-baseline='middle' text-anchor='middle' font-family='sans-serif' font-size='16' fill='%23e0a96d'>Believers+ Media Unavailable</text></svg>";
 
   function handleImageError(img) {
@@ -1163,12 +1158,10 @@ header {
     img.src = svgPlaceholder;
   }
 
-  // GLOBAL DATABASE & APPLICATION STATE
-  let currentUserId = "u_101"; // Default Logged In User ID
+  let currentUserId = "u_101";
   let activeProfileViewUserId = null;
   let attachedImageBase64 = null;
 
-  // Persistent User Database Store
   let usersDb = {
     "u_101": {
       id: "u_101",
@@ -1198,17 +1191,7 @@ header {
       department: "Media & Audio-Visual",
       churchRole: "Department Lead",
       yearsService: "5 Years",
-      memberships: "Youth Fellowship, Ministry Media Guild",
-      ministryAreas: "Digital Evangelism, Choir Support",
-      privacy: {
-        dob: "members",
-        address: "only_me",
-        phone: "friends",
-        email: "members",
-        education: "public",
-        employment: "public",
-        church: "public"
-      }
+      privacy: { dob: "members", address: "only_me", phone: "friends", email: "members", education: "public", employment: "public", church: "public" }
     },
     "u_102": {
       id: "u_102",
@@ -1236,15 +1219,7 @@ header {
       department: "Youth Ministry",
       churchRole: "Youth Leader",
       yearsService: "7 Years",
-      privacy: {
-        dob: "only_me",
-        address: "only_me",
-        phone: "public",
-        email: "members",
-        education: "public",
-        employment: "public",
-        church: "public"
-      }
+      privacy: { dob: "only_me", address: "only_me", phone: "public", email: "members", education: "public", employment: "public", church: "public" }
     },
     "u_103": {
       id: "u_103",
@@ -1260,26 +1235,16 @@ header {
       department: "Choir & Music Ministry",
       churchRole: "Assistant Director",
       yearsService: "4 Years",
-      privacy: {
-        dob: "only_me",
-        address: "only_me",
-        phone: "only_me",
-        email: "members",
-        education: "public",
-        employment: "public",
-        church: "public"
-      }
+      privacy: { dob: "only_me", address: "only_me", phone: "only_me", email: "members", education: "public", employment: "public", church: "public" }
     }
   };
 
-  // Persistent Stories Database
   let stories = [
     { id: "s_1", userId: "u_101", count: 0 },
     { id: "s_2", userId: "u_103", count: 2 },
     { id: "s_3", userId: "u_102", count: 1 }
   ];
 
-  // Persistent Posts Database
   let posts = [
     {
       id: "p_1",
@@ -1293,15 +1258,12 @@ header {
     }
   ];
 
-  // INITIALIZATION & LOCALSTORAGE MANAGEMENT
   document.addEventListener('DOMContentLoaded', () => {
-    // Load persisted users if available
     const savedUsers = localStorage.getItem('bp_users');
     if (savedUsers) {
       try { usersDb = JSON.parse(savedUsers); } catch(e){}
     }
 
-    // Attach Authentication Listeners
     document.getElementById('showSignupBtn').addEventListener('click', () => {
       document.getElementById('loginBox').classList.add('hidden');
       document.getElementById('signupBox').classList.remove('hidden');
@@ -1324,7 +1286,6 @@ header {
         return;
       }
 
-      // Check or create account dynamically
       let user = Object.values(usersDb).find(u => u.email === email);
       if (!user) {
         const newId = 'u_' + Date.now();
@@ -1405,7 +1366,6 @@ header {
       document.getElementById('postImagePreview').classList.add('hidden');
     });
 
-    // Submit Post Execution
     document.getElementById('submitPostBtn').addEventListener('click', () => {
       const text = document.getElementById('postText').value.trim();
       if (!text && !attachedImageBase64) return;
@@ -1424,7 +1384,6 @@ header {
       posts.unshift(newPost);
       renderFeed();
 
-      // Reset composer state
       document.getElementById('postText').value = '';
       attachedImageBase64 = null;
       document.getElementById('postImageInput').value = '';
@@ -1432,18 +1391,17 @@ header {
       document.getElementById('postComposerArea').classList.add('hidden');
     });
 
-    // PHOTO PICKER CHANGE LISTENERS FOR COVER & PROFILE PHOTOS
+    // File Input Listeners
     const coverFileInput = document.getElementById('coverPhotoFileInput');
     coverFileInput.addEventListener('change', async (e) => {
       const file = e.target.files[0];
       if (file) {
         const previewUrl = await readFileAsBase64(file);
-        // Instant Client Preview & State Update
         await uploadCoverPhotoToSupabase(currentUserId, file, previewUrl);
         saveDb();
         updateComposerAvatar();
         if (activeProfileViewUserId === currentUserId) {
-          openProfile(currentUserId);
+          openProfile(currentUserId, false);
         }
       }
       coverFileInput.value = '';
@@ -1454,20 +1412,45 @@ header {
       const file = e.target.files[0];
       if (file) {
         const previewUrl = await readFileAsBase64(file);
-        // Instant Client Preview & State Update
         await uploadProfilePhotoToSupabase(currentUserId, file, previewUrl);
         saveDb();
         updateComposerAvatar();
         if (activeProfileViewUserId === currentUserId) {
-          openProfile(currentUserId);
+          openProfile(currentUserId, false);
         }
       }
       profileFileInput.value = '';
     });
 
+    // Automatically initialize view or handle directly navigated URL
+    loginUser();
   });
 
-  // HELPER: READ FILE AS BASE64 DATA URL
+  // DEEP-LINK INITIALIZATION & ROUTING RESOLUTION
+  function initRouteFromURL() {
+    const path = window.location.pathname;
+    const profileMatch = path.match(/^\/profile\/([^/]+)\/?$/);
+
+    if (profileMatch && profileMatch[1]) {
+      const targetUserId = profileMatch[1];
+      if (usersDb[targetUserId]) {
+        openProfile(targetUserId, false);
+      } else {
+        navigateHome(false);
+      }
+    } else {
+      navigateHome(false);
+    }
+  }
+
+  window.addEventListener('popstate', (e) => {
+    if (e.state && e.state.profileId) {
+      openProfile(e.state.profileId, false);
+    } else {
+      navigateHome(false);
+    }
+  });
+
   function readFileAsBase64(file) {
     return new Promise((resolve, reject) => {
       const reader = new FileReader();
@@ -1477,40 +1460,11 @@ header {
     });
   }
 
-  // =========================================================
-  // SUPABASE PREPARATION STUBS FOR COVER & PROFILE UPLOADS
-  // =========================================================
   async function uploadCoverPhotoToSupabase(userId, fileObject, previewBase64) {
-    /*
-      =========================================================
-      SUPABASE STORAGE INTEGRATION STEP (READY FOR TOMORROW):
-      =========================================================
-      const { data, error } = await supabase.storage
-        .from('cover-photos')
-        .upload(`${userId}/${Date.now()}_${fileObject.name}`, fileObject, { upsert: true });
-      
-      const publicUrl = supabase.storage.from('cover-photos').getPublicUrl(data.path).data.publicUrl;
-      usersDb[userId].coverImg = publicUrl;
-      =========================================================
-    */
-    // For now, use instant local Base64 preview:
     usersDb[userId].coverImg = previewBase64;
   }
 
   async function uploadProfilePhotoToSupabase(userId, fileObject, previewBase64) {
-    /*
-      =========================================================
-      SUPABASE STORAGE INTEGRATION STEP (READY FOR TOMORROW):
-      =========================================================
-      const { data, error } = await supabase.storage
-        .from('profile-photos')
-        .upload(`${userId}/${Date.now()}_${fileObject.name}`, fileObject, { upsert: true });
-      
-      const publicUrl = supabase.storage.from('profile-photos').getPublicUrl(data.path).data.publicUrl;
-      usersDb[userId].avatarImg = publicUrl;
-      =========================================================
-    */
-    // For now, use instant local Base64 preview:
     usersDb[userId].avatarImg = previewBase64;
   }
 
@@ -1522,9 +1476,8 @@ header {
     document.getElementById('auth').classList.add('hidden');
     document.getElementById('app').classList.remove('hidden');
     
-    // Set Header & Composer Avatar to Current User Profile Photo or Initial
     updateComposerAvatar();
-    navigateHome();
+    initRouteFromURL();
   }
 
   function updateComposerAvatar() {
@@ -1549,8 +1502,7 @@ header {
     area.classList.toggle('hidden');
   }
 
-  // ROUTING & NAVIGATION
-  function navigateHome() {
+  function navigateHome(shouldPushState = true) {
     activeProfileViewUserId = null;
     document.getElementById('profileView').classList.add('hidden');
     document.getElementById('feedView').classList.remove('hidden');
@@ -1561,7 +1513,10 @@ header {
     
     renderStories();
     renderFeed();
-    window.history.pushState({}, '', '/');
+
+    if (shouldPushState && window.location.pathname !== '/') {
+      window.history.pushState({}, '', '/');
+    }
   }
 
   function switchTab(tabName) {
@@ -1572,7 +1527,6 @@ header {
     }
   }
 
-  // RENDER STORIES
   function renderStories() {
     const wrapper = document.getElementById('storiesWrapper');
     wrapper.innerHTML = '';
@@ -1606,7 +1560,6 @@ header {
     });
   }
 
-  // RENDER FEED POSTS
   function renderFeed() {
     const feedContainer = document.getElementById('feedContainer');
     feedContainer.innerHTML = '';
@@ -1660,23 +1613,20 @@ header {
     }
   }
 
-  // =========================================================
-  // PROFILE ROUTING & VIEW / EDIT SYSTEM
-  // =========================================================
-  function openProfile(userId) {
+  function openProfile(userId, shouldPushState = true) {
     const user = usersDb[userId];
     if (!user) return;
 
     activeProfileViewUserId = userId;
 
-    // Push URL State
-    window.history.pushState({ profileId: userId }, '', `/profile/${user.id}`);
+    if (shouldPushState) {
+      window.history.pushState({ profileId: userId }, '', `/profile/${user.id}`);
+    }
 
     document.getElementById('feedView').classList.add('hidden');
     const profileView = document.getElementById('profileView');
     profileView.classList.remove('hidden');
 
-    // Navigation highlight
     document.getElementById('navHomeBtn').classList.remove('active');
     document.getElementById('bNavHome').classList.remove('active');
     if (userId === currentUserId) {
@@ -1686,17 +1636,15 @@ header {
     renderProfileCard(user);
   }
 
-  // Helper for Privacy Checks
   function canViewField(user, fieldPrivacyKey) {
-    if (user.id === currentUserId) return true; // Owner can always view
+    if (user.id === currentUserId) return true;
     const setting = (user.privacy && user.privacy[fieldPrivacyKey]) ? user.privacy[fieldPrivacyKey] : 'public';
     
     if (setting === 'public') return true;
-    if (setting === 'members' && currentUserId) return true; // Any authenticated user
-    return false; // 'only_me' or unauthenticated
+    if (setting === 'members' && currentUserId) return true;
+    return false;
   }
 
-  // PHOTO SELECTION & ACTION MODAL CONTROLLERS
   function triggerCoverPhotoPicker() {
     document.getElementById('coverPhotoFileInput').click();
   }
@@ -1738,7 +1686,7 @@ header {
     if (usersDb[currentUserId]) {
       usersDb[currentUserId].coverImg = "";
       saveDb();
-      openProfile(currentUserId);
+      openProfile(currentUserId, false);
     }
   }
 
@@ -1747,7 +1695,7 @@ header {
       usersDb[currentUserId].avatarImg = "";
       saveDb();
       updateComposerAvatar();
-      openProfile(currentUserId);
+      openProfile(currentUserId, false);
     }
   }
 
@@ -1755,7 +1703,6 @@ header {
     const isOwner = (user.id === currentUserId);
     const initial = user.name.charAt(0).toUpperCase();
 
-    // COVER PHOTO HTML CONSTRUCTION
     let coverStyle = "";
     let coverContent = "";
 
@@ -1779,7 +1726,6 @@ header {
       }
     }
 
-    // PROFILE AVATAR HTML CONSTRUCTION
     let avatarContent = "";
     if (user.avatarImg) {
       avatarContent = `<img src="${user.avatarImg}" alt="${user.name}" onerror="handleImageError(this)">`;
@@ -1806,14 +1752,12 @@ header {
 
       <div class="profile-card">
         
-        <!-- COVER PHOTO BANNER -->
         <div class="profile-header-bg ${isOwner ? 'editable' : ''}" style="${coverStyle}" ${isOwner && user.coverImg ? 'onclick="openPhotoModal(\'cover\')"' : ''}>
           ${coverContent}
         </div>
 
         <div class="profile-header-content">
           
-          <!-- PROFILE PHOTO -->
           <div class="profile-avatar-wrapper">
             <div class="profile-avatar-large ${isOwner ? 'editable' : ''}" ${isOwner && user.avatarImg ? 'onclick="openPhotoModal(\'profile\')"' : ''}>
               ${avatarContent}
@@ -1845,7 +1789,6 @@ header {
           </div>
         </div>
 
-        <!-- PERSONAL INFORMATION -->
         <div class="profile-section">
           <div class="profile-section-title"><i class="fa-solid fa-id-card"></i> Personal Information</div>
           <div class="info-grid">
@@ -1880,7 +1823,6 @@ header {
           </div>
         </div>
 
-        <!-- CONTACT INFORMATION -->
         <div class="profile-section">
           <div class="profile-section-title"><i class="fa-solid fa-address-book"></i> Contact Details</div>
           <div class="info-grid">
@@ -1899,7 +1841,6 @@ header {
           </div>
         </div>
 
-        <!-- EDUCATION -->
         <div class="profile-section">
           <div class="profile-section-title"><i class="fa-solid fa-graduation-cap"></i> Education</div>
           <div class="info-grid">
@@ -1928,7 +1869,6 @@ header {
           </div>
         </div>
 
-        <!-- PROFESSIONAL INFORMATION -->
         <div class="profile-section">
           <div class="profile-section-title"><i class="fa-solid fa-briefcase"></i> Professional Information</div>
           <div class="info-grid">
@@ -1957,7 +1897,6 @@ header {
           </div>
         </div>
 
-        <!-- CHURCH & MINISTRY INFORMATION -->
         <div class="profile-section">
           <div class="profile-section-title"><i class="fa-solid fa-church"></i> Church & Ministry</div>
           <div class="info-grid">
@@ -1990,7 +1929,6 @@ header {
     `;
   }
 
-  // EDIT PROFILE FORM RENDER & SAVE LOGIC
   function renderEditProfileForm(userId) {
     const user = usersDb[userId];
     if (!user) return;
@@ -2195,7 +2133,6 @@ header {
     const user = usersDb[userId];
     if (!user) return;
 
-    // Mutate and update user database object
     user.avatarImg = document.getElementById('editAvatarImg').value.trim();
     user.coverImg = document.getElementById('editCoverImg').value.trim();
     user.name = document.getElementById('editName').value.trim();
@@ -2222,7 +2159,6 @@ header {
     user.churchRole = document.getElementById('editChurchRole').value.trim();
     user.yearsService = document.getElementById('editYearsService').value.trim();
 
-    // Privacy Object updates
     user.privacy = {
       dob: document.getElementById('privDob').value,
       address: document.getElementById('privAddress').value,
@@ -2233,12 +2169,10 @@ header {
       church: document.getElementById('privChurch').value
     };
 
-    // Save changes to persistent LocalStorage
     saveDb();
 
-    // Refresh application state
     updateComposerAvatar();
-    openProfile(userId);
+    openProfile(userId, false);
   }
 </script>
 
