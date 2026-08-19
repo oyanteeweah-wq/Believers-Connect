@@ -3,1155 +3,181 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
-
 <meta name="theme-color" content="#1877f2">
 <meta name="description" content="Believer Connect — One Community, One Faith">
 
 <title>Believer Connect</title>
 
-<!-- Font Awesome for Social Media Icons -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
 <style>
-/* =========================================================
-   RESET & BASE STYLES
-========================================================= */
-
-*{
-  box-sizing:border-box;
-  margin:0;
-  padding:0;
-}
-
-html{
-  scroll-behavior:smooth;
-}
-
+*{ box-sizing:border-box; margin:0; padding:0; }
+html{ scroll-behavior:smooth; }
 body{
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
   background:#f0f2f5;
   color:#050505;
   line-height:1.4;
-  padding-bottom: 60px; /* Space for bottom nav */
+  padding-bottom: 60px;
   overflow-x: hidden;
 }
-
-button,
-input,
-textarea{
-  font:inherit;
-}
-
-button{
-  border:0;
-  outline:none;
-}
-
-img{
-  max-width:100%;
-}
-
-/* =========================================================
-   VARIABLES
-========================================================= */
+button, input, textarea{ font:inherit; }
+button{ border:0; outline:none; }
+img{ max-width:100%; }
 
 :root{
   --primary:#1877f2;
   --primary-dark:#0e5aed;
-  --primary-light:#e7f3ff;
-
-  --text:#050505;
   --muted:#65676b;
-
-  --border:#ced0d4;
-
   --surface:#ffffff;
-  --surface-soft:#f0f2f5;
-
-  --danger:#fa3e3e;
-  --danger-bg:#ffebe9;
-
-  --success:#42b72a;
-  --success-bg:#eaf8f1;
-
   --shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
-
   --radius:8px;
 }
 
-/* =========================================================
-   UTILITIES
-========================================================= */
+.hidden{ display:none !important; }
+.wrap{ width:100%; max-width:680px; margin:auto; }
+.muted{ color:var(--muted); }
+.error{ color:#fa3e3e; }
 
-.hidden{
-  display:none !important;
-}
-
-.wrap{
-  width:100%;
-  max-width:680px;
-  margin:auto;
-}
-
-.muted{
-  color:var(--muted);
-}
-
-.error{
-  color:var(--danger);
-}
-
-.success{
-  color:var(--success);
-}
-
-.meta{
-  color:var(--muted);
-  font-size:12px;
-}
-
-.empty{
-  text-align:center;
-  padding:45px 20px;
-  color:var(--muted);
-}
-
-.loading{
-  text-align:center;
-  padding:40px;
-  color:var(--muted);
-}
-
-/* =========================================================
-   TOP HEADER (FACEBOOK STYLE)
-========================================================= */
-
+/* HEADER */
 header{
-  position:sticky;
-  top:0;
-  z-index:1000;
+  position:sticky; top:0; z-index:1000;
   background:var(--surface);
   box-shadow: 0 1px 3px rgba(0,0,0,0.08);
 }
-
 .header-inner{
-  width:100%;
-  max-width:680px;
-  min-height:56px;
-  margin:auto;
-  padding: 0 12px;
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
+  width:100%; max-width:680px; min-height:56px;
+  margin:auto; padding: 0 12px;
+  display:flex; align-items:center; justify-space-between;
 }
-
-.logo-area{
-  display:flex;
-  align-items:center;
-  gap:6px;
-}
-
-.logo-icon{
-  font-size:22px;
-  color:var(--primary);
-  font-weight:bold;
-}
-
-.logo{
-  font-size:24px;
-  font-weight:800;
-  letter-spacing:-0.5px;
-  color:var(--primary);
-  font-family: Arial, sans-serif;
-}
-
-.tag{
-  display:none;
-}
-
-.header-user{
-  display:flex;
-  align-items:center;
-  gap:8px;
-}
-
+.logo{ font-size:24px; font-weight:800; letter-spacing:-0.5px; color:var(--primary); }
+.header-user{ display:flex; align-items:center; gap:8px; margin-left:auto;}
 .icon-circle-btn{
-  width:36px;
-  height:36px;
-  border-radius:50%;
-  background:#e4e6eb;
-  display:grid;
-  place-items:center;
-  color:#050505;
-  font-size:16px;
-  cursor:pointer;
+  width:36px; height:36px; border-radius:50%; background:#e4e6eb;
+  display:grid; place-items:center; color:#050505; font-size:16px; cursor:pointer;
 }
-
-.icon-circle-btn:hover{
-  background:#d8dadf;
-}
-
 .header-avatar{
-  width:36px;
-  height:36px;
-  border-radius:50%;
-  background:#e4e6eb;
-  display:grid;
-  place-items:center;
-  font-weight:700;
-  overflow:hidden;
+  width:36px; height:36px; border-radius:50%; background:#e4e6eb;
+  display:grid; place-items:center; font-weight:700; overflow:hidden;
 }
 
-.header-avatar img{
-  width:100%;
-  height:100%;
-  object-fit:cover;
-}
-
-.logout-btn{
-  padding:6px 10px;
-  border-radius:6px;
-  background:#e4e6eb;
-  color:#050505;
-  cursor:pointer;
-  font-weight:600;
-  font-size:13px;
-}
-
-.logout-btn:hover{
-  background:#d8dadf;
-}
-
-/* =========================================================
-   NAVIGATION ROW (FACEBOOK STYLE TABS)
-========================================================= */
-
-.nav-wrap{
-  position:sticky;
-  top:56px;
-  z-index:900;
-  background:var(--surface);
-  border-bottom:1px solid #e4e6eb;
-}
-
-.nav{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  width:100%;
-  max-width:680px;
-  margin:0 auto;
-}
-
+/* NAV TABS */
+.nav-wrap{ position:sticky; top:56px; z-index:900; background:var(--surface); border-bottom:1px solid #e4e6eb; }
+.nav{ display:flex; justify-space-between; align-items:center; width:100%; max-width:680px; margin:0 auto; }
 .nav button{
-  flex:1;
-  height:48px;
-  background:transparent;
-  color:var(--muted);
-  border:none;
-  position:relative;
-  cursor:pointer;
-  font-size:20px;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  border-bottom:3px solid transparent;
+  flex:1; height:48px; background:transparent; color:var(--muted);
+  border:none; cursor:pointer; font-size:20px; display:flex;
+  align-items:center; justify-content:center; border-bottom:3px solid transparent;
 }
+.nav button.active{ color:var(--primary); border-bottom-color:var(--primary); }
 
-.nav button.active{
-  color:var(--primary);
-  border-bottom-color:var(--primary);
-}
+/* MAIN CONTENT */
+main{ padding:8px 0; }
+.card, .composer-card{ background:var(--surface); box-shadow:var(--shadow); margin-bottom:8px; padding:12px; }
+@media(min-width: 680px){ .card, .composer-card{ border-radius:var(--radius); } }
 
-.nav button .badge{
-  position:absolute;
-  top:6px;
-  right:18%;
-  background:var(--danger);
-  color:white;
-  font-size:10px;
-  font-weight:bold;
-  padding:2px 5px;
-  border-radius:10px;
-  border:2px solid white;
-}
-
-/* =========================================================
-   MAIN CONTENT & CARDS
-========================================================= */
-
-main{
-  padding:8px 0;
-}
-
-.card,
-.composer-card,
-.profile-card{
-  background:var(--surface);
-  border-radius:0;
-  box-shadow:var(--shadow);
-  margin-bottom:8px;
-}
-
-@media(min-width: 680px){
-  .card, .composer-card, .profile-card{
-    border-radius:var(--radius);
-  }
-}
-
-.card{
-  padding:12px;
-}
-
-.composer-card{
-  padding:12px;
-}
-
-/* =========================================================
-   CREATE POST SECTION
-========================================================= */
-
-.composer-top{
-  display:flex;
-  align-items:center;
-  gap:10px;
-}
-
-.avatar,
+/* COMPOSER */
+.composer-top{ display:flex; align-items:center; gap:10px; }
 .composer-avatar{
-  width:40px;
-  height:40px;
-  min-width:40px;
-  border-radius:50%;
-  display:grid;
-  place-items:center;
-  background:#e4e6eb;
-  color:var(--muted);
-  font-weight:700;
-  overflow:hidden;
-  position:relative;
+  width:40px; height:40px; border-radius:50%; background:#e4e6eb;
+  display:grid; place-items:center; font-weight:700;
 }
-
-.avatar img,
-.composer-avatar img{
-  width:100%;
-  height:100%;
-  object-fit:cover;
-}
-
-.online-indicator{
-  position:absolute;
-  bottom:2px;
-  right:2px;
-  width:10px;
-  height:10px;
-  background:#31a24c;
-  border-radius:50%;
-  border:2px solid white;
-}
-
 .mind-button{
-  flex:1;
-  padding:9px 14px;
-  border-radius:20px;
-  background:#f0f2f5;
-  color:var(--text);
-  text-align:left;
-  cursor:pointer;
-  font-size:15px;
-  border:none;
-}
-
-.mind-button:hover{
-  background:#e4e6eb;
-}
-
-#postComposerArea{
-  margin-top:12px;
-}
-
-.composer-textarea{
-  min-height:90px;
-  border:1px solid #ced0d4;
-  border-radius:8px;
-  padding:10px;
-}
-
-.composer-actions{
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  gap:10px;
-  margin-top:10px;
-  padding-top:10px;
-  border-top:1px solid #e4e6eb;
-}
-
-.composer-buttons{
-  display:flex;
-  gap:8px;
-}
-
-.photo-upload{
-  display:inline-flex;
-  align-items:center;
-  gap:6px;
-  padding:6px 10px;
-  border-radius:6px;
-  color:#45bd62;
-  cursor:pointer;
-  font-size:14px;
-  font-weight:600;
-}
-
-.photo-upload:hover{
-  background:#f0f2f5;
-}
-
-/* =========================================================
-   STORIES SECTION
-========================================================= */
-
-.stories-container{
-  display:flex;
-  gap:8px;
-  overflow-x:auto;
-  padding:12px;
-  background:var(--surface);
-  margin-bottom:8px;
-  scrollbar-width:none;
-}
-
-.stories-container::-webkit-scrollbar{
-  display:none;
-}
-
-.story-card{
-  flex:0 0 105px;
-  height:170px;
-  border-radius:10px;
-  position:relative;
-  overflow:hidden;
-  background:#ccc;
-  cursor:pointer;
-  box-shadow: 0 1px 2px rgba(0,0,0,0.2);
-}
-
-.story-card img.story-bg{
-  width:100%;
-  height:100%;
-  object-fit:cover;
-}
-
-.story-card.create-story{
-  background:#fff;
-  border:1px solid #e4e6eb;
-  display:flex;
-  flex-direction:column;
-}
-
-.story-card.create-story .story-bg-wrapper{
-  height:115px;
-  width:100%;
-  overflow:hidden;
-}
-
-.story-card.create-story .story-bg-wrapper img{
-  width:100%;
-  height:100%;
-  object-fit:cover;
-}
-
-.story-card.create-story .create-btn-area{
-  height:55px;
-  background:white;
-  position:relative;
-  display:flex;
-  align-items:flex-end;
-  justify-content:center;
-  padding-bottom:6px;
-}
-
-.story-card.create-story .plus-icon{
-  position:absolute;
-  top:-16px;
-  left:50%;
-  transform:translateX(-50%);
-  width:32px;
-  height:32px;
-  background:var(--primary);
-  color:white;
-  border-radius:50%;
-  border:3px solid white;
-  display:grid;
-  place-items:center;
-  font-size:16px;
-  font-weight:bold;
-}
-
-.story-card.create-story span{
-  font-size:12px;
-  font-weight:600;
-  color:#050505;
-}
-
-.story-card .story-avatar{
-  position:absolute;
-  top:8px;
-  left:8px;
-  width:36px;
-  height:36px;
-  border-radius:50%;
-  border:3px solid var(--primary);
-  overflow:hidden;
-}
-
-.story-card .story-badge{
-  position:absolute;
-  top:8px;
-  left:8px;
-  background:var(--primary);
-  color:white;
-  font-size:11px;
-  font-weight:bold;
-  width:22px;
-  height:22px;
-  border-radius:6px;
-  display:grid;
-  place-items:center;
-}
-
-.story-card .story-author{
-  position:absolute;
-  bottom:8px;
-  left:8px;
-  right:8px;
-  color:white;
-  font-size:12px;
-  font-weight:600;
-  text-shadow:0 1px 2px rgba(0,0,0,0.8);
-  white-space:nowrap;
-  overflow:hidden;
-  text-overflow:ellipsis;
-}
-
-/* =========================================================
-   FEED & POST CARDS
-========================================================= */
-
-.posthead{
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  margin-bottom:10px;
-}
-
-.post-head-left{
-  display:flex;
-  align-items:center;
-  gap:10px;
-}
-
-.post-author{
-  min-width:0;
-}
-
-.post-author-name{
-  font-weight:600;
-  font-size:15px;
-  color:#050505;
-}
-
-.post-meta-line{
-  font-size:12px;
-  color:var(--muted);
-  display:flex;
-  align-items:center;
-  gap:4px;
-}
-
-.post-menu-btn{
-  color:var(--muted);
-  font-size:18px;
-  background:transparent;
-  padding:4px 8px;
-  cursor:pointer;
-}
-
-.post-content{
-  margin-top:6px;
-  font-size:15px;
-  white-space:pre-wrap;
-  overflow-wrap:anywhere;
-  line-height:1.35;
-  color:#050505;
-}
-
-.post-photo{
-  display:block;
-  width:calc(100% + 24px);
-  margin-left:-12px;
-  margin-right:-12px;
-  max-height:600px;
-  object-fit:cover;
-  margin-top:10px;
-  border-radius:0;
-}
-
-/* FACEBOOK STYLE ACTIONS ROW */
-.actions{
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  margin-top:8px;
-  padding-top:4px;
-  border-top:1px solid #e4e6eb;
-}
-
-.action-btn{
-  flex:1;
-  display:inline-flex;
-  align-items:center;
-  justify-content:center;
-  gap:6px;
-  padding:8px 0;
-  margin:2px 0;
-  border-radius:4px;
-  background:transparent;
-  color:#65676b;
-  cursor:pointer;
-  font-weight:600;
-  font-size:13px;
-  transition:background .2s;
-}
-
-.action-btn:hover{
-  background:#f2f2f2;
-}
-
-.action-btn.like-active{
-  color:var(--primary);
-}
-
-.delete-post{
-  margin-top:12px;
-  width:100%;
-}
-
-/* =========================================================
-   IMAGE PREVIEW
-========================================================= */
-
-.post-image-preview{
-  position:relative;
-  margin-top:12px;
-  border-radius:8px;
-  overflow:hidden;
-  background:#f2f5f9;
-}
-
-.post-image-preview img{
-  display:block;
-  width:100%;
-  max-height:300px;
-  object-fit:cover;
-}
-
-.remove-post-image{
-  position:absolute;
-  top:10px;
-  right:10px;
-  width:30px;
-  height:30px;
-  padding:0;
-  border-radius:50%;
-  background:rgba(0,0,0,0.6);
-  color:white;
-  cursor:pointer;
-  font-size:16px;
-}
-
-/* =========================================================
-   FORMS & BUTTONS
-========================================================= */
-
-.form-group{
-  margin-bottom:14px;
-}
-
-label{
-  display:block;
-  margin-bottom:6px;
-  font-size:13px;
-  font-weight:600;
-  color:#526078;
-}
-
-input,
-textarea{
-  width:100%;
-  padding:10px 12px;
-  border:1px solid #ced0d4;
-  border-radius:6px;
-  outline:none;
-  color:var(--text);
-  background:white;
-}
-
-textarea{
-  resize:vertical;
-  min-height:80px;
-}
-
-input:focus,
-textarea:focus{
-  border-color:var(--primary);
-}
-
-.btn{
-  display:inline-flex;
-  align-items:center;
-  justify-content:center;
-  gap:6px;
-  padding:8px 14px;
-  border-radius:6px;
-  background:var(--primary);
-  color:white;
-  font-weight:600;
-  cursor:pointer;
-}
-
-.btn:hover{
-  background:var(--primary-dark);
-}
-
-.btn-full{
-  width:100%;
-}
-
-.btn-secondary{
-  background:#e4e6eb;
-  color:#050505;
-}
-
-.btn-secondary:hover{
-  background:#d8dadf;
-}
-
-.btn-danger{
-  background:var(--danger-bg);
-  color:var(--danger);
-}
-
-.btn-ghost{
-  background:#f1f4f8;
-  color:#334155;
-}
-
-.btn-small{
-  padding:6px 10px;
-  font-size:12px;
-}
-
-/* =========================================================
-   AUTHENTICATION
-========================================================= */
-
-.auth-page{
-  min-height:100vh;
-  display:grid;
-  place-items:center;
-  padding:20px;
-  background:#f0f2f5;
-}
-
-.auth{
-  width:min(100%,400px);
-}
-
-.auth-brand{
-  text-align:center;
-  margin-bottom:20px;
-}
-
-.auth-logo{
-  width:60px;
-  height:60px;
-  margin:0 auto 10px;
-  border-radius:50%;
-  display:grid;
-  place-items:center;
-  color:white;
-  background:var(--primary);
-  font-size:30px;
-}
-
-.brand{
-  font-size:26px;
-  font-weight:800;
-  color:var(--primary);
-}
-
-.brand-subtitle{
-  margin-top:2px;
-  color:var(--muted);
-  font-size:13px;
-}
-
-.auth-card{
-  background:white;
-  border-radius:8px;
-  padding:20px;
-  box-shadow:0 2px 4px rgba(0,0,0,0.1), 0 8px 16px rgba(0,0,0,0.1);
-}
-
-/* =========================================================
-   PROFILE PAGE LAYOUT
-========================================================= */
-
-.profile-card{
-  overflow:hidden;
-}
-
-.profile-cover{
-  height:180px;
-  position:relative;
-  background:linear-gradient(135deg, #0e5aed, #1877f2);
-}
-
-.profile-cover img{
-  width:100%;
-  height:100%;
-  object-fit:cover;
-}
-
-.profile-main{
-  padding:0 16px 12px;
-  position:relative;
-}
-
-.profile-avatar-wrap{
-  margin-top:-45px;
-  margin-bottom:10px;
-}
-
-.profile-avatar{
-  width:90px;
-  height:90px;
-  border-radius:50%;
-  border:4px solid white;
-  display:grid;
-  place-items:center;
-  background:#e4e6eb;
-  color:var(--muted);
-  font-size:32px;
-  font-weight:bold;
-  overflow:hidden;
-}
-
-.profile-heading h2{
-  font-size:22px;
-}
-
-.profile-username{
-  color:var(--muted);
-  font-size:14px;
-}
-
-.profile-bio-area{
-  padding:0 16px 16px;
-}
-
-.profile-tabs{
-  display:flex;
-  border-bottom:1px solid #e4e6eb;
-  margin:-10px -16px 12px;
-  padding:0 16px;
-}
-
-.profile-tab{
-  padding:10px 12px;
-  background:transparent;
-  color:var(--muted);
-  border-bottom:3px solid transparent;
-  cursor:pointer;
-  font-weight:600;
-}
-
-.profile-tab.active{
-  color:var(--primary);
-  border-bottom-color:var(--primary);
-}
-
-/* =========================================================
-   BOTTOM NAVIGATION BAR (MOBILE)
-========================================================= */
-
-.bottom-nav{
-  position:fixed;
-  bottom:0;
-  left:0;
-  right:0;
-  height:50px;
-  background:white;
-  border-top:1px solid #e4e6eb;
-  display:flex;
-  justify-content:space-around;
-  align-items:center;
-  z-index:1000;
-}
-
-.bottom-nav-item{
-  color:var(--muted);
-  font-size:20px;
-  background:transparent;
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  justify-content:center;
-  width:20%;
-  height:100%;
-}
-
-.bottom-nav-item.active{
-  color:var(--primary);
-}
-
-/* =========================================================
-   TOAST
-========================================================= */
-
-#toastContainer{
-  position:fixed;
-  right:16px;
-  bottom:60px;
-  z-index:5000;
-  display:flex;
-  flex-direction:column;
-  gap:8px;
-  width:min(320px,calc(100% - 32px));
-}
-
-.toast{
-  padding:10px 14px;
-  border-radius:8px;
-  color:white;
-  background:#172033;
-  box-shadow:0 4px 12px rgba(0,0,0,0.15);
-  font-size:14px;
-}
-
-.toast.success{ background:var(--success); }
-.toast.error{ background:var(--danger); }
-
-.divider{
-  height:1px;
-  background:#e4e6eb;
-  margin:16px 0;
-}
+  flex:1; padding:9px 14px; border-radius:20px; background:#f0f2f5;
+  color:var(--text); text-align:left; cursor:pointer; font-size:15px; border:none;
+}
+.composer-textarea{ width:100%; min-height:80px; border:1px solid #ced0d4; border-radius:8px; padding:10px; margin-top:10px; }
+.composer-actions{ display:flex; justify-content:flex-end; gap:8px; margin-top:10px; }
+
+/* BUTTONS */
+.btn{ padding:8px 14px; border-radius:6px; background:var(--primary); color:white; font-weight:600; cursor:pointer; }
+.btn-secondary{ background:#e4e6eb; color:#050505; }
+.btn-full{ width:100%; }
+
+/* AUTH */
+.auth-page{ min-height:100vh; display:grid; place-items:center; padding:20px; background:#f0f2f5; }
+.auth-card{ background:white; border-radius:8px; padding:20px; width:min(100%, 400px); box-shadow:0 4px 12px rgba(0,0,0,0.1); }
+.form-group{ margin-bottom:12px; }
+.form-group label{ display:block; font-size:13px; font-weight:600; margin-bottom:4px; }
+.form-group input{ width:100%; padding:10px; border:1px solid #ced0d4; border-radius:6px; }
+
+/* BOTTOM NAV */
+.bottom-nav{ position:fixed; bottom:0; left:0; right:0; height:50px; background:white; border-top:1px solid #e4e6eb; display:flex; justify-around:space-around; align-items:center; z-index:1000; }
+.bottom-nav-item{ color:var(--muted); font-size:20px; background:transparent; display:flex; flex-direction:column; align-items:center; justify-content:center; width:20%; height:100%; }
+.bottom-nav-item.active{ color:var(--primary); }
 </style>
 </head>
 
 <body>
 
-<!-- =======================================================
-     TOAST CONTAINER
-======================================================= -->
-<div id="toastContainer"></div>
-
-
-<!-- =======================================================
-     AUTH PAGE
-======================================================= -->
+<!-- AUTHENTICATION SCREEN -->
 <div id="auth" class="auth-page">
-  <div class="auth">
-    <div class="auth-brand">
-      <div class="auth-logo"><i class="fa-solid fa-cross"></i></div>
-      <div class="brand">BELIEVER CONNECT</div>
-      <div class="brand-subtitle">One Community • One Faith</div>
+  <div class="auth-card">
+    <h2 style="font-size:20px; margin-bottom:4px;">Welcome Back 👋</h2>
+    <p class="muted" style="font-size:13px; margin-bottom:16px;">Sign in to connect with your faith community.</p>
+
+    <div class="form-group">
+      <label for="loginEmail">Email address</label>
+      <input id="loginEmail" type="email" placeholder="you@example.com">
     </div>
 
-    <div class="auth-card">
-      <!-- LOGIN -->
-      <div id="loginBox">
-        <h2 style="font-size:20px; margin-bottom:4px;">Welcome Back 👋</h2>
-        <p class="muted" style="font-size:13px; margin-bottom:16px;">Sign in to connect with your faith community.</p>
-
-        <div class="form-group">
-          <label for="loginEmail">Email address</label>
-          <input id="loginEmail" type="email" autocomplete="email" placeholder="you@example.com">
-        </div>
-
-        <div class="form-group">
-          <label for="loginPass">Password</label>
-          <input id="loginPass" type="password" autocomplete="current-password" placeholder="Your password">
-        </div>
-
-        <button id="loginBtn" class="btn btn-full" type="button">🔐 LOG IN</button>
-
-        <div class="divider"></div>
-
-        <button id="showSignupBtn" class="btn btn-secondary btn-full" type="button">CREATE ACCOUNT</button>
-        <p id="loginMsg" class="error" style="margin-top:10px; font-size:13px;"></p>
-      </div>
-
-      <!-- SIGN UP -->
-      <div id="signupBox" class="hidden">
-        <h2 style="font-size:20px; margin-bottom:4px;">Create Your Account</h2>
-        <p class="muted" style="font-size:13px; margin-bottom:16px;">Join believers and build meaningful connections.</p>
-
-        <div class="form-group">
-          <label for="name">Full name</label>
-          <input id="name" autocomplete="name" placeholder="Your full name">
-        </div>
-
-        <div class="form-group">
-          <label for="email">Email address</label>
-          <input id="email" type="email" autocomplete="email" placeholder="you@example.com">
-        </div>
-
-        <div class="form-group">
-          <label for="pass">Password</label>
-          <input id="pass" type="password" autocomplete="new-password" placeholder="At least 6 characters">
-        </div>
-
-        <button id="signupBtn" class="btn btn-full" type="button">✨ CREATE ACCOUNT</button>
-
-        <div class="divider"></div>
-
-        <button id="showLoginBtn" class="btn btn-secondary btn-full" type="button">BACK TO LOGIN</button>
-        <p id="signupMsg" style="margin-top:10px; font-size:13px;"></p>
-      </div>
+    <div class="form-group">
+      <label for="loginPass">Password</label>
+      <input id="loginPass" type="password" placeholder="Your password">
     </div>
+
+    <button id="loginBtn" class="btn btn-full" type="button">🔐 LOG IN</button>
   </div>
 </div>
 
-
-<!-- =======================================================
-     APPLICATION INTERFACE
-======================================================= -->
+<!-- MAIN APPLICATION SCREEN -->
 <div id="app" class="hidden">
 
-  <!-- TOP HEADER -->
   <header>
     <div class="header-inner">
-      <div class="logo-area">
-        <div class="logo">believer</div>
-      </div>
-
+      <div class="logo">believer</div>
       <div class="header-user">
-        <button class="icon-circle-btn" type="button" aria-label="Create"><i class="fa-solid fa-plus"></i></button>
-        <button class="icon-circle-btn" type="button" aria-label="Search"><i class="fa-solid fa-magnifying-glass"></i></button>
-        <button class="icon-circle-btn" type="button" aria-label="Menu"><i class="fa-solid fa-bars"></i></button>
-        
-        <div id="headerAvatar" class="header-avatar" style="display:none;">B</div>
-        <button id="logoutBtn" class="logout-btn" type="button" style="display:none;">Log out</button>
+        <button class="icon-circle-btn" type="button"><i class="fa-solid fa-plus"></i></button>
+        <button class="icon-circle-btn" type="button"><i class="fa-solid fa-magnifying-glass"></i></button>
+        <div id="headerAvatar" class="header-avatar">B</div>
+        <button id="logoutBtn" class="btn btn-secondary" style="padding:4px 8px; font-size:12px;" type="button">Log out</button>
       </div>
     </div>
   </header>
 
-  <!-- SECONDARY NAVIGATION BAR -->
   <div class="nav-wrap">
     <nav class="nav">
-      <button data-tab="home" onclick="tab('home')" class="active" aria-label="Home">
-        <i class="fa-solid fa-house"></i>
-      </button>
-      <button data-tab="friends" onclick="tab('friends')" aria-label="Friends">
-        <i class="fa-solid fa-user-group"></i>
-      </button>
-      <button data-tab="messages" onclick="tab('messages')" aria-label="Messages">
-        <i class="fa-solid fa-comment-dots"></i>
-      </button>
-      <button data-tab="videos" onclick="tab('videos')" aria-label="Videos">
-        <i class="fa-solid fa-tv"></i>
-        <span class="badge">15+</span>
-      </button>
-      <button data-tab="notifications" onclick="tab('notifications')" aria-label="Notifications">
-        <i class="fa-regular fa-bell"></i>
-      </button>
-      <button data-tab="dashboard" onclick="tab('dashboard')" aria-label="Dashboard">
-        <i class="fa-solid fa-chart-line"></i>
-      </button>
+      <button data-tab="home" onclick="tab('home')" class="active"><i class="fa-solid fa-house"></i></button>
+      <button data-tab="friends" onclick="tab('friends')"><i class="fa-solid fa-user-group"></i></button>
+      <button data-tab="messages" onclick="tab('messages')"><i class="fa-solid fa-comment-dots"></i></button>
+      <button data-tab="notifications" onclick="tab('notifications')"><i class="fa-regular fa-bell"></i></button>
     </nav>
   </div>
 
   <main class="wrap">
-
-    <!-- CREATE POST COMPOSER -->
     <div class="composer-card">
       <div class="composer-top">
-        <div class="composer-avatar">
-          <span id="userAvatarText">B</span>
-          <div class="online-indicator"></div>
-        </div>
+        <div class="composer-avatar" id="userAvatarText">B</div>
         <button id="mindBtn" class="mind-button" type="button">What's on your mind?</button>
-        <div id="photoUploadBtn" class="photo-upload">
-          <i class="fa-solid fa-images"></i>
-          <span>Photo</span>
-        </div>
       </div>
 
       <div id="postComposerArea" class="hidden">
-        <textarea id="postInput" class="composer-textarea" placeholder="Share your prayer, message, or reflection..."></textarea>
-        
-        <div id="imagePreviewContainer" class="post-image-preview hidden">
-          <img id="imagePreview" src="" alt="Preview">
-          <button id="removeImageBtn" class="remove-post-image" type="button">&times;</button>
-        </div>
-
+        <textarea id="postInput" class="composer-textarea" placeholder="Share your prayer or reflection..."></textarea>
         <div class="composer-actions">
-          <input type="file" id="fileInput" accept="image/*" class="hidden">
-          <div class="composer-buttons">
-            <button id="cancelPostBtn" class="btn btn-ghost btn-small" type="button">Cancel</button>
-            <button id="submitPostBtn" class="btn btn-small" type="button">Post</button>
-          </div>
+          <button id="cancelPostBtn" class="btn btn-secondary" type="button">Cancel</button>
+          <button id="submitPostBtn" class="btn" type="button">Post</button>
         </div>
       </div>
     </div>
 
-    <!-- STORIES CAROUSEL -->
-    <div class="stories-container">
-      <!-- Create Story Card -->
-      <div class="story-card create-story">
-        <div class="story-bg-wrapper">
-          <img src="https://via.placeholder.com/105x115" alt="User Avatar" id="storyUserImg">
-        </div>
-        <div class="create-btn-area">
-          <div class="plus-icon">+</div>
-          <span>Create story</span>
-        </div>
-      </div>
-
-      <!-- Story Item 1 -->
-      <div class="story-card">
-        <img src="https://via.placeholder.com/105x170" class="story-bg" alt="Story">
-        <div class="story-badge">2</div>
-        <div class="story-author">Abigail Tor</div>
-      </div>
-
-      <!-- Story Item 2 -->
-      <div class="story-card">
-        <img src="https://via.placeholder.com/105x170" class="story-bg" alt="Story">
-        <div class="story-badge">1</div>
-        <div class="story-author">Rose Kollie</div>
-      </div>
-
-      <!-- Story Item 3 -->
-      <div class="story-card">
-        <img src="https://via.placeholder.com/105x170" class="story-bg" alt="Story">
-        <div class="story-badge">1</div>
-        <div class="story-author">Esther</div>
-      </div>
-    </div>
-
-    <!-- FEED CONTAINER (RENDERED DYNAMICALLY) -->
     <div id="feed">
-      <!-- Dynamic Posts Render Here -->
+      <div class="card">
+        <p><strong>Welcome to Believer Connect!</strong></p>
+        <p class="muted" style="font-size:14px; margin-top:4px;">You are currently logged in.</p>
+      </div>
     </div>
-
   </main>
 
-  <!-- FIXED BOTTOM NAVIGATION BAR -->
   <div class="bottom-nav">
     <button class="bottom-nav-item active" type="button"><i class="fa-solid fa-house"></i></button>
     <button class="bottom-nav-item" type="button"><i class="fa-solid fa-compass"></i></button>
@@ -1161,6 +187,58 @@ textarea:focus{
   </div>
 
 </div>
+
+<!-- JAVASCRIPT INITIALIZATION & SESSION LOGIC -->
+<script>
+  // Elements
+  const authContainer = document.getElementById('auth');
+  const appContainer = document.getElementById('app');
+  const loginBtn = document.getElementById('loginBtn');
+  const logoutBtn = document.getElementById('logoutBtn');
+  const mindBtn = document.getElementById('mindBtn');
+  const cancelPostBtn = document.getElementById('cancelPostBtn');
+  const postComposerArea = document.getElementById('postComposerArea');
+
+  // Check login state on load
+  function checkSession() {
+    const isLoggedIn = localStorage.getItem('isLoggedIn');
+    if (isLoggedIn === 'true') {
+      authContainer.classList.add('hidden');
+      appContainer.classList.remove('hidden');
+    } else {
+      authContainer.classList.remove('hidden');
+      appContainer.classList.add('hidden');
+    }
+  }
+
+  // Event Handlers
+  loginBtn.addEventListener('click', () => {
+    localStorage.setItem('isLoggedIn', 'true');
+    checkSession();
+  });
+
+  logoutBtn.addEventListener('click', () => {
+    localStorage.removeItem('isLoggedIn');
+    checkSession();
+  });
+
+  mindBtn.addEventListener('click', () => {
+    postComposerArea.classList.remove('hidden');
+  });
+
+  cancelPostBtn.addEventListener('click', () => {
+    postComposerArea.classList.add('hidden');
+  });
+
+  function tab(tabName) {
+    document.querySelectorAll('.nav button').forEach(btn => btn.classList.remove('active'));
+    const selectedTab = document.querySelector(`.nav button[data-tab="${tabName}"]`);
+    if(selectedTab) selectedTab.classList.add('active');
+  }
+
+  // Run session check on page load
+  checkSession();
+</script>
 
 </body>
 </html>
