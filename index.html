@@ -500,6 +500,53 @@ header {
 }
 
 /* =========================================================
+   IN-COMPOSER MEDIA PREVIEW CONTAINER STYLING
+========================================================= */
+.composer-preview-box {
+  position: relative;
+  margin: 10px 0;
+  background: #f8fafc;
+  border-radius: 10px;
+  border: 1px solid var(--bp-border);
+  overflow: hidden;
+  max-height: 320px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.composer-preview-box img,
+.composer-preview-box video {
+  width: 100%;
+  max-height: 320px;
+  object-fit: contain;
+  display: block;
+}
+
+.remove-media-btn {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  background: rgba(13, 27, 42, 0.75);
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 28px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 10;
+  backdrop-filter: blur(4px);
+  transition: background 0.2s;
+}
+
+.remove-media-btn:hover {
+  background: rgba(230, 57, 70, 0.9);
+}
+
+/* =========================================================
    COMMUNITY UPDATES / STORIES
 ========================================================= */
 .stories-container {
@@ -646,6 +693,22 @@ header {
   font-size: 14px;
   margin-bottom: 10px;
   white-space: pre-wrap;
+}
+
+.post-media-attachment {
+  width: 100%;
+  border-radius: 10px;
+  overflow: hidden;
+  margin-bottom: 10px;
+  background: #000;
+}
+
+.post-media-attachment img,
+.post-media-attachment video {
+  width: 100%;
+  max-height: 450px;
+  object-fit: contain;
+  display: block;
 }
 
 .actions {
@@ -971,6 +1034,9 @@ header {
 <input type="file" id="profilePhotoPicker" accept="image/*" class="hidden">
 <input type="file" id="coverPhotoPicker" accept="image/*" class="hidden">
 
+<!-- HIDDEN FILE INPUT FOR POST COMPOSER MEDIA -->
+<input type="file" id="postMediaFileInput" accept="image/jpeg, image/jpg, image/png, image/webp, video/mp4, video/webm, video/quicktime" class="hidden">
+
 <!-- =======================================================
      AUTHENTICATION PAGE
 ======================================================= -->
@@ -1094,6 +1160,15 @@ header {
 
       <div id="postComposerArea" class="hidden">
         <textarea id="postText" class="composer-textarea" placeholder="Share a testimony, prayer request, or encouragement..."></textarea>
+        
+        <!-- IN-COMPOSER MEDIA PREVIEW AREA -->
+        <div id="postMediaPreviewContainer" class="composer-preview-box hidden">
+          <button type="button" id="removePostMediaBtn" class="remove-media-btn" title="Remove Media">
+            <i class="fa-solid fa-xmark"></i>
+          </button>
+          <div id="postMediaPreviewContent" style="width: 100%;"></div>
+        </div>
+
         <div class="composer-actions">
           <div style="font-size: 12px; color: var(--bp-muted);"><i class="fa-solid fa-earth-americas"></i> Public</div>
           <button id="submitPostBtn" class="btn btn-gold btn-sm"><i class="fa-solid fa-paper-plane"></i> Publish</button>
@@ -1376,6 +1451,11 @@ const state = {
   },
   tempAvatarUrl: null,
   tempCoverUrl: null,
+  selectedPostMedia: {
+    file: null,
+    url: null,
+    type: null
+  },
   users: [
     { id: "u_101", name: "Oyantee Weah", handle: "@oyantee", avatar: "O" },
     { id: "u_102", name: "Sarah Jenkins", handle: "@sjenkins", avatar: "S" },
@@ -1508,21 +1588,68 @@ function bindAuthEvents() {
 }
 
 /* =========================================================
-   3. COMPOSER & POSTING LOGIC
+   3. COMPOSER & POSTING LOGIC WITH MEDIA UPLOAD
 ========================================================= */
 function bindComposerEvents() {
   const openBtn = document.getElementById('openComposerBtn');
   const mediaBtn = document.getElementById('mediaUploadTrigger');
+  const mediaFileInput = document.getElementById('postMediaFileInput');
+  const previewContainer = document.getElementById('postMediaPreviewContainer');
+  const previewContent = document.getElementById('postMediaPreviewContent');
+  const removeMediaBtn = document.getElementById('removePostMediaBtn');
   const composerArea = document.getElementById('postComposerArea');
   const submitBtn = document.getElementById('submitPostBtn');
 
+  // Open composer area
   openBtn?.addEventListener('click', () => composerArea.classList.toggle('hidden'));
-  mediaBtn?.addEventListener('click', () => composerArea.classList.remove('hidden'));
+  
+  // Media button opens native file picker
+  mediaBtn?.addEventListener('click', () => {
+    composerArea.classList.remove('hidden');
+    mediaFileInput?.click();
+  });
 
+  // Handle selected image or video file
+  mediaFileInput?.addEventListener('change', (e) => {
+    const file = e.target.files[0];
+    if (!file) return;
+
+    if (state.selectedPostMedia.url) {
+      URL.revokeObjectURL(state.selectedPostMedia.url);
+    }
+
+    state.selectedPostMedia.file = file;
+    state.selectedPostMedia.url = URL.createObjectURL(file);
+    state.selectedPostMedia.type = file.type.startsWith('video/') ? 'video' : 'image';
+
+    if (state.selectedPostMedia.type === 'image') {
+      previewContent.innerHTML = `<img src="${state.selectedPostMedia.url}" alt="Post Preview">`;
+    } else {
+      previewContent.innerHTML = `<video src="${state.selectedPostMedia.url}" controls playsinline></video>`;
+    }
+
+    previewContainer.classList.remove('hidden');
+  });
+
+  // Clear selected media
+  removeMediaBtn?.addEventListener('click', clearPostMedia);
+
+  function clearPostMedia() {
+    if (state.selectedPostMedia.url) {
+      URL.revokeObjectURL(state.selectedPostMedia.url);
+    }
+    state.selectedPostMedia = { file: null, url: null, type: null };
+    if (mediaFileInput) mediaFileInput.value = '';
+    if (previewContent) previewContent.innerHTML = '';
+    previewContainer?.classList.add('hidden');
+  }
+
+  // Publish post with optional media attachment
   submitBtn?.addEventListener('click', () => {
     const textInput = document.getElementById('postText');
     const content = textInput.value.trim();
-    if (!content) return;
+
+    if (!content && !state.selectedPostMedia.file) return;
 
     const feed = document.getElementById('feedList');
     const newPost = document.createElement('div');
@@ -1535,6 +1662,17 @@ function bindComposerEvents() {
       avatarText = '';
     }
 
+    let mediaHTML = '';
+    if (state.selectedPostMedia.url) {
+      if (state.selectedPostMedia.type === 'image') {
+        mediaHTML = `<div class="post-media-attachment"><img src="${state.selectedPostMedia.url}" alt="Post Image"></div>`;
+      } else if (state.selectedPostMedia.type === 'video') {
+        mediaHTML = `<div class="post-media-attachment"><video src="${state.selectedPostMedia.url}" controls playsinline></video></div>`;
+      }
+    }
+
+    let textHTML = content ? `<div class="post-content">${content}</div>` : '';
+
     newPost.innerHTML = `
       <div class="posthead">
         <div class="posthead-left">
@@ -1545,7 +1683,8 @@ function bindComposerEvents() {
           </div>
         </div>
       </div>
-      <div class="post-content">${content}</div>
+      ${textHTML}
+      ${mediaHTML}
       <div class="actions">
         <button class="action-btn heart-btn" onclick="toggleHeart(this)"><i class="fa-solid fa-heart"></i> Support (<span>0</span>)</button>
         <button class="action-btn"><i class="fa-solid fa-comment"></i> Encourage</button>
@@ -1553,7 +1692,13 @@ function bindComposerEvents() {
     `;
 
     feed.prepend(newPost);
+
+    // Reset inputs
     textInput.value = '';
+    state.selectedPostMedia = { file: null, url: null, type: null };
+    if (mediaFileInput) mediaFileInput.value = '';
+    if (previewContent) previewContent.innerHTML = '';
+    previewContainer.classList.add('hidden');
     composerArea.classList.add('hidden');
   });
 }
