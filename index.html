@@ -1,193 +1,572 @@
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
+
+<meta name="theme-color" content="#0756d9">
+<meta name="description" content="Believer Connect — One Community, One Faith">
+
 <title>Believer Connect</title>
 
 <style>
-*{box-sizing:border-box}
+/* =========================================================
+   RESET
+========================================================= */
 
-body{
+*{
+  box-sizing:border-box;
   margin:0;
-  font-family:Arial,Helvetica,sans-serif;
-  background:#f3f6fb;
-  color:#14213d;
+  padding:0;
 }
 
+html{
+  scroll-behavior:smooth;
+}
+
+body{
+  font-family:
+    Inter,
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    Arial,
+    sans-serif;
+
+  background:#f4f7fb;
+  color:#172033;
+  line-height:1.5;
+}
+
+button,
+input,
+textarea{
+  font:inherit;
+}
+
+button{
+  border:0;
+}
+
+img{
+  max-width:100%;
+}
+
+/* =========================================================
+   VARIABLES
+========================================================= */
+
+:root{
+  --primary:#0756d9;
+  --primary-dark:#063b91;
+  --primary-light:#eaf2ff;
+
+  --text:#172033;
+  --muted:#697586;
+
+  --border:#e3e8f0;
+
+  --surface:#ffffff;
+  --surface-soft:#f7f9fc;
+
+  --danger:#c6283d;
+  --danger-bg:#fff0f2;
+
+  --success:#087443;
+  --success-bg:#eaf8f1;
+
+  --shadow:
+    0 8px 30px rgba(20,40,80,.07);
+
+  --radius:18px;
+}
+
+/* =========================================================
+   UTILITIES
+========================================================= */
+
+.hidden{
+  display:none !important;
+}
+
+.wrap{
+  width:min(100% - 28px,960px);
+  margin:auto;
+}
+
+.muted{
+  color:var(--muted);
+}
+
+.error{
+  color:var(--danger);
+}
+
+.success{
+  color:var(--success);
+}
+
+.meta{
+  color:var(--muted);
+  font-size:13px;
+}
+
+.empty{
+  text-align:center;
+  padding:45px 20px;
+  color:var(--muted);
+}
+
+.loading{
+  text-align:center;
+  padding:40px;
+  color:var(--muted);
+}
+
+/* =========================================================
+   HEADER
+========================================================= */
+
 header{
-  background:#063b91;
-  color:#fff;
-  padding:15px 20px;
+  position:sticky;
+  top:0;
+  z-index:1000;
+
+  background:
+    linear-gradient(
+      135deg,
+      var(--primary-dark),
+      var(--primary)
+    );
+
+  color:white;
+
+  box-shadow:
+    0 3px 20px rgba(0,0,0,.15);
+}
+
+.header-inner{
+  width:min(100% - 28px,1100px);
+  min-height:68px;
+  margin:auto;
+
   display:flex;
   align-items:center;
   justify-content:space-between;
-  position:sticky;
-  top:0;
-  z-index:100;
-  box-shadow:0 2px 10px #0002;
+  gap:15px;
+}
+
+.logo-area{
+  display:flex;
+  align-items:center;
+  gap:10px;
+}
+
+.logo-icon{
+  width:40px;
+  height:40px;
+
+  border-radius:12px;
+
+  display:grid;
+  place-items:center;
+
+  background:rgba(255,255,255,.15);
+
+  font-size:21px;
 }
 
 .logo{
-  font-size:21px;
-  font-weight:800;
+  font-size:19px;
+  font-weight:900;
+  letter-spacing:-.3px;
 }
 
 .tag{
   font-size:11px;
-  opacity:.85;
+  opacity:.78;
 }
 
-.wrap{
-  max-width:900px;
-  margin:auto;
-  padding:18px;
+.header-user{
+  display:flex;
+  align-items:center;
+  gap:10px;
 }
+
+.header-avatar{
+  width:38px;
+  height:38px;
+
+  border-radius:50%;
+
+  background:rgba(255,255,255,.18);
+
+  display:grid;
+  place-items:center;
+
+  font-weight:800;
+
+  overflow:hidden;
+}
+
+.header-avatar img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+}
+
+.logout-btn{
+  padding:9px 13px;
+  border-radius:10px;
+
+  background:rgba(255,255,255,.14);
+  color:white;
+
+  cursor:pointer;
+  font-weight:700;
+}
+
+.logout-btn:hover{
+  background:rgba(255,255,255,.22);
+}
+
+/* =========================================================
+   MAIN
+========================================================= */
+
+main{
+  padding:22px 0 80px;
+}
+
+/* =========================================================
+   CARD
+========================================================= */
 
 .card,
+.composer-card,
+.profile-card{
+  background:var(--surface);
+
+  border:1px solid rgba(220,227,238,.8);
+
+  border-radius:var(--radius);
+
+  box-shadow:var(--shadow);
+
+  margin-bottom:17px;
+}
+
+.card{
+  padding:20px;
+}
+
 .composer-card{
-  background:#fff;
-  border-radius:16px;
-  padding:18px;
-  margin-bottom:16px;
-  box-shadow:0 2px 10px #00000012;
+  padding:17px;
+}
+
+/* =========================================================
+   AUTH
+========================================================= */
+
+.auth-page{
+  min-height:100vh;
+
+  display:grid;
+  place-items:center;
+
+  padding:25px;
+
+  background:
+    radial-gradient(
+      circle at top left,
+      #dceaff,
+      transparent 35%
+    ),
+    radial-gradient(
+      circle at bottom right,
+      #e8efff,
+      transparent 35%
+    ),
+    #f4f7fb;
+}
+
+.auth{
+  width:min(100%,430px);
+}
+
+.auth-brand{
+  text-align:center;
+  margin-bottom:22px;
+}
+
+.auth-logo{
+  width:72px;
+  height:72px;
+  margin:0 auto 12px;
+
+  border-radius:22px;
+
+  display:grid;
+  place-items:center;
+
+  color:white;
+
+  background:
+    linear-gradient(
+      135deg,
+      var(--primary-dark),
+      var(--primary)
+    );
+
+  box-shadow:
+    0 15px 35px rgba(7,86,217,.25);
+
+  font-size:35px;
+}
+
+.brand{
+  font-size:28px;
+  font-weight:950;
+  color:var(--primary-dark);
+  letter-spacing:-1px;
+}
+
+.brand-subtitle{
+  margin-top:4px;
+  color:var(--muted);
+}
+
+.auth-card{
+  background:white;
+  border-radius:24px;
+  padding:25px;
+
+  box-shadow:
+    0 20px 60px rgba(20,40,80,.12);
+}
+
+.auth-card h2{
+  margin-bottom:5px;
+}
+
+.auth-card .description{
+  color:var(--muted);
+  margin-bottom:20px;
+}
+
+/* =========================================================
+   FORMS
+========================================================= */
+
+.form-group{
+  margin-bottom:14px;
+}
+
+label{
+  display:block;
+
+  margin-bottom:6px;
+
+  font-size:13px;
+  font-weight:800;
+
+  color:#526078;
 }
 
 input,
 textarea{
   width:100%;
-  padding:13px;
-  margin:7px 0;
-  border:1px solid #d7deea;
-  border-radius:10px;
-  font-size:15px;
-  font-family:inherit;
+
+  padding:13px 14px;
+
+  border:1px solid #d8e0ec;
+  border-radius:12px;
+
+  outline:none;
+
+  color:var(--text);
+  background:white;
+
+  transition:
+    border .2s,
+    box-shadow .2s,
+    background .2s;
 }
 
 textarea{
   resize:vertical;
+  min-height:90px;
 }
 
 input:focus,
 textarea:focus{
-  outline:2px solid #0756d9;
-  border-color:#0756d9;
+  border-color:var(--primary);
+
+  box-shadow:
+    0 0 0 4px rgba(7,86,217,.10);
 }
 
-button{
-  border:0;
-  border-radius:10px;
-  padding:12px 18px;
-  background:#0756d9;
-  color:#fff;
-  font-weight:700;
+input::placeholder,
+textarea::placeholder{
+  color:#9aa5b5;
+}
+
+/* =========================================================
+   BUTTONS
+========================================================= */
+
+.btn{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:7px;
+
+  padding:11px 17px;
+
+  border-radius:11px;
+
+  background:var(--primary);
+  color:white;
+
+  font-weight:800;
+
   cursor:pointer;
+
+  transition:
+    transform .15s,
+    box-shadow .15s,
+    background .15s;
 }
 
-button:hover{
-  opacity:.92;
+.btn:hover{
+  background:#0649ba;
+  transform:translateY(-1px);
 }
 
-button:disabled{
+.btn:active{
+  transform:translateY(0);
+}
+
+.btn:disabled{
   opacity:.55;
   cursor:not-allowed;
+  transform:none;
 }
 
-button.secondary{
-  background:#e9effb;
-  color:#0645a8;
+.btn-full{
+  width:100%;
 }
 
-button.danger{
-  background:#ffe8e8;
-  color:#b00020;
+.btn-secondary{
+  background:var(--primary-light);
+  color:var(--primary-dark);
 }
 
-.hidden{
-  display:none!important;
+.btn-secondary:hover{
+  background:#dce9ff;
+}
+
+.btn-danger{
+  background:var(--danger-bg);
+  color:var(--danger);
+}
+
+.btn-ghost{
+  background:#f1f4f8;
+  color:#334155;
+}
+
+.btn-small{
+  padding:8px 11px;
+  font-size:13px;
+}
+
+/* =========================================================
+   NAVIGATION
+========================================================= */
+
+.nav-wrap{
+  position:sticky;
+  top:68px;
+  z-index:900;
+
+  padding:12px 0;
+
+  background:rgba(244,247,251,.94);
+
+  backdrop-filter:blur(12px);
 }
 
 .nav{
   display:flex;
-  gap:8px;
-  overflow:auto;
-  margin-bottom:16px;
-  padding-bottom:3px;
+  gap:7px;
+
+  overflow-x:auto;
+
+  scrollbar-width:none;
+}
+
+.nav::-webkit-scrollbar{
+  display:none;
 }
 
 .nav button{
-  white-space:nowrap;
-}
+  flex:0 0 auto;
 
-.auth{
-  max-width:430px;
-  margin:50px auto;
-}
+  padding:10px 14px;
 
-.brand{
-  text-align:center;
-  font-size:30px;
-  font-weight:900;
-  color:#063b91;
-}
+  border-radius:12px;
 
-.error{
-  color:#b00020;
-  font-size:14px;
-}
-
-.success{
-  color:#087443;
-  font-size:14px;
-}
-
-.info{
+  background:white;
   color:#526078;
-  font-size:14px;
+
+  border:1px solid var(--border);
+
+  cursor:pointer;
+
+  font-weight:800;
 }
 
-.meta{
-  color:#6d7788;
-  font-size:13px;
+.nav button:hover{
+  background:var(--primary-light);
+  color:var(--primary-dark);
 }
 
-.loading{
-  text-align:center;
-  padding:30px;
-  color:#6d7788;
+.nav button.active{
+  background:var(--primary);
+  color:white;
+  border-color:var(--primary);
 }
 
-.empty{
-  text-align:center;
-  color:#6d7788;
-  padding:30px 10px;
-}
+/* =========================================================
+   COMPOSER
+========================================================= */
 
-.status-box{
-  padding:12px;
-  border-radius:10px;
-  background:#f3f6fb;
-  margin-bottom:12px;
-  font-size:14px;
-}
-
-.posthead{
+.composer-top{
   display:flex;
-  gap:10px;
   align-items:center;
+  gap:11px;
 }
 
 .avatar,
 .composer-avatar{
   width:46px;
   height:46px;
+
   min-width:46px;
+
   border-radius:50%;
-  background:#dce8ff;
+
   display:grid;
   place-items:center;
-  font-weight:800;
-  color:#0645a8;
+
+  background:#dce8ff;
+  color:var(--primary-dark);
+
+  font-weight:900;
+
   overflow:hidden;
 }
 
@@ -198,74 +577,34 @@ button.danger{
   object-fit:cover;
 }
 
-.post-content{
-  white-space:pre-wrap;
-  word-break:break-word;
-  line-height:1.55;
-}
-
-.actions{
-  display:flex;
-  gap:8px;
-  margin-top:12px;
-  flex-wrap:wrap;
-}
-
-.actions button{
-  background:#f0f4fa;
-  color:#27364f;
-  flex:1;
-  min-width:90px;
-}
-
-.like-active{
-  background:#ffe8ec!important;
-  color:#c2183b!important;
-}
-
-.like-count{
-  font-size:12px;
-  color:#6d7788;
-}
-
-.delete-post{
-  margin-top:10px;
-  font-size:12px;
-  padding:8px 12px;
-}
-
-.composer-top{
-  display:flex;
-  align-items:center;
-  gap:10px;
-}
-
 .mind-button{
   flex:1;
-  background:#f0f2f5;
-  color:#65676b;
-  border-radius:25px;
+
   padding:13px 18px;
+
+  border-radius:25px;
+
+  background:#f0f2f5;
+
+  color:#69707a;
+
   text-align:left;
-  font-size:15px;
-  font-weight:400;
+
+  cursor:pointer;
+
+  font-weight:500;
 }
 
 .mind-button:hover{
-  background:#e6e8eb;
+  background:#e5e8ed;
 }
 
 #postComposerArea{
-  margin-top:12px;
+  margin-top:14px;
 }
 
 .composer-textarea{
-  width:100%;
-  border:1px solid #d7deea;
-  border-radius:12px;
-  padding:13px;
-  resize:vertical;
-  font-size:15px;
+  min-height:110px;
 }
 
 .composer-actions{
@@ -273,25 +612,11 @@ button.danger{
   align-items:center;
   justify-content:space-between;
   gap:10px;
-  border-top:1px solid #e5e7eb;
+
   margin-top:12px;
-  padding-top:10px;
-}
+  padding-top:12px;
 
-.photo-upload{
-  display:flex;
-  align-items:center;
-  gap:7px;
-  padding:9px 14px;
-  border-radius:10px;
-  color:#1877f2;
-  font-weight:700;
-  font-size:14px;
-  cursor:pointer;
-}
-
-.photo-upload:hover{
-  background:#f0f2f5;
+  border-top:1px solid var(--border);
 }
 
 .composer-buttons{
@@ -299,98 +624,243 @@ button.danger{
   gap:8px;
 }
 
+.photo-upload{
+  display:inline-flex;
+  align-items:center;
+  gap:7px;
+
+  padding:9px 12px;
+
+  border-radius:10px;
+
+  color:#1877f2;
+
+  cursor:pointer;
+
+  font-size:14px;
+  font-weight:800;
+}
+
+.photo-upload:hover{
+  background:#f0f2f5;
+}
+
+/* =========================================================
+   POST
+========================================================= */
+
+.posthead{
+  display:flex;
+  align-items:center;
+  gap:11px;
+}
+
+.post-author{
+  min-width:0;
+}
+
+.post-author-name{
+  font-weight:900;
+}
+
+.post-content{
+  margin-top:14px;
+
+  white-space:pre-wrap;
+  overflow-wrap:anywhere;
+
+  line-height:1.65;
+}
+
+.post-photo{
+  display:block;
+
+  width:100%;
+
+  max-height:650px;
+
+  object-fit:cover;
+
+  margin-top:14px;
+
+  border-radius:14px;
+}
+
+.actions{
+  display:flex;
+  gap:7px;
+
+  margin-top:14px;
+
+  padding-top:11px;
+
+  border-top:1px solid var(--border);
+}
+
+.action-btn{
+  flex:1;
+
+  padding:10px;
+
+  border-radius:10px;
+
+  background:#f4f6f9;
+
+  color:#425066;
+
+  cursor:pointer;
+
+  font-weight:800;
+}
+
+.action-btn:hover{
+  background:#e9edf3;
+}
+
+.action-btn.like-active{
+  background:#ffe8ee;
+  color:#c2183b;
+}
+
+.delete-post{
+  margin-top:10px;
+}
+
+/* =========================================================
+   IMAGE PREVIEW
+========================================================= */
+
 .post-image-preview{
   position:relative;
+
   margin-top:12px;
-  border-radius:12px;
+
+  border-radius:13px;
+
   overflow:hidden;
-  background:#f3f6fb;
+
+  background:#f2f5f9;
 }
 
 .post-image-preview img{
   display:block;
+
   width:100%;
   max-height:400px;
+
   object-fit:cover;
 }
 
 .remove-post-image{
   position:absolute;
+
   top:10px;
   right:10px;
-  width:34px;
-  height:34px;
+
+  width:35px;
+  height:35px;
+
   padding:0;
+
   border-radius:50%;
-  background:#fff;
+
+  background:white;
   color:#222;
+
+  cursor:pointer;
+
   font-size:22px;
-  box-shadow:0 2px 8px #0003;
+
+  box-shadow:0 3px 12px rgba(0,0,0,.2);
 }
 
-.post-photo{
-  display:block;
-  width:100%;
-  max-height:600px;
-  object-fit:cover;
-  border-radius:12px;
-  margin-top:12px;
-}
-
-/* PROFILE */
+/* =========================================================
+   PROFILE
+========================================================= */
 
 .profile-card{
-  background:#fff;
-  border-radius:16px;
   overflow:hidden;
-  margin-bottom:16px;
-  box-shadow:0 2px 10px #00000012;
 }
 
 .profile-cover{
-  height:210px;
-  background:linear-gradient(135deg,#063b91,#0756d9);
+  height:240px;
+
   position:relative;
+
   display:grid;
   place-items:center;
+
   overflow:hidden;
+
+  background:
+    linear-gradient(
+      135deg,
+      #063b91,
+      #0756d9,
+      #3b82f6
+    );
+}
+
+.profile-cover::after{
+  content:"";
+
+  position:absolute;
+  inset:0;
+
+  background:
+    linear-gradient(
+      to top,
+      rgba(0,0,0,.25),
+      transparent 55%
+    );
 }
 
 .profile-cover img{
   width:100%;
   height:100%;
+
   object-fit:cover;
 }
 
 .cover-placeholder{
-  font-size:55px;
-  color:#fff;
+  color:white;
+  font-size:65px;
   opacity:.35;
 }
 
 .profile-main{
   display:flex;
-  align-items:center;
-  gap:14px;
-  padding:0 20px 12px;
+  align-items:flex-end;
+  gap:15px;
+
+  padding:0 22px 14px;
+
   position:relative;
 }
 
 .profile-avatar-wrap{
-  margin-top:-52px;
+  margin-top:-55px;
+  position:relative;
+  z-index:2;
 }
 
 .profile-avatar{
-  width:104px;
-  height:104px;
+  width:110px;
+  height:110px;
+
   border-radius:50%;
-  border:5px solid #fff;
-  background:#dce8ff;
-  color:#0645a8;
+
+  border:5px solid white;
+
   display:grid;
   place-items:center;
-  font-size:38px;
-  font-weight:800;
+
+  background:#dce8ff;
+  color:var(--primary-dark);
+
+  font-size:40px;
+  font-weight:900;
+
   overflow:hidden;
 }
 
@@ -406,25 +876,29 @@ button.danger{
 }
 
 .profile-heading h2{
-  margin:12px 0 2px;
-  font-size:25px;
+  margin-bottom:2px;
+
+  font-size:26px;
+
+  overflow:hidden;
+  text-overflow:ellipsis;
 }
 
 .profile-username{
-  color:#6d7788;
+  color:var(--muted);
 }
 
 .profile-edit-btn{
-  background:#e9effb;
-  color:#0645a8;
+  background:var(--primary-light);
+  color:var(--primary-dark);
 }
 
 .profile-bio-area{
-  padding:0 20px 20px;
+  padding:0 22px 22px;
 }
 
 .profile-bio-area p{
-  margin:8px 0 12px;
+  margin:7px 0 13px;
   white-space:pre-wrap;
 }
 
@@ -432,39 +906,57 @@ button.danger{
   display:flex;
   flex-wrap:wrap;
   gap:12px;
-  color:#6d7788;
+
+  color:var(--muted);
+
   font-size:13px;
 }
 
 .profile-tabs{
   display:flex;
-  gap:8px;
-  border-bottom:1px solid #e5eaf2;
-  margin:-18px -18px 14px;
-  padding:0 18px;
+  gap:5px;
+
+  border-bottom:1px solid var(--border);
+
+  margin:-20px -20px 18px;
+  padding:0 20px;
 }
 
 .profile-tab{
+  padding:13px 15px;
+
   background:transparent;
-  color:#526078;
+  color:var(--muted);
+
   border-radius:0;
+
   border-bottom:3px solid transparent;
+
+  cursor:pointer;
+
+  font-weight:800;
 }
 
 .profile-tab.active{
-  color:#0645a8;
-  border-bottom-color:#0756d9;
+  color:var(--primary);
+  border-bottom-color:var(--primary);
 }
 
+/* =========================================================
+   PREVIEWS
+========================================================= */
+
 .upload-preview{
-  margin:8px 0 12px;
   width:110px;
   height:110px;
+
+  margin:9px 0 13px;
+
   border-radius:50%;
+
   overflow:hidden;
+
   background:#eef3fb;
-  display:grid;
-  place-items:center;
 }
 
 .upload-preview img{
@@ -474,12 +966,16 @@ button.danger{
 }
 
 .cover-upload-preview{
-  margin:8px 0 12px;
   width:100%;
   max-width:520px;
-  height:130px;
-  border-radius:12px;
+  height:140px;
+
+  margin:9px 0 13px;
+
+  border-radius:13px;
+
   overflow:hidden;
+
   background:#eef3fb;
 }
 
@@ -489,52 +985,156 @@ button.danger{
   object-fit:cover;
 }
 
-label{
-  display:block;
-  font-size:13px;
-  font-weight:700;
-  color:#526078;
-  margin-top:10px;
+/* =========================================================
+   TOAST
+========================================================= */
+
+#toastContainer{
+  position:fixed;
+
+  right:20px;
+  bottom:20px;
+
+  z-index:5000;
+
+  display:flex;
+  flex-direction:column;
+  gap:9px;
+
+  width:min(360px,calc(100% - 30px));
 }
 
-@media(max-width:650px){
+.toast{
+  padding:13px 15px;
 
-  .wrap{
-    padding:12px;
+  border-radius:13px;
+
+  color:white;
+
+  background:#172033;
+
+  box-shadow:0 10px 30px rgba(0,0,0,.2);
+
+  animation:
+    toastIn .25s ease;
+}
+
+.toast.success{
+  background:#087443;
+}
+
+.toast.error{
+  background:#b00020;
+}
+
+@keyframes toastIn{
+  from{
+    opacity:0;
+    transform:translateY(10px);
   }
 
-  header{
-    padding:14px;
+  to{
+    opacity:1;
+    transform:translateY(0);
+  }
+}
+
+/* =========================================================
+   DIVIDER
+========================================================= */
+
+.divider{
+  height:1px;
+  background:var(--border);
+  margin:20px 0;
+}
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+@media(max-width:700px){
+
+  .wrap{
+    width:min(100% - 20px,960px);
+  }
+
+  main{
+    padding-top:14px;
+  }
+
+  .nav-wrap{
+    top:62px;
+    padding:8px 0;
+  }
+
+  .header-inner{
+    min-height:62px;
   }
 
   .logo{
-    font-size:17px;
+    font-size:16px;
+  }
+
+  .tag{
+    display:none;
+  }
+
+  .header-avatar{
+    display:none;
+  }
+
+  .logout-btn{
+    padding:8px 10px;
+    font-size:12px;
+  }
+
+  .card{
+    padding:16px;
+  }
+
+  .composer-card{
+    padding:14px;
   }
 
   .profile-cover{
-    height:160px;
+    height:180px;
   }
 
   .profile-main{
     align-items:flex-start;
     flex-wrap:wrap;
+    padding:0 16px 14px;
   }
 
   .profile-heading{
     padding-top:4px;
   }
 
+  .profile-heading h2{
+    font-size:21px;
+  }
+
   .profile-edit-btn{
     width:100%;
   }
 
-  .actions{
-    display:grid;
-    grid-template-columns:1fr 1fr;
+  .profile-bio-area{
+    padding:0 16px 18px;
   }
 
-  .actions button:last-child{
-    grid-column:1/-1;
+  .profile-avatar{
+    width:90px;
+    height:90px;
+  }
+
+  .profile-avatar-wrap{
+    margin-top:-45px;
+  }
+
+  .actions{
+    display:grid;
+    grid-template-columns:1fr 1fr 1fr;
   }
 
   .composer-actions{
@@ -550,64 +1150,227 @@ label{
     display:none;
   }
 }
+
+@media(max-width:450px){
+
+  .auth-page{
+    padding:14px;
+  }
+
+  .auth-card{
+    padding:19px;
+  }
+
+  .brand{
+    font-size:24px;
+  }
+
+  .actions{
+    grid-template-columns:1fr;
+  }
+
+  .action-btn{
+    width:100%;
+  }
+
+  .composer-actions{
+    flex-direction:column;
+  }
+
+  .composer-buttons{
+    width:100%;
+  }
+
+  .composer-buttons .btn{
+    flex:1;
+  }
+}
 </style>
 </head>
 
 <body>
 
-<!-- AUTH -->
+<!-- =======================================================
+     TOAST
+======================================================= -->
 
-<div id="auth" class="wrap auth">
+<div id="toastContainer"></div>
 
-  <div class="card">
 
-    <div class="brand">✝ BELIEVER CONNECT</div>
+<!-- =======================================================
+     AUTH PAGE
+======================================================= -->
 
-    <p style="text-align:center">
-      One Community • One Faith
-    </p>
+<div id="auth" class="auth-page">
 
-    <div id="loginBox">
+  <div class="auth">
 
-      <h2>Welcome Back</h2>
+    <div class="auth-brand">
 
-      <input id="loginEmail" type="email" placeholder="Email address">
+      <div class="auth-logo">✝</div>
 
-      <input id="loginPass" type="password" placeholder="Password">
+      <div class="brand">
+        BELIEVER CONNECT
+      </div>
 
-      <button id="loginBtn" type="button" style="width:100%">
-        LOG IN
-      </button>
-
-      <p id="loginMsg" class="error"></p>
-
-      <hr>
-
-      <button class="secondary" id="showSignupBtn" type="button" style="width:100%">
-        CREATE ACCOUNT
-      </button>
+      <div class="brand-subtitle">
+        One Community • One Faith
+      </div>
 
     </div>
 
-    <div id="signupBox" class="hidden">
 
-      <h2>Create Account</h2>
+    <div class="auth-card">
 
-      <input id="name" placeholder="Full name">
+      <!-- LOGIN -->
 
-      <input id="email" type="email" placeholder="Email address">
+      <div id="loginBox">
 
-      <input id="pass" type="password" placeholder="Password">
+        <h2>Welcome Back 👋</h2>
 
-      <button id="signupBtn" type="button" style="width:100%">
-        CREATE ACCOUNT
-      </button>
+        <p class="description">
+          Sign in to connect with your faith community.
+        </p>
 
-      <p id="signupMsg"></p>
+        <div class="form-group">
 
-      <button class="secondary" id="showLoginBtn" type="button" style="width:100%">
-        BACK TO LOGIN
-      </button>
+          <label for="loginEmail">
+            Email address
+          </label>
+
+          <input
+            id="loginEmail"
+            type="email"
+            autocomplete="email"
+            placeholder="you@example.com"
+          >
+
+        </div>
+
+
+        <div class="form-group">
+
+          <label for="loginPass">
+            Password
+          </label>
+
+          <input
+            id="loginPass"
+            type="password"
+            autocomplete="current-password"
+            placeholder="Your password"
+          >
+
+        </div>
+
+
+        <button
+          id="loginBtn"
+          class="btn btn-full"
+          type="button"
+        >
+          🔐 LOG IN
+        </button>
+
+
+        <div class="divider"></div>
+
+
+        <button
+          id="showSignupBtn"
+          class="btn btn-secondary btn-full"
+          type="button"
+        >
+          CREATE ACCOUNT
+        </button>
+
+        <p id="loginMsg" class="error"></p>
+
+      </div>
+
+
+      <!-- SIGN UP -->
+
+      <div id="signupBox" class="hidden">
+
+        <h2>Create Your Account</h2>
+
+        <p class="description">
+          Join believers and build meaningful connections.
+        </p>
+
+
+        <div class="form-group">
+
+          <label for="name">
+            Full name
+          </label>
+
+          <input
+            id="name"
+            autocomplete="name"
+            placeholder="Your full name"
+          >
+
+        </div>
+
+
+        <div class="form-group">
+
+          <label for="email">
+            Email address
+          </label>
+
+          <input
+            id="email"
+            type="email"
+            autocomplete="email"
+            placeholder="you@example.com"
+          >
+
+        </div>
+
+
+        <div class="form-group">
+
+          <label for="pass">
+            Password
+          </label>
+
+          <input
+            id="pass"
+            type="password"
+            autocomplete="new-password"
+            placeholder="At least 6 characters"
+          >
+
+        </div>
+
+
+        <button
+          id="signupBtn"
+          class="btn btn-full"
+          type="button"
+        >
+          ✨ CREATE ACCOUNT
+        </button>
+
+
+        <div class="divider"></div>
+
+
+        <button
+          id="showLoginBtn"
+          class="btn btn-secondary btn-full"
+          type="button"
+        >
+          BACK TO LOGIN
+        </button>
+
+
+        <p id="signupMsg"></p>
+
+      </div>
 
     </div>
 
@@ -616,327 +1379,636 @@ label{
 </div>
 
 
-<!-- APP -->
+<!-- =======================================================
+     APPLICATION
+======================================================= -->
 
 <div id="app" class="hidden">
 
+
 <header>
 
-  <div>
-    <div class="logo">✝ BELIEVER CONNECT</div>
-    <div class="tag">One Community • One Faith</div>
-  </div>
+  <div class="header-inner">
 
-  <button onclick="logout()">Log out</button>
+    <div class="logo-area">
+
+      <div class="logo-icon">
+        ✝
+      </div>
+
+      <div>
+
+        <div class="logo">
+          BELIEVER CONNECT
+        </div>
+
+        <div class="tag">
+          One Community • One Faith
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <div class="header-user">
+
+      <div
+        id="headerAvatar"
+        class="header-avatar"
+      >
+        B
+      </div>
+
+      <button
+        id="logoutBtn"
+        class="logout-btn"
+        type="button"
+      >
+        Log out
+      </button>
+
+    </div>
+
+  </div>
 
 </header>
 
 
-<div class="wrap">
+<!-- NAVIGATION -->
 
-  <div class="nav">
+<div class="nav-wrap">
 
-    <button onclick="tab('home')">🏠 Home</button>
-    <button onclick="tab('bible')">📖 Bible</button>
-    <button onclick="tab('prayer')">🙏 Prayer</button>
-    <button onclick="tab('groups')">👥 Groups</button>
-    <button onclick="tab('messages')">💬 Messages</button>
-    <button onclick="tab('profile')">👤 Profile</button>
+  <div class="wrap">
+
+    <nav class="nav">
+
+      <button
+        data-tab="home"
+        onclick="tab('home')"
+      >
+        🏠 Home
+      </button>
+
+      <button
+        data-tab="bible"
+        onclick="tab('bible')"
+      >
+        📖 Bible
+      </button>
+
+      <button
+        data-tab="prayer"
+        onclick="tab('prayer')"
+      >
+        🙏 Prayer
+      </button>
+
+      <button
+        data-tab="groups"
+        onclick="tab('groups')"
+      >
+        👥 Groups
+      </button>
+
+      <button
+        data-tab="messages"
+        onclick="tab('messages')"
+      >
+        💬 Messages
+      </button>
+
+      <button
+        data-tab="profile"
+        onclick="tab('profile')"
+      >
+        👤 Profile
+      </button>
+
+    </nav>
 
   </div>
 
+</div>
 
-  <!-- HOME -->
 
-  <section id="home">
+<main>
 
-    <div class="composer-card">
+<div class="wrap">
 
-      <div class="composer-top">
 
-        <div class="composer-avatar" id="composerAvatar">
-          B
-        </div>
+<!-- =====================================================
+     HOME
+===================================================== -->
 
-        <button type="button" class="mind-button" onclick="openPostComposer()">
-          What's on your mind?
-        </button>
+<section id="home">
 
+
+  <!-- COMPOSER -->
+
+  <div class="composer-card">
+
+    <div class="composer-top">
+
+      <div
+        id="composerAvatar"
+        class="composer-avatar"
+      >
+        B
       </div>
 
-      <div id="postComposerArea" class="hidden">
+      <button
+        type="button"
+        class="mind-button"
+        onclick="openPostComposer()"
+      >
+        What's on your mind?
+      </button>
 
-        <textarea
-          id="postText"
-          class="composer-textarea"
-          rows="4"
-          placeholder="What's on your mind?"
-        ></textarea>
+    </div>
 
-        <div id="postImagePreview" class="post-image-preview hidden"></div>
 
-        <div class="composer-actions">
+    <div
+      id="postComposerArea"
+      class="hidden"
+    >
 
-          <label for="postImageFile" class="photo-upload">
-            📷 <span>Photo</span>
+      <textarea
+        id="postText"
+        class="composer-textarea"
+        maxlength="5000"
+        placeholder="Share something encouraging with the community..."
+      ></textarea>
+
+
+      <div
+        id="postImagePreview"
+        class="post-image-preview hidden"
+      ></div>
+
+
+      <div class="composer-actions">
+
+        <div>
+
+          <label
+            for="postImageFile"
+            class="photo-upload"
+          >
+            📷 <span>Add Photo</span>
           </label>
 
           <input
             id="postImageFile"
             type="file"
-            accept="image/*"
+            accept="image/jpeg,image/png,image/webp,image/gif"
             class="hidden"
-            onchange="previewPostImage(this)"
           >
 
-          <div class="composer-buttons">
+        </div>
 
-            <button
-              type="button"
-              class="secondary"
-              onclick="closePostComposer()"
-            >
-              CANCEL
-            </button>
 
-            <button
-              id="postBtn"
-              type="button"
-              onclick="addPost()"
-            >
-              POST
-            </button>
+        <div class="composer-buttons">
 
-          </div>
+          <button
+            type="button"
+            class="btn btn-secondary"
+            onclick="closePostComposer()"
+          >
+            Cancel
+          </button>
+
+          <button
+            id="postBtn"
+            type="button"
+            class="btn"
+            onclick="addPost()"
+          >
+            POST
+          </button>
 
         </div>
 
       </div>
 
-      <p id="postMsg"></p>
-
     </div>
 
-    <div id="feed">
-      <div class="loading">Loading posts...</div>
+
+    <p id="postMsg"></p>
+
+  </div>
+
+
+  <!-- FEED -->
+
+  <div id="feed">
+
+    <div class="loading">
+      Loading posts...
     </div>
 
-  </section>
+  </div>
+
+</section>
 
 
-  <!-- BIBLE -->
+<!-- =====================================================
+     BIBLE
+===================================================== -->
 
-  <section id="bible" class="hidden">
+<section
+  id="bible"
+  class="hidden"
+>
 
-    <div class="card">
+  <div class="card">
 
-      <h2>📖 Bible</h2>
+    <h2>📖 Bible</h2>
 
-      <h3>Philippians 4:13</h3>
+    <p class="muted" style="margin-top:5px">
+      A word of encouragement for today.
+    </p>
 
-      <p>
-        “I can do all things through Christ which strengtheneth me.”
+
+    <div
+      style="
+        margin-top:20px;
+        padding:22px;
+        border-radius:15px;
+        background:#eef4ff;
+        border-left:5px solid #0756d9;
+      "
+    >
+
+      <h3>
+        Philippians 4:13
+      </h3>
+
+      <p style="margin-top:9px">
+        “I can do all things through Christ
+        which strengtheneth me.”
       </p>
 
-      <button onclick="alert('Bible search will be added in the next version.')">
-        Search Bible
+    </div>
+
+
+    <div style="margin-top:18px">
+
+      <button
+        class="btn"
+        onclick="showToast('Bible search will be available in a future version.','success')"
+      >
+        🔎 Search Bible
       </button>
 
     </div>
 
-  </section>
+  </div>
+
+</section>
 
 
-  <!-- PRAYER -->
+<!-- =====================================================
+     PRAYER
+===================================================== -->
 
-  <section id="prayer" class="hidden">
+<section
+  id="prayer"
+  class="hidden"
+>
 
-    <div class="card">
+  <div class="card">
 
-      <h2>🙏 Prayer Wall</h2>
+    <h2>🙏 Prayer Wall</h2>
 
-      <p>
-        Share a prayer request and encourage other believers.
-      </p>
+    <p class="muted" style="margin:5px 0 17px">
+      Share a prayer request and encourage
+      other believers.
+    </p>
 
-      <textarea
-        id="prayerText"
-        rows="3"
-        placeholder="What would you like us to pray about?"
-      ></textarea>
 
-      <button onclick="addPrayer()">
-        POST PRAYER REQUEST
+    <textarea
+      id="prayerText"
+      rows="4"
+      maxlength="3000"
+      placeholder="What would you like us to pray about?"
+    ></textarea>
+
+
+    <div style="margin-top:12px">
+
+      <button
+        class="btn"
+        onclick="addPrayer()"
+      >
+        🙏 POST PRAYER REQUEST
       </button>
 
     </div>
 
-    <div id="prayers"></div>
-
-  </section>
+  </div>
 
 
-  <!-- GROUPS -->
+  <div id="prayers"></div>
 
-  <section id="groups" class="hidden">
+</section>
 
-    <div class="card">
 
-      <h2>👥 Christian Groups</h2>
+<!-- =====================================================
+     GROUPS
+===================================================== -->
 
-      <input id="groupName" placeholder="Group name">
+<section
+  id="groups"
+  class="hidden"
+>
+
+  <div class="card">
+
+    <h2>👥 Christian Groups</h2>
+
+    <p class="muted" style="margin:5px 0 17px">
+      Create a community around faith,
+      fellowship and shared interests.
+    </p>
+
+
+    <div class="form-group">
+
+      <label>
+        Group name
+      </label>
+
+      <input
+        id="groupName"
+        maxlength="100"
+        placeholder="Example: Youth Fellowship"
+      >
+
+    </div>
+
+
+    <div class="form-group">
+
+      <label>
+        Description
+      </label>
 
       <textarea
         id="groupDescription"
-        rows="2"
+        rows="3"
+        maxlength="500"
         placeholder="What is this group about?"
       ></textarea>
 
-      <button onclick="createGroup()">
-        CREATE GROUP
-      </button>
-
-      <div id="groupsList" style="margin-top:16px"></div>
-
     </div>
 
-  </section>
+
+    <button
+      class="btn"
+      onclick="createGroup()"
+    >
+      ➕ CREATE GROUP
+    </button>
+
+  </div>
 
 
-  <!-- MESSAGES -->
+  <div id="groupsList"></div>
 
-  <section id="messages" class="hidden">
+</section>
 
-    <div class="card">
 
-      <h2>💬 Messages</h2>
+<!-- =====================================================
+     MESSAGES
+===================================================== -->
 
-      <p>
-        Private messaging between registered believers.
-      </p>
+<section
+  id="messages"
+  class="hidden"
+>
+
+  <div class="card">
+
+    <h2>💬 Messages</h2>
+
+    <p class="muted" style="margin:5px 0 17px">
+      Send a private message to another registered believer.
+    </p>
+
+
+    <div class="form-group">
+
+      <label>
+        Recipient email
+      </label>
 
       <input
         id="messageUserEmail"
         type="email"
-        placeholder="Recipient's email address"
+        placeholder="recipient@example.com"
       >
+
+    </div>
+
+
+    <div class="form-group">
+
+      <label>
+        Message
+      </label>
 
       <textarea
         id="messageText"
-        rows="3"
-        placeholder="Write a private message..."
+        rows="4"
+        maxlength="3000"
+        placeholder="Write your private message..."
       ></textarea>
 
-      <button onclick="sendMessage()">
-        SEND MESSAGE
+    </div>
+
+
+    <button
+      class="btn"
+      onclick="sendMessage()"
+    >
+      ✉️ SEND MESSAGE
+    </button>
+
+  </div>
+
+
+  <div id="messagesList"></div>
+
+</section>
+
+
+<!-- =====================================================
+     PROFILE
+===================================================== -->
+
+<section
+  id="profile"
+  class="hidden"
+>
+
+
+  <div class="profile-card">
+
+
+    <div
+      id="profileCover"
+      class="profile-cover"
+    >
+
+      <div class="cover-placeholder">
+        ✝
+      </div>
+
+    </div>
+
+
+    <div class="profile-main">
+
+
+      <div class="profile-avatar-wrap">
+
+        <div
+          id="profileAvatar"
+          class="profile-avatar"
+        >
+          B
+        </div>
+
+      </div>
+
+
+      <div class="profile-heading">
+
+        <h2 id="profileDisplayName">
+          Believer
+        </h2>
+
+        <div
+          id="profileDisplayUsername"
+          class="profile-username"
+        >
+          @username
+        </div>
+
+      </div>
+
+
+      <button
+        class="btn profile-edit-btn"
+        onclick="toggleProfileEditor()"
+      >
+        ✏️ Edit Profile
       </button>
 
-      <div id="messagesList" style="margin-top:16px"></div>
-
-    </div>
-
-  </section>
-
-
-  <!-- PROFILE -->
-
-  <section id="profile" class="hidden">
-
-    <div class="profile-card">
-
-      <div class="profile-cover" id="profileCover">
-        <div class="cover-placeholder">✝</div>
-      </div>
-
-      <div class="profile-main">
-
-        <div class="profile-avatar-wrap">
-
-          <div class="profile-avatar" id="profileAvatar">
-            B
-          </div>
-
-        </div>
-
-        <div class="profile-heading">
-
-          <h2 id="profileDisplayName">
-            Believer
-          </h2>
-
-          <div class="profile-username" id="profileDisplayUsername">
-            @username
-          </div>
-
-        </div>
-
-        <button
-          class="profile-edit-btn"
-          onclick="toggleProfileEditor()"
-        >
-          ✏️ Edit Profile
-        </button>
-
-      </div>
-
-      <div class="profile-bio-area">
-
-        <p id="profileDisplayBio">
-          Add a short bio about yourself.
-        </p>
-
-        <div class="profile-details">
-
-          <span id="profileDisplayLocation"></span>
-
-          <span id="profileDisplayWebsite"></span>
-
-          <span id="profileJoined"></span>
-
-        </div>
-
-      </div>
-
     </div>
 
 
-    <div id="profileEditor" class="card hidden">
+    <div class="profile-bio-area">
 
-      <h2>✏️ Edit Profile</h2>
-
-      <p class="meta">
-        Update the information people see on your profile.
+      <p id="profileDisplayBio">
+        Add a short bio about yourself.
       </p>
 
-      <label>Full name</label>
 
-      <input id="profileNameEdit" placeholder="Full name">
+      <div class="profile-details">
 
-      <label>Username</label>
+        <span id="profileDisplayLocation"></span>
+
+        <span id="profileDisplayWebsite"></span>
+
+        <span id="profileJoined"></span>
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <!-- PROFILE EDITOR -->
+
+  <div
+    id="profileEditor"
+    class="card hidden"
+  >
+
+    <h2>✏️ Edit Profile</h2>
+
+    <p class="muted" style="margin:5px 0 20px">
+      Update the information people see on your profile.
+    </p>
+
+
+    <div class="form-group">
+
+      <label>
+        Full name
+      </label>
+
+      <input
+        id="profileNameEdit"
+        placeholder="Full name"
+      >
+
+    </div>
+
+
+    <div class="form-group">
+
+      <label>
+        Username
+      </label>
 
       <input
         id="profileUsernameEdit"
-        placeholder="username"
         maxlength="30"
+        placeholder="username"
       >
 
-      <label>Bio</label>
+    </div>
+
+
+    <div class="form-group">
+
+      <label>
+        Bio
+      </label>
 
       <textarea
         id="profileBioEdit"
         rows="4"
         maxlength="300"
-        placeholder="Tell the community a little about yourself..."
+        placeholder="Tell the community about yourself..."
       ></textarea>
 
-      <label>Location</label>
+    </div>
+
+
+    <div class="form-group">
+
+      <label>
+        Location
+      </label>
 
       <input
         id="profileLocationEdit"
         placeholder="City, Country"
       >
 
-      <label>Website</label>
+    </div>
+
+
+    <div class="form-group">
+
+      <label>
+        Website
+      </label>
 
       <input
         id="profileWebsiteEdit"
@@ -944,31 +2016,56 @@ label{
         placeholder="https://example.com"
       >
 
-      <label>Profile photo</label>
+    </div>
+
+
+    <div class="form-group">
+
+      <label>
+        Profile photo
+      </label>
 
       <input
         id="profileAvatarFile"
         type="file"
-        accept="image/*"
-        onchange="previewProfileImage(this,'profileAvatarPreview')"
+        accept="image/jpeg,image/png,image/webp"
       >
 
-      <div id="profileAvatarPreview" class="upload-preview"></div>
+      <div
+        id="profileAvatarPreview"
+        class="upload-preview"
+      ></div>
 
-      <label>Cover photo</label>
+    </div>
+
+
+    <div class="form-group">
+
+      <label>
+        Cover photo
+      </label>
 
       <input
         id="profileCoverFile"
         type="file"
-        accept="image/*"
-        onchange="previewProfileImage(this,'profileCoverPreview')"
+        accept="image/jpeg,image/png,image/webp"
       >
 
-      <div id="profileCoverPreview" class="cover-upload-preview"></div>
+      <div
+        id="profileCoverPreview"
+        class="cover-upload-preview"
+      ></div>
 
-      <details>
+    </div>
 
-        <summary>Use an image URL instead</summary>
+
+    <details>
+
+      <summary>
+        Use image URLs instead
+      </summary>
+
+      <div style="margin-top:12px">
 
         <input
           id="profileAvatarEdit"
@@ -980,130 +2077,199 @@ label{
           id="profileCoverEdit"
           type="url"
           placeholder="Cover photo URL"
+          style="margin-top:8px"
         >
-
-      </details>
-
-      <div class="actions">
-
-        <button onclick="updateProfile()">
-          💾 SAVE PROFILE
-        </button>
-
-        <button
-          class="secondary"
-          onclick="toggleProfileEditor()"
-        >
-          CANCEL
-        </button>
 
       </div>
 
-      <p id="profileMsg"></p>
+    </details>
+
+
+    <div class="actions" style="margin-top:18px">
+
+      <button
+        class="btn"
+        onclick="updateProfile()"
+      >
+        💾 SAVE PROFILE
+      </button>
+
+      <button
+        class="btn btn-secondary"
+        onclick="toggleProfileEditor()"
+      >
+        CANCEL
+      </button>
 
     </div>
 
 
-    <div class="card">
+    <p id="profileMsg"></p>
 
-      <div class="profile-tabs">
+  </div>
 
-        <button class="profile-tab active">
-          Posts
-        </button>
 
-        <button class="profile-tab">
-          About
-        </button>
+  <div class="card">
 
-        <button class="profile-tab">
-          Connections
-        </button>
+    <div class="profile-tabs">
 
-      </div>
+      <button class="profile-tab active">
+        Posts
+      </button>
 
-      <p class="meta">
-        Your profile activity will appear here.
-      </p>
+      <button class="profile-tab">
+        About
+      </button>
+
+      <button class="profile-tab">
+        Connections
+      </button>
 
     </div>
 
-  </section>
+
+    <p class="meta">
+      Your profile activity will appear here.
+    </p>
+
+  </div>
+
+</section>
+
 
 </div>
 
+</main>
+
 </div>
 
 
-<!-- SUPABASE -->
+<!-- =======================================================
+     SUPABASE
+======================================================= -->
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 <script>
 
 /* =========================================================
-   SUPABASE
+   SUPABASE CONFIG
 ========================================================= */
 
 const SUPABASE_URL =
-"https://zupbqtnqbsmlwbidsddk.supabase.co";
+  "https://zupbqtnqbsmlwbidsddk.supabase.co";
 
 const SUPABASE_PUBLISHABLE_KEY =
-"sb_publishable_NtyX9tGZ7vAmLB73ylIasw_RZZf7P2o";
+  "sb_publishable_NtyX9tGZ7vAmLB73ylIasw_RZZf7P2o";
 
 const supabaseClient =
-window.supabase.createClient(
-  SUPABASE_URL,
-  SUPABASE_PUBLISHABLE_KEY
-);
+  window.supabase.createClient(
+    SUPABASE_URL,
+    SUPABASE_PUBLISHABLE_KEY
+  );
 
-let currentUser=null;
-let currentProfile=null;
+
+let currentUser = null;
+let currentProfile = null;
 
 
 /* =========================================================
    HELPERS
 ========================================================= */
 
+function $(id){
+  return document.getElementById(id);
+}
+
+
+function showToast(message,type="success"){
+
+  const container =
+    $("toastContainer");
+
+  const toast =
+    document.createElement("div");
+
+  toast.className =
+    "toast " + type;
+
+  toast.textContent =
+    message;
+
+  container.appendChild(toast);
+
+  setTimeout(()=>{
+    toast.remove();
+  },3500);
+}
+
+
 function setMsg(id,text,type="error"){
 
-  const el=document.getElementById(id);
+  const element =
+    $(id);
 
-  if(!el)return;
+  if(!element)return;
 
-  el.className=type;
-  el.textContent=text;
+  element.className =
+    type;
+
+  element.textContent =
+    text;
 }
 
 
 function escapeHtml(value){
 
-  return String(value??"")
-    .replace(/[&<>"']/g,function(c){
+  return String(value ?? "")
+    .replace(/[&<>"']/g,c=>({
 
-      return {
-        "&":"&amp;",
-        "<":"&lt;",
-        ">":"&gt;",
-        '"':"&quot;",
-        "'":"&#039;"
-      }[c];
+      "&":"&amp;",
+      "<":"&lt;",
+      ">":"&gt;",
+      '"':"&quot;",
+      "'":"&#039;"
 
-    });
-
+    }[c]));
 }
 
 
 function formatDate(value){
 
-  if(!value)return "Just now";
-
-  const date=new Date(value);
-
-  if(isNaN(date.getTime()))
+  if(!value)
     return "Just now";
 
-  return date.toLocaleString();
+  const date =
+    new Date(value);
+
+  if(Number.isNaN(date.getTime()))
+    return "Just now";
+
+  return date.toLocaleString(
+    undefined,
+    {
+      dateStyle:"medium",
+      timeStyle:"short"
+    }
+  );
+}
+
+
+function initials(name){
+
+  const value =
+    String(name || "Believer")
+      .trim();
+
+  if(!value)
+    return "B";
+
+  return value
+    .split(/\s+/)
+    .slice(0,2)
+    .map(word=>word[0])
+    .join("")
+    .toUpperCase();
 }
 
 
@@ -1113,48 +2279,48 @@ function formatDate(value){
 
 function showSignup(){
 
-  document
-    .getElementById("loginBox")
+  $("loginBox")
     .classList.add("hidden");
 
-  document
-    .getElementById("signupBox")
+  $("signupBox")
     .classList.remove("hidden");
 
+  $("name")?.focus();
 }
 
 
 function showLogin(){
 
-  document
-    .getElementById("signupBox")
+  $("signupBox")
     .classList.add("hidden");
 
-  document
-    .getElementById("loginBox")
+  $("loginBox")
     .classList.remove("hidden");
 
+  $("loginEmail")?.focus();
 }
 
 
 /* =========================================================
-   SIGN UP
+   SIGNUP
 ========================================================= */
 
 async function signup(){
 
-  const name=
-    document.getElementById("name").value.trim();
+  const name =
+    $("name").value.trim();
 
-  const email=
-    document.getElementById("email")
-      .value.trim()
+  const email =
+    $("email")
+      .value
+      .trim()
       .toLowerCase();
 
-  const password=
-    document.getElementById("pass").value;
+  const password =
+    $("pass").value;
 
-  if(!name||!email||!password){
+
+  if(!name || !email || !password){
 
     setMsg(
       "signupMsg",
@@ -1164,25 +2330,31 @@ async function signup(){
     return;
   }
 
-  if(password.length<6){
+
+  if(password.length < 6){
 
     setMsg(
       "signupMsg",
-      "Password must be at least 6 characters."
+      "Password must contain at least 6 characters."
     );
 
     return;
   }
 
-  const btn=
-    document.getElementById("signupBtn");
 
-  btn.disabled=true;
-  btn.textContent="CREATING...";
+  const button =
+    $("signupBtn");
+
+  button.disabled = true;
+  button.textContent = "CREATING...";
+
 
   try{
 
-    const {data,error}=
+    const {
+      data,
+      error
+    } =
       await supabaseClient.auth.signUp({
 
         email,
@@ -1196,10 +2368,16 @@ async function signup(){
 
       });
 
-    if(error)throw error;
+
+    if(error)
+      throw error;
+
 
     if(!data.user)
-      throw new Error("Account could not be created.");
+      throw new Error(
+        "Account could not be created."
+      );
+
 
     if(data.session){
 
@@ -1209,34 +2387,45 @@ async function signup(){
         email
       );
 
-      await loadApp(data.user);
+      await loadApp(
+        data.user
+      );
 
     }else{
 
       setMsg(
         "signupMsg",
-        "Account created. Check your email if confirmation is required.",
+        "Account created. Check your email to confirm your account.",
         "success"
       );
 
-      setTimeout(showLogin,1500);
+      setTimeout(
+        showLogin,
+        1800
+      );
     }
+
 
   }catch(error){
 
-    console.error("SIGNUP ERROR:",error);
+    console.error(
+      "SIGNUP ERROR",
+      error
+    );
 
     setMsg(
       "signupMsg",
-      "SIGN-UP ERROR: "+error.message
+      error.message ||
+      "Unable to create account."
     );
+
 
   }finally{
 
-    btn.disabled=false;
-    btn.textContent="CREATE ACCOUNT";
+    button.disabled = false;
+    button.textContent =
+      "✨ CREATE ACCOUNT";
   }
-
 }
 
 
@@ -1246,16 +2435,17 @@ async function signup(){
 
 async function login(){
 
-  const email=
-    document.getElementById("loginEmail")
-      .value.trim()
+  const email =
+    $("loginEmail")
+      .value
+      .trim()
       .toLowerCase();
 
-  const password=
-    document.getElementById("loginPass")
-      .value;
+  const password =
+    $("loginPass").value;
 
-  if(!email||!password){
+
+  if(!email || !password){
 
     setMsg(
       "loginMsg",
@@ -1265,41 +2455,59 @@ async function login(){
     return;
   }
 
-  const button=
-    document.getElementById("loginBtn");
 
-  button.disabled=true;
-  button.textContent="LOGGING IN...";
+  const button =
+    $("loginBtn");
+
+  button.disabled = true;
+  button.textContent =
+    "LOGGING IN...";
+
 
   try{
 
-    const {data,error}=
-      await supabaseClient.auth.signInWithPassword({
+    const {
+      data,
+      error
+    } =
+      await supabaseClient.auth
+        .signInWithPassword({
 
-        email,
-        password
+          email,
+          password
 
-      });
+        });
 
-    if(error)throw error;
 
-    await loadApp(data.user);
+    if(error)
+      throw error;
+
+
+    await loadApp(
+      data.user
+    );
+
 
   }catch(error){
 
-    console.error("LOGIN ERROR:",error);
+    console.error(
+      "LOGIN ERROR",
+      error
+    );
 
     setMsg(
       "loginMsg",
-      "LOGIN ERROR: "+error.message
+      error.message ||
+      "Unable to log in."
     );
+
 
   }finally{
 
-    button.disabled=false;
-    button.textContent="LOG IN";
+    button.disabled = false;
+    button.textContent =
+      "🔐 LOG IN";
   }
-
 }
 
 
@@ -1313,19 +2521,26 @@ async function ensureProfile(
   fallbackEmail
 ){
 
-  if(!user)return null;
+  if(!user)
+    return null;
 
-  const name=
+
+  const name =
     user.user_metadata?.full_name ||
     fallbackName ||
     "Believer";
 
-  const email=
+
+  const email =
     user.email ||
     fallbackEmail ||
     null;
 
-  const {data,error}=
+
+  const {
+    data,
+    error
+  } =
     await supabaseClient
       .from("profiles")
       .upsert(
@@ -1341,31 +2556,38 @@ async function ensureProfile(
       .select()
       .single();
 
+
   if(error){
 
     console.error(
-      "ENSURE PROFILE ERROR:",
+      "PROFILE ERROR",
       error
     );
 
     throw error;
   }
 
-  currentProfile=data;
+
+  currentProfile =
+    data;
 
   return data;
 }
 
 
 /* =========================================================
-   LOAD APP
+   LOAD APPLICATION
 ========================================================= */
 
 async function loadApp(user){
 
-  if(!user)return;
+  if(!user)
+    return;
 
-  currentUser=user;
+
+  currentUser =
+    user;
+
 
   try{
 
@@ -1375,31 +2597,29 @@ async function loadApp(user){
       user.email
     );
 
+
+    $("auth")
+      .classList.add("hidden");
+
+    $("app")
+      .classList.remove("hidden");
+
+
+    await render();
+
+
   }catch(error){
 
     console.error(
-      "PROFILE LOAD ERROR:",
+      "APP LOAD ERROR",
       error
     );
 
-    setMsg(
-      "loginMsg",
-      "Login worked, but your profile could not be loaded: "+
-      error.message
+    showToast(
+      "Your account loaded, but your profile could not be loaded.",
+      "error"
     );
-
-    return;
   }
-
-  document
-    .getElementById("auth")
-    .classList.add("hidden");
-
-  document
-    .getElementById("app")
-    .classList.remove("hidden");
-
-  await render();
 }
 
 
@@ -1409,81 +2629,108 @@ async function loadApp(user){
 
 async function logout(){
 
-  await supabaseClient.auth.signOut();
+  try{
 
-  currentUser=null;
-  currentProfile=null;
+    await supabaseClient.auth
+      .signOut();
 
-  location.reload();
+  }finally{
+
+    currentUser = null;
+    currentProfile = null;
+
+    location.reload();
+  }
 }
 
 
 /* =========================================================
-   POST COMPOSER
+   COMPOSER
 ========================================================= */
 
 function openPostComposer(){
 
-  const area=
-    document.getElementById("postComposerArea");
+  $("postComposerArea")
+    .classList.remove("hidden");
 
-  area.classList.remove("hidden");
-
-  setTimeout(()=>{
-
-    document
-      .getElementById("postText")
-      ?.focus();
-
-  },50);
+  $("postText")
+    ?.focus();
 }
 
 
 function closePostComposer(){
 
-  const area=
-    document.getElementById("postComposerArea");
-
-  const text=
-    document.getElementById("postText");
-
-  if(text)text.value="";
+  $("postText").value = "";
 
   removePostImage();
 
-  area.classList.add("hidden");
+  $("postComposerArea")
+    .classList.add("hidden");
+}
+
+
+function renderComposer(){
+
+  if(!currentProfile)
+    return;
+
+
+  const avatar =
+    $("composerAvatar");
+
+  const name =
+    currentProfile.full_name ||
+    "Believer";
+
+
+  if(currentProfile.avatar_url){
+
+    avatar.innerHTML = `
+      <img
+        src="${escapeHtml(currentProfile.avatar_url)}"
+        alt="Profile"
+      >
+    `;
+
+  }else{
+
+    avatar.textContent =
+      initials(name);
+  }
 }
 
 
 /* =========================================================
-   COMPOSER AVATAR
+   HEADER AVATAR
 ========================================================= */
 
-function renderComposer(){
+function renderHeader(){
 
-  if(!currentProfile)return;
+  if(!currentProfile)
+    return;
 
-  const avatar=
-    document.getElementById("composerAvatar");
 
-  if(!avatar)return;
+  const avatar =
+    $("headerAvatar");
 
-  const name=
+  const name =
     currentProfile.full_name ||
     "Believer";
 
+
   if(currentProfile.avatar_url){
 
-    avatar.innerHTML=
-      `<img
+    avatar.innerHTML = `
+      <img
         src="${escapeHtml(currentProfile.avatar_url)}"
         alt="Profile"
-      >`;
+      >
+    `;
 
   }else{
 
-    avatar.textContent=
-      name.charAt(0).toUpperCase();
+    avatar.textContent =
+      initials(name);
   }
 }
 
@@ -1492,72 +2739,96 @@ function renderComposer(){
    POST IMAGE PREVIEW
 ========================================================= */
 
-function previewPostImage(input){
+$("postImageFile")
+  .addEventListener(
+    "change",
+    function(){
 
-  const file=input.files?.[0];
+      const file =
+        this.files?.[0];
 
-  const preview=
-    document.getElementById("postImagePreview");
+      const preview =
+        $("postImagePreview");
 
-  if(!file){
 
-    preview.innerHTML="";
-    preview.classList.add("hidden");
-    return;
-  }
+      if(!file){
 
-  if(!file.type.startsWith("image/")){
+        removePostImage();
+        return;
+      }
 
-    alert("Please select an image file.");
 
-    input.value="";
-    return;
-  }
+      if(!file.type.startsWith("image/")){
 
-  if(file.size>10*1024*1024){
+        showToast(
+          "Please select an image file.",
+          "error"
+        );
 
-    alert("The image must be smaller than 10 MB.");
+        this.value="";
+        return;
+      }
 
-    input.value="";
-    return;
-  }
 
-  const url=URL.createObjectURL(file);
+      if(file.size > 10 * 1024 * 1024){
 
-  preview.innerHTML=`
+        showToast(
+          "The image must be smaller than 10 MB.",
+          "error"
+        );
 
-    <img
-      src="${url}"
-      alt="Post photo preview"
-    >
+        this.value="";
+        return;
+      }
 
-    <button
-      type="button"
-      class="remove-post-image"
-      onclick="removePostImage()"
-    >×</button>
 
-  `;
+      const url =
+        URL.createObjectURL(file);
 
-  preview.classList.remove("hidden");
-}
+
+      preview.innerHTML = `
+
+        <img
+          src="${url}"
+          alt="Post photo preview"
+        >
+
+        <button
+          type="button"
+          class="remove-post-image"
+          onclick="removePostImage()"
+        >
+          ×
+        </button>
+
+      `;
+
+
+      preview.classList.remove(
+        "hidden"
+      );
+    }
+  );
 
 
 function removePostImage(){
 
-  const input=
-    document.getElementById("postImageFile");
+  const input =
+    $("postImageFile");
 
-  const preview=
-    document.getElementById("postImagePreview");
+  const preview =
+    $("postImagePreview");
 
-  if(input)input.value="";
 
-  if(preview){
+  if(input)
+    input.value = "";
 
-    preview.innerHTML="";
-    preview.classList.add("hidden");
-  }
+
+  preview.innerHTML = "";
+
+  preview.classList.add(
+    "hidden"
+  );
 }
 
 
@@ -1567,24 +2838,33 @@ function removePostImage(){
 
 async function uploadPostImage(file){
 
-  if(!file||!currentUser)
+  if(!file || !currentUser)
     return null;
 
-  const extension=
-    (
-      file.name.split(".").pop()||"jpg"
-    )
-    .toLowerCase()
-    .replace(/[^a-z0-9]/g,"");
 
-  const path=
-    currentUser.id+
-    "/post-"+
-    crypto.randomUUID()+
-    "."+
+  const extension =
+    (
+      file.name.split(".").pop() ||
+      "jpg"
+    )
+      .toLowerCase()
+      .replace(
+        /[^a-z0-9]/g,
+        ""
+      );
+
+
+  const path =
+    currentUser.id +
+    "/post-" +
+    crypto.randomUUID() +
+    "." +
     extension;
 
-  const {error}=
+
+  const {
+    error
+  } =
     await supabaseClient
       .storage
       .from("post-media")
@@ -1598,13 +2878,19 @@ async function uploadPostImage(file){
         }
       );
 
-  if(error)throw error;
 
-  const {data}=
+  if(error)
+    throw error;
+
+
+  const {
+    data
+  } =
     supabaseClient
       .storage
       .from("post-media")
       .getPublicUrl(path);
+
 
   return data.publicUrl;
 }
@@ -1618,101 +2904,108 @@ async function addPost(){
 
   if(!currentUser){
 
-    alert("Please log in first.");
-    return;
-  }
-
-  const textarea=
-    document.getElementById("postText");
-
-  const text=
-    textarea.value.trim();
-
-  const imageInput=
-    document.getElementById("postImageFile");
-
-  const imageFile=
-    imageInput.files?.[0]||null;
-
-  if(!text&&!imageFile){
-
-    setMsg(
-      "postMsg",
-      "Write something or select a photo before posting."
+    showToast(
+      "Please log in first.",
+      "error"
     );
 
     return;
   }
 
-  const button=
-    document.getElementById("postBtn");
 
-  button.disabled=true;
-  button.textContent="POSTING...";
+  const text =
+    $("postText")
+      .value
+      .trim();
+
+
+  const imageFile =
+    $("postImageFile")
+      .files?.[0] || null;
+
+
+  if(!text && !imageFile){
+
+    setMsg(
+      "postMsg",
+      "Write something or select a photo."
+    );
+
+    return;
+  }
+
+
+  const button =
+    $("postBtn");
+
+  button.disabled = true;
+  button.textContent =
+    "POSTING...";
+
 
   try{
 
-    let image_url=null;
+    let image_url = null;
+
 
     if(imageFile){
 
-      image_url=
-        await uploadPostImage(imageFile);
+      image_url =
+        await uploadPostImage(
+          imageFile
+        );
     }
 
-    const {error}=
+
+    const {
+      error
+    } =
       await supabaseClient
         .from("posts")
         .insert({
 
           user_id:currentUser.id,
           content:text,
-          image_url:image_url
+          image_url
 
         });
 
-    if(error){
 
-      console.error(
-        "SUPABASE POST INSERT ERROR:",
-        error
-      );
-
+    if(error)
       throw error;
-    }
 
-    textarea.value="";
 
-    removePostImage();
+    closePostComposer();
 
-    setMsg(
-      "postMsg",
-      "Post published successfully.",
+
+    showToast(
+      "Your post was published.",
       "success"
     );
 
+
     await renderPosts();
 
-    document
-      .getElementById("postComposerArea")
-      .classList.add("hidden");
 
   }catch(error){
 
     console.error(
-      "POST ERROR:",
+      "POST ERROR",
       error
     );
 
-    setMsg(
-      "postMsg",
-      "Could not post: "+error.message
+    showToast(
+      "Could not publish post: " +
+      error.message,
+      "error"
     );
+
 
   }finally{
 
-    button.disabled=false;
-    button.textContent="POST";
+    button.disabled = false;
+    button.textContent =
+      "POST";
   }
 }
 
@@ -1723,27 +3016,25 @@ async function addPost(){
 
 async function renderPosts(){
 
-  const feed=
-    document.getElementById("feed");
+  const feed =
+    $("feed");
 
-  if(!feed)return;
+  if(!feed)
+    return;
 
-  feed.innerHTML=
-    `<div class="loading">Loading posts...</div>`;
+
+  feed.innerHTML =
+    `<div class="loading">
+      Loading posts...
+    </div>`;
+
 
   try{
 
-    /*
-      IMPORTANT:
-      First load ONLY the posts table.
-      This prevents a profile/likes problem
-      from making the entire feed disappear.
-    */
-
     const {
       data:posts,
-      error:postsError
-    }=
+      error
+    } =
       await supabaseClient
         .from("posts")
         .select(
@@ -1756,33 +3047,30 @@ async function renderPosts(){
           }
         );
 
-    if(postsError){
 
-      console.error(
-        "POSTS TABLE ERROR:",
-        postsError
-      );
+    if(error)
+      throw error;
 
-      throw new Error(
-        "Posts could not be loaded. "+
-        postsError.message
-      );
-    }
 
-    if(!posts||posts.length===0){
+    if(!posts?.length){
 
-      feed.innerHTML=`
+      feed.innerHTML = `
 
         <div class="card empty">
 
-          <h3>📝 No posts yet</h3>
+          <h3>
+            📝 No posts yet
+          </h3>
 
-          <p>
-            Be the first believer to share something
-            with the community.
+          <p style="margin:8px 0 18px">
+            Be the first believer to share
+            something with the community.
           </p>
 
-          <button onclick="openPostComposer()">
+          <button
+            class="btn"
+            onclick="openPostComposer()"
+          >
             CREATE FIRST POST
           </button>
 
@@ -1794,24 +3082,24 @@ async function renderPosts(){
     }
 
 
-    /* LOAD PROFILES */
+    const userIds =
+      [
+        ...new Set(
+          posts
+            .map(post=>post.user_id)
+            .filter(Boolean)
+        )
+      ];
 
-    const userIds=[
-      ...new Set(
-        posts
-          .map(p=>p.user_id)
-          .filter(Boolean)
-      )
-    ];
 
-    let profilesById={};
+    let profilesById = {};
+
 
     if(userIds.length){
 
       const {
-        data:profiles,
-        error:profileError
-      }=
+        data:profiles
+      } =
         await supabaseClient
           .from("profiles")
           .select(
@@ -1822,42 +3110,34 @@ async function renderPosts(){
             userIds
           );
 
-      if(profileError){
 
-        console.warn(
-          "PROFILE LOAD WARNING:",
-          profileError
+      profilesById =
+        Object.fromEntries(
+          (profiles || [])
+            .map(profile=>[
+              profile.id,
+              profile
+            ])
         );
-
-      }else{
-
-        profilesById=
-          Object.fromEntries(
-            (profiles||[]).map(
-              profile=>[
-                profile.id,
-                profile
-              ]
-            )
-          );
-      }
     }
 
 
-    /* LOAD LIKES */
+    const postIds =
+      posts.map(
+        post=>post.id
+      );
 
-    const postIds=
-      posts.map(post=>post.id);
 
-    let likesByPost={};
-    let myLikedPosts=new Set();
+    let likesByPost = {};
+    let myLikedPosts =
+      new Set();
+
 
     if(postIds.length){
 
       const {
-        data:likes,
-        error:likeError
-      }=
+        data:likes
+      } =
         await supabaseClient
           .from("post_likes")
           .select(
@@ -1868,23 +3148,17 @@ async function renderPosts(){
             postIds
           );
 
-      if(likeError){
 
-        console.warn(
-          "LIKE LOAD WARNING:",
-          likeError
-        );
+      (likes || [])
+        .forEach(like=>{
 
-      }else{
+          likesByPost[like.post_id] =
+            (likesByPost[like.post_id] || 0) + 1;
 
-        (likes||[]).forEach(like=>{
-
-          likesByPost[like.post_id]=
-            (likesByPost[like.post_id]||0)+1;
 
           if(
             currentUser &&
-            like.user_id===currentUser.id
+            like.user_id === currentUser.id
           ){
 
             myLikedPosts.add(
@@ -1893,191 +3167,194 @@ async function renderPosts(){
           }
 
         });
-      }
     }
 
 
-    /* DRAW POSTS */
+    feed.innerHTML =
+      posts
+        .map(post=>{
 
-    feed.innerHTML=
-      posts.map(post=>{
+          const profile =
+            profilesById[
+              post.user_id
+            ] || {};
 
-        const profile=
-          profilesById[post.user_id]||{};
 
-        const name=
-          profile.full_name||
-          "Believer";
+          const name =
+            profile.full_name ||
+            "Believer";
 
-        const avatar=
-          profile.avatar_url||
-          "";
 
-        const liked=
-          myLikedPosts.has(post.id);
+          const liked =
+            myLikedPosts.has(
+              post.id
+            );
 
-        const count=
-          likesByPost[post.id]||0;
 
-        const isMine=
-          currentUser &&
-          post.user_id===currentUser.id;
+          const likeCount =
+            likesByPost[
+              post.id
+            ] || 0;
 
-        return `
 
-          <div
-            class="card"
-            id="post-${escapeHtml(post.id)}"
-          >
+          const isMine =
+            currentUser &&
+            post.user_id ===
+            currentUser.id;
 
-            <div class="posthead">
 
-              <div class="avatar">
+          return `
 
-                ${
-                  avatar
-                  ?
-                  `<img
-                    src="${escapeHtml(avatar)}"
-                    alt="Profile"
-                    onerror="this.style.display='none'"
-                  >`
-                  :
-                  escapeHtml(
-                    name
-                      .charAt(0)
-                      .toUpperCase()
-                  )
-                }
+            <article
+              class="card"
+              id="post-${escapeHtml(post.id)}"
+            >
 
-              </div>
+              <div class="posthead">
 
-              <div>
+                <div class="avatar">
 
-                <b>
-                  ${escapeHtml(name)}
-                </b>
+                  ${
+                    profile.avatar_url
+                    ?
+                    `
+                    <img
+                      src="${escapeHtml(profile.avatar_url)}"
+                      alt="${escapeHtml(name)}"
+                      loading="lazy"
+                    >
+                    `
+                    :
+                    escapeHtml(
+                      initials(name)
+                    )
+                  }
 
-                <div class="meta">
+                </div>
 
-                  ${formatDate(post.created_at)}
-                  • Public
+
+                <div class="post-author">
+
+                  <div class="post-author-name">
+                    ${escapeHtml(name)}
+                  </div>
+
+                  <div class="meta">
+                    ${formatDate(post.created_at)}
+                    • Public
+                  </div>
 
                 </div>
 
               </div>
 
-            </div>
+
+              ${
+                post.content
+                ?
+                `
+                <div class="post-content">
+                  ${escapeHtml(post.content)}
+                </div>
+                `
+                :
+                ""
+              }
 
 
-            ${
-              post.content
-              ?
-              `
-              <p class="post-content">
-                ${escapeHtml(post.content)}
-              </p>
-              `
-              :
-              ""
-            }
+              ${
+                post.image_url
+                ?
+                `
+                <img
+                  class="post-photo"
+                  src="${escapeHtml(post.image_url)}"
+                  alt="Post photo"
+                  loading="lazy"
+                >
+                `
+                :
+                ""
+              }
 
 
-            ${
-              post.image_url
-              ?
-              `
-              <img
-                class="post-photo"
-                src="${escapeHtml(post.image_url)}"
-                alt="Post photo"
-                loading="lazy"
-                onerror="this.style.display='none'"
-              >
-              `
-              :
-              ""
-            }
+              <div class="actions">
+
+                <button
+                  class="action-btn ${liked ? "like-active" : ""}"
+                  onclick="likePost('${escapeHtml(post.id)}')"
+                >
+                  ${liked ? "❤️" : "🤍"}
+                  ${liked ? "Liked" : "Like"}
+                  · ${likeCount}
+                </button>
 
 
-            <div class="actions">
-
-              <button
-                id="like-${escapeHtml(post.id)}"
-                class="${liked?"like-active":""}"
-                onclick="likePost('${escapeHtml(post.id)}')"
-              >
-
-                ${liked?"❤️ Liked":"🤍 Like"}
-
-                <span class="like-count">
-                  ${count}
-                </span>
-
-              </button>
+                <button
+                  class="action-btn"
+                  onclick="commentPost('${escapeHtml(post.id)}')"
+                >
+                  💬 Comment
+                </button>
 
 
-              <button
-                onclick="commentPost('${escapeHtml(post.id)}')"
-              >
-                💬 Comment
-              </button>
+                <button
+                  class="action-btn"
+                  onclick="sharePost('${escapeHtml(post.id)}')"
+                >
+                  ↗ Share
+                </button>
+
+              </div>
 
 
-              <button
-                onclick="sharePost('${escapeHtml(post.id)}')"
-              >
-                ↗ Share
-              </button>
+              ${
+                isMine
+                ?
+                `
+                <button
+                  class="btn btn-danger btn-small delete-post"
+                  onclick="deletePost('${escapeHtml(post.id)}')"
+                >
+                  🗑️ Delete Post
+                </button>
+                `
+                :
+                ""
+              }
 
-            </div>
+            </article>
 
+          `;
 
-            ${
-              isMine
-              ?
-              `
-              <button
-                class="danger delete-post"
-                onclick="deletePost('${escapeHtml(post.id)}')"
-              >
-                🗑️ Delete Post
-              </button>
-              `
-              :
-              ""
-            }
+        })
+        .join("");
 
-          </div>
-
-        `;
-
-      }).join("");
 
   }catch(error){
 
     console.error(
-      "LOAD POSTS ERROR:",
+      "POST LOAD ERROR",
       error
     );
 
-    feed.innerHTML=`
+
+    feed.innerHTML = `
 
       <div class="card">
 
-        <h3>⚠️ Could not load posts</h3>
+        <h3>
+          ⚠️ Could not load posts
+        </h3>
 
-        <p class="error">
+        <p class="error" style="margin:8px 0 17px">
           ${escapeHtml(error.message)}
         </p>
 
-        <p class="meta">
-          Your connection to the app is working,
-          but Supabase returned an error while
-          loading the posts.
-        </p>
-
-        <button onclick="renderPosts()">
+        <button
+          class="btn"
+          onclick="renderPosts()"
+        >
           🔄 TRY AGAIN
         </button>
 
@@ -2094,38 +3371,53 @@ async function renderPosts(){
 
 async function deletePost(postId){
 
-  if(!currentUser){
-
-    alert("Please log in first.");
+  if(!currentUser)
     return;
-  }
 
-  if(
-    !confirm(
-      "Are you sure you want to delete this post?"
-    )
-  )return;
+
+  if(!confirm(
+    "Delete this post?"
+  ))
+    return;
+
 
   try{
 
-    const {error}=
+    const {
+      error
+    } =
       await supabaseClient
         .from("posts")
         .delete()
-        .eq("id",postId)
-        .eq("user_id",currentUser.id);
+        .eq(
+          "id",
+          postId
+        )
+        .eq(
+          "user_id",
+          currentUser.id
+        );
 
-    if(error)throw error;
+
+    if(error)
+      throw error;
+
+
+    showToast(
+      "Post deleted.",
+      "success"
+    );
+
 
     await renderPosts();
 
+
   }catch(error){
 
-    console.error(error);
-
-    alert(
-      "Could not delete post: "+
-      error.message
+    showToast(
+      "Could not delete post: " +
+      error.message,
+      "error"
     );
   }
 }
@@ -2137,41 +3429,60 @@ async function deletePost(postId){
 
 async function likePost(postId){
 
-  if(!currentUser){
-
-    alert("Please log in first.");
+  if(!currentUser)
     return;
-  }
+
 
   try{
 
     const {
       data:existing,
       error:checkError
-    }=
+    } =
       await supabaseClient
         .from("post_likes")
         .select("post_id")
-        .eq("post_id",postId)
-        .eq("user_id",currentUser.id)
+        .eq(
+          "post_id",
+          postId
+        )
+        .eq(
+          "user_id",
+          currentUser.id
+        )
         .maybeSingle();
 
-    if(checkError)throw checkError;
+
+    if(checkError)
+      throw checkError;
+
 
     if(existing){
 
-      const {error}=
+      const {
+        error
+      } =
         await supabaseClient
           .from("post_likes")
           .delete()
-          .eq("post_id",postId)
-          .eq("user_id",currentUser.id);
+          .eq(
+            "post_id",
+            postId
+          )
+          .eq(
+            "user_id",
+            currentUser.id
+          );
 
-      if(error)throw error;
+
+      if(error)
+        throw error;
 
     }else{
 
-      const {error}=
+      const {
+        error
+      } =
         await supabaseClient
           .from("post_likes")
           .insert({
@@ -2181,18 +3492,25 @@ async function likePost(postId){
 
           });
 
-      if(error)throw error;
+
+      if(error)
+        throw error;
     }
+
 
     await renderPosts();
 
+
   }catch(error){
 
-    console.error(error);
+    console.error(
+      "LIKE ERROR",
+      error
+    );
 
-    alert(
-      "Could not update like: "+
-      error.message
+    showToast(
+      "Could not update like.",
+      "error"
     );
   }
 }
@@ -2204,23 +3522,25 @@ async function likePost(postId){
 
 async function commentPost(postId){
 
-  if(!currentUser){
-
-    alert("Please log in first.");
+  if(!currentUser)
     return;
-  }
 
-  const comment=
-    prompt("Write your comment:");
 
-  if(
-    !comment||
-    !comment.trim()
-  )return;
+  const comment =
+    prompt(
+      "Write your comment:"
+    );
+
+
+  if(!comment?.trim())
+    return;
+
 
   try{
 
-    const {error}=
+    const {
+      error
+    } =
       await supabaseClient
         .from("post_comments")
         .insert({
@@ -2231,17 +3551,23 @@ async function commentPost(postId){
 
         });
 
-    if(error)throw error;
 
-    alert("💬 Comment added.");
+    if(error)
+      throw error;
+
+
+    showToast(
+      "Comment added.",
+      "success"
+    );
+
 
   }catch(error){
 
-    console.error(error);
-
-    alert(
-      "Could not add comment: "+
-      error.message
+    showToast(
+      "Could not add comment: " +
+      error.message,
+      "error"
     );
   }
 }
@@ -2253,46 +3579,47 @@ async function commentPost(postId){
 
 async function sharePost(postId){
 
-  const url=
-    window.location.origin+
-    window.location.pathname+
-    "#post-"+postId;
+  const url =
+    window.location.origin +
+    window.location.pathname +
+    "#post-" +
+    postId;
+
 
   try{
 
-    if(
-      navigator.share
-    ){
+    if(navigator.share){
 
       await navigator.share({
-        title:"Believer Connect Post",
-        text:"Check out this post on Believer Connect.",
-        url:url
+
+        title:
+          "Believer Connect",
+
+        text:
+          "Check out this post on Believer Connect.",
+
+        url
+
       });
 
     }else{
 
-      await navigator.clipboard.writeText(url);
+      await navigator.clipboard
+        .writeText(url);
 
-      alert("↗ Post link copied.");
-
+      showToast(
+        "Post link copied.",
+        "success"
+      );
     }
+
 
   }catch(error){
 
-    try{
-
-      await navigator.clipboard.writeText(url);
-
-      alert("↗ Post link copied.");
-
-    }catch(e){
-
-      prompt(
-        "Copy this post link:",
-        url
-      );
-    }
+    console.warn(
+      "Share cancelled",
+      error
+    );
   }
 }
 
@@ -2303,23 +3630,32 @@ async function sharePost(postId){
 
 async function addPrayer(){
 
-  if(!currentUser){
-
-    alert("Please log in first.");
+  if(!currentUser)
     return;
-  }
 
-  const text=
-    document
-      .getElementById("prayerText")
+
+  const text =
+    $("prayerText")
       .value
       .trim();
 
-  if(!text)return;
+
+  if(!text){
+
+    showToast(
+      "Please enter a prayer request.",
+      "error"
+    );
+
+    return;
+  }
+
 
   try{
 
-    const {error}=
+    const {
+      error
+    } =
       await supabaseClient
         .from("prayer_requests")
         .insert({
@@ -2329,19 +3665,29 @@ async function addPrayer(){
 
         });
 
-    if(error)throw error;
 
-    document
-      .getElementById("prayerText")
-      .value="";
+    if(error)
+      throw error;
+
+
+    $("prayerText").value = "";
+
+
+    showToast(
+      "Prayer request posted.",
+      "success"
+    );
+
 
     await renderPrayers();
 
+
   }catch(error){
 
-    alert(
-      "Could not post prayer: "+
-      error.message
+    showToast(
+      "Could not post prayer: " +
+      error.message,
+      "error"
     );
   }
 }
@@ -2349,15 +3695,23 @@ async function addPrayer(){
 
 async function renderPrayers(){
 
-  const box=
-    document.getElementById("prayers");
+  const box =
+    $("prayers");
 
-  if(!box)return;
+  if(!box)
+    return;
+
+
+  box.innerHTML =
+    `<div class="loading">
+      Loading prayer requests...
+    </div>`;
+
 
   const {
     data,
     error
-  }=
+  } =
     await supabaseClient
       .from("prayer_requests")
       .select(
@@ -2370,13 +3724,18 @@ async function renderPrayers(){
         }
       );
 
+
   if(error){
 
-    box.innerHTML=`
+    box.innerHTML = `
 
-      <div class="card error">
-        Could not load prayer requests:
-        ${escapeHtml(error.message)}
+      <div class="card">
+
+        <p class="error">
+          Could not load prayer requests:
+          ${escapeHtml(error.message)}
+        </p>
+
       </div>
 
     `;
@@ -2384,30 +3743,29 @@ async function renderPrayers(){
     return;
   }
 
-  box.innerHTML=
-    (data||[])
-      .map(
-        prayer=>`
 
-          <div class="card">
+  box.innerHTML =
+    (data || [])
+      .map(prayer=>`
 
-            <p class="post-content">
-              ${escapeHtml(prayer.content)}
-            </p>
+        <div class="card">
 
-            <div class="meta">
+          <div class="post-content">
+            ${escapeHtml(prayer.content)}
+          </div>
 
-              ${prayer.prayer_count||0}
-              people are praying
+          <div class="meta" style="margin-top:10px">
+            🙏 ${prayer.prayer_count || 0}
+            people are praying
+          </div>
 
-            </div>
-
-            <br>
+          <div style="margin-top:13px">
 
             <button
+              class="btn btn-secondary btn-small"
               onclick="pray(
                 '${escapeHtml(prayer.id)}',
-                ${prayer.prayer_count||0}
+                ${Number(prayer.prayer_count || 0)}
               )"
             >
               🙏 I am praying
@@ -2415,13 +3773,17 @@ async function renderPrayers(){
 
           </div>
 
-        `
-      )
+        </div>
+
+      `)
       .join("")
       ||
       `
       <div class="card empty">
-        No prayer requests yet.
+        <h3>No prayer requests yet.</h3>
+        <p style="margin-top:7px">
+          Be the first to share.
+        </p>
       </div>
       `;
 }
@@ -2431,23 +3793,35 @@ async function pray(id,count){
 
   try{
 
-    const {error}=
+    const {
+      error
+    } =
       await supabaseClient
         .from("prayer_requests")
         .update({
-          prayer_count:(count||0)+1
-        })
-        .eq("id",id);
 
-    if(error)throw error;
+          prayer_count:
+            Number(count || 0) + 1
+
+        })
+        .eq(
+          "id",
+          id
+        );
+
+
+    if(error)
+      throw error;
+
 
     await renderPrayers();
 
+
   }catch(error){
 
-    alert(
-      "Could not record prayer: "+
-      error.message
+    showToast(
+      "Could not record prayer.",
+      "error"
     );
   }
 }
@@ -2459,29 +3833,38 @@ async function pray(id,count){
 
 async function createGroup(){
 
-  if(!currentUser)return;
+  if(!currentUser)
+    return;
 
-  const name=
-    document
-      .getElementById("groupName")
+
+  const name =
+    $("groupName")
       .value
       .trim();
 
-  const description=
-    document
-      .getElementById("groupDescription")
+
+  const description =
+    $("groupDescription")
       .value
       .trim();
+
 
   if(!name){
 
-    alert("Please enter a group name.");
+    showToast(
+      "Please enter a group name.",
+      "error"
+    );
+
     return;
   }
 
+
   try{
 
-    const {error}=
+    const {
+      error
+    } =
       await supabaseClient
         .from("groups")
         .insert({
@@ -2492,18 +3875,30 @@ async function createGroup(){
 
         });
 
-    if(error)throw error;
 
-    document.getElementById("groupName").value="";
-    document.getElementById("groupDescription").value="";
+    if(error)
+      throw error;
+
+
+    $("groupName").value="";
+    $("groupDescription").value="";
+
+
+    showToast(
+      "Group created.",
+      "success"
+    );
+
 
     await renderGroups();
 
+
   }catch(error){
 
-    alert(
-      "Could not create group: "+
-      error.message
+    showToast(
+      "Could not create group: " +
+      error.message,
+      "error"
     );
   }
 }
@@ -2511,15 +3906,23 @@ async function createGroup(){
 
 async function renderGroups(){
 
-  const box=
-    document.getElementById("groupsList");
+  const box =
+    $("groupsList");
 
-  if(!box)return;
+  if(!box)
+    return;
+
+
+  box.innerHTML =
+    `<div class="loading">
+      Loading groups...
+    </div>`;
+
 
   const {
     data,
     error
-  }=
+  } =
     await supabaseClient
       .from("groups")
       .select(
@@ -2532,13 +3935,18 @@ async function renderGroups(){
         }
       );
 
+
   if(error){
 
-    box.innerHTML=`
+    box.innerHTML = `
 
-      <div class="error">
-        Could not load groups:
-        ${escapeHtml(error.message)}
+      <div class="card">
+
+        <p class="error">
+          Could not load groups:
+          ${escapeHtml(error.message)}
+        </p>
+
       </div>
 
     `;
@@ -2546,37 +3954,44 @@ async function renderGroups(){
     return;
   }
 
-  box.innerHTML=
-    (data||[])
-      .map(
-        group=>`
 
-          <div class="card">
+  box.innerHTML =
+    (data || [])
+      .map(group=>`
 
-            <h3>
-              👥 ${escapeHtml(group.name)}
-            </h3>
+        <div class="card">
 
-            <p>
-              ${escapeHtml(
-                group.description||
-                "Christian community group"
-              )}
-            </p>
+          <h3>
+            👥 ${escapeHtml(group.name)}
+          </h3>
 
-            <div class="meta">
-              ${formatDate(group.created_at)}
-            </div>
+          <p style="margin-top:7px">
+            ${escapeHtml(
+              group.description ||
+              "Christian community group"
+            )}
+          </p>
 
+          <div
+            class="meta"
+            style="margin-top:10px"
+          >
+            Created ${formatDate(
+              group.created_at
+            )}
           </div>
 
-        `
-      )
+        </div>
+
+      `)
       .join("")
       ||
       `
       <div class="card empty">
-        No groups yet.
+        <h3>No groups yet.</h3>
+        <p style="margin-top:7px">
+          Create the first Christian group.
+        </p>
       </div>
       `;
 }
@@ -2588,64 +4003,82 @@ async function renderGroups(){
 
 async function sendMessage(){
 
-  if(!currentUser)return;
+  if(!currentUser)
+    return;
 
-  const email=
-    document
-      .getElementById("messageUserEmail")
+
+  const email =
+    $("messageUserEmail")
       .value
       .trim()
       .toLowerCase();
 
-  const content=
-    document
-      .getElementById("messageText")
+
+  const content =
+    $("messageText")
       .value
       .trim();
 
-  if(!email||!content){
 
-    alert(
-      "Enter recipient email and message."
+  if(!email || !content){
+
+    showToast(
+      "Enter the recipient email and message.",
+      "error"
     );
 
     return;
   }
+
 
   try{
 
     const {
       data:recipient,
       error:recipientError
-    }=
+    } =
       await supabaseClient
         .from("profiles")
         .select("id,email")
-        .eq("email",email)
+        .eq(
+          "email",
+          email
+        )
         .maybeSingle();
+
 
     if(recipientError)
       throw recipientError;
 
+
     if(!recipient){
 
-      alert(
-        "No account was found for that email."
+      showToast(
+        "No account was found for that email.",
+        "error"
       );
 
       return;
     }
 
-    if(recipient.id===currentUser.id){
 
-      alert(
-        "You cannot send a private message to yourself."
+    if(
+      recipient.id ===
+      currentUser.id
+    ){
+
+      showToast(
+        "You cannot message yourself.",
+        "error"
       );
 
       return;
     }
 
-    const {error}=
+
+    const {
+      error
+    } =
       await supabaseClient
         .from("messages")
         .insert({
@@ -2656,19 +4089,29 @@ async function sendMessage(){
 
         });
 
-    if(error)throw error;
 
-    document.getElementById("messageText").value="";
+    if(error)
+      throw error;
 
-    alert("💬 Message sent.");
+
+    $("messageText").value = "";
+
+
+    showToast(
+      "Message sent.",
+      "success"
+    );
+
 
     await renderMessages();
 
+
   }catch(error){
 
-    alert(
-      "Could not send message: "+
-      error.message
+    showToast(
+      "Could not send message: " +
+      error.message,
+      "error"
     );
   }
 }
@@ -2676,15 +4119,23 @@ async function sendMessage(){
 
 async function renderMessages(){
 
-  const box=
-    document.getElementById("messagesList");
+  const box =
+    $("messagesList");
 
-  if(!box||!currentUser)return;
+  if(!box || !currentUser)
+    return;
+
+
+  box.innerHTML =
+    `<div class="loading">
+      Loading messages...
+    </div>`;
+
 
   const {
     data,
     error
-  }=
+  } =
     await supabaseClient
       .from("messages")
       .select(
@@ -2700,13 +4151,18 @@ async function renderMessages(){
         }
       );
 
+
   if(error){
 
-    box.innerHTML=`
+    box.innerHTML = `
 
-      <div class="error">
-        Could not load messages:
-        ${escapeHtml(error.message)}
+      <div class="card">
+
+        <p class="error">
+          Could not load messages:
+          ${escapeHtml(error.message)}
+        </p>
+
       </div>
 
     `;
@@ -2714,43 +4170,50 @@ async function renderMessages(){
     return;
   }
 
-  box.innerHTML=
-    (data||[])
-      .map(
-        message=>`
 
-          <div class="card">
+  box.innerHTML =
+    (data || [])
+      .map(message=>`
 
-            <div class="meta">
+        <div class="card">
 
-              ${
-                message.sender_id===
-                currentUser.id
-                ?
-                "You sent"
-                :
-                "Received"
-              }
+          <div class="meta">
 
-              •
+            ${
+              message.sender_id ===
+              currentUser.id
+              ?
+              "📤 You sent"
+              :
+              "📥 Received"
+            }
 
-              ${formatDate(message.created_at)}
-
-            </div>
-
-            <p>
-              ${escapeHtml(message.content)}
-            </p>
+            • ${formatDate(
+              message.created_at
+            )}
 
           </div>
 
-        `
-      )
+          <div
+            class="post-content"
+            style="margin-top:8px"
+          >
+            ${escapeHtml(
+              message.content
+            )}
+          </div>
+
+        </div>
+
+      `)
       .join("")
       ||
       `
       <div class="card empty">
-        No messages yet.
+        <h3>No messages yet.</h3>
+        <p style="margin-top:7px">
+          Your private conversations will appear here.
+        </p>
       </div>
       `;
 }
@@ -2762,58 +4225,88 @@ async function renderMessages(){
 
 function toggleProfileEditor(){
 
-  const editor=
-    document.getElementById("profileEditor");
+  const editor =
+    $("profileEditor");
 
-  editor.classList.toggle("hidden");
+  editor.classList.toggle(
+    "hidden"
+  );
+
 
   if(
-    !editor.classList.contains("hidden")
+    !editor.classList.contains(
+      "hidden"
+    )
   ){
 
     fillProfileEditor();
+
+    editor.scrollIntoView({
+      behavior:"smooth",
+      block:"start"
+    });
   }
 }
 
 
 function fillProfileEditor(){
 
-  if(!currentProfile)return;
+  if(!currentProfile)
+    return;
 
-  document.getElementById(
-    "profileNameEdit"
-  ).value=
-    currentProfile.full_name||"";
 
-  document.getElementById(
-    "profileUsernameEdit"
-  ).value=
-    currentProfile.username||"";
+  $("profileNameEdit").value =
+    currentProfile.full_name || "";
 
-  document.getElementById(
-    "profileBioEdit"
-  ).value=
-    currentProfile.bio||"";
 
-  document.getElementById(
-    "profileLocationEdit"
-  ).value=
-    currentProfile.location||"";
+  $("profileUsernameEdit").value =
+    currentProfile.username || "";
 
-  document.getElementById(
-    "profileWebsiteEdit"
-  ).value=
-    currentProfile.website||"";
 
-  document.getElementById(
-    "profileAvatarEdit"
-  ).value=
-    currentProfile.avatar_url||"";
+  $("profileBioEdit").value =
+    currentProfile.bio || "";
 
-  document.getElementById(
-    "profileCoverEdit"
-  ).value=
-    currentProfile.cover_url||"";
+
+  $("profileLocationEdit").value =
+    currentProfile.location || "";
+
+
+  $("profileWebsiteEdit").value =
+    currentProfile.website || "";
+
+
+  $("profileAvatarEdit").value =
+    currentProfile.avatar_url || "";
+
+
+  $("profileCoverEdit").value =
+    currentProfile.cover_url || "";
+
+
+  $("profileAvatarPreview").innerHTML =
+    currentProfile.avatar_url
+    ?
+    `
+    <img
+      src="${escapeHtml(currentProfile.avatar_url)}"
+      alt="Current profile photo"
+    >
+    `
+    :
+    "";
+
+
+  $("profileCoverPreview").innerHTML =
+    currentProfile.cover_url
+    ?
+    `
+    <img
+      src="${escapeHtml(currentProfile.cover_url)}"
+      alt="Current cover photo"
+    >
+    `
+    :
+    "";
 }
 
 
@@ -2823,109 +4316,159 @@ function fillProfileEditor(){
 
 function renderProfile(){
 
-  if(!currentProfile)return;
+  if(!currentProfile)
+    return;
 
-  const name=
-    currentProfile.full_name||
+
+  const name =
+    currentProfile.full_name ||
     "Believer";
 
-  const username=
+
+  const username =
     currentProfile.username
     ?
-    "@"+
-    currentProfile.username.replace(/^@/,"")
+    "@" +
+    currentProfile.username
+      .replace(/^@/,"")
     :
     "@username";
 
-  document.getElementById(
-    "profileDisplayName"
-  ).textContent=name;
 
-  document.getElementById(
-    "profileDisplayUsername"
-  ).textContent=username;
+  $("profileDisplayName")
+    .textContent =
+    name;
 
-  document.getElementById(
-    "profileDisplayBio"
-  ).textContent=
-    currentProfile.bio||
+
+  $("profileDisplayUsername")
+    .textContent =
+    username;
+
+
+  $("profileDisplayBio")
+    .textContent =
+    currentProfile.bio ||
     "Add a short bio about yourself.";
 
-  document.getElementById(
-    "profileDisplayLocation"
-  ).textContent=
+
+  $("profileDisplayLocation")
+    .textContent =
     currentProfile.location
     ?
-    "📍 "+currentProfile.location
+    "📍 " +
+    currentProfile.location
     :
     "";
 
-  document.getElementById(
-    "profileDisplayWebsite"
-  ).textContent=
+
+  $("profileDisplayWebsite")
+    .textContent =
     currentProfile.website
     ?
-    "🌐 "+currentProfile.website
+    "🌐 " +
+    currentProfile.website
     :
     "";
 
-  document.getElementById(
-    "profileJoined"
-  ).textContent=
+
+  $("profileJoined")
+    .textContent =
     currentProfile.created_at
     ?
-    "🗓️ Joined "+
+    "🗓️ Joined " +
     new Date(
       currentProfile.created_at
     ).toLocaleDateString()
     :
     "";
 
-  const avatar=
-    document.getElementById("profileAvatar");
 
-  avatar.innerHTML=
+  const avatar =
+    $("profileAvatar");
+
+
+  avatar.innerHTML =
     currentProfile.avatar_url
     ?
-    `<img
+    `
+    <img
       src="${escapeHtml(currentProfile.avatar_url)}"
       alt="Profile photo"
-    >`
+    >
+    `
     :
     escapeHtml(
-      name.charAt(0).toUpperCase()
+      initials(name)
     );
 
-  const cover=
-    document.getElementById("profileCover");
 
-  cover.innerHTML=
+  const cover =
+    $("profileCover");
+
+
+  cover.innerHTML =
     currentProfile.cover_url
     ?
-    `<img
+    `
+    <img
       src="${escapeHtml(currentProfile.cover_url)}"
       alt="Cover photo"
-    >`
+    >
+    `
     :
-    `<div class="cover-placeholder">✝</div>`;
+    `
+    <div class="cover-placeholder">
+      ✝
+    </div>
+    `;
+
 
   renderComposer();
+  renderHeader();
 }
 
 
 /* =========================================================
-   PROFILE IMAGE PREVIEW
+   PROFILE IMAGE PREVIEWS
 ========================================================= */
+
+$("profileAvatarFile")
+  .addEventListener(
+    "change",
+    function(){
+
+      previewProfileImage(
+        this,
+        "profileAvatarPreview"
+      );
+    }
+  );
+
+
+$("profileCoverFile")
+  .addEventListener(
+    "change",
+    function(){
+
+      previewProfileImage(
+        this,
+        "profileCoverPreview"
+      );
+    }
+  );
+
 
 function previewProfileImage(
   input,
   targetId
 ){
 
-  const file=input.files?.[0];
+  const file =
+    input.files?.[0];
 
-  const target=
-    document.getElementById(targetId);
+  const target =
+    $(targetId);
+
 
   if(!file){
 
@@ -2933,36 +4476,43 @@ function previewProfileImage(
     return;
   }
 
+
   if(!file.type.startsWith("image/")){
 
-    setMsg(
-      "profileMsg",
-      "Please select an image."
+    showToast(
+      "Please select an image.",
+      "error"
     );
 
     input.value="";
     return;
   }
 
-  if(file.size>5*1024*1024){
 
-    setMsg(
-      "profileMsg",
-      "Image must be smaller than 5 MB."
+  if(file.size > 5 * 1024 * 1024){
+
+    showToast(
+      "Image must be smaller than 5 MB.",
+      "error"
     );
 
     input.value="";
     return;
   }
 
-  const url=
+
+  const url =
     URL.createObjectURL(file);
 
-  target.innerHTML=
-    `<img
+
+  target.innerHTML = `
+
+    <img
       src="${url}"
-      alt="Preview"
-    >`;
+      alt="Image preview"
+    >
+
+  `;
 }
 
 
@@ -2975,27 +4525,35 @@ async function uploadProfileMedia(
   kind
 ){
 
-  if(!file||!currentUser)
+  if(!file || !currentUser)
     return null;
 
-  const extension=
+
+  const extension =
     (
-      file.name.split(".").pop()||
+      file.name.split(".").pop() ||
       "jpg"
     )
-    .toLowerCase()
-    .replace(/[^a-z0-9]/g,"");
+      .toLowerCase()
+      .replace(
+        /[^a-z0-9]/g,
+        ""
+      );
 
-  const path=
-    currentUser.id+
-    "/"+
-    kind+
-    "-"+
-    crypto.randomUUID()+
-    "."+
+
+  const path =
+    currentUser.id +
+    "/" +
+    kind +
+    "-" +
+    crypto.randomUUID() +
+    "." +
     extension;
 
-  const {error}=
+
+  const {
+    error
+  } =
     await supabaseClient
       .storage
       .from("profile-media")
@@ -3009,127 +4567,140 @@ async function uploadProfileMedia(
         }
       );
 
-  if(error)throw error;
 
-  const {data}=
+  if(error)
+    throw error;
+
+
+  const {
+    data
+  } =
     supabaseClient
       .storage
       .from("profile-media")
       .getPublicUrl(path);
+
 
   return data.publicUrl;
 }
 
 
 /* =========================================================
-   SAVE PROFILE
+   UPDATE PROFILE
 ========================================================= */
 
 async function updateProfile(){
 
-  if(!currentUser)return;
+  if(!currentUser)
+    return;
 
-  const name=
-    document
-      .getElementById("profileNameEdit")
+
+  const name =
+    $("profileNameEdit")
       .value
       .trim();
 
-  const username=
-    document
-      .getElementById("profileUsernameEdit")
+
+  const username =
+    $("profileUsernameEdit")
       .value
       .trim()
       .replace(/^@/,"")
       .toLowerCase();
 
-  const bio=
-    document
-      .getElementById("profileBioEdit")
+
+  const bio =
+    $("profileBioEdit")
       .value
       .trim();
 
-  const location=
-    document
-      .getElementById("profileLocationEdit")
+
+  const location =
+    $("profileLocationEdit")
       .value
       .trim();
 
-  const website=
-    document
-      .getElementById("profileWebsiteEdit")
+
+  const website =
+    $("profileWebsiteEdit")
       .value
       .trim();
 
-  let avatar_url=
-    document
-      .getElementById("profileAvatarEdit")
+
+  let avatar_url =
+    $("profileAvatarEdit")
       .value
       .trim();
 
-  let cover_url=
-    document
-      .getElementById("profileCoverEdit")
+
+  let cover_url =
+    $("profileCoverEdit")
       .value
       .trim();
 
-  const avatarFile=
-    document
-      .getElementById("profileAvatarFile")
+
+  const avatarFile =
+    $("profileAvatarFile")
       .files?.[0];
 
-  const coverFile=
-    document
-      .getElementById("profileCoverFile")
+
+  const coverFile =
+    $("profileCoverFile")
       .files?.[0];
+
 
   if(!name){
 
-    setMsg(
-      "profileMsg",
-      "Please enter your name."
+    showToast(
+      "Please enter your name.",
+      "error"
     );
 
     return;
   }
+
 
   if(
-    username&&
-    !/^[a-z0-9._-]{3,30}$/.test(username)
+    username &&
+    !/^[a-z0-9._-]{3,30}$/
+      .test(username)
   ){
 
-    setMsg(
-      "profileMsg",
-      "Username must be 3–30 characters."
+    showToast(
+      "Username must be 3–30 characters and use only letters, numbers, dots, underscores or hyphens.",
+      "error"
     );
 
     return;
   }
+
 
   try{
 
     if(avatarFile){
 
-      avatar_url=
+      avatar_url =
         await uploadProfileMedia(
           avatarFile,
           "avatar"
         );
     }
 
+
     if(coverFile){
 
-      cover_url=
+      cover_url =
         await uploadProfileMedia(
           coverFile,
           "cover"
         );
     }
 
+
     const {
       data,
       error
-    }=
+    } =
       await supabaseClient
         .from("profiles")
         .update({
@@ -3137,22 +4708,22 @@ async function updateProfile(){
           full_name:name,
 
           username:
-            username||null,
+            username || null,
 
           bio:
-            bio||null,
+            bio || null,
 
           location:
-            location||null,
+            location || null,
 
           website:
-            website||null,
+            website || null,
 
           avatar_url:
-            avatar_url||null,
+            avatar_url || null,
 
           cover_url:
-            cover_url||null
+            cover_url || null
 
         })
         .eq(
@@ -3162,68 +4733,74 @@ async function updateProfile(){
         .select()
         .single();
 
-    if(error)throw error;
 
-    currentProfile=data;
+    if(error)
+      throw error;
+
+
+    currentProfile =
+      data;
+
 
     renderProfile();
-    renderComposer();
+    renderHeader();
 
-    setMsg(
-      "profileMsg",
+
+    showToast(
       "Profile updated successfully.",
       "success"
     );
 
+
     setTimeout(()=>{
 
-      document
-        .getElementById("profileEditor")
-        .classList.add("hidden");
+      $("profileEditor")
+        .classList.add(
+          "hidden"
+        );
 
-    },800);
+    },700);
+
 
   }catch(error){
 
     console.error(
-      "PROFILE UPDATE ERROR:",
+      "PROFILE UPDATE ERROR",
       error
     );
 
-    setMsg(
-      "profileMsg",
-      "Could not update profile: "+
-      error.message
+    showToast(
+      "Could not update profile: " +
+      error.message,
+      "error"
     );
   }
 }
 
 
 /* =========================================================
-   RENDER EVERYTHING
+   RENDER
 ========================================================= */
 
 async function render(){
 
   renderProfile();
+  renderHeader();
   renderComposer();
 
-  /*
-    Posts are the most important section.
-    Load them first so the home feed appears
-    immediately.
-  */
 
   await renderPosts();
 
-  /*
-    Other sections are loaded independently.
-    A problem with one will not stop posts.
-  */
 
   renderPrayers();
   renderGroups();
   renderMessages();
+
+
+  tab(
+    "home",
+    false
+  );
 }
 
 
@@ -3231,53 +4808,184 @@ async function render(){
    NAVIGATION
 ========================================================= */
 
-function tab(id){
+function tab(
+  id,
+  scroll=true
+){
 
   document
-    .querySelectorAll("#app section")
-    .forEach(
-      section=>
-        section.classList.add("hidden")
-    );
+    .querySelectorAll(
+      "#app section"
+    )
+    .forEach(section=>{
 
-  const section=
-    document.getElementById(id);
+      section.classList.add(
+        "hidden"
+      );
+
+    });
+
+
+  const section =
+    $(id);
+
 
   if(section){
 
-    section.classList.remove("hidden");
+    section.classList.remove(
+      "hidden"
+    );
   }
 
-  if(id==="home"){
 
+  document
+    .querySelectorAll(
+      ".nav button"
+    )
+    .forEach(button=>{
+
+      button.classList.toggle(
+        "active",
+        button.dataset.tab === id
+      );
+
+    });
+
+
+  if(id === "home")
     renderPosts();
-    renderComposer();
 
-  }
 
-  if(id==="prayer")
+  if(id === "prayer")
     renderPrayers();
 
-  if(id==="groups")
+
+  if(id === "groups")
     renderGroups();
 
-  if(id==="messages")
+
+  if(id === "messages")
     renderMessages();
 
-  if(id==="profile")
+
+  if(id === "profile")
     renderProfile();
 
-  window.scrollTo(
-    {
+
+  if(scroll){
+
+    window.scrollTo({
       top:0,
       behavior:"smooth"
-    }
-  );
+    });
+  }
 }
 
 
 /* =========================================================
-   START APPLICATION
+   ENTER KEY LOGIN
+========================================================= */
+
+$("loginPass")
+  .addEventListener(
+    "keydown",
+    event=>{
+
+      if(event.key === "Enter")
+        login();
+
+    }
+  );
+
+
+$("pass")
+  .addEventListener(
+    "keydown",
+    event=>{
+
+      if(event.key === "Enter")
+        signup();
+
+    }
+  );
+
+
+/* =========================================================
+   AUTH BUTTONS
+========================================================= */
+
+$("showSignupBtn")
+  .addEventListener(
+    "click",
+    showSignup
+  );
+
+
+$("showLoginBtn")
+  .addEventListener(
+    "click",
+    showLogin
+  );
+
+
+$("signupBtn")
+  .addEventListener(
+    "click",
+    signup
+  );
+
+
+$("loginBtn")
+  .addEventListener(
+    "click",
+    login
+  );
+
+
+$("logoutBtn")
+  .addEventListener(
+    "click",
+    logout
+  );
+
+
+/* =========================================================
+   AUTH STATE
+========================================================= */
+
+supabaseClient.auth
+  .onAuthStateChange(
+    (event,session)=>{
+
+      if(
+        event === "SIGNED_IN" &&
+        session?.user &&
+        !currentUser
+      ){
+
+        setTimeout(
+          ()=>loadApp(
+            session.user
+          ),
+          0
+        );
+      }
+
+
+      if(
+        event === "SIGNED_OUT"
+      ){
+
+        currentUser = null;
+        currentProfile = null;
+      }
+
+    }
+  );
+
+
+/* =========================================================
+   START
 ========================================================= */
 
 async function startBelieverConnect(){
@@ -3287,20 +4995,14 @@ async function startBelieverConnect(){
     const {
       data,
       error
-    }=
-      await supabaseClient
-        .auth
+    } =
+      await supabaseClient.auth
         .getSession();
 
-    if(error){
 
-      console.error(
-        "SESSION ERROR:",
-        error
-      );
+    if(error)
+      throw error;
 
-      return;
-    }
 
     if(data?.session?.user){
 
@@ -3309,80 +5011,16 @@ async function startBelieverConnect(){
       );
     }
 
+
   }catch(error){
 
     console.error(
-      "START ERROR:",
+      "START ERROR",
       error
     );
   }
 }
 
-
-/* =========================================================
-   AUTH EVENTS
-========================================================= */
-
-document
-  .getElementById("showSignupBtn")
-  .addEventListener(
-    "click",
-    showSignup
-  );
-
-document
-  .getElementById("showLoginBtn")
-  .addEventListener(
-    "click",
-    showLogin
-  );
-
-document
-  .getElementById("signupBtn")
-  .addEventListener(
-    "click",
-    signup
-  );
-
-document
-  .getElementById("loginBtn")
-  .addEventListener(
-    "click",
-    login
-);
-
-
-/* =========================================================
-   SUPABASE AUTH STATE
-========================================================= */
-
-supabaseClient.auth.onAuthStateChange(
-  async(event,session)=>{
-
-    if(
-      event==="SIGNED_IN" &&
-      session?.user &&
-      !currentUser
-    ){
-
-      /*
-        Small delay prevents duplicate
-        auth/session initialization calls.
-      */
-
-      setTimeout(
-        ()=>loadApp(session.user),
-        0
-      );
-    }
-
-  }
-);
-
-
-/* =========================================================
-   START
-========================================================= */
 
 startBelieverConnect();
 
@@ -3390,3 +5028,4 @@ startBelieverConnect();
 
 </body>
 </html>
+```
