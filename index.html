@@ -651,7 +651,7 @@ header {
 }
 
 /* =========================================================
-   FEED POST CARDS & HEART/SUPPORT
+   FEED POST CARDS & HORIZONTAL ACTIONS (LIKE, COMMENT, SHARE)
 ========================================================= */
 .card {
   background: var(--bp-card-bg);
@@ -711,13 +711,15 @@ header {
   display: block;
 }
 
+/* Horizontal Actions Row: ❤️ Like | 💬 Comment | ↗️ Share */
 .actions {
   display: flex;
   align-items: center;
-  justify-content: space-around;
+  justify-content: space-between;
   border-top: 1px solid var(--bp-border);
   padding-top: 8px;
   margin-top: 4px;
+  gap: 4px;
 }
 
 .action-btn {
@@ -726,15 +728,80 @@ header {
   align-items: center;
   justify-content: center;
   gap: 6px;
-  padding: 6px 0;
+  padding: 6px 4px;
   color: var(--bp-muted);
   font-size: 13px;
   font-weight: 700;
   border-radius: 6px;
+  transition: color 0.2s, background 0.2s;
+  white-space: nowrap;
+}
+
+.action-btn:hover {
+  background: #f8fafc;
 }
 
 .action-btn.liked {
   color: #e63946;
+}
+
+/* Comments Section Styling */
+.comments-section {
+  margin-top: 10px;
+  border-top: 1px dashed var(--bp-border);
+  padding-top: 10px;
+}
+
+.comments-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 10px;
+  max-height: 200px;
+  overflow-y: auto;
+}
+
+.comment-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  font-size: 13px;
+  background: #f8fafc;
+  padding: 8px 10px;
+  border-radius: 8px;
+  border: 1px solid var(--bp-border);
+}
+
+.comment-author {
+  font-weight: 800;
+  color: var(--bp-primary);
+  font-size: 12px;
+}
+
+.comment-text {
+  color: var(--bp-text);
+  margin-top: 2px;
+  word-break: break-word;
+}
+
+.comment-input-wrap {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.comment-input-wrap input {
+  flex: 1;
+  padding: 8px 12px;
+  border: 1px solid var(--bp-border);
+  border-radius: 20px;
+  outline: none;
+  font-size: 13px;
+  background: #f8fafc;
+}
+
+.comment-input-wrap input:focus {
+  border-color: var(--bp-gold);
 }
 
 /* =========================================================
@@ -1203,7 +1270,7 @@ header {
 
       <!-- FEED POSTS LIST -->
       <div id="feedList">
-        <div class="card">
+        <div class="card" data-post-id="sample_1">
           <div class="posthead">
             <div class="posthead-left">
               <div class="avatar">G</div>
@@ -1214,9 +1281,21 @@ header {
             </div>
           </div>
           <div class="post-content">Welcoming everyone to our weekly digital fellowship! Let's uplift each other in prayer today.</div>
+          
+          <!-- HORIZONTAL ACTIONS ROW: LIKE, COMMENT, SHARE -->
           <div class="actions">
-            <button class="action-btn heart-btn" onclick="toggleHeart(this)"><i class="fa-solid fa-heart"></i> Support (<span>12</span>)</button>
-            <button class="action-btn"><i class="fa-solid fa-comment"></i> Encourage</button>
+            <button class="action-btn like-btn" onclick="toggleLike(this)"><i class="fa-solid fa-heart"></i> Like (<span class="like-count">12</span>)</button>
+            <button class="action-btn comment-btn" onclick="toggleCommentSection(this)"><i class="fa-solid fa-comment"></i> Comment (<span class="comment-count">0</span>)</button>
+            <button class="action-btn share-btn" onclick="sharePost(this)"><i class="fa-solid fa-share"></i> Share</button>
+          </div>
+
+          <!-- COMMENT CONTAINER -->
+          <div class="comments-section hidden">
+            <div class="comments-list"></div>
+            <div class="comment-input-wrap">
+              <input type="text" class="comment-input-field" placeholder="Write a comment..." onkeydown="handleCommentKeydown(event, this)">
+              <button class="btn btn-gold btn-sm" style="width: auto;" onclick="submitComment(this)"><i class="fa-solid fa-paper-plane"></i></button>
+            </div>
           </div>
         </div>
       </div>
@@ -1654,6 +1733,8 @@ function bindComposerEvents() {
     const feed = document.getElementById('feedList');
     const newPost = document.createElement('div');
     newPost.className = 'card';
+    const postId = 'post_' + Date.now();
+    newPost.setAttribute('data-post-id', postId);
     
     let avatarStyle = '';
     let avatarText = state.currentUser.avatar;
@@ -1685,9 +1766,21 @@ function bindComposerEvents() {
       </div>
       ${textHTML}
       ${mediaHTML}
+      
+      <!-- HORIZONTAL ACTIONS ROW: LIKE, COMMENT, SHARE -->
       <div class="actions">
-        <button class="action-btn heart-btn" onclick="toggleHeart(this)"><i class="fa-solid fa-heart"></i> Support (<span>0</span>)</button>
-        <button class="action-btn"><i class="fa-solid fa-comment"></i> Encourage</button>
+        <button class="action-btn like-btn" onclick="toggleLike(this)"><i class="fa-solid fa-heart"></i> Like (<span class="like-count">0</span>)</button>
+        <button class="action-btn comment-btn" onclick="toggleCommentSection(this)"><i class="fa-solid fa-comment"></i> Comment (<span class="comment-count">0</span>)</button>
+        <button class="action-btn share-btn" onclick="sharePost(this)"><i class="fa-solid fa-share"></i> Share</button>
+      </div>
+
+      <!-- COMMENT CONTAINER -->
+      <div class="comments-section hidden">
+        <div class="comments-list"></div>
+        <div class="comment-input-wrap">
+          <input type="text" class="comment-input-field" placeholder="Write a comment..." onkeydown="handleCommentKeydown(event, this)">
+          <button class="btn btn-gold btn-sm" style="width: auto;" onclick="submitComment(this)"><i class="fa-solid fa-paper-plane"></i></button>
+        </div>
       </div>
     `;
 
@@ -1703,19 +1796,117 @@ function bindComposerEvents() {
   });
 }
 
-function toggleHeart(btn) {
-  btn.classList.toggle('liked');
-  const countSpan = btn.querySelector('span');
+/* =========================================================
+   4. POST CONTROLS: LIKE, COMMENT, SHARE FUNCTIONS
+========================================================= */
+
+// 1. LIKE FUNCTIONALITY
+function toggleLike(btn) {
+  const countSpan = btn.querySelector('.like-count');
   let count = parseInt(countSpan.textContent) || 0;
+
   if (btn.classList.contains('liked')) {
-    countSpan.textContent = count + 1;
-  } else {
+    btn.classList.remove('liked');
     countSpan.textContent = Math.max(0, count - 1);
+  } else {
+    btn.classList.add('liked');
+    countSpan.textContent = count + 1;
   }
 }
 
+// 2. COMMENT FUNCTIONALITY
+function toggleCommentSection(btn) {
+  const card = btn.closest('.card');
+  const commentsSection = card.querySelector('.comments-section');
+  if (commentsSection) {
+    commentsSection.classList.toggle('hidden');
+    if (!commentsSection.classList.contains('hidden')) {
+      const inputField = commentsSection.querySelector('.comment-input-field');
+      if (inputField) inputField.focus();
+    }
+  }
+}
+
+function handleCommentKeydown(event, inputEl) {
+  if (event.key === 'Enter') {
+    event.preventDefault();
+    const submitBtn = inputEl.nextElementSibling;
+    if (submitBtn) submitBtn.click();
+  }
+}
+
+function submitComment(btn) {
+  const card = btn.closest('.card');
+  const inputField = card.querySelector('.comment-input-field');
+  const commentText = inputField.value.trim();
+
+  if (!commentText) return;
+
+  const commentsList = card.querySelector('.comments-list');
+  const newComment = document.createElement('div');
+  newComment.className = 'comment-item';
+
+  let avatarBg = state.currentUser.avatar;
+  let avatarStyle = '';
+  if (state.currentUser.photoUrl) {
+    avatarStyle = `style="background-image: url('${state.currentUser.photoUrl}'); color: transparent;"`;
+    avatarBg = '';
+  }
+
+  newComment.innerHTML = `
+    <div class="avatar" style="width: 28px; height: 28px; font-size: 12px; ${state.currentUser.photoUrl ? `background-image: url('${state.currentUser.photoUrl}'); color: transparent;` : ''}">${state.currentUser.photoUrl ? '' : state.currentUser.avatar}</div>
+    <div style="flex: 1;">
+      <div class="comment-author">${state.currentUser.name}</div>
+      <div class="comment-text">${escapeHtml(commentText)}</div>
+    </div>
+  `;
+
+  commentsList.appendChild(newComment);
+  inputField.value = '';
+
+  // Update comment count
+  const countSpan = card.querySelector('.comment-count');
+  let currentCount = parseInt(countSpan.textContent) || 0;
+  countSpan.textContent = currentCount + 1;
+}
+
+function escapeHtml(text) {
+  const div = document.createElement('div');
+  div.textContent = text;
+  return div.innerHTML;
+}
+
+// 3. SHARE FUNCTIONALITY
+function sharePost(btn) {
+  const card = btn.closest('.card');
+  const postContentEl = card.querySelector('.post-content');
+  const shareText = postContentEl ? postContentEl.textContent : "Check out this uplifting post on Believers+!";
+
+  if (navigator.share) {
+    navigator.share({
+      title: 'Believers+ Post',
+      text: shareText,
+      url: window.location.href
+    }).catch((err) => {
+      if (err.name !== 'AbortError') {
+        fallbackShare(shareText);
+      }
+    });
+  } else {
+    fallbackShare(shareText);
+  }
+}
+
+function fallbackShare(text) {
+  navigator.clipboard.writeText(window.location.href).then(() => {
+    alert("Post link copied to clipboard!");
+  }).catch(() => {
+    prompt("Copy link to share:", window.location.href);
+  });
+}
+
 /* =========================================================
-   4. FIND FRIENDS SYSTEM
+   5. FIND FRIENDS SYSTEM
 ========================================================= */
 function bindFriendEvents() {}
 
@@ -1761,7 +1952,7 @@ function sendFriendRequest(userId) {
 }
 
 /* =========================================================
-   5. SEARCH FUNCTIONALITY
+   6. SEARCH FUNCTIONALITY
 ========================================================= */
 function bindSearchEvents() {
   const searchBtn = document.getElementById('topSearchBtn');
@@ -1815,7 +2006,7 @@ function bindSearchEvents() {
 }
 
 /* =========================================================
-   6. NOTIFICATIONS BELL & DROPDOWN
+   7. NOTIFICATIONS BELL & DROPDOWN
 ========================================================= */
 function bindNotificationEvents() {
   const bellBtn = document.getElementById('notifBellBtn');
@@ -1872,7 +2063,7 @@ function markNotifRead(id) {
 }
 
 /* =========================================================
-   7. CREATE GROUP (+) MODAL SYSTEM
+   8. CREATE GROUP (+) MODAL SYSTEM
 ========================================================= */
 function bindGroupEvents() {
   const topPlusBtn = document.getElementById('topPlusBtn');
@@ -1928,7 +2119,7 @@ function renderGroups() {
 }
 
 /* =========================================================
-   8. VIDEO HUB PLAYBACK
+   9. VIDEO HUB PLAYBACK
 ========================================================= */
 function bindVideoEvents() {}
 
@@ -1953,7 +2144,7 @@ function renderVideos() {
 }
 
 /* =========================================================
-   9. RESTORED PROFILE, PHOTOS & BIO MANAGEMENT
+   10. RESTORED PROFILE, PHOTOS & BIO MANAGEMENT
 ========================================================= */
 function loadProfileFromStorage() {
   try {
