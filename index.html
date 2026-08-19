@@ -4,14 +4,17 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
 
-<meta name="theme-color" content="#0756d9">
+<meta name="theme-color" content="#1877f2">
 <meta name="description" content="Believer Connect — One Community, One Faith">
 
 <title>Believer Connect</title>
 
+<!-- Font Awesome for Social Media Icons -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
 <style>
 /* =========================================================
-   RESET
+   RESET & BASE STYLES
 ========================================================= */
 
 *{
@@ -25,18 +28,12 @@ html{
 }
 
 body{
-  font-family:
-    Inter,
-    system-ui,
-    -apple-system,
-    BlinkMacSystemFont,
-    "Segoe UI",
-    Arial,
-    sans-serif;
-
-  background:#f4f7fb;
-  color:#172033;
-  line-height:1.5;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  background:#f0f2f5;
+  color:#050505;
+  line-height:1.4;
+  padding-bottom: 60px; /* Space for bottom nav */
+  overflow-x: hidden;
 }
 
 button,
@@ -47,6 +44,7 @@ textarea{
 
 button{
   border:0;
+  outline:none;
 }
 
 img{
@@ -58,28 +56,27 @@ img{
 ========================================================= */
 
 :root{
-  --primary:#0756d9;
-  --primary-dark:#063b91;
-  --primary-light:#eaf2ff;
+  --primary:#1877f2;
+  --primary-dark:#0e5aed;
+  --primary-light:#e7f3ff;
 
-  --text:#172033;
-  --muted:#697586;
+  --text:#050505;
+  --muted:#65676b;
 
-  --border:#e3e8f0;
+  --border:#ced0d4;
 
   --surface:#ffffff;
-  --surface-soft:#f7f9fc;
+  --surface-soft:#f0f2f5;
 
-  --danger:#c6283d;
-  --danger-bg:#fff0f2;
+  --danger:#fa3e3e;
+  --danger-bg:#ffebe9;
 
-  --success:#087443;
+  --success:#42b72a;
   --success-bg:#eaf8f1;
 
-  --shadow:
-    0 8px 30px rgba(20,40,80,.07);
+  --shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
 
-  --radius:18px;
+  --radius:8px;
 }
 
 /* =========================================================
@@ -91,7 +88,8 @@ img{
 }
 
 .wrap{
-  width:min(100% - 28px,960px);
+  width:100%;
+  max-width:680px;
   margin:auto;
 }
 
@@ -109,7 +107,7 @@ img{
 
 .meta{
   color:var(--muted);
-  font-size:13px;
+  font-size:12px;
 }
 
 .empty{
@@ -125,88 +123,82 @@ img{
 }
 
 /* =========================================================
-   HEADER
+   TOP HEADER (FACEBOOK STYLE)
 ========================================================= */
 
 header{
   position:sticky;
   top:0;
   z-index:1000;
-
-  background:
-    linear-gradient(
-      135deg,
-      var(--primary-dark),
-      var(--primary)
-    );
-
-  color:white;
-
-  box-shadow:
-    0 3px 20px rgba(0,0,0,.15);
+  background:var(--surface);
+  box-shadow: 0 1px 3px rgba(0,0,0,0.08);
 }
 
 .header-inner{
-  width:min(100% - 28px,1100px);
-  min-height:68px;
+  width:100%;
+  max-width:680px;
+  min-height:56px;
   margin:auto;
-
+  padding: 0 12px;
   display:flex;
   align-items:center;
   justify-content:space-between;
-  gap:15px;
 }
 
 .logo-area{
   display:flex;
   align-items:center;
-  gap:10px;
+  gap:6px;
 }
 
 .logo-icon{
-  width:40px;
-  height:40px;
-
-  border-radius:12px;
-
-  display:grid;
-  place-items:center;
-
-  background:rgba(255,255,255,.15);
-
-  font-size:21px;
+  font-size:22px;
+  color:var(--primary);
+  font-weight:bold;
 }
 
 .logo{
-  font-size:19px;
-  font-weight:900;
-  letter-spacing:-.3px;
+  font-size:24px;
+  font-weight:800;
+  letter-spacing:-0.5px;
+  color:var(--primary);
+  font-family: Arial, sans-serif;
 }
 
 .tag{
-  font-size:11px;
-  opacity:.78;
+  display:none;
 }
 
 .header-user{
   display:flex;
   align-items:center;
-  gap:10px;
+  gap:8px;
+}
+
+.icon-circle-btn{
+  width:36px;
+  height:36px;
+  border-radius:50%;
+  background:#e4e6eb;
+  display:grid;
+  place-items:center;
+  color:#050505;
+  font-size:16px;
+  cursor:pointer;
+}
+
+.icon-circle-btn:hover{
+  background:#d8dadf;
 }
 
 .header-avatar{
-  width:38px;
-  height:38px;
-
+  width:36px;
+  height:36px;
   border-radius:50%;
-
-  background:rgba(255,255,255,.18);
-
+  background:#e4e6eb;
   display:grid;
   place-items:center;
-
-  font-weight:800;
-
+  font-weight:700;
   overflow:hidden;
 }
 
@@ -217,356 +209,127 @@ header{
 }
 
 .logout-btn{
-  padding:9px 13px;
-  border-radius:10px;
-
-  background:rgba(255,255,255,.14);
-  color:white;
-
+  padding:6px 10px;
+  border-radius:6px;
+  background:#e4e6eb;
+  color:#050505;
   cursor:pointer;
-  font-weight:700;
+  font-weight:600;
+  font-size:13px;
 }
 
 .logout-btn:hover{
-  background:rgba(255,255,255,.22);
+  background:#d8dadf;
 }
 
 /* =========================================================
-   MAIN
+   NAVIGATION ROW (FACEBOOK STYLE TABS)
+========================================================= */
+
+.nav-wrap{
+  position:sticky;
+  top:56px;
+  z-index:900;
+  background:var(--surface);
+  border-bottom:1px solid #e4e6eb;
+}
+
+.nav{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  width:100%;
+  max-width:680px;
+  margin:0 auto;
+}
+
+.nav button{
+  flex:1;
+  height:48px;
+  background:transparent;
+  color:var(--muted);
+  border:none;
+  position:relative;
+  cursor:pointer;
+  font-size:20px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  border-bottom:3px solid transparent;
+}
+
+.nav button.active{
+  color:var(--primary);
+  border-bottom-color:var(--primary);
+}
+
+.nav button .badge{
+  position:absolute;
+  top:6px;
+  right:18%;
+  background:var(--danger);
+  color:white;
+  font-size:10px;
+  font-weight:bold;
+  padding:2px 5px;
+  border-radius:10px;
+  border:2px solid white;
+}
+
+/* =========================================================
+   MAIN CONTENT & CARDS
 ========================================================= */
 
 main{
-  padding:22px 0 80px;
+  padding:8px 0;
 }
-
-/* =========================================================
-   CARD
-========================================================= */
 
 .card,
 .composer-card,
 .profile-card{
   background:var(--surface);
-
-  border:1px solid rgba(220,227,238,.8);
-
-  border-radius:var(--radius);
-
+  border-radius:0;
   box-shadow:var(--shadow);
+  margin-bottom:8px;
+}
 
-  margin-bottom:17px;
+@media(min-width: 680px){
+  .card, .composer-card, .profile-card{
+    border-radius:var(--radius);
+  }
 }
 
 .card{
-  padding:20px;
+  padding:12px;
 }
 
 .composer-card{
-  padding:17px;
+  padding:12px;
 }
 
 /* =========================================================
-   AUTH
-========================================================= */
-
-.auth-page{
-  min-height:100vh;
-
-  display:grid;
-  place-items:center;
-
-  padding:25px;
-
-  background:
-    radial-gradient(
-      circle at top left,
-      #dceaff,
-      transparent 35%
-    ),
-    radial-gradient(
-      circle at bottom right,
-      #e8efff,
-      transparent 35%
-    ),
-    #f4f7fb;
-}
-
-.auth{
-  width:min(100%,430px);
-}
-
-.auth-brand{
-  text-align:center;
-  margin-bottom:22px;
-}
-
-.auth-logo{
-  width:72px;
-  height:72px;
-  margin:0 auto 12px;
-
-  border-radius:22px;
-
-  display:grid;
-  place-items:center;
-
-  color:white;
-
-  background:
-    linear-gradient(
-      135deg,
-      var(--primary-dark),
-      var(--primary)
-    );
-
-  box-shadow:
-    0 15px 35px rgba(7,86,217,.25);
-
-  font-size:35px;
-}
-
-.brand{
-  font-size:28px;
-  font-weight:950;
-  color:var(--primary-dark);
-  letter-spacing:-1px;
-}
-
-.brand-subtitle{
-  margin-top:4px;
-  color:var(--muted);
-}
-
-.auth-card{
-  background:white;
-  border-radius:24px;
-  padding:25px;
-
-  box-shadow:
-    0 20px 60px rgba(20,40,80,.12);
-}
-
-.auth-card h2{
-  margin-bottom:5px;
-}
-
-.auth-card .description{
-  color:var(--muted);
-  margin-bottom:20px;
-}
-
-/* =========================================================
-   FORMS
-========================================================= */
-
-.form-group{
-  margin-bottom:14px;
-}
-
-label{
-  display:block;
-
-  margin-bottom:6px;
-
-  font-size:13px;
-  font-weight:800;
-
-  color:#526078;
-}
-
-input,
-textarea{
-  width:100%;
-
-  padding:13px 14px;
-
-  border:1px solid #d8e0ec;
-  border-radius:12px;
-
-  outline:none;
-
-  color:var(--text);
-  background:white;
-
-  transition:
-    border .2s,
-    box-shadow .2s,
-    background .2s;
-}
-
-textarea{
-  resize:vertical;
-  min-height:90px;
-}
-
-input:focus,
-textarea:focus{
-  border-color:var(--primary);
-
-  box-shadow:
-    0 0 0 4px rgba(7,86,217,.10);
-}
-
-input::placeholder,
-textarea::placeholder{
-  color:#9aa5b5;
-}
-
-/* =========================================================
-   BUTTONS
-========================================================= */
-
-.btn{
-  display:inline-flex;
-  align-items:center;
-  justify-content:center;
-  gap:7px;
-
-  padding:11px 17px;
-
-  border-radius:11px;
-
-  background:var(--primary);
-  color:white;
-
-  font-weight:800;
-
-  cursor:pointer;
-
-  transition:
-    transform .15s,
-    box-shadow .15s,
-    background .15s;
-}
-
-.btn:hover{
-  background:#0649ba;
-  transform:translateY(-1px);
-}
-
-.btn:active{
-  transform:translateY(0);
-}
-
-.btn:disabled{
-  opacity:.55;
-  cursor:not-allowed;
-  transform:none;
-}
-
-.btn-full{
-  width:100%;
-}
-
-.btn-secondary{
-  background:var(--primary-light);
-  color:var(--primary-dark);
-}
-
-.btn-secondary:hover{
-  background:#dce9ff;
-}
-
-.btn-danger{
-  background:var(--danger-bg);
-  color:var(--danger);
-}
-
-.btn-ghost{
-  background:#f1f4f8;
-  color:#334155;
-}
-
-.btn-small{
-  padding:8px 11px;
-  font-size:13px;
-}
-
-/* =========================================================
-   NAVIGATION
-========================================================= */
-
-.nav-wrap{
-  position:sticky;
-  top:68px;
-  z-index:900;
-
-  padding:12px 0;
-
-  background:rgba(244,247,251,.94);
-
-  backdrop-filter:blur(12px);
-}
-
-.nav{
-  display:flex;
-  gap:7px;
-
-  overflow-x:auto;
-
-  scrollbar-width:none;
-}
-
-.nav::-webkit-scrollbar{
-  display:none;
-}
-
-.nav button{
-  flex:0 0 auto;
-
-  padding:10px 14px;
-
-  border-radius:12px;
-
-  background:white;
-  color:#526078;
-
-  border:1px solid var(--border);
-
-  cursor:pointer;
-
-  font-weight:800;
-}
-
-.nav button:hover{
-  background:var(--primary-light);
-  color:var(--primary-dark);
-}
-
-.nav button.active{
-  background:var(--primary);
-  color:white;
-  border-color:var(--primary);
-}
-
-/* =========================================================
-   COMPOSER
+   CREATE POST SECTION
 ========================================================= */
 
 .composer-top{
   display:flex;
   align-items:center;
-  gap:11px;
+  gap:10px;
 }
 
 .avatar,
 .composer-avatar{
-  width:46px;
-  height:46px;
-
-  min-width:46px;
-
+  width:40px;
+  height:40px;
+  min-width:40px;
   border-radius:50%;
-
   display:grid;
   place-items:center;
-
-  background:#dce8ff;
-  color:var(--primary-dark);
-
-  font-weight:900;
-
+  background:#e4e6eb;
+  color:var(--muted);
+  font-weight:700;
   overflow:hidden;
+  position:relative;
 }
 
 .avatar img,
@@ -576,34 +339,42 @@ textarea::placeholder{
   object-fit:cover;
 }
 
+.online-indicator{
+  position:absolute;
+  bottom:2px;
+  right:2px;
+  width:10px;
+  height:10px;
+  background:#31a24c;
+  border-radius:50%;
+  border:2px solid white;
+}
+
 .mind-button{
   flex:1;
-
-  padding:13px 18px;
-
-  border-radius:25px;
-
+  padding:9px 14px;
+  border-radius:20px;
   background:#f0f2f5;
-
-  color:#69707a;
-
+  color:var(--text);
   text-align:left;
-
   cursor:pointer;
-
-  font-weight:500;
+  font-size:15px;
+  border:none;
 }
 
 .mind-button:hover{
-  background:#e5e8ed;
+  background:#e4e6eb;
 }
 
 #postComposerArea{
-  margin-top:14px;
+  margin-top:12px;
 }
 
 .composer-textarea{
-  min-height:110px;
+  min-height:90px;
+  border:1px solid #ced0d4;
+  border-radius:8px;
+  padding:10px;
 }
 
 .composer-actions{
@@ -611,11 +382,9 @@ textarea::placeholder{
   align-items:center;
   justify-content:space-between;
   gap:10px;
-
-  margin-top:12px;
-  padding-top:12px;
-
-  border-top:1px solid var(--border);
+  margin-top:10px;
+  padding-top:10px;
+  border-top:1px solid #e4e6eb;
 }
 
 .composer-buttons{
@@ -626,18 +395,13 @@ textarea::placeholder{
 .photo-upload{
   display:inline-flex;
   align-items:center;
-  gap:7px;
-
-  padding:9px 12px;
-
-  border-radius:10px;
-
-  color:#1877f2;
-
+  gap:6px;
+  padding:6px 10px;
+  border-radius:6px;
+  color:#45bd62;
   cursor:pointer;
-
   font-size:14px;
-  font-weight:800;
+  font-weight:600;
 }
 
 .photo-upload:hover{
@@ -645,13 +409,147 @@ textarea::placeholder{
 }
 
 /* =========================================================
-   POST
+   STORIES SECTION
+========================================================= */
+
+.stories-container{
+  display:flex;
+  gap:8px;
+  overflow-x:auto;
+  padding:12px;
+  background:var(--surface);
+  margin-bottom:8px;
+  scrollbar-width:none;
+}
+
+.stories-container::-webkit-scrollbar{
+  display:none;
+}
+
+.story-card{
+  flex:0 0 105px;
+  height:170px;
+  border-radius:10px;
+  position:relative;
+  overflow:hidden;
+  background:#ccc;
+  cursor:pointer;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.2);
+}
+
+.story-card img.story-bg{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+}
+
+.story-card.create-story{
+  background:#fff;
+  border:1px solid #e4e6eb;
+  display:flex;
+  flex-direction:column;
+}
+
+.story-card.create-story .story-bg-wrapper{
+  height:115px;
+  width:100%;
+  overflow:hidden;
+}
+
+.story-card.create-story .story-bg-wrapper img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+}
+
+.story-card.create-story .create-btn-area{
+  height:55px;
+  background:white;
+  position:relative;
+  display:flex;
+  align-items:flex-end;
+  justify-content:center;
+  padding-bottom:6px;
+}
+
+.story-card.create-story .plus-icon{
+  position:absolute;
+  top:-16px;
+  left:50%;
+  transform:translateX(-50%);
+  width:32px;
+  height:32px;
+  background:var(--primary);
+  color:white;
+  border-radius:50%;
+  border:3px solid white;
+  display:grid;
+  place-items:center;
+  font-size:16px;
+  font-weight:bold;
+}
+
+.story-card.create-story span{
+  font-size:12px;
+  font-weight:600;
+  color:#050505;
+}
+
+.story-card .story-avatar{
+  position:absolute;
+  top:8px;
+  left:8px;
+  width:36px;
+  height:36px;
+  border-radius:50%;
+  border:3px solid var(--primary);
+  overflow:hidden;
+}
+
+.story-card .story-badge{
+  position:absolute;
+  top:8px;
+  left:8px;
+  background:var(--primary);
+  color:white;
+  font-size:11px;
+  font-weight:bold;
+  width:22px;
+  height:22px;
+  border-radius:6px;
+  display:grid;
+  place-items:center;
+}
+
+.story-card .story-author{
+  position:absolute;
+  bottom:8px;
+  left:8px;
+  right:8px;
+  color:white;
+  font-size:12px;
+  font-weight:600;
+  text-shadow:0 1px 2px rgba(0,0,0,0.8);
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+}
+
+/* =========================================================
+   FEED & POST CARDS
 ========================================================= */
 
 .posthead{
   display:flex;
   align-items:center;
-  gap:11px;
+  justify-content:space-between;
+  margin-bottom:10px;
+}
+
+.post-head-left{
+  display:flex;
+  align-items:center;
+  gap:10px;
 }
 
 .post-author{
@@ -659,30 +557,45 @@ textarea::placeholder{
 }
 
 .post-author-name{
-  font-weight:900;
+  font-weight:600;
+  font-size:15px;
+  color:#050505;
+}
+
+.post-meta-line{
+  font-size:12px;
+  color:var(--muted);
+  display:flex;
+  align-items:center;
+  gap:4px;
+}
+
+.post-menu-btn{
+  color:var(--muted);
+  font-size:18px;
+  background:transparent;
+  padding:4px 8px;
+  cursor:pointer;
 }
 
 .post-content{
-  margin-top:14px;
-
+  margin-top:6px;
+  font-size:15px;
   white-space:pre-wrap;
   overflow-wrap:anywhere;
-
-  line-height:1.65;
+  line-height:1.35;
+  color:#050505;
 }
 
 .post-photo{
   display:block;
-
-  width:100%;
-
-  max-height:650px;
-
+  width:calc(100% + 24px);
+  margin-left:-12px;
+  margin-right:-12px;
+  max-height:600px;
   object-fit:cover;
-
-  margin-top:14px;
-
-  border-radius:14px;
+  margin-top:10px;
+  border-radius:0;
 }
 
 /* FACEBOOK STYLE ACTIONS ROW */
@@ -690,12 +603,9 @@ textarea::placeholder{
   display:flex;
   align-items:center;
   justify-content:space-between;
-
-  margin-top:12px;
+  margin-top:8px;
   padding-top:4px;
-
-  border-top:1px solid var(--border);
-  border-bottom:1px solid var(--border);
+  border-top:1px solid #e4e6eb;
 }
 
 .action-btn{
@@ -704,20 +614,14 @@ textarea::placeholder{
   align-items:center;
   justify-content:center;
   gap:6px;
-
-  padding:8px 4px;
+  padding:8px 0;
   margin:2px 0;
-
-  border-radius:8px;
+  border-radius:4px;
   background:transparent;
-
   color:#65676b;
-
   cursor:pointer;
-
-  font-weight:700;
-  font-size:14px;
-
+  font-weight:600;
+  font-size:13px;
   transition:background .2s;
 }
 
@@ -726,7 +630,7 @@ textarea::placeholder{
 }
 
 .action-btn.like-active{
-  color:#c2183b;
+  color:var(--primary);
 }
 
 .delete-post{
@@ -740,50 +644,169 @@ textarea::placeholder{
 
 .post-image-preview{
   position:relative;
-
   margin-top:12px;
-
-  border-radius:13px;
-
+  border-radius:8px;
   overflow:hidden;
-
   background:#f2f5f9;
 }
 
 .post-image-preview img{
   display:block;
-
   width:100%;
-  max-height:400px;
-
+  max-height:300px;
   object-fit:cover;
 }
 
 .remove-post-image{
   position:absolute;
-
   top:10px;
   right:10px;
-
-  width:35px;
-  height:35px;
-
+  width:30px;
+  height:30px;
   padding:0;
-
   border-radius:50%;
-
-  background:white;
-  color:#222;
-
+  background:rgba(0,0,0,0.6);
+  color:white;
   cursor:pointer;
-
-  font-size:22px;
-
-  box-shadow:0 3px 12px rgba(0,0,0,.2);
+  font-size:16px;
 }
 
 /* =========================================================
-   PROFILE
+   FORMS & BUTTONS
+========================================================= */
+
+.form-group{
+  margin-bottom:14px;
+}
+
+label{
+  display:block;
+  margin-bottom:6px;
+  font-size:13px;
+  font-weight:600;
+  color:#526078;
+}
+
+input,
+textarea{
+  width:100%;
+  padding:10px 12px;
+  border:1px solid #ced0d4;
+  border-radius:6px;
+  outline:none;
+  color:var(--text);
+  background:white;
+}
+
+textarea{
+  resize:vertical;
+  min-height:80px;
+}
+
+input:focus,
+textarea:focus{
+  border-color:var(--primary);
+}
+
+.btn{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:6px;
+  padding:8px 14px;
+  border-radius:6px;
+  background:var(--primary);
+  color:white;
+  font-weight:600;
+  cursor:pointer;
+}
+
+.btn:hover{
+  background:var(--primary-dark);
+}
+
+.btn-full{
+  width:100%;
+}
+
+.btn-secondary{
+  background:#e4e6eb;
+  color:#050505;
+}
+
+.btn-secondary:hover{
+  background:#d8dadf;
+}
+
+.btn-danger{
+  background:var(--danger-bg);
+  color:var(--danger);
+}
+
+.btn-ghost{
+  background:#f1f4f8;
+  color:#334155;
+}
+
+.btn-small{
+  padding:6px 10px;
+  font-size:12px;
+}
+
+/* =========================================================
+   AUTHENTICATION
+========================================================= */
+
+.auth-page{
+  min-height:100vh;
+  display:grid;
+  place-items:center;
+  padding:20px;
+  background:#f0f2f5;
+}
+
+.auth{
+  width:min(100%,400px);
+}
+
+.auth-brand{
+  text-align:center;
+  margin-bottom:20px;
+}
+
+.auth-logo{
+  width:60px;
+  height:60px;
+  margin:0 auto 10px;
+  border-radius:50%;
+  display:grid;
+  place-items:center;
+  color:white;
+  background:var(--primary);
+  font-size:30px;
+}
+
+.brand{
+  font-size:26px;
+  font-weight:800;
+  color:var(--primary);
+}
+
+.brand-subtitle{
+  margin-top:2px;
+  color:var(--muted);
+  font-size:13px;
+}
+
+.auth-card{
+  background:white;
+  border-radius:8px;
+  padding:20px;
+  box-shadow:0 2px 4px rgba(0,0,0,0.1), 0 8px 16px rgba(0,0,0,0.1);
+}
+
+/* =========================================================
+   PROFILE PAGE LAYOUT
 ========================================================= */
 
 .profile-card{
@@ -791,158 +814,68 @@ textarea::placeholder{
 }
 
 .profile-cover{
-  height:240px;
-
+  height:180px;
   position:relative;
-
-  display:grid;
-  place-items:center;
-
-  overflow:hidden;
-
-  background:
-    linear-gradient(
-      135deg,
-      #063b91,
-      #0756d9,
-      #3b82f6
-    );
-}
-
-.profile-cover::after{
-  content:"";
-
-  position:absolute;
-  inset:0;
-
-  background:
-    linear-gradient(
-      to top,
-      rgba(0,0,0,.25),
-      transparent 55%
-    );
+  background:linear-gradient(135deg, #0e5aed, #1877f2);
 }
 
 .profile-cover img{
   width:100%;
   height:100%;
-
   object-fit:cover;
 }
 
-.cover-placeholder{
-  color:white;
-  font-size:65px;
-  opacity:.35;
-}
-
 .profile-main{
-  display:flex;
-  align-items:flex-end;
-  gap:15px;
-
-  padding:0 22px 14px;
-
+  padding:0 16px 12px;
   position:relative;
 }
 
 .profile-avatar-wrap{
-  margin-top:-55px;
-  position:relative;
-  z-index:2;
+  margin-top:-45px;
+  margin-bottom:10px;
 }
 
 .profile-avatar{
-  width:110px;
-  height:110px;
-
+  width:90px;
+  height:90px;
   border-radius:50%;
-
-  border:5px solid white;
-
+  border:4px solid white;
   display:grid;
   place-items:center;
-
-  background:#dce8ff;
-  color:var(--primary-dark);
-
-  font-size:40px;
-  font-weight:900;
-
+  background:#e4e6eb;
+  color:var(--muted);
+  font-size:32px;
+  font-weight:bold;
   overflow:hidden;
-}
-
-.profile-avatar img{
-  width:100%;
-  height:100%;
-  object-fit:cover;
-}
-
-.profile-heading{
-  flex:1;
-  min-width:0;
 }
 
 .profile-heading h2{
-  margin-bottom:2px;
-
-  font-size:26px;
-
-  overflow:hidden;
-  text-overflow:ellipsis;
+  font-size:22px;
 }
 
 .profile-username{
   color:var(--muted);
-}
-
-.profile-edit-btn{
-  background:var(--primary-light);
-  color:var(--primary-dark);
+  font-size:14px;
 }
 
 .profile-bio-area{
-  padding:0 22px 22px;
-}
-
-.profile-bio-area p{
-  margin:7px 0 13px;
-  white-space:pre-wrap;
-}
-
-.profile-details{
-  display:flex;
-  flex-wrap:wrap;
-  gap:12px;
-
-  color:var(--muted);
-
-  font-size:13px;
+  padding:0 16px 16px;
 }
 
 .profile-tabs{
   display:flex;
-  gap:5px;
-
-  border-bottom:1px solid var(--border);
-
-  margin:-20px -20px 18px;
-  padding:0 20px;
+  border-bottom:1px solid #e4e6eb;
+  margin:-10px -16px 12px;
+  padding:0 16px;
 }
 
 .profile-tab{
-  padding:13px 15px;
-
+  padding:10px 12px;
   background:transparent;
   color:var(--muted);
-
-  border-radius:0;
-
   border-bottom:3px solid transparent;
-
   cursor:pointer;
-
-  font-weight:800;
+  font-weight:600;
 }
 
 .profile-tab.active{
@@ -951,46 +884,37 @@ textarea::placeholder{
 }
 
 /* =========================================================
-   PREVIEWS
+   BOTTOM NAVIGATION BAR (MOBILE)
 ========================================================= */
 
-.upload-preview{
-  width:110px;
-  height:110px;
-
-  margin:9px 0 13px;
-
-  border-radius:50%;
-
-  overflow:hidden;
-
-  background:#eef3fb;
+.bottom-nav{
+  position:fixed;
+  bottom:0;
+  left:0;
+  right:0;
+  height:50px;
+  background:white;
+  border-top:1px solid #e4e6eb;
+  display:flex;
+  justify-content:space-around;
+  align-items:center;
+  z-index:1000;
 }
 
-.upload-preview img{
-  width:100%;
+.bottom-nav-item{
+  color:var(--muted);
+  font-size:20px;
+  background:transparent;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  width:20%;
   height:100%;
-  object-fit:cover;
 }
 
-.cover-upload-preview{
-  width:100%;
-  max-width:520px;
-  height:140px;
-
-  margin:9px 0 13px;
-
-  border-radius:13px;
-
-  overflow:hidden;
-
-  background:#eef3fb;
-}
-
-.cover-upload-preview img{
-  width:100%;
-  height:100%;
-  object-fit:cover;
+.bottom-nav-item.active{
+  color:var(--primary);
 }
 
 /* =========================================================
@@ -999,186 +923,31 @@ textarea::placeholder{
 
 #toastContainer{
   position:fixed;
-
-  right:20px;
-  bottom:20px;
-
+  right:16px;
+  bottom:60px;
   z-index:5000;
-
   display:flex;
   flex-direction:column;
-  gap:9px;
-
-  width:min(360px,calc(100% - 30px));
+  gap:8px;
+  width:min(320px,calc(100% - 32px));
 }
 
 .toast{
-  padding:13px 15px;
-
-  border-radius:13px;
-
+  padding:10px 14px;
+  border-radius:8px;
   color:white;
-
   background:#172033;
-
-  box-shadow:0 10px 30px rgba(0,0,0,.2);
-
-  animation:
-    toastIn .25s ease;
+  box-shadow:0 4px 12px rgba(0,0,0,0.15);
+  font-size:14px;
 }
 
-.toast.success{
-  background:#087443;
-}
-
-.toast.error{
-  background:#b00020;
-}
-
-@keyframes toastIn{
-  from{
-    opacity:0;
-    transform:translateY(10px);
-  }
-
-  to{
-    opacity:1;
-    transform:translateY(0);
-  }
-}
-
-/* =========================================================
-   DIVIDER
-========================================================= */
+.toast.success{ background:var(--success); }
+.toast.error{ background:var(--danger); }
 
 .divider{
   height:1px;
-  background:var(--border);
-  margin:20px 0;
-}
-
-/* =========================================================
-   RESPONSIVE
-========================================================= */
-
-@media(max-width:700px){
-
-  .wrap{
-    width:min(100% - 20px,960px);
-  }
-
-  main{
-    padding-top:14px;
-  }
-
-  .nav-wrap{
-    top:62px;
-    padding:8px 0;
-  }
-
-  .header-inner{
-    min-height:62px;
-  }
-
-  .logo{
-    font-size:16px;
-  }
-
-  .tag{
-    display:none;
-  }
-
-  .header-avatar{
-    display:none;
-  }
-
-  .logout-btn{
-    padding:8px 10px;
-    font-size:12px;
-  }
-
-  .card{
-    padding:16px;
-  }
-
-  .composer-card{
-    padding:14px;
-  }
-
-  .profile-cover{
-    height:180px;
-  }
-
-  .profile-main{
-    align-items:flex-start;
-    flex-wrap:wrap;
-    padding:0 16px 14px;
-  }
-
-  .profile-heading{
-    padding-top:4px;
-  }
-
-  .profile-heading h2{
-    font-size:21px;
-  }
-
-  .profile-edit-btn{
-    width:100%;
-  }
-
-  .profile-bio-area{
-    padding:0 16px 18px;
-  }
-
-  .profile-avatar{
-    width:90px;
-    height:90px;
-  }
-
-  .profile-avatar-wrap{
-    margin-top:-45px;
-  }
-
-  .composer-actions{
-    align-items:flex-start;
-  }
-
-  .composer-buttons{
-    flex:1;
-    justify-content:flex-end;
-  }
-
-  .photo-upload span{
-    display:none;
-  }
-}
-
-@media(max-width:450px){
-
-  .auth-page{
-    padding:14px;
-  }
-
-  .auth-card{
-    padding:19px;
-  }
-
-  .brand{
-    font-size:24px;
-  }
-
-  .composer-actions{
-    flex-direction:column;
-  }
-
-  .composer-buttons{
-    width:100%;
-  }
-
-  .composer-buttons .btn{
-    flex:1;
-  }
+  background:#e4e6eb;
+  margin:16px 0;
 }
 </style>
 </head>
@@ -1186,3838 +955,212 @@ textarea::placeholder{
 <body>
 
 <!-- =======================================================
-     TOAST
+     TOAST CONTAINER
 ======================================================= -->
-
 <div id="toastContainer"></div>
 
 
 <!-- =======================================================
      AUTH PAGE
 ======================================================= -->
-
 <div id="auth" class="auth-page">
-
   <div class="auth">
-
     <div class="auth-brand">
-
-      <div class="auth-logo">✝</div>
-
-      <div class="brand">
-        BELIEVER CONNECT
-      </div>
-
-      <div class="brand-subtitle">
-        One Community • One Faith
-      </div>
-
+      <div class="auth-logo"><i class="fa-solid fa-cross"></i></div>
+      <div class="brand">BELIEVER CONNECT</div>
+      <div class="brand-subtitle">One Community • One Faith</div>
     </div>
-
 
     <div class="auth-card">
-
       <!-- LOGIN -->
-
       <div id="loginBox">
-
-        <h2>Welcome Back 👋</h2>
-
-        <p class="description">
-          Sign in to connect with your faith community.
-        </p>
+        <h2 style="font-size:20px; margin-bottom:4px;">Welcome Back 👋</h2>
+        <p class="muted" style="font-size:13px; margin-bottom:16px;">Sign in to connect with your faith community.</p>
 
         <div class="form-group">
-
-          <label for="loginEmail">
-            Email address
-          </label>
-
-          <input
-            id="loginEmail"
-            type="email"
-            autocomplete="email"
-            placeholder="you@example.com"
-          >
-
+          <label for="loginEmail">Email address</label>
+          <input id="loginEmail" type="email" autocomplete="email" placeholder="you@example.com">
         </div>
-
 
         <div class="form-group">
-
-          <label for="loginPass">
-            Password
-          </label>
-
-          <input
-            id="loginPass"
-            type="password"
-            autocomplete="current-password"
-            placeholder="Your password"
-          >
-
+          <label for="loginPass">Password</label>
+          <input id="loginPass" type="password" autocomplete="current-password" placeholder="Your password">
         </div>
 
-
-        <button
-          id="loginBtn"
-          class="btn btn-full"
-          type="button"
-        >
-          🔐 LOG IN
-        </button>
-
+        <button id="loginBtn" class="btn btn-full" type="button">🔐 LOG IN</button>
 
         <div class="divider"></div>
 
-
-        <button
-          id="showSignupBtn"
-          class="btn btn-secondary btn-full"
-          type="button"
-        >
-          CREATE ACCOUNT
-        </button>
-
-        <p id="loginMsg" class="error"></p>
-
+        <button id="showSignupBtn" class="btn btn-secondary btn-full" type="button">CREATE ACCOUNT</button>
+        <p id="loginMsg" class="error" style="margin-top:10px; font-size:13px;"></p>
       </div>
-
 
       <!-- SIGN UP -->
-
       <div id="signupBox" class="hidden">
-
-        <h2>Create Your Account</h2>
-
-        <p class="description">
-          Join believers and build meaningful connections.
-        </p>
-
+        <h2 style="font-size:20px; margin-bottom:4px;">Create Your Account</h2>
+        <p class="muted" style="font-size:13px; margin-bottom:16px;">Join believers and build meaningful connections.</p>
 
         <div class="form-group">
-
-          <label for="name">
-            Full name
-          </label>
-
-          <input
-            id="name"
-            autocomplete="name"
-            placeholder="Your full name"
-          >
-
+          <label for="name">Full name</label>
+          <input id="name" autocomplete="name" placeholder="Your full name">
         </div>
-
 
         <div class="form-group">
-
-          <label for="email">
-            Email address
-          </label>
-
-          <input
-            id="email"
-            type="email"
-            autocomplete="email"
-            placeholder="you@example.com"
-          >
-
+          <label for="email">Email address</label>
+          <input id="email" type="email" autocomplete="email" placeholder="you@example.com">
         </div>
-
 
         <div class="form-group">
-
-          <label for="pass">
-            Password
-          </label>
-
-          <input
-            id="pass"
-            type="password"
-            autocomplete="new-password"
-            placeholder="At least 6 characters"
-          >
-
+          <label for="pass">Password</label>
+          <input id="pass" type="password" autocomplete="new-password" placeholder="At least 6 characters">
         </div>
 
-
-        <button
-          id="signupBtn"
-          class="btn btn-full"
-          type="button"
-        >
-          ✨ CREATE ACCOUNT
-        </button>
-
+        <button id="signupBtn" class="btn btn-full" type="button">✨ CREATE ACCOUNT</button>
 
         <div class="divider"></div>
 
-
-        <button
-          id="showLoginBtn"
-          class="btn btn-secondary btn-full"
-          type="button"
-        >
-          BACK TO LOGIN
-        </button>
-
-
-        <p id="signupMsg"></p>
-
+        <button id="showLoginBtn" class="btn btn-secondary btn-full" type="button">BACK TO LOGIN</button>
+        <p id="signupMsg" style="margin-top:10px; font-size:13px;"></p>
       </div>
-
     </div>
-
   </div>
-
 </div>
 
 
 <!-- =======================================================
-     APPLICATION
+     APPLICATION INTERFACE
 ======================================================= -->
-
 <div id="app" class="hidden">
 
-
-<header>
-
-  <div class="header-inner">
-
-    <div class="logo-area">
-
-      <div class="logo-icon">
-        ✝
+  <!-- TOP HEADER -->
+  <header>
+    <div class="header-inner">
+      <div class="logo-area">
+        <div class="logo">believer</div>
       </div>
 
-      <div>
-
-        <div class="logo">
-          BELIEVER CONNECT
-        </div>
-
-        <div class="tag">
-          One Community • One Faith
-        </div>
-
+      <div class="header-user">
+        <button class="icon-circle-btn" type="button" aria-label="Create"><i class="fa-solid fa-plus"></i></button>
+        <button class="icon-circle-btn" type="button" aria-label="Search"><i class="fa-solid fa-magnifying-glass"></i></button>
+        <button class="icon-circle-btn" type="button" aria-label="Menu"><i class="fa-solid fa-bars"></i></button>
+        
+        <div id="headerAvatar" class="header-avatar" style="display:none;">B</div>
+        <button id="logoutBtn" class="logout-btn" type="button" style="display:none;">Log out</button>
       </div>
-
     </div>
+  </header>
 
-
-    <div class="header-user">
-
-      <div
-        id="headerAvatar"
-        class="header-avatar"
-      >
-        B
-      </div>
-
-      <button
-        id="logoutBtn"
-        class="logout-btn"
-        type="button"
-      >
-        Log out
-      </button>
-
-    </div>
-
-  </div>
-
-</header>
-
-
-<!-- NAVIGATION -->
-
-<div class="nav-wrap">
-
-  <div class="wrap">
-
+  <!-- SECONDARY NAVIGATION BAR -->
+  <div class="nav-wrap">
     <nav class="nav">
-
-      <button
-        data-tab="home"
-        onclick="tab('home')"
-      >
-        🏠 Home
+      <button data-tab="home" onclick="tab('home')" class="active" aria-label="Home">
+        <i class="fa-solid fa-house"></i>
       </button>
-
-      <button
-        data-tab="bible"
-        onclick="tab('bible')"
-      >
-        📖 Bible
+      <button data-tab="friends" onclick="tab('friends')" aria-label="Friends">
+        <i class="fa-solid fa-user-group"></i>
       </button>
-
-      <button
-        data-tab="prayer"
-        onclick="tab('prayer')"
-      >
-        🙏 Prayer
+      <button data-tab="messages" onclick="tab('messages')" aria-label="Messages">
+        <i class="fa-solid fa-comment-dots"></i>
       </button>
-
-      <button
-        data-tab="groups"
-        onclick="tab('groups')"
-      >
-        👥 Groups
+      <button data-tab="videos" onclick="tab('videos')" aria-label="Videos">
+        <i class="fa-solid fa-tv"></i>
+        <span class="badge">15+</span>
       </button>
-
-      <button
-        data-tab="messages"
-        onclick="tab('messages')"
-      >
-        💬 Messages
+      <button data-tab="notifications" onclick="tab('notifications')" aria-label="Notifications">
+        <i class="fa-regular fa-bell"></i>
       </button>
-
-      <button
-        data-tab="profile"
-        onclick="tab('profile')"
-      >
-        👤 Profile
+      <button data-tab="dashboard" onclick="tab('dashboard')" aria-label="Dashboard">
+        <i class="fa-solid fa-chart-line"></i>
       </button>
-
     </nav>
+  </div>
 
+  <main class="wrap">
+
+    <!-- CREATE POST COMPOSER -->
+    <div class="composer-card">
+      <div class="composer-top">
+        <div class="composer-avatar">
+          <span id="userAvatarText">B</span>
+          <div class="online-indicator"></div>
+        </div>
+        <button id="mindBtn" class="mind-button" type="button">What's on your mind?</button>
+        <div id="photoUploadBtn" class="photo-upload">
+          <i class="fa-solid fa-images"></i>
+          <span>Photo</span>
+        </div>
+      </div>
+
+      <div id="postComposerArea" class="hidden">
+        <textarea id="postInput" class="composer-textarea" placeholder="Share your prayer, message, or reflection..."></textarea>
+        
+        <div id="imagePreviewContainer" class="post-image-preview hidden">
+          <img id="imagePreview" src="" alt="Preview">
+          <button id="removeImageBtn" class="remove-post-image" type="button">&times;</button>
+        </div>
+
+        <div class="composer-actions">
+          <input type="file" id="fileInput" accept="image/*" class="hidden">
+          <div class="composer-buttons">
+            <button id="cancelPostBtn" class="btn btn-ghost btn-small" type="button">Cancel</button>
+            <button id="submitPostBtn" class="btn btn-small" type="button">Post</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- STORIES CAROUSEL -->
+    <div class="stories-container">
+      <!-- Create Story Card -->
+      <div class="story-card create-story">
+        <div class="story-bg-wrapper">
+          <img src="https://via.placeholder.com/105x115" alt="User Avatar" id="storyUserImg">
+        </div>
+        <div class="create-btn-area">
+          <div class="plus-icon">+</div>
+          <span>Create story</span>
+        </div>
+      </div>
+
+      <!-- Story Item 1 -->
+      <div class="story-card">
+        <img src="https://via.placeholder.com/105x170" class="story-bg" alt="Story">
+        <div class="story-badge">2</div>
+        <div class="story-author">Abigail Tor</div>
+      </div>
+
+      <!-- Story Item 2 -->
+      <div class="story-card">
+        <img src="https://via.placeholder.com/105x170" class="story-bg" alt="Story">
+        <div class="story-badge">1</div>
+        <div class="story-author">Rose Kollie</div>
+      </div>
+
+      <!-- Story Item 3 -->
+      <div class="story-card">
+        <img src="https://via.placeholder.com/105x170" class="story-bg" alt="Story">
+        <div class="story-badge">1</div>
+        <div class="story-author">Esther</div>
+      </div>
+    </div>
+
+    <!-- FEED CONTAINER (RENDERED DYNAMICALLY) -->
+    <div id="feed">
+      <!-- Dynamic Posts Render Here -->
+    </div>
+
+  </main>
+
+  <!-- FIXED BOTTOM NAVIGATION BAR -->
+  <div class="bottom-nav">
+    <button class="bottom-nav-item active" type="button"><i class="fa-solid fa-house"></i></button>
+    <button class="bottom-nav-item" type="button"><i class="fa-solid fa-compass"></i></button>
+    <button class="bottom-nav-item" type="button"><i class="fa-regular fa-square-plus"></i></button>
+    <button class="bottom-nav-item" type="button"><i class="fa-regular fa-bell"></i></button>
+    <button class="bottom-nav-item" type="button"><i class="fa-solid fa-user"></i></button>
   </div>
 
 </div>
-
-
-<main>
-
-<div class="wrap">
-
-
-<!-- =====================================================
-     HOME
-===================================================== -->
-
-<section id="home">
-
-
-  <!-- COMPOSER -->
-
-  <div class="composer-card">
-
-    <div class="composer-top">
-
-      <div
-        id="composerAvatar"
-        class="composer-avatar"
-      >
-        B
-      </div>
-
-      <button
-        type="button"
-        class="mind-button"
-        onclick="openPostComposer()"
-      >
-        What's on your mind?
-      </button>
-
-    </div>
-
-
-    <div
-      id="postComposerArea"
-      class="hidden"
-    >
-
-      <textarea
-        id="postText"
-        class="composer-textarea"
-        maxlength="5000"
-        placeholder="Share something encouraging with the community..."
-      ></textarea>
-
-
-      <div
-        id="postImagePreview"
-        class="post-image-preview hidden"
-      ></div>
-
-
-      <div class="composer-actions">
-
-        <div>
-
-          <label
-            for="postImageFile"
-            class="photo-upload"
-          >
-            📷 <span>Add Photo</span>
-          </label>
-
-          <input
-            id="postImageFile"
-            type="file"
-            accept="image/jpeg,image/png,image/webp,image/gif"
-            class="hidden"
-          >
-
-        </div>
-
-
-        <div class="composer-buttons">
-
-          <button
-            type="button"
-            class="btn btn-secondary"
-            onclick="closePostComposer()"
-          >
-            Cancel
-          </button>
-
-          <button
-            id="postBtn"
-            type="button"
-            class="btn"
-            onclick="addPost()"
-          >
-            POST
-          </button>
-
-        </div>
-
-      </div>
-
-    </div>
-
-
-    <p id="postMsg"></p>
-
-  </div>
-
-
-  <!-- FEED -->
-
-  <div id="feed">
-
-    <div class="loading">
-      Loading posts...
-    </div>
-
-  </div>
-
-</section>
-
-
-<!-- =====================================================
-     BIBLE
-===================================================== -->
-
-<section
-  id="bible"
-  class="hidden"
->
-
-  <div class="card">
-
-    <h2>📖 Bible</h2>
-
-    <p class="muted" style="margin-top:5px">
-      A word of encouragement for today.
-    </p>
-
-
-    <div
-      style="
-        margin-top:20px;
-        padding:22px;
-        border-radius:15px;
-        background:#eef4ff;
-        border-left:5px solid #0756d9;
-      "
-    >
-
-      <h3>
-        Philippians 4:13
-      </h3>
-
-      <p style="margin-top:9px">
-        “I can do all things through Christ
-        which strengtheneth me.”
-      </p>
-
-    </div>
-
-
-    <div style="margin-top:18px">
-
-      <button
-        class="btn"
-        onclick="showToast('Bible search will be available in a future version.','success')"
-      >
-        🔎 Search Bible
-      </button>
-
-    </div>
-
-  </div>
-
-</section>
-
-
-<!-- =====================================================
-     PRAYER
-===================================================== -->
-
-<section
-  id="prayer"
-  class="hidden"
->
-
-  <div class="card">
-
-    <h2>🙏 Prayer Wall</h2>
-
-    <p class="muted" style="margin:5px 0 17px">
-      Share a prayer request and encourage
-      other believers.
-    </p>
-
-
-    <textarea
-      id="prayerText"
-      rows="4"
-      maxlength="3000"
-      placeholder="What would you like us to pray about?"
-    ></textarea>
-
-
-    <div style="margin-top:12px">
-
-      <button
-        class="btn"
-        onclick="addPrayer()"
-      >
-        🙏 POST PRAYER REQUEST
-      </button>
-
-    </div>
-
-  </div>
-
-
-  <div id="prayers"></div>
-
-</section>
-
-
-<!-- =====================================================
-     GROUPS
-===================================================== -->
-
-<section
-  id="groups"
-  class="hidden"
->
-
-  <div class="card">
-
-    <h2>👥 Christian Groups</h2>
-
-    <p class="muted" style="margin:5px 0 17px">
-      Create a community around faith,
-      fellowship and shared interests.
-    </p>
-
-
-    <div class="form-group">
-
-      <label>
-        Group name
-      </label>
-
-      <input
-        id="groupName"
-        maxlength="100"
-        placeholder="Example: Youth Fellowship"
-      >
-
-    </div>
-
-
-    <div class="form-group">
-
-      <label>
-        Description
-      </label>
-
-      <textarea
-        id="groupDescription"
-        rows="3"
-        maxlength="500"
-        placeholder="What is this group about?"
-      ></textarea>
-
-    </div>
-
-
-    <button
-      class="btn"
-      onclick="createGroup()"
-    >
-      ➕ CREATE GROUP
-    </button>
-
-  </div>
-
-
-  <div id="groupsList"></div>
-
-</section>
-
-
-<!-- =====================================================
-     MESSAGES
-===================================================== -->
-
-<section
-  id="messages"
-  class="hidden"
->
-
-  <div class="card">
-
-    <h2>💬 Messages</h2>
-
-    <p class="muted" style="margin:5px 0 17px">
-      Send a private message to another registered believer.
-    </p>
-
-
-    <div class="form-group">
-
-      <label>
-        Recipient email
-      </label>
-
-      <input
-        id="messageUserEmail"
-        type="email"
-        placeholder="recipient@example.com"
-      >
-
-    </div>
-
-
-    <div class="form-group">
-
-      <label>
-        Message
-      </label>
-
-      <textarea
-        id="messageText"
-        rows="4"
-        maxlength="3000"
-        placeholder="Write your private message..."
-      ></textarea>
-
-    </div>
-
-
-    <button
-      class="btn"
-      onclick="sendMessage()"
-    >
-      ✉️ SEND MESSAGE
-    </button>
-
-  </div>
-
-
-  <div id="messagesList"></div>
-
-</section>
-
-
-<!-- =====================================================
-     PROFILE
-===================================================== -->
-
-<section
-  id="profile"
-  class="hidden"
->
-
-
-  <div class="profile-card">
-
-
-    <div
-      id="profileCover"
-      class="profile-cover"
-    >
-
-      <div class="cover-placeholder">
-        ✝
-      </div>
-
-    </div>
-
-
-    <div class="profile-main">
-
-
-      <div class="profile-avatar-wrap">
-
-        <div
-          id="profileAvatar"
-          class="profile-avatar"
-        >
-          B
-        </div>
-
-      </div>
-
-
-      <div class="profile-heading">
-
-        <h2 id="profileDisplayName">
-          Believer
-        </h2>
-
-        <div
-          id="profileDisplayUsername"
-          class="profile-username"
-        >
-          @username
-        </div>
-
-      </div>
-
-
-      <button
-        class="btn profile-edit-btn"
-        onclick="toggleProfileEditor()"
-      >
-        ✏️ Edit Profile
-      </button>
-
-    </div>
-
-
-    <div class="profile-bio-area">
-
-      <p id="profileDisplayBio">
-        Add a short bio about yourself.
-      </p>
-
-
-      <div class="profile-details">
-
-        <span id="profileDisplayLocation"></span>
-
-        <span id="profileDisplayWebsite"></span>
-
-        <span id="profileJoined"></span>
-
-      </div>
-
-    </div>
-
-  </div>
-
-
-  <!-- PROFILE EDITOR -->
-
-  <div
-    id="profileEditor"
-    class="card hidden"
-  >
-
-    <h2>✏️ Edit Profile</h2>
-
-    <p class="muted" style="margin:5px 0 20px">
-      Update the information people see on your profile.
-    </p>
-
-
-    <div class="form-group">
-
-      <label>
-        Full name
-      </label>
-
-      <input
-        id="profileNameEdit"
-        placeholder="Full name"
-      >
-
-    </div>
-
-
-    <div class="form-group">
-
-      <label>
-        Username
-      </label>
-
-      <input
-        id="profileUsernameEdit"
-        maxlength="30"
-        placeholder="username"
-      >
-
-    </div>
-
-
-    <div class="form-group">
-
-      <label>
-        Bio
-      </label>
-
-      <textarea
-        id="profileBioEdit"
-        rows="4"
-        maxlength="300"
-        placeholder="Tell the community about yourself..."
-      ></textarea>
-
-    </div>
-
-
-    <div class="form-group">
-
-      <label>
-        Location
-      </label>
-
-      <input
-        id="profileLocationEdit"
-        placeholder="City, Country"
-      >
-
-    </div>
-
-
-    <div class="form-group">
-
-      <label>
-        Website
-      </label>
-
-      <input
-        id="profileWebsiteEdit"
-        type="url"
-        placeholder="https://example.com"
-      >
-
-    </div>
-
-
-    <div class="form-group">
-
-      <label>
-        Profile photo
-      </label>
-
-      <input
-        id="profileAvatarFile"
-        type="file"
-        accept="image/jpeg,image/png,image/webp"
-      >
-
-      <div
-        id="profileAvatarPreview"
-        class="upload-preview"
-      ></div>
-
-    </div>
-
-
-    <div class="form-group">
-
-      <label>
-        Cover photo
-      </label>
-
-      <input
-        id="profileCoverFile"
-        type="file"
-        accept="image/jpeg,image/png,image/webp"
-      >
-
-      <div
-        id="profileCoverPreview"
-        class="cover-upload-preview"
-      ></div>
-
-    </div>
-
-
-    <details>
-
-      <summary>
-        Use image URLs instead
-      </summary>
-
-      <div style="margin-top:12px">
-
-        <input
-          id="profileAvatarEdit"
-          type="url"
-          placeholder="Profile photo URL"
-        >
-
-        <input
-          id="profileCoverEdit"
-          type="url"
-          placeholder="Cover photo URL"
-          style="margin-top:8px"
-        >
-
-      </div>
-
-    </details>
-
-
-    <div class="actions" style="margin-top:18px">
-
-      <button
-        class="btn"
-        onclick="updateProfile()"
-      >
-        💾 SAVE PROFILE
-      </button>
-
-      <button
-        class="btn btn-secondary"
-        onclick="toggleProfileEditor()"
-      >
-        CANCEL
-      </button>
-
-    </div>
-
-
-    <p id="profileMsg"></p>
-
-  </div>
-
-
-  <div class="card">
-
-    <div class="profile-tabs">
-
-      <button class="profile-tab active">
-        Posts
-      </button>
-
-      <button class="profile-tab">
-        About
-      </button>
-
-      <button class="profile-tab">
-        Connections
-      </button>
-
-    </div>
-
-
-    <p class="meta">
-      Your profile activity will appear here.
-    </p>
-
-  </div>
-
-</section>
-
-
-</div>
-
-</main>
-
-</div>
-
-
-<!-- =======================================================
-     SUPABASE
-======================================================= -->
-
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-
-<script>
-
-/* =========================================================
-   SUPABASE CONFIG
-========================================================= */
-
-const SUPABASE_URL =
-  "https://zupbqtnqbsmlwbidsddk.supabase.co";
-
-const SUPABASE_PUBLISHABLE_KEY =
-  "sb_publishable_NtyX9tGZ7vAmLB73ylIasw_RZZf7P2o";
-
-const supabaseClient =
-  window.supabase.createClient(
-    SUPABASE_URL,
-    SUPABASE_PUBLISHABLE_KEY
-  );
-
-
-let currentUser = null;
-let currentProfile = null;
-
-
-/* =========================================================
-   HELPERS
-========================================================= */
-
-function $(id){
-  return document.getElementById(id);
-}
-
-
-function showToast(message,type="success"){
-
-  const container =
-    $("toastContainer");
-
-  const toast =
-    document.createElement("div");
-
-  toast.className =
-    "toast " + type;
-
-  toast.textContent =
-    message;
-
-  container.appendChild(toast);
-
-  setTimeout(()=>{
-    toast.remove();
-  },3500);
-}
-
-
-function setMsg(id,text,type="error"){
-
-  const element =
-    $(id);
-
-  if(!element)return;
-
-  element.className =
-    type;
-
-  element.textContent =
-    text;
-}
-
-
-function escapeHtml(value){
-
-  return String(value ?? "")
-    .replace(/[&<>"']/g,c=>({
-
-      "&":"&amp;",
-      "<":"&lt;",
-      ">":"&gt;",
-      '"':"&quot;",
-      "'":"&#039;"
-
-    }[c]));
-}
-
-
-function formatDate(value){
-
-  if(!value)
-    return "Just now";
-
-  const date =
-    new Date(value);
-
-  if(Number.isNaN(date.getTime()))
-    return "Just now";
-
-  return date.toLocaleString(
-    undefined,
-    {
-      dateStyle:"medium",
-      timeStyle:"short"
-    }
-  );
-}
-
-
-function initials(name){
-
-  const value =
-    String(name || "Believer")
-      .trim();
-
-  if(!value)
-    return "B";
-
-  return value
-    .split(/\s+/)
-    .slice(0,2)
-    .map(word=>word[0])
-    .join("")
-    .toUpperCase();
-}
-
-
-/* =========================================================
-   AUTH SCREENS
-========================================================= */
-
-function showSignup(){
-
-  $("loginBox")
-    .classList.add("hidden");
-
-  $("signupBox")
-    .classList.remove("hidden");
-
-  $("name")?.focus();
-}
-
-
-function showLogin(){
-
-  $("signupBox")
-    .classList.add("hidden");
-
-  $("loginBox")
-    .classList.remove("hidden");
-
-  $("loginEmail")?.focus();
-}
-
-
-/* =========================================================
-   SIGNUP
-========================================================= */
-
-async function signup(){
-
-  const name =
-    $("name").value.trim();
-
-  const email =
-    $("email")
-      .value
-      .trim()
-      .toLowerCase();
-
-  const password =
-    $("pass").value;
-
-
-  if(!name || !email || !password){
-
-    setMsg(
-      "signupMsg",
-      "Please complete all fields."
-    );
-
-    return;
-  }
-
-
-  if(password.length < 6){
-
-    setMsg(
-      "signupMsg",
-      "Password must contain at least 6 characters."
-    );
-
-    return;
-  }
-
-
-  const button =
-    $("signupBtn");
-
-  button.disabled = true;
-  button.textContent = "CREATING...";
-
-
-  try{
-
-    const {
-      data,
-      error
-    } =
-      await supabaseClient.auth.signUp({
-
-        email,
-        password,
-
-        options:{
-          data:{
-            full_name:name
-          }
-        }
-
-      });
-
-
-    if(error)
-      throw error;
-
-
-    if(!data.user)
-      throw new Error(
-        "Account could not be created."
-      );
-
-
-    if(data.session){
-
-      await ensureProfile(
-        data.user,
-        name,
-        email
-      );
-
-      await loadApp(
-        data.user
-      );
-
-    }else{
-
-      setMsg(
-        "signupMsg",
-        "Account created. Check your email to confirm your account.",
-        "success"
-      );
-
-      setTimeout(
-        showLogin,
-        1800
-      );
-    }
-
-
-  }catch(error){
-
-    console.error(
-      "SIGNUP ERROR",
-      error
-    );
-
-    setMsg(
-      "signupMsg",
-      error.message ||
-      "Unable to create account."
-    );
-
-
-  }finally{
-
-    button.disabled = false;
-    button.textContent =
-      "✨ CREATE ACCOUNT";
-  }
-}
-
-
-/* =========================================================
-   LOGIN
-========================================================= */
-
-async function login(){
-
-  const email =
-    $("loginEmail")
-      .value
-      .trim()
-      .toLowerCase();
-
-  const password =
-    $("loginPass").value;
-
-
-  if(!email || !password){
-
-    setMsg(
-      "loginMsg",
-      "Enter your email and password."
-    );
-
-    return;
-  }
-
-
-  const button =
-    $("loginBtn");
-
-  button.disabled = true;
-  button.textContent =
-    "LOGGING IN...";
-
-
-  try{
-
-    const {
-      data,
-      error
-    } =
-      await supabaseClient.auth
-        .signInWithPassword({
-
-          email,
-          password
-
-        });
-
-
-    if(error)
-      throw error;
-
-
-    await loadApp(
-      data.user
-    );
-
-
-  }catch(error){
-
-    console.error(
-      "LOGIN ERROR",
-      error
-    );
-
-    setMsg(
-      "loginMsg",
-      error.message ||
-      "Unable to log in."
-    );
-
-
-  }finally{
-
-    button.disabled = false;
-    button.textContent =
-      "🔐 LOG IN";
-  }
-}
-
-
-/* =========================================================
-   PROFILE
-========================================================= */
-
-async function ensureProfile(
-  user,
-  fallbackName,
-  fallbackEmail
-){
-
-  if(!user)
-    return null;
-
-
-  const name =
-    user.user_metadata?.full_name ||
-    fallbackName ||
-    "Believer";
-
-
-  const email =
-    user.email ||
-    fallbackEmail ||
-    null;
-
-
-  const {
-    data,
-    error
-  } =
-    await supabaseClient
-      .from("profiles")
-      .upsert(
-        {
-          id:user.id,
-          full_name:name,
-          email:email
-        },
-        {
-          onConflict:"id"
-        }
-      )
-      .select()
-      .single();
-
-
-  if(error){
-
-    console.error(
-      "PROFILE ERROR",
-      error
-    );
-
-    throw error;
-  }
-
-
-  currentProfile =
-    data;
-
-  return data;
-}
-
-
-/* =========================================================
-   LOAD APPLICATION
-========================================================= */
-
-async function loadApp(user){
-
-  if(!user)
-    return;
-
-
-  currentUser =
-    user;
-
-
-  try{
-
-    await ensureProfile(
-      user,
-      user.user_metadata?.full_name,
-      user.email
-    );
-
-
-    $("auth")
-      .classList.add("hidden");
-
-    $("app")
-      .classList.remove("hidden");
-
-
-    await render();
-
-
-  }catch(error){
-
-    console.error(
-      "APP LOAD ERROR",
-      error
-    );
-
-    showToast(
-      "Your account loaded, but your profile could not be loaded.",
-      "error"
-    );
-  }
-}
-
-
-/* =========================================================
-   LOGOUT
-========================================================= */
-
-async function logout(){
-
-  try{
-
-    await supabaseClient.auth
-      .signOut();
-
-  }finally{
-
-    currentUser = null;
-    currentProfile = null;
-
-    location.reload();
-  }
-}
-
-
-/* =========================================================
-   COMPOSER
-========================================================= */
-
-function openPostComposer(){
-
-  $("postComposerArea")
-    .classList.remove("hidden");
-
-  $("postText")
-    ?.focus();
-}
-
-
-function closePostComposer(){
-
-  $("postText").value = "";
-
-  removePostImage();
-
-  $("postComposerArea")
-    .classList.add("hidden");
-}
-
-
-function renderComposer(){
-
-  if(!currentProfile)
-    return;
-
-
-  const avatar =
-    $("composerAvatar");
-
-  const name =
-    currentProfile.full_name ||
-    "Believer";
-
-
-  if(currentProfile.avatar_url){
-
-    avatar.innerHTML = `
-      <img
-        src="${escapeHtml(currentProfile.avatar_url)}"
-        alt="Profile"
-      >
-    `;
-
-  }else{
-
-    avatar.textContent =
-      initials(name);
-  }
-}
-
-
-/* =========================================================
-   HEADER AVATAR
-========================================================= */
-
-function renderHeader(){
-
-  if(!currentProfile)
-    return;
-
-
-  const avatar =
-    $("headerAvatar");
-
-  const name =
-    currentProfile.full_name ||
-    "Believer";
-
-
-  if(currentProfile.avatar_url){
-
-    avatar.innerHTML = `
-      <img
-        src="${escapeHtml(currentProfile.avatar_url)}"
-        alt="Profile"
-      >
-    `;
-
-  }else{
-
-    avatar.textContent =
-      initials(name);
-  }
-}
-
-
-/* =========================================================
-   POST IMAGE PREVIEW
-========================================================= */
-
-$("postImageFile")
-  .addEventListener(
-    "change",
-    function(){
-
-      const file =
-        this.files?.[0];
-
-      const preview =
-        $("postImagePreview");
-
-
-      if(!file){
-
-        removePostImage();
-        return;
-      }
-
-
-      if(!file.type.startsWith("image/")){
-
-        showToast(
-          "Please select an image file.",
-          "error"
-        );
-
-        this.value="";
-        return;
-      }
-
-
-      if(file.size > 10 * 1024 * 1024){
-
-        showToast(
-          "The image must be smaller than 10 MB.",
-          "error"
-        );
-
-        this.value="";
-        return;
-      }
-
-
-      const url =
-        URL.createObjectURL(file);
-
-
-      preview.innerHTML = `
-
-        <img
-          src="${url}"
-          alt="Post photo preview"
-        >
-
-        <button
-          type="button"
-          class="remove-post-image"
-          onclick="removePostImage()"
-        >
-          ×
-        </button>
-
-      `;
-
-
-      preview.classList.remove(
-        "hidden"
-      );
-    }
-  );
-
-
-function removePostImage(){
-
-  const input =
-    $("postImageFile");
-
-  const preview =
-    $("postImagePreview");
-
-
-  if(input)
-    input.value = "";
-
-
-  preview.innerHTML = "";
-
-  preview.classList.add(
-    "hidden"
-  );
-}
-
-
-/* =========================================================
-   UPLOAD POST IMAGE
-========================================================= */
-
-async function uploadPostImage(file){
-
-  if(!file || !currentUser)
-    return null;
-
-
-  const extension =
-    (
-      file.name.split(".").pop() ||
-      "jpg"
-    )
-      .toLowerCase()
-      .replace(
-        /[^a-z0-9]/g,
-        ""
-      );
-
-
-  const path =
-    currentUser.id +
-    "/post-" +
-    crypto.randomUUID() +
-    "." +
-    extension;
-
-
-  const {
-    error
-  } =
-    await supabaseClient
-      .storage
-      .from("post-media")
-      .upload(
-        path,
-        file,
-        {
-          contentType:file.type,
-          cacheControl:"31536000",
-          upsert:false
-        }
-      );
-
-
-  if(error)
-    throw error;
-
-
-  const {
-    data
-  } =
-    supabaseClient
-      .storage
-      .from("post-media")
-      .getPublicUrl(path);
-
-
-  return data.publicUrl;
-}
-
-
-/* =========================================================
-   CREATE POST
-========================================================= */
-
-async function addPost(){
-
-  if(!currentUser){
-
-    showToast(
-      "Please log in first.",
-      "error"
-    );
-
-    return;
-  }
-
-
-  const text =
-    $("postText")
-      .value
-      .trim();
-
-
-  const imageFile =
-    $("postImageFile")
-      .files?.[0] || null;
-
-
-  if(!text && !imageFile){
-
-    setMsg(
-      "postMsg",
-      "Write something or select a photo."
-    );
-
-    return;
-  }
-
-
-  const button =
-    $("postBtn");
-
-  button.disabled = true;
-  button.textContent =
-    "POSTING...";
-
-
-  try{
-
-    let image_url = null;
-
-
-    if(imageFile){
-
-      image_url =
-        await uploadPostImage(
-          imageFile
-        );
-    }
-
-
-    const {
-      error
-    } =
-      await supabaseClient
-        .from("posts")
-        .insert({
-
-          user_id:currentUser.id,
-          content:text,
-          image_url
-
-        });
-
-
-    if(error)
-      throw error;
-
-
-    closePostComposer();
-
-
-    showToast(
-      "Your post was published.",
-      "success"
-    );
-
-
-    await renderPosts();
-
-
-  }catch(error){
-
-    console.error(
-      "POST ERROR",
-      error
-    );
-
-    showToast(
-      "Could not publish post: " +
-      error.message,
-      "error"
-    );
-
-
-  }finally{
-
-    button.disabled = false;
-    button.textContent =
-      "POST";
-  }
-}
-
-
-/* =========================================================
-   LOAD POSTS
-========================================================= */
-
-async function renderPosts(){
-
-  const feed =
-    $("feed");
-
-  if(!feed)
-    return;
-
-
-  feed.innerHTML =
-    `<div class="loading">
-      Loading posts...
-    </div>`;
-
-
-  try{
-
-    const {
-      data:posts,
-      error
-    } =
-      await supabaseClient
-        .from("posts")
-        .select(
-          "id,content,image_url,created_at,user_id"
-        )
-        .order(
-          "created_at",
-          {
-            ascending:false
-          }
-        );
-
-
-    if(error)
-      throw error;
-
-
-    if(!posts?.length){
-
-      feed.innerHTML = `
-
-        <div class="card empty">
-
-          <h3>
-            📝 No posts yet
-          </h3>
-
-          <p style="margin:8px 0 18px">
-            Be the first believer to share
-            something with the community.
-          </p>
-
-          <button
-            class="btn"
-            onclick="openPostComposer()"
-          >
-            CREATE FIRST POST
-          </button>
-
-        </div>
-
-      `;
-
-      return;
-    }
-
-
-    const userIds =
-      [
-        ...new Set(
-          posts
-            .map(post=>post.user_id)
-            .filter(Boolean)
-        )
-      ];
-
-
-    let profilesById = {};
-
-
-    if(userIds.length){
-
-      const {
-        data:profiles
-      } =
-        await supabaseClient
-          .from("profiles")
-          .select(
-            "id,full_name,avatar_url"
-          )
-          .in(
-            "id",
-            userIds
-          );
-
-
-      profilesById =
-        Object.fromEntries(
-          (profiles || [])
-            .map(profile=>[
-              profile.id,
-              profile
-            ])
-        );
-    }
-
-
-    const postIds =
-      posts.map(
-        post=>post.id
-      );
-
-
-    let likesByPost = {};
-    let myLikedPosts =
-      new Set();
-
-
-    if(postIds.length){
-
-      const {
-        data:likes
-      } =
-        await supabaseClient
-          .from("post_likes")
-          .select(
-            "post_id,user_id"
-          )
-          .in(
-            "post_id",
-            postIds
-          );
-
-
-      (likes || [])
-        .forEach(like=>{
-
-          likesByPost[like.post_id] =
-            (likesByPost[like.post_id] || 0) + 1;
-
-
-          if(
-            currentUser &&
-            like.user_id === currentUser.id
-          ){
-
-            myLikedPosts.add(
-              like.post_id
-            );
-          }
-
-        });
-    }
-
-
-    feed.innerHTML =
-      posts
-        .map(post=>{
-
-          const profile =
-            profilesById[
-              post.user_id
-            ] || {};
-
-
-          const name =
-            profile.full_name ||
-            "Believer";
-
-
-          const liked =
-            myLikedPosts.has(
-              post.id
-            );
-
-
-          const likeCount =
-            likesByPost[
-              post.id
-            ] || 0;
-
-
-          const isMine =
-            currentUser &&
-            post.user_id ===
-            currentUser.id;
-
-
-          return `
-
-            <article
-              class="card"
-              id="post-${escapeHtml(post.id)}"
-            >
-
-              <div class="posthead">
-
-                <div class="avatar">
-
-                  ${
-                    profile.avatar_url
-                    ?
-                    `
-                    <img
-                      src="${escapeHtml(profile.avatar_url)}"
-                      alt="${escapeHtml(name)}"
-                      loading="lazy"
-                    >
-                    `
-                    :
-                    escapeHtml(
-                      initials(name)
-                    )
-                  }
-
-                </div>
-
-
-                <div class="post-author">
-
-                  <div class="post-author-name">
-                    ${escapeHtml(name)}
-                  </div>
-
-                  <div class="meta">
-                    ${formatDate(post.created_at)}
-                    • Public
-                  </div>
-
-                </div>
-
-              </div>
-
-
-              ${
-                post.content
-                ?
-                `
-                <div class="post-content">
-                  ${escapeHtml(post.content)}
-                </div>
-                `
-                :
-                ""
-              }
-
-
-              ${
-                post.image_url
-                ?
-                `
-                <img
-                  class="post-photo"
-                  src="${escapeHtml(post.image_url)}"
-                  alt="Post photo"
-                  loading="lazy"
-                >
-                `
-                :
-                ""
-              }
-
-
-              <div class="actions">
-
-                <button
-                  class="action-btn ${liked ? "like-active" : ""}"
-                  onclick="likePost('${escapeHtml(post.id)}')"
-                >
-                  ${liked ? "👍 Liked" : "👍 Like"} ${likeCount ? `(${likeCount})` : ""}
-                </button>
-
-
-                <button
-                  class="action-btn"
-                  onclick="commentPost('${escapeHtml(post.id)}')"
-                >
-                  💬 Comment
-                </button>
-
-
-                <button
-                  class="action-btn"
-                  onclick="sharePost('${escapeHtml(post.id)}')"
-                >
-                  ↪ Share
-                </button>
-
-              </div>
-
-
-              ${
-                isMine
-                ?
-                `
-                <button
-                  class="btn btn-danger btn-small delete-post"
-                  onclick="deletePost('${escapeHtml(post.id)}')"
-                >
-                  🗑️ Delete Post
-                </button>
-                `
-                :
-                ""
-              }
-
-            </article>
-
-          `;
-
-        })
-        .join("");
-
-
-  }catch(error){
-
-    console.error(
-      "POST LOAD ERROR",
-      error
-    );
-
-
-    feed.innerHTML = `
-
-      <div class="card">
-
-        <h3>
-          ⚠️ Could not load posts
-        </h3>
-
-        <p class="error" style="margin:8px 0 17px">
-          ${escapeHtml(error.message)}
-        </p>
-
-        <button
-          class="btn"
-          onclick="renderPosts()"
-        >
-          🔄 TRY AGAIN
-        </button>
-
-      </div>
-
-    `;
-  }
-}
-
-
-/* =========================================================
-   DELETE POST
-========================================================= */
-
-async function deletePost(postId){
-
-  if(!currentUser)
-    return;
-
-
-  if(!confirm(
-    "Delete this post?"
-  ))
-    return;
-
-
-  try{
-
-    const {
-      error
-    } =
-      await supabaseClient
-        .from("posts")
-        .delete()
-        .eq(
-          "id",
-          postId
-        )
-        .eq(
-          "user_id",
-          currentUser.id
-        );
-
-
-    if(error)
-      throw error;
-
-
-    showToast(
-      "Post deleted.",
-      "success"
-    );
-
-
-    await renderPosts();
-
-
-  }catch(error){
-
-    showToast(
-      "Could not delete post: " +
-      error.message,
-      "error"
-    );
-  }
-}
-
-
-/* =========================================================
-   LIKE
-========================================================= */
-
-async function likePost(postId){
-
-  if(!currentUser)
-    return;
-
-
-  try{
-
-    const {
-      data:existing,
-      error:checkError
-    } =
-      await supabaseClient
-        .from("post_likes")
-        .select("post_id")
-        .eq(
-          "post_id",
-          postId
-        )
-        .eq(
-          "user_id",
-          currentUser.id
-        )
-        .maybeSingle();
-
-
-    if(checkError)
-      throw checkError;
-
-
-    if(existing){
-
-      const {
-        error
-      } =
-        await supabaseClient
-          .from("post_likes")
-          .delete()
-          .eq(
-            "post_id",
-            postId
-          )
-          .eq(
-            "user_id",
-            currentUser.id
-          );
-
-
-      if(error)
-        throw error;
-
-    }else{
-
-      const {
-        error
-      } =
-        await supabaseClient
-          .from("post_likes")
-          .insert({
-
-            post_id:postId,
-            user_id:currentUser.id
-
-          });
-
-
-      if(error)
-        throw error;
-    }
-
-
-    await renderPosts();
-
-
-  }catch(error){
-
-    console.error(
-      "LIKE ERROR",
-      error
-    );
-
-    showToast(
-      "Could not update like.",
-      "error"
-    );
-  }
-}
-
-
-/* =========================================================
-   COMMENTS
-========================================================= */
-
-async function commentPost(postId){
-
-  if(!currentUser)
-    return;
-
-
-  const comment =
-    prompt(
-      "Write your comment:"
-    );
-
-
-  if(!comment?.trim())
-    return;
-
-
-  try{
-
-    const {
-      error
-    } =
-      await supabaseClient
-        .from("post_comments")
-        .insert({
-
-          post_id:postId,
-          user_id:currentUser.id,
-          content:comment.trim()
-
-        });
-
-
-    if(error)
-      throw error;
-
-
-    showToast(
-      "Comment added.",
-      "success"
-    );
-
-
-  }catch(error){
-
-    showToast(
-      "Could not add comment: " +
-      error.message,
-      "error"
-    );
-  }
-}
-
-
-/* =========================================================
-   SHARE
-========================================================= */
-
-async function sharePost(postId){
-
-  const url =
-    window.location.origin +
-    window.location.pathname +
-    "#post-" +
-    postId;
-
-
-  try{
-
-    if(navigator.share){
-
-      await navigator.share({
-
-        title:
-          "Believer Connect",
-
-        text:
-          "Check out this post on Believer Connect.",
-
-        url
-
-      });
-
-    }else{
-
-      await navigator.clipboard
-        .writeText(url);
-
-      showToast(
-        "Post link copied.",
-        "success"
-      );
-    }
-
-
-  }catch(error){
-
-    console.warn(
-      "Share cancelled",
-      error
-    );
-  }
-}
-
-
-/* =========================================================
-   PRAYER
-========================================================= */
-
-async function addPrayer(){
-
-  if(!currentUser)
-    return;
-
-
-  const text =
-    $("prayerText")
-      .value
-      .trim();
-
-
-  if(!text){
-
-    showToast(
-      "Please enter a prayer request.",
-      "error"
-    );
-
-    return;
-  }
-
-
-  try{
-
-    const {
-      error
-    } =
-      await supabaseClient
-        .from("prayer_requests")
-        .insert({
-
-          user_id:currentUser.id,
-          content:text
-
-        });
-
-
-    if(error)
-      throw error;
-
-
-    $("prayerText").value = "";
-
-
-    showToast(
-      "Prayer request posted.",
-      "success"
-    );
-
-
-    await renderPrayers();
-
-
-  }catch(error){
-
-    showToast(
-      "Could not post prayer: " +
-      error.message,
-      "error"
-    );
-  }
-}
-
-
-async function renderPrayers(){
-
-  const box =
-    $("prayers");
-
-  if(!box)
-    return;
-
-
-  box.innerHTML =
-    `<div class="loading">
-      Loading prayer requests...
-    </div>`;
-
-
-  const {
-    data,
-    error
-  } =
-    await supabaseClient
-      .from("prayer_requests")
-      .select(
-        "id,content,prayer_count,created_at,user_id"
-      )
-      .order(
-        "created_at",
-        {
-          ascending:false
-        }
-      );
-
-
-  if(error){
-
-    box.innerHTML = `
-
-      <div class="card">
-
-        <p class="error">
-          Could not load prayer requests:
-          ${escapeHtml(error.message)}
-        </p>
-
-      </div>
-
-    `;
-
-    return;
-  }
-
-
-  box.innerHTML =
-    (data || [])
-      .map(prayer=>`
-
-        <div class="card">
-
-          <div class="post-content">
-            ${escapeHtml(prayer.content)}
-          </div>
-
-          <div class="meta" style="margin-top:10px">
-            🙏 ${prayer.prayer_count || 0}
-            people are praying
-          </div>
-
-          <div style="margin-top:13px">
-
-            <button
-              class="btn btn-secondary btn-small"
-              onclick="pray(
-                '${escapeHtml(prayer.id)}',
-                ${Number(prayer.prayer_count || 0)}
-              )"
-            >
-              🙏 I am praying
-            </button>
-
-          </div>
-
-        </div>
-
-      `)
-      .join("")
-      ||
-      `
-      <div class="card empty">
-        <h3>No prayer requests yet.</h3>
-        <p style="margin-top:7px">
-          Be the first to share.
-        </p>
-      </div>
-      `;
-}
-
-
-async function pray(id,count){
-
-  try{
-
-    const {
-      error
-    } =
-      await supabaseClient
-        .from("prayer_requests")
-        .update({
-
-          prayer_count:
-            Number(count || 0) + 1
-
-        })
-        .eq(
-          "id",
-          id
-        );
-
-
-    if(error)
-      throw error;
-
-
-    await renderPrayers();
-
-
-  }catch(error){
-
-    showToast(
-      "Could not record prayer.",
-      "error"
-    );
-  }
-}
-
-
-/* =========================================================
-   GROUPS
-========================================================= */
-
-async function createGroup(){
-
-  if(!currentUser)
-    return;
-
-
-  const name =
-    $("groupName")
-      .value
-      .trim();
-
-
-  const description =
-    $("groupDescription")
-      .value
-      .trim();
-
-
-  if(!name){
-
-    showToast(
-      "Please enter a group name.",
-      "error"
-    );
-
-    return;
-  }
-
-
-  try{
-
-    const {
-      error
-    } =
-      await supabaseClient
-        .from("groups")
-        .insert({
-
-          name,
-          description,
-          created_by:currentUser.id
-
-        });
-
-
-    if(error)
-      throw error;
-
-
-    $("groupName").value="";
-    $("groupDescription").value="";
-
-
-    showToast(
-      "Group created.",
-      "success"
-    );
-
-
-    await renderGroups();
-
-
-  }catch(error){
-
-    showToast(
-      "Could not create group: " +
-      error.message,
-      "error"
-    );
-  }
-}
-
-
-async function renderGroups(){
-
-  const box =
-    $("groupsList");
-
-  if(!box)
-    return;
-
-
-  box.innerHTML =
-    `<div class="loading">
-      Loading groups...
-    </div>`;
-
-
-  const {
-    data,
-    error
-  } =
-    await supabaseClient
-      .from("groups")
-      .select(
-        "id,name,description,created_at"
-      )
-      .order(
-        "created_at",
-        {
-          ascending:false
-        }
-      );
-
-
-  if(error){
-
-    box.innerHTML = `
-
-      <div class="card">
-
-        <p class="error">
-          Could not load groups:
-          ${escapeHtml(error.message)}
-        </p>
-
-      </div>
-
-    `;
-
-    return;
-  }
-
-
-  box.innerHTML =
-    (data || [])
-      .map(group=>`
-
-        <div class="card">
-
-          <h3>
-            👥 ${escapeHtml(group.name)}
-          </h3>
-
-          <p style="margin-top:7px">
-            ${escapeHtml(
-              group.description ||
-              "Christian community group"
-            )}
-          </p>
-
-          <div
-            class="meta"
-            style="margin-top:10px"
-          >
-            Created ${formatDate(
-              group.created_at
-            )}
-          </div>
-
-        </div>
-
-      `)
-      .join("")
-      ||
-      `
-      <div class="card empty">
-        <h3>No groups yet.</h3>
-        <p style="margin-top:7px">
-          Create the first Christian group.
-        </p>
-      </div>
-      `;
-}
-
-
-/* =========================================================
-   MESSAGES
-========================================================= */
-
-async function sendMessage(){
-
-  if(!currentUser)
-    return;
-
-
-  const email =
-    $("messageUserEmail")
-      .value
-      .trim()
-      .toLowerCase();
-
-
-  const content =
-    $("messageText")
-      .value
-      .trim();
-
-
-  if(!email || !content){
-
-    showToast(
-      "Enter the recipient email and message.",
-      "error"
-    );
-
-    return;
-  }
-
-
-  try{
-
-    const {
-      data:recipient,
-      error:recipientError
-    } =
-      await supabaseClient
-        .from("profiles")
-        .select("id,email")
-        .eq(
-          "email",
-          email
-        )
-        .maybeSingle();
-
-
-    if(recipientError)
-      throw recipientError;
-
-
-    if(!recipient){
-
-      showToast(
-        "No account was found for that email.",
-        "error"
-      );
-
-      return;
-    }
-
-
-    if(
-      recipient.id ===
-      currentUser.id
-    ){
-
-      showToast(
-        "You cannot message yourself.",
-        "error"
-      );
-
-      return;
-    }
-
-
-    const {
-      error
-    } =
-      await supabaseClient
-        .from("messages")
-        .insert({
-
-          sender_id:currentUser.id,
-          recipient_id:recipient.id,
-          content
-
-        });
-
-
-    if(error)
-      throw error;
-
-
-    $("messageText").value = "";
-
-
-    showToast(
-      "Message sent.",
-      "success"
-    );
-
-
-    await renderMessages();
-
-
-  }catch(error){
-
-    showToast(
-      "Could not send message: " +
-      error.message,
-      "error"
-    );
-  }
-}
-
-
-async function renderMessages(){
-
-  const box =
-    $("messagesList");
-
-  if(!box || !currentUser)
-    return;
-
-
-  box.innerHTML =
-    `<div class="loading">
-      Loading messages...
-    </div>`;
-
-
-  const {
-    data,
-    error
-  } =
-    await supabaseClient
-      .from("messages")
-      .select(
-        "id,sender_id,recipient_id,content,created_at"
-      )
-      .or(
-        `sender_id.eq.${currentUser.id},recipient_id.eq.${currentUser.id}`
-      )
-      .order(
-        "created_at",
-        {
-          ascending:false
-        }
-      );
-
-
-  if(error){
-
-    box.innerHTML = `
-
-      <div class="card">
-
-        <p class="error">
-          Could not load messages:
-          ${escapeHtml(error.message)}
-        </p>
-
-      </div>
-
-    `;
-
-    return;
-  }
-
-
-  box.innerHTML =
-    (data || [])
-      .map(message=>`
-
-        <div class="card">
-
-          <div class="meta">
-
-            ${
-              message.sender_id ===
-              currentUser.id
-              ?
-              "📤 You sent"
-              :
-              "📥 Received"
-            }
-
-            • ${formatDate(
-              message.created_at
-            )}
-
-          </div>
-
-          <div
-            class="post-content"
-            style="margin-top:8px"
-          >
-            ${escapeHtml(
-              message.content
-            )}
-          </div>
-
-        </div>
-
-      `)
-      .join("")
-      ||
-      `
-      <div class="card empty">
-        <h3>No messages yet.</h3>
-        <p style="margin-top:7px">
-          Your private conversations will appear here.
-        </p>
-      </div>
-      `;
-}
-
-
-/* =========================================================
-   PROFILE EDITOR
-========================================================= */
-
-function toggleProfileEditor(){
-
-  const editor =
-    $("profileEditor");
-
-  editor.classList.toggle(
-    "hidden"
-  );
-
-
-  if(
-    !editor.classList.contains(
-      "hidden"
-    )
-  ){
-
-    fillProfileEditor();
-
-    editor.scrollIntoView({
-      behavior:"smooth",
-      block:"start"
-    });
-  }
-}
-
-
-function fillProfileEditor(){
-
-  if(!currentProfile)
-    return;
-
-
-  $("profileNameEdit").value =
-    currentProfile.full_name || "";
-
-
-  $("profileUsernameEdit").value =
-    currentProfile.username || "";
-
-
-  $("profileBioEdit").value =
-    currentProfile.bio || "";
-
-
-  $("profileLocationEdit").value =
-    currentProfile.location || "";
-
-
-  $("profileWebsiteEdit").value =
-    currentProfile.website || "";
-
-
-  $("profileAvatarEdit").value =
-    currentProfile.avatar_url || "";
-
-
-  $("profileCoverEdit").value =
-    currentProfile.cover_url || "";
-
-
-  $("profileAvatarPreview").innerHTML =
-    currentProfile.avatar_url
-    ?
-    `
-    <img
-      src="${escapeHtml(currentProfile.avatar_url)}"
-      alt="Current profile photo"
-    >
-    `
-    :
-    "";
-
-
-  $("profileCoverPreview").innerHTML =
-    currentProfile.cover_url
-    ?
-    `
-    <img
-      src="${escapeHtml(currentProfile.cover_url)}"
-      alt="Current cover photo"
-    >
-    `
-    :
-    "";
-}
-
-
-/* =========================================================
-   PROFILE DISPLAY
-========================================================= */
-
-function renderProfile(){
-
-  if(!currentProfile)
-    return;
-
-
-  const name =
-    currentProfile.full_name ||
-    "Believer";
-
-
-  const username =
-    currentProfile.username
-    ?
-    "@" +
-    currentProfile.username
-      .replace(/^@/,"")
-    :
-    "@username";
-
-
-  $("profileDisplayName")
-    .textContent =
-    name;
-
-
-  $("profileDisplayUsername")
-    .textContent =
-    username;
-
-
-  $("profileDisplayBio")
-    .textContent =
-    currentProfile.bio ||
-    "Add a short bio about yourself.";
-
-
-  $("profileDisplayLocation")
-    .textContent =
-    currentProfile.location
-    ?
-    "📍 " +
-    currentProfile.location
-    :
-    "";
-
-
-  $("profileDisplayWebsite")
-    .textContent =
-    currentProfile.website
-    ?
-    "🌐 " +
-    currentProfile.website
-    :
-    "";
-
-
-  $("profileJoined")
-    .textContent =
-    currentProfile.created_at
-    ?
-    "🗓️ Joined " +
-    new Date(
-      currentProfile.created_at
-    ).toLocaleDateString()
-    :
-    "";
-
-
-  const avatar =
-    $("profileAvatar");
-
-
-  avatar.innerHTML =
-    currentProfile.avatar_url
-    ?
-    `
-    <img
-      src="${escapeHtml(currentProfile.avatar_url)}"
-      alt="Profile photo"
-    >
-    `
-    :
-    escapeHtml(
-      initials(name)
-    );
-
-
-  const cover =
-    $("profileCover");
-
-
-  cover.innerHTML =
-    currentProfile.cover_url
-    ?
-    `
-    <img
-      src="${escapeHtml(currentProfile.cover_url)}"
-      alt="Cover photo"
-    >
-    `
-    :
-    `
-    <div class="cover-placeholder">
-      ✝
-    </div>
-    `;
-
-
-  renderComposer();
-  renderHeader();
-}
-
-
-/* =========================================================
-   PROFILE IMAGE PREVIEWS
-========================================================= */
-
-$("profileAvatarFile")
-  .addEventListener(
-    "change",
-    function(){
-
-      previewProfileImage(
-        this,
-        "profileAvatarPreview"
-      );
-    }
-  );
-
-
-$("profileCoverFile")
-  .addEventListener(
-    "change",
-    function(){
-
-      previewProfileImage(
-        this,
-        "profileCoverPreview"
-      );
-    }
-  );
-
-
-function previewProfileImage(
-  input,
-  targetId
-){
-
-  const file =
-    input.files?.[0];
-
-  const target =
-    $(targetId);
-
-
-  if(!file){
-
-    target.innerHTML="";
-    return;
-  }
-
-
-  if(!file.type.startsWith("image/")){
-
-    showToast(
-      "Please select an image.",
-      "error"
-    );
-
-    input.value="";
-    return;
-  }
-
-
-  if(file.size > 5 * 1024 * 1024){
-
-    showToast(
-      "Image must be smaller than 5 MB.",
-      "error"
-    );
-
-    input.value="";
-    return;
-  }
-
-
-  const url =
-    URL.createObjectURL(file);
-
-
-  target.innerHTML = `
-
-    <img
-      src="${url}"
-      alt="Image preview"
-    >
-
-  `;
-}
-
-
-/* =========================================================
-   PROFILE MEDIA UPLOAD
-========================================================= */
-
-async function uploadProfileMedia(
-  file,
-  kind
-){
-
-  if(!file || !currentUser)
-    return null;
-
-
-  const extension =
-    (
-      file.name.split(".").pop() ||
-      "jpg"
-    )
-      .toLowerCase()
-      .replace(
-        /[^a-z0-9]/g,
-        ""
-      );
-
-
-  const path =
-    currentUser.id +
-    "/" +
-    kind +
-    "-" +
-    crypto.randomUUID() +
-    "." +
-    extension;
-
-
-  const {
-    error
-  } =
-    await supabaseClient
-      .storage
-      .from("profile-media")
-      .upload(
-        path,
-        file,
-        {
-          contentType:file.type,
-          cacheControl:"31536000",
-          upsert:false
-        }
-      );
-
-
-  if(error)
-    throw error;
-
-
-  const {
-    data
-  } =
-    supabaseClient
-      .storage
-      .from("profile-media")
-      .getPublicUrl(path);
-
-
-  return data.publicUrl;
-}
-
-
-/* =========================================================
-   UPDATE PROFILE
-========================================================= */
-
-async function updateProfile(){
-
-  if(!currentUser)
-    return;
-
-
-  const name =
-    $("profileNameEdit")
-      .value
-      .trim();
-
-
-  const username =
-    $("profileUsernameEdit")
-      .value
-      .trim()
-      .replace(/^@/,"")
-      .toLowerCase();
-
-
-  const bio =
-    $("profileBioEdit")
-      .value
-      .trim();
-
-
-  const location =
-    $("profileLocationEdit")
-      .value
-      .trim();
-
-
-  const website =
-    $("profileWebsiteEdit")
-      .value
-      .trim();
-
-
-  let avatar_url =
-    $("profileAvatarEdit")
-      .value
-      .trim();
-
-
-  let cover_url =
-    $("profileCoverEdit")
-      .value
-      .trim();
-
-
-  const avatarFile =
-    $("profileAvatarFile")
-      .files?.[0];
-
-
-  const coverFile =
-    $("profileCoverFile")
-      .files?.[0];
-
-
-  if(!name){
-
-    showToast(
-      "Please enter your name.",
-      "error"
-    );
-
-    return;
-  }
-
-
-  if(
-    username &&
-    !/^[a-z0-9._-]{3,30}$/
-      .test(username)
-  ){
-
-    showToast(
-      "Username must be 3–30 characters and use only letters, numbers, dots, underscores or hyphens.",
-      "error"
-    );
-
-    return;
-  }
-
-
-  try{
-
-    if(avatarFile){
-
-      avatar_url =
-        await uploadProfileMedia(
-          avatarFile,
-          "avatar"
-        );
-    }
-
-
-    if(coverFile){
-
-      cover_url =
-        await uploadProfileMedia(
-          coverFile,
-          "cover"
-        );
-    }
-
-
-    const {
-      data,
-      error
-    } =
-      await supabaseClient
-        .from("profiles")
-        .update({
-
-          full_name:name,
-
-          username:
-            username || null,
-
-          bio:
-            bio || null,
-
-          location:
-            location || null,
-
-          website:
-            website || null,
-
-          avatar_url:
-            avatar_url || null,
-
-          cover_url:
-            cover_url || null
-
-        })
-        .eq(
-          "id",
-          currentUser.id
-        )
-        .select()
-        .single();
-
-
-    if(error)
-      throw error;
-
-
-    currentProfile =
-      data;
-
-
-    renderProfile();
-    renderHeader();
-
-
-    showToast(
-      "Profile updated successfully.",
-      "success"
-    );
-
-
-    setTimeout(()=>{
-
-      $("profileEditor")
-        .classList.add(
-          "hidden"
-        );
-
-    },700);
-
-
-  }catch(error){
-
-    console.error(
-      "PROFILE UPDATE ERROR",
-      error
-    );
-
-    showToast(
-      "Could not update profile: " +
-      error.message,
-      "error"
-    );
-  }
-}
-
-
-/* =========================================================
-   RENDER
-========================================================= */
-
-async function render(){
-
-  renderProfile();
-  renderHeader();
-  renderComposer();
-
-
-  await renderPosts();
-
-
-  renderPrayers();
-  renderGroups();
-  renderMessages();
-
-
-  tab(
-    "home",
-    false
-  );
-}
-
-
-/* =========================================================
-   NAVIGATION
-========================================================= */
-
-function tab(
-  id,
-  scroll=true
-){
-
-  document
-    .querySelectorAll(
-      "#app section"
-    )
-    .forEach(section=>{
-
-      section.classList.add(
-        "hidden"
-      );
-
-    });
-
-
-  const section =
-    $(id);
-
-
-  if(section){
-
-    section.classList.remove(
-      "hidden"
-    );
-  }
-
-
-  document
-    .querySelectorAll(
-      ".nav button"
-    )
-    .forEach(button=>{
-
-      button.classList.toggle(
-        "active",
-        button.dataset.tab === id
-      );
-
-    });
-
-
-  if(id === "home")
-    renderPosts();
-
-
-  if(id === "prayer")
-    renderPrayers();
-
-
-  if(id === "groups")
-    renderGroups();
-
-
-  if(id === "messages")
-    renderMessages();
-
-
-  if(id === "profile")
-    renderProfile();
-
-
-  if(scroll){
-
-    window.scrollTo({
-      top:0,
-      behavior:"smooth"
-    });
-  }
-}
-
-
-/* =========================================================
-   ENTER KEY LOGIN
-========================================================= */
-
-$("loginPass")
-  .addEventListener(
-    "keydown",
-    event=>{
-
-      if(event.key === "Enter")
-        login();
-
-    }
-  );
-
-
-$("pass")
-  .addEventListener(
-    "keydown",
-    event=>{
-
-      if(event.key === "Enter")
-        signup();
-
-    }
-  );
-
-
-/* =========================================================
-   AUTH BUTTONS
-========================================================= */
-
-$("showSignupBtn")
-  .addEventListener(
-    "click",
-    showSignup
-  );
-
-
-$("showLoginBtn")
-  .addEventListener(
-    "click",
-    showLogin
-  );
-
-
-$("signupBtn")
-  .addEventListener(
-    "click",
-    signup
-  );
-
-
-$("loginBtn")
-  .addEventListener(
-    "click",
-    login
-  );
-
-
-$("logoutBtn")
-  .addEventListener(
-    "click",
-    logout
-  );
-
-
-/* =========================================================
-   AUTH STATE
-========================================================= */
-
-supabaseClient.auth
-  .onAuthStateChange(
-    (event,session)=>{
-
-      if(
-        event === "SIGNED_IN" &&
-        session?.user &&
-        !currentUser
-      ){
-
-        setTimeout(
-          ()=>loadApp(
-            session.user
-          ),
-          0
-        );
-      }
-
-
-      if(
-        event === "SIGNED_OUT"
-      ){
-
-        currentUser = null;
-        currentProfile = null;
-      }
-
-    }
-  );
-
-
-/* =========================================================
-   START
-========================================================= */
-
-async function startBelieverConnect(){
-
-  try{
-
-    const {
-      data,
-      error
-    } =
-      await supabaseClient.auth
-        .getSession();
-
-
-    if(error)
-      throw error;
-
-
-    if(data?.session?.user){
-
-      await loadApp(
-        data.session.user
-      );
-    }
-
-
-  }catch(error){
-
-    console.error(
-      "START ERROR",
-      error
-    );
-  }
-}
-
-
-startBelieverConnect();
-
-</script>
 
 </body>
 </html>
