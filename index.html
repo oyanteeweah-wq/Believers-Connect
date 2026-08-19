@@ -671,7 +671,7 @@ header {
 }
 
 /* =========================================================
-   FRIENDS & GROUPS & VIDEO MODULES
+   FRIENDS, GROUPS & VIDEO MODULES
 ========================================================= */
 .friends-list, .groups-list {
   display: flex;
@@ -749,6 +749,101 @@ header {
   border-top-right-radius: 20px;
   padding: 20px;
   box-shadow: 0 -4px 20px rgba(0,0,0,0.15);
+}
+
+/* =========================================================
+   RESTORED PROFILE / ABOUT ME STYLES
+========================================================= */
+.profile-header-card {
+  background: white;
+  border-radius: var(--bp-radius);
+  border: 1px solid var(--bp-border);
+  box-shadow: var(--bp-shadow);
+  padding: 20px 16px;
+  text-align: center;
+  margin-bottom: 12px;
+}
+
+.profile-avatar-large {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--bp-primary), var(--bp-accent));
+  color: var(--bp-gold);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 800;
+  font-size: 32px;
+  margin: 0 auto 12px auto;
+  border: 3px solid var(--bp-gold);
+}
+
+.about-me-card {
+  background: white;
+  border-radius: var(--bp-radius);
+  border: 1px solid var(--bp-border);
+  box-shadow: var(--bp-shadow);
+  padding: 16px;
+  margin-bottom: 12px;
+}
+
+.about-me-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 14px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid var(--bp-border);
+}
+
+.about-me-title {
+  font-weight: 800;
+  font-size: 16px;
+  color: var(--bp-primary);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.profile-field-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 10px 0;
+  border-bottom: 1px dashed #edf2f7;
+}
+
+.profile-field-item:last-child {
+  border-bottom: none;
+}
+
+.profile-field-icon {
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  background: #f8fafc;
+  color: var(--bp-gold);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  flex-shrink: 0;
+}
+
+.profile-field-content label {
+  display: block;
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--bp-muted);
+  text-transform: uppercase;
+}
+
+.profile-field-content div {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--bp-primary);
+  margin-top: 2px;
 }
 
 /* =========================================================
@@ -843,7 +938,7 @@ header {
 </div>
 
 <!-- =======================================================
-     MAIN APPLICATION VIEW (ORIGINAL LAYOUT RESTORED)
+     MAIN APPLICATION VIEW (ORIGINAL LAYOUT PRESERVED)
 ======================================================= -->
 <div id="app" class="hidden">
   <header>
@@ -893,6 +988,7 @@ header {
         <button id="tabFriends" title="Find Friends"><i class="fa-solid fa-user-plus"></i></button>
         <button id="tabVideos" title="Watch Videos"><i class="fa-solid fa-tv"></i></button>
         <button id="tabGroups" title="Groups"><i class="fa-solid fa-users"></i></button>
+        <button id="tabProfile" title="Profile & Bio"><i class="fa-solid fa-user"></i></button>
       </nav>
     </div>
   </header>
@@ -903,7 +999,7 @@ header {
     <div id="viewHome">
       <!-- POST / ENCOURAGEMENT COMPOSER -->
       <div class="composer-card">
-        <div class="avatar" id="currentUserAvatar">O</div>
+        <div class="avatar currentUserAvatar" title="View Profile">O</div>
         <button id="openComposerBtn" class="mind-button">What is on your heart today?</button>
         <div class="photo-upload-btn" id="mediaUploadTrigger">
           <i class="fa-solid fa-image"></i>
@@ -988,6 +1084,125 @@ header {
       <div id="groupsList" class="groups-list"></div>
     </div>
 
+    <!-- RESTORED PROFILE & BIO TAB -->
+    <div id="viewProfile" class="hidden">
+      <div class="profile-header-card">
+        <div class="profile-avatar-large currentUserAvatar">O</div>
+        <h2 id="profDisplayFullName" style="font-size: 20px; font-weight: 800; color: var(--bp-primary);">Oyantee Weah</h2>
+        <div id="profDisplayHandle" style="font-size: 13px; color: var(--bp-muted); margin-top: 2px;">@oyantee</div>
+      </div>
+
+      <!-- ABOUT ME SECTION WITH RESTORED FIELDS -->
+      <div class="about-me-card">
+        <div class="about-me-header">
+          <div class="about-me-title">
+            <i class="fa-solid fa-address-card" style="color: var(--bp-gold);"></i>
+            About Me
+          </div>
+          <button id="editProfileToggleBtn" class="btn btn-outline btn-sm">
+            <i class="fa-solid fa-pen-to-square"></i> Edit Profile
+          </button>
+        </div>
+
+        <!-- READ-ONLY BIO DISPLAY -->
+        <div id="profileViewFields">
+          <div class="profile-field-item">
+            <div class="profile-field-icon"><i class="fa-solid fa-location-dot"></i></div>
+            <div class="profile-field-content">
+              <label>Current Address</label>
+              <div id="valAddress">Not specified</div>
+            </div>
+          </div>
+
+          <div class="profile-field-item">
+            <div class="profile-field-icon"><i class="fa-solid fa-briefcase"></i></div>
+            <div class="profile-field-content">
+              <label>Working Place / Workplace</label>
+              <div id="valWorkplace">Not specified</div>
+            </div>
+          </div>
+
+          <div class="profile-field-item">
+            <div class="profile-field-icon"><i class="fa-solid fa-phone"></i></div>
+            <div class="profile-field-content">
+              <label>Contact Information</label>
+              <div id="valContact">Not specified</div>
+            </div>
+          </div>
+
+          <div class="profile-field-item">
+            <div class="profile-field-icon"><i class="fa-solid fa-graduation-cap"></i></div>
+            <div class="profile-field-content">
+              <label>Educational Level</label>
+              <div id="valEduLevel">Not specified</div>
+            </div>
+          </div>
+
+          <div class="profile-field-item">
+            <div class="profile-field-icon"><i class="fa-solid fa-school"></i></div>
+            <div class="profile-field-content">
+              <label>Education / School Information</label>
+              <div id="valSchool">Not specified</div>
+            </div>
+          </div>
+
+          <div class="profile-field-item">
+            <div class="profile-field-icon"><i class="fa-solid fa-quote-left"></i></div>
+            <div class="profile-field-content">
+              <label>Personal Bio / Encouragement Note</label>
+              <div id="valBio">Not specified</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- EDIT FORM FOR PROFILE FIELDS -->
+        <div id="profileEditFields" class="hidden" style="margin-top: 10px;">
+          <div class="form-group">
+            <label>Current Address</label>
+            <input type="text" id="editAddress" placeholder="City, Country or Street Address">
+          </div>
+
+          <div class="form-group">
+            <label>Working Place / Workplace</label>
+            <input type="text" id="editWorkplace" placeholder="Company, Ministry, or Industry">
+          </div>
+
+          <div class="form-group">
+            <label>Contact Information</label>
+            <input type="text" id="editContact" placeholder="Phone Number or Alternate Email">
+          </div>
+
+          <div class="form-group">
+            <label>Educational Level</label>
+            <select id="editEduLevel">
+              <option value="">Select Educational Level</option>
+              <option value="High School">High School</option>
+              <option value="Associate Degree">Associate Degree</option>
+              <option value="Bachelor's Degree">Bachelor's Degree</option>
+              <option value="Master's Degree">Master's Degree</option>
+              <option value="Doctorate / PhD">Doctorate / PhD</option>
+              <option value="Other / Professional Certification">Other / Professional Certification</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label>Education / School Information</label>
+            <input type="text" id="editSchool" placeholder="University, College, or High School Name">
+          </div>
+
+          <div class="form-group">
+            <label>Personal Bio / Encouragement Note</label>
+            <textarea id="editBio" rows="3" placeholder="Share a verse, statement of faith, or brief bio..."></textarea>
+          </div>
+
+          <div style="display: flex; gap: 8px; margin-top: 14px;">
+            <button id="saveProfileBtn" class="btn btn-gold btn-sm" style="flex: 1;"><i class="fa-solid fa-floppy-disk"></i> Save Profile</button>
+            <button id="cancelProfileBtn" class="btn btn-outline btn-sm" style="flex: 1;">Cancel</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
   </main>
 
   <!-- CREATE GROUP MODAL CONTAINER -->
@@ -1013,6 +1228,7 @@ header {
     <button id="bNavFriends"><i class="fa-solid fa-user-plus"></i></button>
     <button id="bNavVideos"><i class="fa-solid fa-tv"></i></button>
     <button id="bNavGroups"><i class="fa-solid fa-users"></i></button>
+    <button id="bNavProfile"><i class="fa-solid fa-user"></i></button>
   </div>
 </div>
 
@@ -1021,7 +1237,20 @@ header {
 ======================================================= -->
 <script>
 const state = {
-  currentUser: { id: "u_101", name: "Oyantee Weah", handle: "@oyantee", avatar: "O" },
+  currentUser: {
+    id: "u_101",
+    name: "Oyantee Weah",
+    handle: "@oyantee",
+    avatar: "O",
+    profile: {
+      address: "",
+      workplace: "",
+      contact: "",
+      eduLevel: "",
+      school: "",
+      bio: ""
+    }
+  },
   users: [
     { id: "u_101", name: "Oyantee Weah", handle: "@oyantee", avatar: "O" },
     { id: "u_102", name: "Sarah Jenkins", handle: "@sjenkins", avatar: "S" },
@@ -1055,6 +1284,7 @@ const state = {
 };
 
 document.addEventListener('DOMContentLoaded', () => {
+  loadProfileFromStorage();
   bindAuthEvents();
   bindNavigationEvents();
   bindComposerEvents();
@@ -1063,6 +1293,7 @@ document.addEventListener('DOMContentLoaded', () => {
   bindFriendEvents();
   bindGroupEvents();
   bindVideoEvents();
+  bindProfileEvents();
   showApp();
 });
 
@@ -1073,6 +1304,7 @@ function showApp() {
   renderFriends();
   renderGroups();
   renderVideos();
+  renderProfile();
 }
 
 /* =========================================================
@@ -1084,10 +1316,12 @@ function bindNavigationEvents() {
     tabFriends: 'viewFriends',
     tabVideos: 'viewVideos',
     tabGroups: 'viewGroups',
+    tabProfile: 'viewProfile',
     bNavHome: 'viewHome',
     bNavFriends: 'viewFriends',
     bNavVideos: 'viewVideos',
-    bNavGroups: 'viewGroups'
+    bNavGroups: 'viewGroups',
+    bNavProfile: 'viewProfile'
   };
 
   Object.keys(tabs).forEach(btnId => {
@@ -1095,16 +1329,32 @@ function bindNavigationEvents() {
   });
 
   document.getElementById('brandLogoBtn')?.addEventListener('click', () => switchTab('viewHome'));
+
+  document.querySelectorAll('.currentUserAvatar').forEach(avatarEl => {
+    avatarEl.addEventListener('click', () => switchTab('viewProfile'));
+  });
 }
 
 function switchTab(viewId) {
-  ['viewHome', 'viewFriends', 'viewVideos', 'viewGroups'].forEach(id => {
+  ['viewHome', 'viewFriends', 'viewVideos', 'viewGroups', 'viewProfile'].forEach(id => {
     document.getElementById(id).classList.add('hidden');
   });
   document.getElementById(viewId).classList.remove('hidden');
 
-  const navMap = { viewHome: 'tabHome', viewFriends: 'tabFriends', viewVideos: 'tabVideos', viewGroups: 'tabGroups' };
-  const bNavMap = { viewHome: 'bNavHome', viewFriends: 'bNavFriends', viewVideos: 'bNavVideos', viewGroups: 'bNavGroups' };
+  const navMap = {
+    viewHome: 'tabHome',
+    viewFriends: 'tabFriends',
+    viewVideos: 'tabVideos',
+    viewGroups: 'tabGroups',
+    viewProfile: 'tabProfile'
+  };
+  const bNavMap = {
+    viewHome: 'bNavHome',
+    viewFriends: 'bNavFriends',
+    viewVideos: 'bNavVideos',
+    viewGroups: 'bNavGroups',
+    viewProfile: 'bNavProfile'
+  };
 
   document.querySelectorAll('.nav button, .bottom-nav button').forEach(btn => btn.classList.remove('active'));
   if (navMap[viewId]) document.getElementById(navMap[viewId])?.classList.add('active');
@@ -1154,14 +1404,14 @@ function bindComposerEvents() {
     newPost.innerHTML = `
       <div class="posthead">
         <div class="posthead-left">
-          <div class="avatar">${state.currentUser.avatar}</div>
+          <div class="avatar currentUserAvatar">${state.currentUser.avatar}</div>
           <div>
             <div class="post-author-name">${state.currentUser.name}</div>
             <div class="post-meta-line"><span>Just now</span> • <i class="fa-solid fa-cross"></i></div>
           </div>
         </div>
       </div>
-      <div class="postcontent">${content}</div>
+      <div class="post-content">${content}</div>
       <div class="actions">
         <button class="action-btn heart-btn" onclick="toggleHeart(this)"><i class="fa-solid fa-heart"></i> Support (<span>0</span>)</button>
         <button class="action-btn"><i class="fa-solid fa-comment"></i> Encourage</button>
@@ -1421,6 +1671,85 @@ function renderVideos() {
       </div>
     </div>
   `).join('');
+}
+
+/* =========================================================
+   9. RESTORED PROFILE & BIO MANAGEMENT
+========================================================= */
+function loadProfileFromStorage() {
+  try {
+    const saved = localStorage.getItem('believers_user_profile');
+    if (saved) {
+      const parsed = JSON.parse(saved);
+      state.currentUser.profile = { ...state.currentUser.profile, ...parsed };
+    }
+  } catch(e) {
+    console.error("Could not load profile from localStorage", e);
+  }
+}
+
+function saveProfileToStorage() {
+  try {
+    localStorage.setItem('believers_user_profile', JSON.stringify(state.currentUser.profile));
+  } catch(e) {
+    console.error("Could not save profile to localStorage", e);
+  }
+}
+
+function bindProfileEvents() {
+  const editBtn = document.getElementById('editProfileToggleBtn');
+  const cancelBtn = document.getElementById('cancelProfileBtn');
+  const saveBtn = document.getElementById('saveProfileBtn');
+  const viewPanel = document.getElementById('profileViewFields');
+  const editPanel = document.getElementById('profileEditFields');
+
+  editBtn?.addEventListener('click', () => {
+    // Populate form with current values
+    const p = state.currentUser.profile;
+    document.getElementById('editAddress').value = p.address || '';
+    document.getElementById('editWorkplace').value = p.workplace || '';
+    document.getElementById('editContact').value = p.contact || '';
+    document.getElementById('editEduLevel').value = p.eduLevel || '';
+    document.getElementById('editSchool').value = p.school || '';
+    document.getElementById('editBio').value = p.bio || '';
+
+    viewPanel.classList.add('hidden');
+    editPanel.classList.remove('hidden');
+  });
+
+  cancelBtn?.addEventListener('click', () => {
+    editPanel.classList.add('hidden');
+    viewPanel.classList.remove('hidden');
+  });
+
+  saveBtn?.addEventListener('click', () => {
+    state.currentUser.profile.address = document.getElementById('editAddress').value.trim();
+    state.currentUser.profile.workplace = document.getElementById('editWorkplace').value.trim();
+    state.currentUser.profile.contact = document.getElementById('editContact').value.trim();
+    state.currentUser.profile.eduLevel = document.getElementById('editEduLevel').value.trim();
+    state.currentUser.profile.school = document.getElementById('editSchool').value.trim();
+    state.currentUser.profile.bio = document.getElementById('editBio').value.trim();
+
+    saveProfileToStorage();
+    renderProfile();
+
+    editPanel.classList.add('hidden');
+    viewPanel.classList.remove('hidden');
+  });
+}
+
+function renderProfile() {
+  const p = state.currentUser.profile;
+
+  document.getElementById('profDisplayFullName').textContent = state.currentUser.name;
+  document.getElementById('profDisplayHandle').textContent = state.currentUser.handle;
+
+  document.getElementById('valAddress').textContent = p.address || "Not specified";
+  document.getElementById('valWorkplace').textContent = p.workplace || "Not specified";
+  document.getElementById('valContact').textContent = p.contact || "Not specified";
+  document.getElementById('valEduLevel').textContent = p.eduLevel || "Not specified";
+  document.getElementById('valSchool').textContent = p.school || "Not specified";
+  document.getElementById('valBio').textContent = p.bio || "Not specified";
 }
 </script>
 </body>
