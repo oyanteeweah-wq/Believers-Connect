@@ -1052,4 +1052,1037 @@ header {
 <div id="authView" class="auth-page">
   <div class="auth">
     <div class="auth-brand">
-      <div cla
+      <div class="auth-logo"><i class="fa-solid fa-cross"></i></div>
+      <div class="brand">Believers<span>+</span></div>
+    </div>
+    <div class="auth-card">
+      <form id="authForm">
+        <div id="nameField" class="form-group hidden">
+          <label>Full Name</label>
+          <input type="text" id="fullName" placeholder="Enter your name">
+        </div>
+        <div class="form-group">
+          <label>Email Address</label>
+          <input type="email" id="authEmail" required placeholder="name@example.com">
+        </div>
+        <div class="form-group">
+          <label>Password</label>
+          <input type="password" id="authPass" required placeholder="••••••••">
+        </div>
+        <button type="submit" class="btn btn-gold" id="authSubmitBtn">Log In</button>
+        <div id="authError" class="msg-error"></div>
+      </form>
+      <div class="divider"></div>
+      <button class="btn btn-outline" id="authToggleBtn" type="button">Create New Account</button>
+    </div>
+  </div>
+</div>
+
+<!-- Main App View -->
+<div id="mainAppView" class="hidden">
+  <header>
+    <div class="header-inner">
+      <div class="logo-area" onclick="switchTab('feed')">
+        <i class="fa-solid fa-cross logo-icon"></i>
+        <div class="logo">Believers<span>+</span></div>
+      </div>
+      <div class="header-actions">
+        <button class="header-circle-btn" onclick="openCreateModal()"><i class="fa-solid fa-plus"></i></button>
+        <button class="header-circle-btn" onclick="toggleSearchModal()"><i class="fa-solid fa-search"></i></button>
+        <button class="header-circle-btn" onclick="toggleNotifications()"><i class="fa-solid fa-bell"></i><span id="notifBadge" class="badge hidden">0</span></button>
+        <button class="header-circle-btn" onclick="toggleMenuDropdown()"><i class="fa-solid fa-bars"></i></button>
+
+        <!-- Notifications Dropdown -->
+        <div id="notifDropdown" class="notif-dropdown hidden">
+          <div class="notif-header">
+            <span>Notifications</span>
+            <button onclick="markAllNotificationsRead()">Mark all read</button>
+          </div>
+          <div id="notifList" class="notif-list"></div>
+        </div>
+
+        <!-- ☰ Menu Dropdown -->
+        <div id="menuDropdown" class="menu-dropdown hidden">
+          <div class="menu-list">
+            <button class="menu-item" onclick="switchTab('profile'); closeMenuDropdown();"><i class="fa-solid fa-user"></i> Profile</button>
+            <button class="menu-item" onclick="switchTab('groups'); closeMenuDropdown();"><i class="fa-solid fa-users"></i> Groups</button>
+            <button class="menu-item" onclick="switchTab('videos'); closeMenuDropdown();"><i class="fa-solid fa-video"></i> Videos</button>
+            <button class="menu-item" onclick="alert('Settings feature coming soon!'); closeMenuDropdown();"><i class="fa-solid fa-gear"></i> Settings</button>
+            <button class="menu-item" onclick="alert('For support, contact admin@believersplus.org'); closeMenuDropdown();"><i class="fa-solid fa-circle-question"></i> Help & Support</button>
+            <div class="divider" style="margin: 4px 0;"></div>
+            <button class="menu-item logout-menu-item" onclick="handleLogout()"><i class="fa-solid fa-right-from-bracket"></i> Log Out</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Navigation Tabs -->
+  <div class="nav-wrap">
+    <div class="nav">
+      <button id="tabFeed" class="active" onclick="switchTab('feed')"><i class="fa-solid fa-house"></i></button>
+      <button id="tabFriends" onclick="switchTab('friends')"><i class="fa-solid fa-user-group"></i></button>
+      <button id="tabGroups" onclick="switchTab('groups')"><i class="fa-solid fa-people-group"></i></button>
+      <button id="tabVideos" onclick="switchTab('videos')"><i class="fa-solid fa-play"></i></button>
+      <button id="tabProfile" onclick="switchTab('profile')"><i class="fa-solid fa-user-circle"></i></button>
+    </div>
+  </div>
+
+  <div class="wrap">
+    <!-- Search Bar Box (Toggleable) -->
+    <div id="searchModalBox" class="search-modal-box hidden">
+      <div class="search-input-wrapper">
+        <i class="fa-solid fa-search" style="color: var(--bp-muted);"></i>
+        <input type="text" id="searchInput" placeholder="Search posts, friends, groups..." oninput="handleSearch(this.value)">
+      </div>
+      <div id="searchResultsList" class="search-results-list"></div>
+    </div>
+
+    <!-- TAB 1: FEED -->
+    <div id="sectionFeed" class="app-section">
+      <!-- Composer Card -->
+      <div class="composer-card">
+        <div id="userAvatarSmall" class="avatar" onclick="switchTab('profile')">B+</div>
+        <div class="mind-button" onclick="openCreateModal()">What's on your heart today?</div>
+        <div class="photo-upload-btn" onclick="openCreateModal()">
+          <i class="fa-solid fa-image"></i>
+          <span>Photo</span>
+        </div>
+      </div>
+
+      <!-- Stories Container -->
+      <div class="stories-container">
+        <div class="stories-wrapper" id="storiesWrapper">
+          <!-- Dynamic Stories -->
+        </div>
+      </div>
+
+      <!-- Post Feed -->
+      <div id="postFeedContainer">
+        <!-- Dynamic Posts -->
+      </div>
+    </div>
+
+    <!-- TAB 2: FRIENDS -->
+    <div id="sectionFriends" class="app-section hidden">
+      <h3 style="margin: 14px 0 6px 0; font-size: 16px; color: var(--bp-primary);">People You May Know</h3>
+      <div id="friendsList" class="friends-list"></div>
+    </div>
+
+    <!-- TAB 3: GROUPS -->
+    <div id="sectionGroups" class="app-section hidden">
+      <h3 style="margin: 14px 0 6px 0; font-size: 16px; color: var(--bp-primary);">Faith Communities & Groups</h3>
+      <div id="groupsList" class="groups-list"></div>
+    </div>
+
+    <!-- TAB 4: VIDEOS -->
+    <div id="sectionVideos" class="app-section hidden">
+      <h3 style="margin: 14px 0 6px 0; font-size: 16px; color: var(--bp-primary);">Inspirational Sermons & Media</h3>
+      <div id="videosList"></div>
+    </div>
+
+    <!-- TAB 5: PROFILE -->
+    <div id="sectionProfile" class="app-section hidden">
+      <div class="profile-card">
+        <div id="profileCoverArea" class="profile-cover-area" style="background-image: url('');">
+          <label class="cover-upload-badge">
+            <i class="fa-solid fa-camera"></i> Edit Cover
+            <input type="file" accept="image/*" class="hidden" onchange="updateCoverPhoto(event)">
+          </label>
+        </div>
+        <div class="profile-header-content">
+          <div class="profile-avatar-wrapper">
+            <div id="profileAvatarLarge" class="profile-avatar-large">B+</div>
+            <label class="avatar-upload-badge">
+              <i class="fa-solid fa-camera"></i>
+              <input type="file" accept="image/*" class="hidden" onchange="updateAvatarPhoto(event)">
+            </label>
+          </div>
+          <h2 id="profileDisplayName" style="font-size: 20px; font-weight: 900; color: var(--bp-primary);">User Name</h2>
+          <p id="profileDisplayEmail" style="font-size: 13px; color: var(--bp-muted); margin-top: 2px;">email@example.com</p>
+        </div>
+      </div>
+
+      <div class="about-me-card">
+        <div class="about-me-header">
+          <h4 style="font-size: 15px; font-weight: 800; color: var(--bp-primary);">About Me</h4>
+          <button onclick="editBio()" style="font-size: 13px; color: var(--bp-gold); font-weight: 700;"><i class="fa-solid fa-pen"></i> Edit</button>
+        </div>
+        <p id="profileBioText" style="font-size: 14px; color: var(--bp-text);">Walking in faith, love, and grace every single day. Sharing light with the world.</p>
+      </div>
+
+      <h3 style="margin: 16px 0 10px 0; font-size: 16px; color: var(--bp-primary);">My Posts</h3>
+      <div id="myPostsContainer"></div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal Sheet for Creating Post -->
+<div id="createModalOverlay" class="modal-overlay hidden" onclick="if(event.target === this) closeCreateModal()">
+  <div class="modal-sheet">
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+      <h3 style="font-size: 16px; font-weight: 800; color: var(--bp-primary);">Create Post</h3>
+      <button onclick="closeCreateModal()" style="font-size: 18px; color: var(--bp-muted);"><i class="fa-solid fa-xmark"></i></button>
+    </div>
+    <textarea id="composerText" class="composer-textarea" placeholder="What is on your heart today, believer?"></textarea>
+    
+    <div id="composerPreviewBox" class="composer-preview-box hidden">
+      <button class="remove-media-btn" onclick="clearComposerMedia()"><i class="fa-solid fa-xmark"></i></button>
+      <div id="composerPreviewContent"></div>
+    </div>
+
+    <div class="composer-actions">
+      <label class="photo-upload-btn" style="cursor: pointer;">
+        <i class="fa-solid fa-image"></i>
+        <span>Add Photo/Video</span>
+        <input type="file" accept="image/*,video/*" class="hidden" onchange="handleComposerMediaUpload(event)">
+      </label>
+      <button class="btn btn-gold" style="width: auto; padding: 8px 20px;" onclick="submitNewPost()">Post</button>
+    </div>
+  </div>
+</div>
+
+<script>
+/* =========================================================
+   APPLICATION STATE & LOCAL STORAGE DATABASE
+========================================================= */
+const DB_KEYS = {
+  users: 'bp_users_v1',
+  currentUser: 'bp_current_user_v1',
+  posts: 'bp_posts_v1',
+  notifications: 'bp_notifs_v1',
+  friends: 'bp_friends_v1',
+  groups: 'bp_groups_v1',
+  videos: 'bp_videos_v1'
+};
+
+let currentUser = JSON.parse(localStorage.getItem(DB_KEYS.currentUser)) || null;
+let isRegistering = false;
+let uploadedMediaData = null;
+
+// Initial Seed Data if empty
+if (!localStorage.getItem(DB_KEYS.posts)) {
+  const seedPosts = [
+    {
+      id: 'p1',
+      authorEmail: 'pastor@believersplus.org',
+      authorName: 'Pastor David Mensah',
+      authorAvatar: '',
+      content: '“The Lord is my shepherd; I shall not want. He maketh me to lie down in green pastures: he leadeth me beside the still waters.” 🙏✨ Have a blessed and peaceful week ahead everyone!',
+      media: '',
+      mediaType: '',
+      timestamp: Date.now() - 3600000 * 2,
+      likes: ['user@example.com'],
+      comments: [
+        { id: 'c1', authorName: 'Sister Grace', text: 'Amen! Praise God for His unending grace.', timestamp: Date.now() - 3600000 }
+      ]
+    },
+    {
+      id: 'p2',
+      authorEmail: 'sarah@believersplus.org',
+      authorName: 'Sarah Jenkins',
+      authorAvatar: '',
+      content: 'Our youth fellowship outreach was an absolute success today! Thank you to everyone who donated food and clothing for our community drive. 💛',
+      media: '',
+      mediaType: '',
+      timestamp: Date.now() - 3600000 * 5,
+      likes: [],
+      comments: []
+    }
+  ];
+  localStorage.setItem(DB_KEYS.posts, JSON.stringify(seedPosts));
+}
+
+if (!localStorage.getItem(DB_KEYS.friends)) {
+  const seedFriends = [
+    { id: 'f1', name: 'Deacon John Cole', mutual: '12 mutual connections', avatar: '', status: 'connect' },
+    { id: 'f2', name: 'Mercy Johnson', mutual: '5 mutual connections', avatar: '', status: 'connect' },
+    { id: 'f3', name: 'Brother Samuel', mutual: '8 mutual connections', avatar: '', status: 'connect' }
+  ];
+  localStorage.setItem(DB_KEYS.friends, JSON.stringify(seedFriends));
+}
+
+if (!localStorage.getItem(DB_KEYS.groups)) {
+  const seedGroups = [
+    { id: 'g1', name: 'Daily Prayer & Intercession', members: '4.2K members', desc: 'Lifting each other up in constant prayer.' },
+    { id: 'g2', name: 'Scripture Study & Reflection', members: '2.8K members', desc: 'Deep diving into the Word of God together.' },
+    { id: 'g3', name: 'Worship & Choir Fellowship', members: '1.5K members', desc: 'Making a joyful noise unto the Lord.' }
+  ];
+  localStorage.setItem(DB_KEYS.groups, JSON.stringify(seedGroups));
+}
+
+if (!localStorage.getItem(DB_KEYS.videos)) {
+  const seedVideos = [
+    { id: 'v1', title: 'Sunday Worship Service - Walking in Divine Favor', duration: '1:12:45', url: 'https://www.w3schools.com/html/mov_bbb.mp4' },
+    { id: 'v2', title: 'Midweek Bible Study: Overcoming Fear with Faith', duration: '45:20', url: 'https://www.w3schools.com/html/mov_bbb.mp4' }
+  ];
+  localStorage.setItem(DB_KEYS.videos, JSON.stringify(seedVideos));
+}
+
+if (!localStorage.getItem(DB_KEYS.notifications)) {
+  const seedNotifs = [
+    { id: 'n1', text: 'Sister Grace commented on Pastor David’s post.', unread: true, time: '2h ago' },
+    { id: 'n2', text: 'Welcome to Believers+! Connect with your faith community.', unread: false, time: '1d ago' }
+  ];
+  localStorage.setItem(DB_KEYS.notifications, JSON.stringify(seedNotifs));
+}
+
+/* =========================================================
+   AUTHENTICATION LOGIC
+========================================================= */
+const authView = document.getElementById('authView');
+const mainAppView = document.getElementById('mainAppView');
+const authForm = document.getElementById('authForm');
+const authToggleBtn = document.getElementById('authToggleBtn');
+const authSubmitBtn = document.getElementById('authSubmitBtn');
+const nameField = document.getElementById('nameField');
+const fullNameInput = document.getElementById('fullName');
+const authEmailInput = document.getElementById('authEmail');
+const authPassInput = document.getElementById('authPass');
+const authError = document.getElementById('authError');
+
+authToggleBtn.addEventListener('click', () => {
+  isRegistering = !isRegistering;
+  if (isRegistering) {
+    nameField.classList.remove('hidden');
+    fullNameInput.required = true;
+    authSubmitBtn.textContent = 'Create Account';
+    authToggleBtn.textContent = 'Already have an account? Log In';
+  } else {
+    nameField.classList.add('hidden');
+    fullNameInput.required = false;
+    authSubmitBtn.textContent = 'Log In';
+    authToggleBtn.textContent = 'Create New Account';
+  }
+  authError.textContent = '';
+});
+
+authForm.addEventListener('submit', (e) => {
+  e.preventDefault();
+  const email = authEmailInput.value.trim().toLowerCase();
+  const pass = authPassInput.value.trim();
+  const name = fullNameInput.value.trim();
+
+  let users = JSON.parse(localStorage.getItem(DB_KEYS.users)) || [];
+
+  if (isRegistering) {
+    if (!name) {
+      authError.textContent = 'Please enter your full name.';
+      return;
+    }
+    const existing = users.find(u => u.email === email);
+    if (existing) {
+      authError.textContent = 'An account with this email already exists.';
+      return;
+    }
+    const newUser = {
+      name,
+      email,
+      pass,
+      bio: 'Walking in faith, love, and grace every single day.',
+      avatar: '',
+      cover: ''
+    };
+    users.push(newUser);
+    localStorage.setItem(DB_KEYS.users, JSON.stringify(users));
+    currentUser = newUser;
+  } else {
+    const found = users.find(u => u.email === email && u.pass === pass);
+    if (!found) {
+      // Demo fallback login if user was not explicitly registered in array
+      currentUser = {
+        name: email.split('@')[0],
+        email: email,
+        bio: 'Walking in faith, love, and grace every single day.',
+        avatar: '',
+        cover: ''
+      };
+    } else {
+      currentUser = found;
+    }
+  }
+
+  localStorage.setItem(DB_KEYS.currentUser, JSON.stringify(currentUser));
+  checkAuthState();
+});
+
+function handleLogout() {
+  localStorage.removeItem(DB_KEYS.currentUser);
+  currentUser = null;
+  closeMenuDropdown();
+  checkAuthState();
+}
+
+function checkAuthState() {
+  if (currentUser) {
+    authView.classList.add('hidden');
+    mainAppView.classList.remove('hidden');
+    initApp();
+  } else {
+    authView.classList.remove('hidden');
+    mainAppView.classList.add('hidden');
+    authForm.reset();
+    isRegistering = false;
+    nameField.classList.add('hidden');
+    authSubmitBtn.textContent = 'Log In';
+    authToggleBtn.textContent = 'Create New Account';
+    authError.textContent = '';
+  }
+}
+
+/* =========================================================
+   APPLICATION INITIALIZATION & RENDERING
+========================================================= */
+function initApp() {
+  updateUserUIElements();
+  renderFeed();
+  renderStories();
+  renderFriends();
+  renderGroups();
+  renderVideos();
+  renderProfile();
+  updateNotificationsBadge();
+}
+
+function updateUserUIElements() {
+  const initials = getInitials(currentUser.name);
+  ['userAvatarSmall', 'profileAvatarLarge'].forEach(id => {
+    const el = document.getElementById(id);
+    if (el) {
+      if (currentUser.avatar) {
+        el.style.backgroundImage = `url('${currentUser.avatar}')`;
+        el.textContent = '';
+      } else {
+        el.style.backgroundImage = '';
+        el.textContent = initials;
+      }
+    }
+  });
+
+  const coverEl = document.getElementById('profileCoverArea');
+  if (coverEl && currentUser.cover) {
+    coverEl.style.backgroundImage = `url('${currentUser.cover}')`;
+  }
+
+  const nameEl = document.getElementById('profileDisplayName');
+  if (nameEl) nameEl.textContent = currentUser.name;
+
+  const emailEl = document.getElementById('profileDisplayEmail');
+  if (emailEl) emailEl.textContent = currentUser.email;
+
+  const bioEl = document.getElementById('profileBioText');
+  if (bioEl) bioEl.textContent = currentUser.bio || 'Walking in faith, love, and grace every single day.';
+}
+
+function getInitials(name) {
+  if (!name) return 'B+';
+  const parts = name.trim().split(' ');
+  if (parts.length >= 2) {
+    return (parts[0][0] + parts[1][0]).toUpperCase();
+  }
+  return name.substring(0, 2).toUpperCase();
+}
+
+/* Tab Navigation Switcher */
+function switchTab(tabName) {
+  ['Feed', 'Friends', 'Groups', 'Videos', 'Profile'].forEach(t => {
+    const section = document.getElementById('section' + t);
+    const btn = document.getElementById('tab' + t);
+    if (section && btn) {
+      if (t.toLowerCase() === tabName) {
+        section.classList.remove('hidden');
+        btn.classList.add('active');
+      } else {
+        section.classList.add('hidden');
+        btn.classList.remove('active');
+      }
+    }
+  });
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+/* Header Dropdowns & Toggles */
+function toggleMenuDropdown() {
+  const dropdown = document.getElementById('menuDropdown');
+  const notifDropdown = document.getElementById('notifDropdown');
+  if (notifDropdown) notifDropdown.classList.add('hidden');
+  if (dropdown) dropdown.classList.toggle('hidden');
+}
+
+function closeMenuDropdown() {
+  const dropdown = document.getElementById('menuDropdown');
+  if (dropdown) dropdown.classList.add('hidden');
+}
+
+function toggleNotifications() {
+  const dropdown = document.getElementById('notifDropdown');
+  const menuDropdown = document.getElementById('menuDropdown');
+  if (menuDropdown) menuDropdown.classList.add('hidden');
+  if (dropdown) {
+    dropdown.classList.toggle('hidden');
+    if (!dropdown.classList.contains('hidden')) {
+      renderNotificationsList();
+    }
+  }
+}
+
+function toggleSearchModal() {
+  const box = document.getElementById('searchModalBox');
+  if (box) {
+    box.classList.toggle('hidden');
+    if (!box.classList.contains('hidden')) {
+      document.getElementById('searchInput').focus();
+    }
+  }
+}
+
+// Close dropdowns on outside click
+window.addEventListener('click', (e) => {
+  if (!e.target.closest('.header-actions')) {
+    const menuDropdown = document.getElementById('menuDropdown');
+    const notifDropdown = document.getElementById('notifDropdown');
+    if (menuDropdown) menuDropdown.classList.add('hidden');
+    if (notifDropdown) notifDropdown.classList.add('hidden');
+  }
+});
+
+/* =========================================================
+   STORIES RENDERING
+========================================================= */
+function renderStories() {
+  const wrapper = document.getElementById('storiesWrapper');
+  if (!wrapper) return;
+
+  const mockStories = [
+    { name: 'Create Story', isCreate: true },
+    { name: 'Pastor David', img: 'https://images.unsplash.com/photo-1544717305-2782549b5136?w=200&auto=format&fit=crop&q=60' },
+    { name: 'Sarah Jenkins', img: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=200&auto=format&fit=crop&q=60' },
+    { name: 'Deacon John', img: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=200&auto=format&fit=crop&q=60' },
+    { name: 'Worship Team', img: 'https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=200&auto=format&fit=crop&q=60' }
+  ];
+
+  let html = '';
+  mockStories.forEach((st, idx) => {
+    if (st.isCreate) {
+      const initials = getInitials(currentUser.name);
+      html += `
+        <div class="story-card create-story" onclick="openCreateModal()">
+          <div class="top-img" style="background-image: url('${currentUser.avatar || ''}');">
+            ${!currentUser.avatar ? `<div style="display:grid; place-items:center; height:100%; font-weight:800; font-size:18px; color:var(--bp-primary);">${initials}</div>` : ''}
+            <div class="plus-btn"><i class="fa-solid fa-plus"></i></div>
+          </div>
+          <div class="bottom-text">Create Story</div>
+        </div>
+      `;
+    } else {
+      html += `
+        <div class="story-card" onclick="alert('Viewing story by ${st.name}')">
+          <img src="${st.img}" class="bg-story" alt="Story">
+          <div class="story-overlay"></div>
+          <div class="story-author">${st.name}</div>
+        </div>
+      `;
+    }
+  });
+  wrapper.innerHTML = html;
+}
+
+/* =========================================================
+   POST FEED & INTERACTIONS
+========================================================= */
+function renderFeed() {
+  const container = document.getElementById('postFeedContainer');
+  if (!container) return;
+
+  const posts = JSON.parse(localStorage.getItem(DB_KEYS.posts)) || [];
+  if (posts.length === 0) {
+    container.innerHTML = `<div class="card" style="text-align:center; color:var(--bp-muted); padding:30px;">No posts yet. Be the first to share something on your heart!</div>`;
+    return;
+  }
+
+  let html = '';
+  posts.forEach(post => {
+    const isLiked = post.likes && post.likes.includes(currentUser.email);
+    const likeCount = post.likes ? post.likes.length : 0;
+    const commentCount = post.comments ? post.comments.length : 0;
+    const timeAgo = getTimeAgo(post.timestamp);
+    const authorInitials = getInitials(post.authorName);
+
+    html += `
+      <div class="card" data-post-id="${post.id}">
+        <div class="posthead">
+          <div class="posthead-left">
+            <div class="avatar" style="width:38px; height:38px; font-size:14px;">${authorInitials}</div>
+            <div>
+              <div class="post-author-name">${post.authorName}</div>
+              <div class="post-meta-line">
+                <span>${timeAgo}</span>
+                <span>•</span>
+                <i class="fa-solid fa-earth-americas" style="font-size:10px;"></i>
+              </div>
+            </div>
+          </div>
+          ${post.authorEmail === currentUser.email ? `<button onclick="deletePost('${post.id}')" style="color:var(--bp-muted);"><i class="fa-solid fa-trash-can" style="font-size:13px;"></i></button>` : ''}
+        </div>
+
+        <div class="post-content">${escapeHtml(post.content)}</div>
+
+        ${post.media ? `
+          <div class="post-media-attachment">
+            ${post.mediaType === 'video' ? `<video src="${post.media}" controls></video>` : `<img src="${post.media}" alt="Post attachment">`}
+          </div>
+        ` : ''}
+
+        <div class="actions">
+          <button class="action-btn ${isLiked ? 'liked' : ''}" onclick="toggleLikePost('${post.id}')">
+            <i class="${isLiked ? 'fa-solid' : 'fa-regular'} fa-heart"></i>
+            <span>${likeCount > 0 ? likeCount : 'Like'}</span>
+          </button>
+          <button class="action-btn" onclick="toggleCommentsSection('${post.id}')">
+            <i class="fa-regular fa-comment"></i>
+            <span>${commentCount > 0 ? commentCount : 'Comment'}</span>
+          </button>
+          <button class="action-btn" onclick="sharePost('${post.id}')">
+            <i class="fa-solid fa-share"></i>
+            <span>Share</span>
+          </button>
+        </div>
+
+        <!-- Comments Section (Collapsible/Inline) -->
+        <div id="commentsSection-${post.id}" class="comments-section hidden">
+          <div class="comments-list" id="commentsList-${post.id}">
+            ${renderCommentsList(post.comments)}
+          </div>
+          <div class="comment-input-wrap">
+            <div class="avatar" style="width:30px; height:30px; font-size:11px;">${getInitials(currentUser.name)}</div>
+            <input type="text" id="commentInput-${post.id}" placeholder="Write a comment..." onkeydown="if(event.key==='Enter') submitComment('${post.id}')">
+            <button class="btn btn-gold" style="width:auto; padding:6px 12px; font-size:12px;" onclick="submitComment('${post.id}')">Post</button>
+          </div>
+        </div>
+      </div>
+    `;
+  });
+  container.innerHTML = html;
+  renderMyPosts();
+}
+
+function renderCommentsList(comments) {
+  if (!comments || comments.length === 0) return '<div style="font-size:12px; color:var(--bp-muted); text-align:center;">No comments yet.</div>';
+  return comments.map(c => `
+    <div class="comment-item">
+      <div class="avatar" style="width:26px; height:26px; font-size:10px;">${getInitials(c.authorName)}</div>
+      <div style="flex:1;">
+        <div class="comment-author">${c.authorName}</div>
+        <div class="comment-text">${escapeHtml(c.text)}</div>
+      </div>
+    </div>
+  `).join('');
+}
+
+function toggleLikePost(postId) {
+  let posts = JSON.parse(localStorage.getItem(DB_KEYS.posts)) || [];
+  posts = posts.map(p => {
+    if (p.id === postId) {
+      if (!p.likes) p.likes = [];
+      const idx = p.likes.indexOf(currentUser.email);
+      if (idx > -1) {
+        p.likes.splice(idx, 1);
+      } else {
+        p.likes.push(currentUser.email);
+      }
+    }
+    return p;
+  });
+  localStorage.setItem(DB_KEYS.posts, JSON.stringify(posts));
+  renderFeed();
+}
+
+function toggleCommentsSection(postId) {
+  const sec = document.getElementById(`commentsSection-${postId}`);
+  if (sec) {
+    sec.classList.toggle('hidden');
+    if (!sec.classList.contains('hidden')) {
+      const input = document.getElementById(`commentInput-${postId}`);
+      if (input) input.focus();
+    }
+  }
+}
+
+function submitComment(postId) {
+  const input = document.getElementById(`commentInput-${postId}`);
+  if (!input) return;
+  const text = input.value.trim();
+  if (!text) return;
+
+  let posts = JSON.parse(localStorage.getItem(DB_KEYS.posts)) || [];
+  posts = posts.map(p => {
+    if (p.id === postId) {
+      if (!p.comments) p.comments = [];
+      p.comments.push({
+        id: 'c_' + Date.now(),
+        authorName: currentUser.name,
+        authorEmail: currentUser.email,
+        text: text,
+        timestamp: Date.now()
+      });
+    }
+    return p;
+  });
+  localStorage.setItem(DB_KEYS.posts, JSON.stringify(posts));
+  input.value = '';
+  renderFeed();
+  // Keep comments section open after submission
+  const sec = document.getElementById(`commentsSection-${postId}`);
+  if (sec) sec.classList.remove('hidden');
+}
+
+function sharePost(postId) {
+  if (navigator.share) {
+    navigator.share({
+      title: 'Believers+ Post',
+      text: 'Check out this inspiring post on Believers+!',
+      url: window.location.href
+    }).catch(() => {});
+  } else {
+    alert('Post link copied to clipboard!');
+  }
+}
+
+function deletePost(postId) {
+  if (!confirm('Are you sure you want to delete this post?')) return;
+  let posts = JSON.parse(localStorage.getItem(DB_KEYS.posts)) || [];
+  posts = posts.filter(p => p.id !== postId);
+  localStorage.setItem(DB_KEYS.posts, JSON.stringify(posts));
+  renderFeed();
+}
+
+/* =========================================================
+   COMPOSER MODAL & MEDIA UPLOADS
+========================================================= */
+function openCreateModal() {
+  const modal = document.getElementById('createModalOverlay');
+  if (modal) modal.classList.remove('hidden');
+}
+
+function closeCreateModal() {
+  const modal = document.getElementById('createModalOverlay');
+  if (modal) modal.classList.add('hidden');
+  document.getElementById('composerText').value = '';
+  clearComposerMedia();
+}
+
+function handleComposerMediaUpload(event) {
+  const file = event.target.files[0];
+  if (!file) return;
+
+  const reader = new FileReader();
+  reader.onload = function(e) {
+    uploadedMediaData = {
+      url: e.target.result,
+      type: file.type.startsWith('video') ? 'video' : 'image'
+    };
+    const previewBox = document.getElementById('composerPreviewBox');
+    const previewContent = document.getElementById('composerPreviewContent');
+    if (previewBox && previewContent) {
+      previewBox.classList.remove('hidden');
+      if (uploadedMediaData.type === 'video') {
+        previewContent.innerHTML = `<video src="${uploadedMediaData.url}" controls></video>`;
+      } else {
+        previewContent.innerHTML = `<img src="${uploadedMediaData.url}" alt="Preview">`;
+      }
+    }
+  };
+  reader.readAsDataURL(file);
+}
+
+function clearComposerMedia() {
+  uploadedMediaData = null;
+  const previewBox = document.getElementById('composerPreviewBox');
+  const previewContent = document.getElementById('composerPreviewContent');
+  if (previewBox && previewContent) {
+    previewBox.classList.add('hidden');
+    previewContent.innerHTML = '';
+  }
+}
+
+function submitNewPost() {
+  const text = document.getElementById('composerText').value.trim();
+  if (!text && !uploadedMediaData) {
+    alert('Please write something or attach a photo/video.');
+    return;
+  }
+
+  let posts = JSON.parse(localStorage.getItem(DB_KEYS.posts)) || [];
+  const newPost = {
+    id: 'post_' + Date.now(),
+    authorEmail: currentUser.email,
+    authorName: currentUser.name,
+    authorAvatar: currentUser.avatar || '',
+    content: text,
+    media: uploadedMediaData ? uploadedMediaData.url : '',
+    mediaType: uploadedMediaData ? uploadedMediaData.type : '',
+    timestamp: Date.now(),
+    likes: [],
+    comments: []
+  };
+
+  posts.unshift(newPost);
+  localStorage.setItem(DB_KEYS.posts, JSON.stringify(posts));
+  closeCreateModal();
+  renderFeed();
+}
+
+/* =========================================================
+   FRIENDS, GROUPS & VIDEOS TABS RENDERING
+========================================================= */
+function renderFriends() {
+  const list = document.getElementById('friendsList');
+  if (!list) return;
+  const friends = JSON.parse(localStorage.getItem(DB_KEYS.friends)) || [];
+  
+  list.innerHTML = friends.map(f => `
+    <div class="friend-card">
+      <div class="friend-info">
+        <div class="avatar">${getInitials(f.name)}</div>
+        <div>
+          <div style="font-weight:800; font-size:14px; color:var(--bp-primary);">${f.name}</div>
+          <div style="font-size:12px; color:var(--bp-muted);">${f.mutual}</div>
+        </div>
+      </div>
+      <button class="btn btn-gold btn-sm" onclick="alert('Friend request sent to ${f.name}!')">Connect</button>
+    </div>
+  `).join('');
+}
+
+function renderGroups() {
+  const list = document.getElementById('groupsList');
+  if (!list) return;
+  const groups = JSON.parse(localStorage.getItem(DB_KEYS.groups)) || [];
+
+  list.innerHTML = groups.map(g => `
+    <div class="group-card">
+      <div class="group-info" style="align-items:flex-start;">
+        <div class="avatar" style="border-radius:10px; background:var(--bp-primary); color:var(--bp-gold);"><i class="fa-solid fa-users"></i></div>
+        <div>
+          <div style="font-weight:800; font-size:14px; color:var(--bp-primary);">${g.name}</div>
+          <div style="font-size:12px; color:var(--bp-muted);">${g.members}</div>
+          <div style="font-size:13px; color:var(--bp-text); margin-top:4px;">${g.desc}</div>
+        </div>
+      </div>
+      <button class="btn btn-outline btn-sm" onclick="this.textContent = this.textContent === 'Joined' ? 'Join' : 'Joined'; this.classList.toggle('btn-gold');">Join</button>
+    </div>
+  `).join('');
+}
+
+function renderVideos() {
+  const list = document.getElementById('videosList');
+  if (!list) return;
+  const videos = JSON.parse(localStorage.getItem(DB_KEYS.videos)) || [];
+
+  list.innerHTML = videos.map(v => `
+    <div class="video-card">
+      <div class="video-container">
+        <video src="${v.url}" controls></video>
+      </div>
+      <div class="video-info">
+        <h4 style="font-size:14px; font-weight:800; color:var(--bp-primary);">${v.title}</h4>
+        <div style="font-size:12px; color:var(--bp-muted); margin-top:2px;">Duration: ${v.duration}</div>
+      </div>
+    </div>
+  `).join('');
+}
+
+/* =========================================================
+   PROFILE MANAGEMENT & EDITING
+========================================================= */
+function renderProfile() {
+  updateUserUIElements();
+  renderMyPosts();
+}
+
+function renderMyPosts() {
+  const container = document.getElementById('myPostsContainer');
+  if (!container) return;
+
+  const posts = JSON.parse(localStorage.getItem(DB_KEYS.posts)) || [];
+  const myPosts = posts.filter(p => p.authorEmail === currentUser.email);
+
+  if (myPosts.length === 0) {
+    container.innerHTML = `<div class="card" style="text-align:center; color:var(--bp-muted); padding:20px; font-size:13px;">You haven't posted anything yet.</div>`;
+    return;
+  }
+
+  let html = '';
+  myPosts.forEach(post => {
+    html += `
+      <div class="card">
+        <div class="posthead">
+          <div class="posthead-left">
+            <div class="avatar" style="width:34px; height:34px; font-size:12px;">${getInitials(post.authorName)}</div>
+            <div>
+              <div class="post-author-name">${post.authorName}</div>
+              <div class="post-meta-line"><span>${getTimeAgo(post.timestamp)}</span></div>
+            </div>
+          </div>
+          <button onclick="deletePost('${post.id}')" style="color:var(--bp-muted);"><i class="fa-solid fa-trash-can" style="font-size:13px;"></i></button>
+        </div>
+        <div class="post-content">${escapeHtml(post.content)}</div>
+        ${post.media ? `<div class="post-media-attachment">${post.mediaType === 'video' ? `<video src="${post.media}" controls></video>` : `<img src="${post.media}" alt="Media">`}</div>` : ''}
+      </div>
+    `;
+  });
+  container.innerHTML = html;
+}
+
+function editBio() {
+  const newBio = prompt('Update your bio:', currentUser.bio || '');
+  if (newBio !== null) {
+    currentUser.bio = newBio.trim();
+    saveUserDataChanges();
+  }
+}
+
+function updateAvatarPhoto(event) {
+  const file = event.target.files[0];
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onload = function(e) {
+    currentUser.avatar = e.target.result;
+    saveUserDataChanges();
+  };
+  reader.readAsDataURL(file);
+}
+
+function updateCoverPhoto(event) {
+  const file = event.target.files[0];
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onload = function(e) {
+    currentUser.cover = e.target.result;
+    saveUserDataChanges();
+  };
+  reader.readAsDataURL(file);
+}
+
+function saveUserDataChanges() {
+  localStorage.setItem(DB_KEYS.currentUser, JSON.stringify(currentUser));
+  let users = JSON.parse(localStorage.getItem(DB_KEYS.users)) || [];
+  users = users.map(u => u.email === currentUser.email ? currentUser : u);
+  localStorage.setItem(DB_KEYS.users, JSON.stringify(users));
+  initApp();
+}
+
+/* =========================================================
+   SEARCH & NOTIFICATIONS LOGIC
+========================================================= */
+function handleSearch(query) {
+  const list = document.getElementById('searchResultsList');
+  if (!list) return;
+  const q = query.trim().toLowerCase();
+  if (!q) {
+    list.innerHTML = '';
+    return;
+  }
+
+  const posts = JSON.parse(localStorage.getItem(DB_KEYS.posts)) || [];
+  const matchedPosts = posts.filter(p => p.content.toLowerCase().includes(q) || p.authorName.toLowerCase().includes(q));
+
+  if (matchedPosts.length === 0) {
+    list.innerHTML = `<div style="padding:10px; font-size:13px; color:var(--bp-muted); text-align:center;">No results found for "${query}"</div>`;
+    return;
+  }
+
+  list.innerHTML = matchedPosts.map(p => `
+    <div class="search-item" onclick="switchTab('feed'); toggleSearchModal();">
+      <div>
+        <div style="font-weight:800; font-size:13px; color:var(--bp-primary);">${p.authorName}</div>
+        <div style="font-size:12px; color:var(--bp-muted); white-space:nowrap; overflow:hidden; text-overflow:ellipsis; max-width:240px;">${escapeHtml(p.content)}</div>
+      </div>
+      <i class="fa-solid fa-chevron-right" style="font-size:12px; color:var(--bp-muted);"></i>
+    </div>
+  `).join('');
+}
+
+function renderNotificationsList() {
+  const list = document.getElementById('notifList');
+  if (!list) return;
+  const notifs = JSON.parse(localStorage.getItem(DB_KEYS.notifications)) || [];
+
+  if (notifs.length === 0) {
+    list.innerHTML = `<div style="padding:16px; text-align:center; font-size:13px; color:var(--bp-muted);">No notifications</div>`;
+    return;
+  }
+
+  list.innerHTML = notifs.map(n => `
+    <div class="notif-item ${n.unread ? 'unread' : ''}" onclick="markNotificationRead('${n.id}')">
+      <div class="avatar" style="width:32px; height:32px; font-size:12px;"><i class="fa-solid fa-bell"></i></div>
+      <div style="flex:1;">
+        <div style="font-size:13px; color:var(--bp-text);">${n.text}</div>
+        <div style="font-size:11px; color:var(--bp-muted); margin-top:2px;">${n.time}</div>
+      </div>
+    </div>
+  `).join('');
+}
+
+function updateNotificationsBadge() {
+  const notifs = JSON.parse(localStorage.getItem(DB_KEYS.notifications)) || [];
+  const unreadCount = notifs.filter(n => n.unread).length;
+  const badge = document.getElementById('notifBadge');
+  if (badge) {
+    if (unreadCount > 0) {
+      badge.textContent = unreadCount;
+      badge.classList.remove('hidden');
+    } else {
+      badge.classList.add('hidden');
+    }
+  }
+}
+
+function markNotificationRead(id) {
+  let notifs = JSON.parse(localStorage.getItem(DB_KEYS.notifications)) || [];
+  notifs = notifs.map(n => n.id === id ? { ...n, unread: false } : n);
+  localStorage.setItem(DB_KEYS.notifications, JSON.stringify(notifs));
+  renderNotificationsList();
+  updateNotificationsBadge();
+}
+
+function markAllNotificationsRead() {
+  let notifs = JSON.parse(localStorage.getItem(DB_KEYS.notifications)) || [];
+  notifs = notifs.map(n => ({ ...n, unread: false }));
+  localStorage.setItem(DB_KEYS.notifications, JSON.stringify(notifs));
+  renderNotificationsList();
+  updateNotificationsBadge();
+}
+
+/* =========================================================
+   UTILITIES
+========================================================= */
+function getTimeAgo(timestamp) {
+  const seconds = Math.floor((Date.now() - timestamp) / 1000);
+  if (seconds < 60) return 'Just now';
+  const minutes = Math.floor(seconds / 60);
+  if (minutes < 60) return `${minutes}m ago`;
+  const hours = Math.floor(minutes / 60);
+  if (hours < 24) return `${hours}h ago`;
+  const days = Math.floor(hours / 24);
+  return `${days}d ago`;
+}
+
+function escapeHtml(text) {
+  if (!text) return '';
+  return text
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#039;");
+}
+
+// On page load
+window.addEventListener('DOMContentLoaded', () => {
+  checkAuthState();
+});
+</script>
+
+</body>
+</html>
