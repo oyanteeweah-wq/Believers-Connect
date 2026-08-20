@@ -25,11 +25,11 @@ html {
 }
 
 :root {
-  --bp-primary: #0d1b2a;       /* Deep Sapphire */
-  --bp-accent: #1b263b;        /* Midnight Blue */
-  --bp-gold: #e0a96d;          /* Radiant Gold */
+  --bp-primary: #0d1b2a;        /* Deep Sapphire */
+  --bp-accent: #1b263b;         /* Midnight Blue */
+  --bp-gold: #e0a96d;           /* Radiant Gold */
   --bp-gold-hover: #c89355;
-  --bp-bg: #f4f6f9;            /* Soft Pearl White */
+  --bp-bg: #f4f6f9;             /* Soft Pearl White */
   --bp-card-bg: #ffffff;
   --bp-text: #1b1e23;
   --bp-muted: #6c757d;
@@ -1038,48 +1038,129 @@ header {
   margin-bottom: 12px;
 }
 
-.about-me-header {
+.about-me-title {
+  font-size: 15px;
+  font-weight: 800;
+  color: var(--bp-primary);
+  margin-bottom: 12px;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: 14px;
+}
+
+.about-info-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 10px;
+}
+
+.about-info-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 13px;
+  color: var(--bp-text);
+}
+
+.about-info-item i {
+  color: var(--bp-gold);
+  width: 18px;
+  text-align: center;
+}
+
+.profile-stats-row {
+  display: flex;
+  justify-content: space-around;
+  border-top: 1px solid var(--bp-border);
+  border-bottom: 1px solid var(--bp-border);
+  padding: 10px 0;
+  margin: 12px 0;
+}
+
+.stat-item {
+  text-align: center;
+}
+
+.stat-num {
+  font-weight: 800;
+  font-size: 16px;
+  color: var(--bp-primary);
+}
+
+.stat-label {
+  font-size: 11px;
+  color: var(--bp-muted);
+  text-transform: uppercase;
 }
 </style>
 </head>
 <body>
 
-<!-- Authentication View -->
+<!-- =========================================================
+   1. AUTHENTICATION VIEW (LOGIN & REGISTRATION)
+========================================================= -->
 <div id="authView" class="auth-page">
   <div class="auth">
     <div class="auth-brand">
-      <div class="auth-logo"><i class="fa-solid fa-cross"></i></div>
+      <div class="auth-logo"><i class="fa-solid font-awesome-logo-full"></i><i class="fa-solid fa-cross"></i></div>
       <div class="brand">Believers<span>+</span></div>
+      <p style="font-size:13px; color:#a0aec0; margin-top:4px;">Connecting Believers Worldwide</p>
     </div>
-    <div class="auth-card">
-      <form id="authForm">
-        <div id="nameField" class="form-group hidden">
-          <label>Full Name</label>
-          <input type="text" id="fullName" placeholder="Enter your name">
-        </div>
-        <div class="form-group">
-          <label>Email Address</label>
-          <input type="email" id="authEmail" required placeholder="name@example.com">
-        </div>
-        <div class="form-group">
-          <label>Password</label>
-          <input type="password" id="authPass" required placeholder="••••••••">
-        </div>
-        <button type="submit" class="btn btn-gold" id="authSubmitBtn">Log In</button>
-        <div id="authError" class="msg-error"></div>
-      </form>
+
+    <!-- LOGIN FORM CARD -->
+    <div id="loginCard" class="auth-card">
+      <h2 style="font-size:18px; font-weight:800; color:var(--bp-primary); margin-bottom:16px; text-align:center;">Log In to Believers+</h2>
+      <div class="form-group">
+        <label>Email</label>
+        <input type="email" id="loginEmail" placeholder="you@example.com" />
+      </div>
+      <div class="form-group">
+        <label>Password</label>
+        <input type="password" id="loginPassword" placeholder="••••••••" />
+      </div>
+      <button class="btn btn-gold" onclick="handleLogin()" style="margin-top:10px;">
+        <i class="fa-solid fa-right-to-bracket"></i> Log In
+      </button>
+      <div id="loginError" class="msg-error"></div>
       <div class="divider"></div>
-      <button class="btn btn-outline" id="authToggleBtn" type="button">Create New Account</button>
+      <button class="btn btn-outline" onclick="toggleAuthMode('register')">
+        Create New Account
+      </button>
+    </div>
+
+    <!-- REGISTRATION FORM CARD -->
+    <div id="registerCard" class="auth-card hidden">
+      <h2 style="font-size:18px; font-weight:800; color:var(--bp-primary); margin-bottom:16px; text-align:center;">Join Believers+</h2>
+      <div class="form-group">
+        <label>Full Name</label>
+        <input type="text" id="regName" placeholder="e.g. John Doe" />
+      </div>
+      <div class="form-group">
+        <label>Email</label>
+        <input type="email" id="regEmail" placeholder="you@example.com" />
+      </div>
+      <div class="form-group">
+        <label>Password</label>
+        <input type="password" id="regPassword" placeholder="Minimum 6 characters" />
+      </div>
+      <button class="btn btn-gold" onclick="handleRegister()" style="margin-top:10px;">
+        <i class="fa-solid fa-user-plus"></i> Create Account
+      </button>
+      <div id="registerError" class="msg-error"></div>
+      <div class="divider"></div>
+      <button class="btn btn-outline" onclick="toggleAuthMode('login')">
+        Already have an account? Log In
+      </button>
     </div>
   </div>
 </div>
 
-<!-- Main App View -->
-<div id="mainAppView" class="hidden">
+<!-- =========================================================
+   2. MAIN APPLICATION VIEW
+========================================================= -->
+<div id="appView" class="hidden">
+  
+  <!-- STICKY TOP HEADER -->
   <header>
     <div class="header-inner">
       <div class="logo-area" onclick="switchTab('feed')">
@@ -1087,1002 +1168,1188 @@ header {
         <div class="logo">Believers<span>+</span></div>
       </div>
       <div class="header-actions">
-        <button class="header-circle-btn" onclick="openCreateModal()"><i class="fa-solid fa-plus"></i></button>
-        <button class="header-circle-btn" onclick="toggleSearchModal()"><i class="fa-solid fa-search"></i></button>
-        <button class="header-circle-btn" onclick="toggleNotifications()"><i class="fa-solid fa-bell"></i><span id="notifBadge" class="badge hidden">0</span></button>
-        <button class="header-circle-btn" onclick="toggleMenuDropdown()"><i class="fa-solid fa-bars"></i></button>
+        <button class="header-circle-btn" onclick="toggleSearchModal()">
+          <i class="fa-solid fa-magnifying-glass"></i>
+        </button>
+        <button class="header-circle-btn" onclick="toggleNotifications()">
+          <i class="fa-solid fa-bell"></i>
+          <span id="notifBadge" class="badge hidden">0</span>
+        </button>
+        <!-- FACEBOOK-STYLE ☰ MENU BUTTON -->
+        <button class="header-circle-btn" onclick="toggleHeaderMenu()">
+          <i class="fa-solid fa-bars"></i>
+        </button>
+      </div>
+    </div>
 
-        <!-- Notifications Dropdown -->
-        <div id="notifDropdown" class="notif-dropdown hidden">
-          <div class="notif-header">
-            <span>Notifications</span>
-            <button onclick="markAllNotificationsRead()">Mark all read</button>
-          </div>
-          <div id="notifList" class="notif-list"></div>
-        </div>
+    <!-- FACEBOOK-STYLE ☰ DROPDOWN MENU -->
+    <div id="headerMenuDropdown" class="menu-dropdown hidden">
+      <div class="menu-list">
+        <button class="menu-item" onclick="switchTab('profile'); closeHeaderMenu();">
+          <i class="fa-solid fa-user"></i> View Profile
+        </button>
+        <button class="menu-item" onclick="switchTab('friends'); closeHeaderMenu();">
+          <i class="fa-solid fa-user-group"></i> Friends
+        </button>
+        <button class="menu-item" onclick="switchTab('groups'); closeHeaderMenu();">
+          <i class="fa-solid fa-people-group"></i> Groups & Fellowship
+        </button>
+        <button class="menu-item" onclick="switchTab('videos'); closeHeaderMenu();">
+          <i class="fa-solid fa-video"></i> Watch Sermons
+        </button>
+        <button class="menu-item" onclick="openEditProfileModal(); closeHeaderMenu();">
+          <i class="fa-solid fa-pen-to-square"></i> Edit Profile
+        </button>
+        <div class="divider" style="margin: 4px 0;"></div>
+        <button class="menu-item logout-menu-item" onclick="handleLogout()">
+          <i class="fa-solid fa-right-from-bracket"></i> Log Out
+        </button>
+      </div>
+    </div>
 
-        <!-- ☰ Menu Dropdown -->
-        <div id="menuDropdown" class="menu-dropdown hidden">
-          <div class="menu-list">
-            <button class="menu-item" onclick="switchTab('profile'); closeMenuDropdown();"><i class="fa-solid fa-user"></i> Profile</button>
-            <button class="menu-item" onclick="switchTab('groups'); closeMenuDropdown();"><i class="fa-solid fa-users"></i> Groups</button>
-            <button class="menu-item" onclick="switchTab('videos'); closeMenuDropdown();"><i class="fa-solid fa-video"></i> Videos</button>
-            <button class="menu-item" onclick="alert('Settings feature coming soon!'); closeMenuDropdown();"><i class="fa-solid fa-gear"></i> Settings</button>
-            <button class="menu-item" onclick="alert('For support, contact admin@believersplus.org'); closeMenuDropdown();"><i class="fa-solid fa-circle-question"></i> Help & Support</button>
-            <div class="divider" style="margin: 4px 0;"></div>
-            <button class="menu-item logout-menu-item" onclick="handleLogout()"><i class="fa-solid fa-right-from-bracket"></i> Log Out</button>
-          </div>
-        </div>
+    <!-- NOTIFICATION DROPDOWN OVERLAY -->
+    <div id="notifDropdown" class="notif-dropdown hidden">
+      <div class="notif-header">
+        <span>Notifications</span>
+        <button onclick="clearNotifications()">Clear All</button>
+      </div>
+      <div id="notifList" class="notif-list">
+        <div style="padding:16px; text-align:center; font-size:12px; color:var(--bp-muted);">No new notifications</div>
+      </div>
+    </div>
+
+    <!-- SEARCH OVERLAY BOX -->
+    <div id="searchBoxModal" class="search-modal-box hidden">
+      <div class="search-input-wrapper">
+        <i class="fa-solid fa-magnifying-glass" style="color:var(--bp-muted);"></i>
+        <input type="text" id="searchInput" placeholder="Search Believers, Prayers, Videos..." oninput="handleSearch(this.value)" />
+        <i class="fa-solid fa-xmark" style="color:var(--bp-muted); cursor:pointer;" onclick="toggleSearchModal()"></i>
+      </div>
+      <div id="searchResults" class="search-results-list"></div>
+    </div>
+
+    <!-- MAIN NAVIGATION TABS -->
+    <div class="nav-wrap">
+      <div class="nav">
+        <button id="nav-feed" class="active" onclick="switchTab('feed')" title="Feed"><i class="fa-solid fa-house"></i></button>
+        <button id="nav-friends" onclick="switchTab('friends')" title="Friends"><i class="fa-solid fa-user-group"></i></button>
+        <button id="nav-groups" onclick="switchTab('groups')" title="Groups"><i class="fa-solid fa-people-group"></i></button>
+        <button id="nav-videos" onclick="switchTab('videos')" title="Videos"><i class="fa-solid fa-circle-play"></i></button>
+        <button id="nav-profile" onclick="switchTab('profile')" title="Profile"><i class="fa-solid fa-user"></i></button>
       </div>
     </div>
   </header>
 
-  <!-- Navigation Tabs -->
-  <div class="nav-wrap">
-    <div class="nav">
-      <button id="tabFeed" class="active" onclick="switchTab('feed')"><i class="fa-solid fa-house"></i></button>
-      <button id="tabFriends" onclick="switchTab('friends')"><i class="fa-solid fa-user-group"></i></button>
-      <button id="tabGroups" onclick="switchTab('groups')"><i class="fa-solid fa-people-group"></i></button>
-      <button id="tabVideos" onclick="switchTab('videos')"><i class="fa-solid fa-play"></i></button>
-      <button id="tabProfile" onclick="switchTab('profile')"><i class="fa-solid fa-user-circle"></i></button>
-    </div>
-  </div>
+  <!-- MAIN CONTAINER -->
+  <main class="wrap" style="padding: 0 12px;">
 
-  <div class="wrap">
-    <!-- Search Bar Box (Toggleable) -->
-    <div id="searchModalBox" class="search-modal-box hidden">
-      <div class="search-input-wrapper">
-        <i class="fa-solid fa-search" style="color: var(--bp-muted);"></i>
-        <input type="text" id="searchInput" placeholder="Search posts, friends, groups..." oninput="handleSearch(this.value)">
-      </div>
-      <div id="searchResultsList" class="search-results-list"></div>
-    </div>
-
-    <!-- TAB 1: FEED -->
-    <div id="sectionFeed" class="app-section">
-      <!-- Composer Card -->
+    <!-- TAB 1: NEWS FEED & COMMUNITY UPDATES -->
+    <div id="tab-feed">
+      
+      <!-- COMPOSER BAR -->
       <div class="composer-card">
-        <div id="userAvatarSmall" class="avatar" onclick="switchTab('profile')">B+</div>
-        <div class="mind-button" onclick="openCreateModal()">What's on your heart today?</div>
-        <div class="photo-upload-btn" onclick="openCreateModal()">
+        <div id="userHeaderAvatar" class="avatar" onclick="switchTab('profile')"></div>
+        <button class="mind-button" onclick="openComposer()">What is on your heart today?</button>
+        <label for="mediaInput" class="photo-upload-btn">
           <i class="fa-solid fa-image"></i>
-          <span>Photo</span>
-        </div>
+          <span>Media</span>
+        </label>
+        <input type="file" id="mediaInput" accept="image/*,video/*" class="hidden" onchange="handleFileSelect(event)">
       </div>
 
-      <!-- Stories Container -->
-      <div class="stories-container">
-        <div class="stories-wrapper" id="storiesWrapper">
-          <!-- Dynamic Stories -->
+      <!-- IN-COMPOSER DYNAMIC AREA (HIDDEN UNTIL EXPANDED) -->
+      <div id="postComposerArea" class="hidden">
+        <textarea id="postText" class="composer-textarea" placeholder="Share a prayer request, testimony, or scripture..."></textarea>
+        
+        <!-- IN-COMPOSER MEDIA PREVIEW BOX -->
+        <div id="composerPreviewBox" class="composer-preview-box hidden">
+          <button class="remove-media-btn" onclick="clearSelectedMedia()" title="Remove Media">
+            <i class="fa-solid fa-xmark"></i>
+          </button>
+          <div id="composerPreviewContent"></div>
         </div>
-      </div>
 
-      <!-- Post Feed -->
-      <div id="postFeedContainer">
-        <!-- Dynamic Posts -->
-      </div>
-    </div>
-
-    <!-- TAB 2: FRIENDS -->
-    <div id="sectionFriends" class="app-section hidden">
-      <h3 style="margin: 14px 0 6px 0; font-size: 16px; color: var(--bp-primary);">People You May Know</h3>
-      <div id="friendsList" class="friends-list"></div>
-    </div>
-
-    <!-- TAB 3: GROUPS -->
-    <div id="sectionGroups" class="app-section hidden">
-      <h3 style="margin: 14px 0 6px 0; font-size: 16px; color: var(--bp-primary);">Faith Communities & Groups</h3>
-      <div id="groupsList" class="groups-list"></div>
-    </div>
-
-    <!-- TAB 4: VIDEOS -->
-    <div id="sectionVideos" class="app-section hidden">
-      <h3 style="margin: 14px 0 6px 0; font-size: 16px; color: var(--bp-primary);">Inspirational Sermons & Media</h3>
-      <div id="videosList"></div>
-    </div>
-
-    <!-- TAB 5: PROFILE -->
-    <div id="sectionProfile" class="app-section hidden">
-      <div class="profile-card">
-        <div id="profileCoverArea" class="profile-cover-area" style="background-image: url('');">
-          <label class="cover-upload-badge">
-            <i class="fa-solid fa-camera"></i> Edit Cover
-            <input type="file" accept="image/*" class="hidden" onchange="updateCoverPhoto(event)">
-          </label>
-        </div>
-        <div class="profile-header-content">
-          <div class="profile-avatar-wrapper">
-            <div id="profileAvatarLarge" class="profile-avatar-large">B+</div>
-            <label class="avatar-upload-badge">
-              <i class="fa-solid fa-camera"></i>
-              <input type="file" accept="image/*" class="hidden" onchange="updateAvatarPhoto(event)">
+        <div class="composer-actions">
+          <div style="display:flex; gap:10px; align-items:center;">
+            <label for="mediaInputArea" class="photo-upload-btn" style="margin:0;">
+              <i class="fa-solid fa-photo-film"></i>
+              <span>Photo/Video</span>
             </label>
+            <input type="file" id="mediaInputArea" accept="image/*,video/*" class="hidden" onchange="handleFileSelect(event)">
+            <select id="postCategory" style="padding:4px 8px; border-radius:6px; border:1px solid var(--bp-border); font-size:12px;">
+              <option value="general">General</option>
+              <option value="prayer">Prayer Request</option>
+              <option value="testimony">Testimony</option>
+            </select>
           </div>
-          <h2 id="profileDisplayName" style="font-size: 20px; font-weight: 900; color: var(--bp-primary);">User Name</h2>
-          <p id="profileDisplayEmail" style="font-size: 13px; color: var(--bp-muted); margin-top: 2px;">email@example.com</p>
+          <div style="display:flex; gap:6px;">
+            <button class="btn btn-outline" style="padding:6px 12px; font-size:12px; width:auto;" onclick="closeComposer()">Cancel</button>
+            <button class="btn btn-gold" style="padding:6px 16px; font-size:12px; width:auto;" onclick="publishPost()">Post</button>
+          </div>
         </div>
       </div>
 
-      <div class="about-me-card">
-        <div class="about-me-header">
-          <h4 style="font-size: 15px; font-weight: 800; color: var(--bp-primary);">About Me</h4>
-          <button onclick="editBio()" style="font-size: 13px; color: var(--bp-gold); font-weight: 700;"><i class="fa-solid fa-pen"></i> Edit</button>
+      <!-- COMMUNITY UPDATES / STORIES ROW -->
+      <div class="stories-container">
+        <div class="stories-wrapper">
+          <div class="story-card create-story" onclick="triggerStoryUpload()">
+            <div id="storyCreateTopImg" class="top-img">
+              <div class="plus-btn"><i class="fa-solid fa-plus"></i></div>
+            </div>
+            <div class="bottom-text">Add Update</div>
+            <input type="file" id="storyFileInput" accept="image/*" class="hidden" onchange="handleStoryUpload(event)">
+          </div>
+          <div id="storiesList" style="display:inline-flex; gap:10px;"></div>
         </div>
-        <p id="profileBioText" style="font-size: 14px; color: var(--bp-text);">Walking in faith, love, and grace every single day. Sharing light with the world.</p>
       </div>
 
-      <h3 style="margin: 16px 0 10px 0; font-size: 16px; color: var(--bp-primary);">My Posts</h3>
-      <div id="myPostsContainer"></div>
-    </div>
-  </div>
-</div>
-
-<!-- Modal Sheet for Creating Post -->
-<div id="createModalOverlay" class="modal-overlay hidden" onclick="if(event.target === this) closeCreateModal()">
-  <div class="modal-sheet">
-    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
-      <h3 style="font-size: 16px; font-weight: 800; color: var(--bp-primary);">Create Post</h3>
-      <button onclick="closeCreateModal()" style="font-size: 18px; color: var(--bp-muted);"><i class="fa-solid fa-xmark"></i></button>
-    </div>
-    <textarea id="composerText" class="composer-textarea" placeholder="What is on your heart today, believer?"></textarea>
-    
-    <div id="composerPreviewBox" class="composer-preview-box hidden">
-      <button class="remove-media-btn" onclick="clearComposerMedia()"><i class="fa-solid fa-xmark"></i></button>
-      <div id="composerPreviewContent"></div>
+      <!-- POSTS FEED CONTAINER -->
+      <div id="postsFeed"></div>
     </div>
 
-    <div class="composer-actions">
-      <label class="photo-upload-btn" style="cursor: pointer;">
-        <i class="fa-solid fa-image"></i>
-        <span>Add Photo/Video</span>
-        <input type="file" accept="image/*,video/*" class="hidden" onchange="handleComposerMediaUpload(event)">
-      </label>
-      <button class="btn btn-gold" style="width: auto; padding: 8px 20px;" onclick="submitNewPost()">Post</button>
+    <!-- TAB 2: FRIENDS & FELLOWSHIP -->
+    <div id="tab-friends" class="hidden">
+      <div style="padding: 12px 0;">
+        <h2 style="font-size:18px; font-weight:800; color:var(--bp-primary);">Friends & Believers</h2>
+        <p style="font-size:13px; color:var(--bp-muted);">Connect with brothers and sisters in Christ</p>
+        <div class="friends-list" id="friendsList"></div>
+      </div>
     </div>
-  </div>
-</div>
 
-<script>
-/* =========================================================
-   APPLICATION STATE & LOCAL STORAGE DATABASE
-========================================================= */
-const DB_KEYS = {
-  users: 'bp_users_v1',
-  currentUser: 'bp_current_user_v1',
-  posts: 'bp_posts_v1',
-  notifications: 'bp_notifs_v1',
-  friends: 'bp_friends_v1',
-  groups: 'bp_groups_v1',
-  videos: 'bp_videos_v1'
-};
+    <!-- TAB 3: GROUPS & FELLOWSHIP -->
+    <div id="tab-groups" class="hidden">
+      <div style="padding: 12px 0;">
+        <h2 style="font-size:18px; font-weight:800; color:var(--bp-primary);">Fellowship Groups</h2>
+        <p style="font-size:13px; color:var(--bp-muted);">Join communities around ministry and scripture</p>
+        <div class="groups-list" id="groupsList"></div>
+      </div>
+    </div>
 
-let currentUser = JSON.parse(localStorage.getItem(DB_KEYS.currentUser)) || null;
-let isRegistering = false;
-let uploadedMediaData = null;
+    <!-- TAB 4: WATCH SERMONS & VIDEOS -->
+    <div id="tab-videos" class="hidden">
+      <div style="padding: 12px 0;">
+        <h2 style="font-size:18px; font-weight:800; color:var(--bp-primary);">Sermons & Spiritual Videos</h2>
+        <p style="font-size:13px; color:var(--bp-muted); margin-bottom:12px;">Watch teachings, worship, and testimonies</p>
+        <div id="videosList"></div>
+      </div>
+    </div>
 
-// Initial Seed Data if empty
-if (!localStorage.getItem(DB_KEYS.posts)) {
-  const seedPosts = [
-    {
-      id: 'p1',
-      authorEmail: 'pastor@believersplus.org',
-      authorName: 'Pastor David Mensah',
-      authorAvatar: '',
-      content: '“The Lord is my shepherd; I shall not want. He maketh me to lie down in green pastures: he leadeth me beside the still waters.” 🙏✨ Have a blessed and peaceful week ahead everyone!',
-      media: '',
-      mediaType: '',
-      timestamp: Date.now() - 3600000 * 2,
-      likes: ['user@example.com'],
-      comments: [
-        { id: 'c1', authorName: 'Sister Grace', text: 'Amen! Praise God for His unending grace.', timestamp: Date.now() - 3600000 }
-      ]
-    },
-    {
-      id: 'p2',
-      authorEmail: 'sarah@believersplus.org',
-      authorName: 'Sarah Jenkins',
-      authorAvatar: '',
-      content: 'Our youth fellowship outreach was an absolute success today! Thank you to everyone who donated food and clothing for our community drive. 💛',
-      media: '',
-      mediaType: '',
-      timestamp: Date.now() - 3600000 * 5,
-      likes: [],
-      comments: []
-    }
-  ];
-  localStorage.setItem(DB_KEYS.posts, JSON.stringify(seedPosts));
-}
-
-if (!localStorage.getItem(DB_KEYS.friends)) {
-  const seedFriends = [
-    { id: 'f1', name: 'Deacon John Cole', mutual: '12 mutual connections', avatar: '', status: 'connect' },
-    { id: 'f2', name: 'Mercy Johnson', mutual: '5 mutual connections', avatar: '', status: 'connect' },
-    { id: 'f3', name: 'Brother Samuel', mutual: '8 mutual connections', avatar: '', status: 'connect' }
-  ];
-  localStorage.setItem(DB_KEYS.friends, JSON.stringify(seedFriends));
-}
-
-if (!localStorage.getItem(DB_KEYS.groups)) {
-  const seedGroups = [
-    { id: 'g1', name: 'Daily Prayer & Intercession', members: '4.2K members', desc: 'Lifting each other up in constant prayer.' },
-    { id: 'g2', name: 'Scripture Study & Reflection', members: '2.8K members', desc: 'Deep diving into the Word of God together.' },
-    { id: 'g3', name: 'Worship & Choir Fellowship', members: '1.5K members', desc: 'Making a joyful noise unto the Lord.' }
-  ];
-  localStorage.setItem(DB_KEYS.groups, JSON.stringify(seedGroups));
-}
-
-if (!localStorage.getItem(DB_KEYS.videos)) {
-  const seedVideos = [
-    { id: 'v1', title: 'Sunday Worship Service - Walking in Divine Favor', duration: '1:12:45', url: 'https://www.w3schools.com/html/mov_bbb.mp4' },
-    { id: 'v2', title: 'Midweek Bible Study: Overcoming Fear with Faith', duration: '45:20', url: 'https://www.w3schools.com/html/mov_bbb.mp4' }
-  ];
-  localStorage.setItem(DB_KEYS.videos, JSON.stringify(seedVideos));
-}
-
-if (!localStorage.getItem(DB_KEYS.notifications)) {
-  const seedNotifs = [
-    { id: 'n1', text: 'Sister Grace commented on Pastor David’s post.', unread: true, time: '2h ago' },
-    { id: 'n2', text: 'Welcome to Believers+! Connect with your faith community.', unread: false, time: '1d ago' }
-  ];
-  localStorage.setItem(DB_KEYS.notifications, JSON.stringify(seedNotifs));
-}
-
-/* =========================================================
-   AUTHENTICATION LOGIC
-========================================================= */
-const authView = document.getElementById('authView');
-const mainAppView = document.getElementById('mainAppView');
-const authForm = document.getElementById('authForm');
-const authToggleBtn = document.getElementById('authToggleBtn');
-const authSubmitBtn = document.getElementById('authSubmitBtn');
-const nameField = document.getElementById('nameField');
-const fullNameInput = document.getElementById('fullName');
-const authEmailInput = document.getElementById('authEmail');
-const authPassInput = document.getElementById('authPass');
-const authError = document.getElementById('authError');
-
-authToggleBtn.addEventListener('click', () => {
-  isRegistering = !isRegistering;
-  if (isRegistering) {
-    nameField.classList.remove('hidden');
-    fullNameInput.required = true;
-    authSubmitBtn.textContent = 'Create Account';
-    authToggleBtn.textContent = 'Already have an account? Log In';
-  } else {
-    nameField.classList.add('hidden');
-    fullNameInput.required = false;
-    authSubmitBtn.textContent = 'Log In';
-    authToggleBtn.textContent = 'Create New Account';
-  }
-  authError.textContent = '';
-});
-
-authForm.addEventListener('submit', (e) => {
-  e.preventDefault();
-  const email = authEmailInput.value.trim().toLowerCase();
-  const pass = authPassInput.value.trim();
-  const name = fullNameInput.value.trim();
-
-  let users = JSON.parse(localStorage.getItem(DB_KEYS.users)) || [];
-
-  if (isRegistering) {
-    if (!name) {
-      authError.textContent = 'Please enter your full name.';
-      return;
-    }
-    const existing = users.find(u => u.email === email);
-    if (existing) {
-      authError.textContent = 'An account with this email already exists.';
-      return;
-    }
-    const newUser = {
-      name,
-      email,
-      pass,
-      bio: 'Walking in faith, love, and grace every single day.',
-      avatar: '',
-      cover: ''
-    };
-    users.push(newUser);
-    localStorage.setItem(DB_KEYS.users, JSON.stringify(users));
-    currentUser = newUser;
-  } else {
-    const found = users.find(u => u.email === email && u.pass === pass);
-    if (!found) {
-      // Demo fallback login if user was not explicitly registered in array
-      currentUser = {
-        name: email.split('@')[0],
-        email: email,
-        bio: 'Walking in faith, love, and grace every single day.',
-        avatar: '',
-        cover: ''
-      };
-    } else {
-      currentUser = found;
-    }
-  }
-
-  localStorage.setItem(DB_KEYS.currentUser, JSON.stringify(currentUser));
-  checkAuthState();
-});
-
-function handleLogout() {
-  localStorage.removeItem(DB_KEYS.currentUser);
-  currentUser = null;
-  closeMenuDropdown();
-  checkAuthState();
-}
-
-function checkAuthState() {
-  if (currentUser) {
-    authView.classList.add('hidden');
-    mainAppView.classList.remove('hidden');
-    initApp();
-  } else {
-    authView.classList.remove('hidden');
-    mainAppView.classList.add('hidden');
-    authForm.reset();
-    isRegistering = false;
-    nameField.classList.add('hidden');
-    authSubmitBtn.textContent = 'Log In';
-    authToggleBtn.textContent = 'Create New Account';
-    authError.textContent = '';
-  }
-}
-
-/* =========================================================
-   APPLICATION INITIALIZATION & RENDERING
-========================================================= */
-function initApp() {
-  updateUserUIElements();
-  renderFeed();
-  renderStories();
-  renderFriends();
-  renderGroups();
-  renderVideos();
-  renderProfile();
-  updateNotificationsBadge();
-}
-
-function updateUserUIElements() {
-  const initials = getInitials(currentUser.name);
-  ['userAvatarSmall', 'profileAvatarLarge'].forEach(id => {
-    const el = document.getElementById(id);
-    if (el) {
-      if (currentUser.avatar) {
-        el.style.backgroundImage = `url('${currentUser.avatar}')`;
-        el.textContent = '';
-      } else {
-        el.style.backgroundImage = '';
-        el.textContent = initials;
-      }
-    }
-  });
-
-  const coverEl = document.getElementById('profileCoverArea');
-  if (coverEl && currentUser.cover) {
-    coverEl.style.backgroundImage = `url('${currentUser.cover}')`;
-  }
-
-  const nameEl = document.getElementById('profileDisplayName');
-  if (nameEl) nameEl.textContent = currentUser.name;
-
-  const emailEl = document.getElementById('profileDisplayEmail');
-  if (emailEl) emailEl.textContent = currentUser.email;
-
-  const bioEl = document.getElementById('profileBioText');
-  if (bioEl) bioEl.textContent = currentUser.bio || 'Walking in faith, love, and grace every single day.';
-}
-
-function getInitials(name) {
-  if (!name) return 'B+';
-  const parts = name.trim().split(' ');
-  if (parts.length >= 2) {
-    return (parts[0][0] + parts[1][0]).toUpperCase();
-  }
-  return name.substring(0, 2).toUpperCase();
-}
-
-/* Tab Navigation Switcher */
-function switchTab(tabName) {
-  ['Feed', 'Friends', 'Groups', 'Videos', 'Profile'].forEach(t => {
-    const section = document.getElementById('section' + t);
-    const btn = document.getElementById('tab' + t);
-    if (section && btn) {
-      if (t.toLowerCase() === tabName) {
-        section.classList.remove('hidden');
-        btn.classList.add('active');
-      } else {
-        section.classList.add('hidden');
-        btn.classList.remove('active');
-      }
-    }
-  });
-  window.scrollTo({ top: 0, behavior: 'smooth' });
-}
-
-/* Header Dropdowns & Toggles */
-function toggleMenuDropdown() {
-  const dropdown = document.getElementById('menuDropdown');
-  const notifDropdown = document.getElementById('notifDropdown');
-  if (notifDropdown) notifDropdown.classList.add('hidden');
-  if (dropdown) dropdown.classList.toggle('hidden');
-}
-
-function closeMenuDropdown() {
-  const dropdown = document.getElementById('menuDropdown');
-  if (dropdown) dropdown.classList.add('hidden');
-}
-
-function toggleNotifications() {
-  const dropdown = document.getElementById('notifDropdown');
-  const menuDropdown = document.getElementById('menuDropdown');
-  if (menuDropdown) menuDropdown.classList.add('hidden');
-  if (dropdown) {
-    dropdown.classList.toggle('hidden');
-    if (!dropdown.classList.contains('hidden')) {
-      renderNotificationsList();
-    }
-  }
-}
-
-function toggleSearchModal() {
-  const box = document.getElementById('searchModalBox');
-  if (box) {
-    box.classList.toggle('hidden');
-    if (!box.classList.contains('hidden')) {
-      document.getElementById('searchInput').focus();
-    }
-  }
-}
-
-// Close dropdowns on outside click
-window.addEventListener('click', (e) => {
-  if (!e.target.closest('.header-actions')) {
-    const menuDropdown = document.getElementById('menuDropdown');
-    const notifDropdown = document.getElementById('notifDropdown');
-    if (menuDropdown) menuDropdown.classList.add('hidden');
-    if (notifDropdown) notifDropdown.classList.add('hidden');
-  }
-});
-
-/* =========================================================
-   STORIES RENDERING
-========================================================= */
-function renderStories() {
-  const wrapper = document.getElementById('storiesWrapper');
-  if (!wrapper) return;
-
-  const mockStories = [
-    { name: 'Create Story', isCreate: true },
-    { name: 'Pastor David', img: 'https://images.unsplash.com/photo-1544717305-2782549b5136?w=200&auto=format&fit=crop&q=60' },
-    { name: 'Sarah Jenkins', img: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=200&auto=format&fit=crop&q=60' },
-    { name: 'Deacon John', img: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=200&auto=format&fit=crop&q=60' },
-    { name: 'Worship Team', img: 'https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=200&auto=format&fit=crop&q=60' }
-  ];
-
-  let html = '';
-  mockStories.forEach((st, idx) => {
-    if (st.isCreate) {
-      const initials = getInitials(currentUser.name);
-      html += `
-        <div class="story-card create-story" onclick="openCreateModal()">
-          <div class="top-img" style="background-image: url('${currentUser.avatar || ''}');">
-            ${!currentUser.avatar ? `<div style="display:grid; place-items:center; height:100%; font-weight:800; font-size:18px; color:var(--bp-primary);">${initials}</div>` : ''}
-            <div class="plus-btn"><i class="fa-solid fa-plus"></i></div>
+    <!-- TAB 5: PROFILE PAGE -->
+    <div id="tab-profile" class="hidden">
+      <div style="padding: 12px 0;">
+        
+        <!-- PROFILE HEADER CARD -->
+        <div class="profile-card">
+          <div id="profileCoverArea" class="profile-cover-area">
+            <label for="coverInput" class="cover-upload-badge">
+              <i class="fa-solid fa-camera"></i> Edit Cover
+            </label>
+            <input type="file" id="coverInput" accept="image/*" class="hidden" onchange="handleCoverChange(event)" />
           </div>
-          <div class="bottom-text">Create Story</div>
-        </div>
-      `;
-    } else {
-      html += `
-        <div class="story-card" onclick="alert('Viewing story by ${st.name}')">
-          <img src="${st.img}" class="bg-story" alt="Story">
-          <div class="story-overlay"></div>
-          <div class="story-author">${st.name}</div>
-        </div>
-      `;
-    }
-  });
-  wrapper.innerHTML = html;
-}
+          
+          <div class="profile-header-content">
+            <div class="profile-avatar-wrapper">
+              <div id="profileAvatarLarge" class="profile-avatar-large"></div>
+              <label for="avatarInput" class="avatar-upload-badge">
+                <i class="fa-solid fa-camera"></i>
+              </label>
+              <input type="file" id="avatarInput" accept="image/*" class="hidden" onchange="handleAvatarChange(event)" />
+            </div>
 
-/* =========================================================
-   POST FEED & INTERACTIONS
-========================================================= */
-function renderFeed() {
-  const container = document.getElementById('postFeedContainer');
-  if (!container) return;
+            <h2 id="profileName" style="font-size:20px; font-weight:800; color:var(--bp-primary); margin-bottom:2px;">---</h2>
+            <p id="profileHandle" style="font-size:13px; color:var(--bp-muted); font-weight:600; margin-bottom:8px;">@---</p>
+            <p id="profileBioText" style="font-size:14px; color:var(--bp-text); margin-bottom:12px; white-space:pre-wrap;">---</p>
 
-  const posts = JSON.parse(localStorage.getItem(DB_KEYS.posts)) || [];
-  if (posts.length === 0) {
-    container.innerHTML = `<div class="card" style="text-align:center; color:var(--bp-muted); padding:30px;">No posts yet. Be the first to share something on your heart!</div>`;
-    return;
-  }
+            <button class="btn btn-outline" style="width:auto; padding:6px 16px; font-size:13px; margin:0 auto 12px auto;" onclick="openEditProfileModal()">
+              <i class="fa-solid fa-pen-to-square"></i> Edit Profile
+            </button>
 
-  let html = '';
-  posts.forEach(post => {
-    const isLiked = post.likes && post.likes.includes(currentUser.email);
-    const likeCount = post.likes ? post.likes.length : 0;
-    const commentCount = post.comments ? post.comments.length : 0;
-    const timeAgo = getTimeAgo(post.timestamp);
-    const authorInitials = getInitials(post.authorName);
-
-    html += `
-      <div class="card" data-post-id="${post.id}">
-        <div class="posthead">
-          <div class="posthead-left">
-            <div class="avatar" style="width:38px; height:38px; font-size:14px;">${authorInitials}</div>
-            <div>
-              <div class="post-author-name">${post.authorName}</div>
-              <div class="post-meta-line">
-                <span>${timeAgo}</span>
-                <span>•</span>
-                <i class="fa-solid fa-earth-americas" style="font-size:10px;"></i>
+            <!-- PROFILE STATS ROW -->
+            <div class="profile-stats-row">
+              <div class="stat-item">
+                <div id="statPostsCount" class="stat-num">0</div>
+                <div class="stat-label">Posts</div>
+              </div>
+              <div class="stat-item">
+                <div id="statFriendsCount" class="stat-num">0</div>
+                <div class="stat-label">Friends</div>
+              </div>
+              <div class="stat-item">
+                <div id="statPrayersCount" class="stat-num">0</div>
+                <div class="stat-label">Prayers</div>
               </div>
             </div>
           </div>
-          ${post.authorEmail === currentUser.email ? `<button onclick="deletePost('${post.id}')" style="color:var(--bp-muted);"><i class="fa-solid fa-trash-can" style="font-size:13px;"></i></button>` : ''}
         </div>
 
-        <div class="post-content">${escapeHtml(post.content)}</div>
-
-        ${post.media ? `
-          <div class="post-media-attachment">
-            ${post.mediaType === 'video' ? `<video src="${post.media}" controls></video>` : `<img src="${post.media}" alt="Post attachment">`}
+        <!-- ABOUT ME CARD -->
+        <div class="about-me-card">
+          <div class="about-me-title">
+            <span>About Believer</span>
+            <i class="fa-solid fa-circle-info" style="color:var(--bp-gold);"></i>
           </div>
-        ` : ''}
-
-        <div class="actions">
-          <button class="action-btn ${isLiked ? 'liked' : ''}" onclick="toggleLikePost('${post.id}')">
-            <i class="${isLiked ? 'fa-solid' : 'fa-regular'} fa-heart"></i>
-            <span>${likeCount > 0 ? likeCount : 'Like'}</span>
-          </button>
-          <button class="action-btn" onclick="toggleCommentsSection('${post.id}')">
-            <i class="fa-regular fa-comment"></i>
-            <span>${commentCount > 0 ? commentCount : 'Comment'}</span>
-          </button>
-          <button class="action-btn" onclick="sharePost('${post.id}')">
-            <i class="fa-solid fa-share"></i>
-            <span>Share</span>
-          </button>
-        </div>
-
-        <!-- Comments Section (Collapsible/Inline) -->
-        <div id="commentsSection-${post.id}" class="comments-section hidden">
-          <div class="comments-list" id="commentsList-${post.id}">
-            ${renderCommentsList(post.comments)}
-          </div>
-          <div class="comment-input-wrap">
-            <div class="avatar" style="width:30px; height:30px; font-size:11px;">${getInitials(currentUser.name)}</div>
-            <input type="text" id="commentInput-${post.id}" placeholder="Write a comment..." onkeydown="if(event.key==='Enter') submitComment('${post.id}')">
-            <button class="btn btn-gold" style="width:auto; padding:6px 12px; font-size:12px;" onclick="submitComment('${post.id}')">Post</button>
+          <div class="about-info-grid">
+            <div class="about-info-item">
+              <i class="fa-solid fa-church"></i>
+              <span id="aboutChurch">Ministry: Not specified</span>
+            </div>
+            <div class="about-info-item">
+              <i class="fa-solid fa-location-dot"></i>
+              <span id="aboutLocation">Location: Not specified</span>
+            </div>
+            <div class="about-info-item">
+              <i class="fa-solid fa-globe"></i>
+              <span id="aboutWebsite">Website: Not specified</span>
+            </div>
+            <div class="about-info-item">
+              <i class="fa-solid fa-calendar-days"></i>
+              <span id="aboutJoined">Joined Believers+ ---</span>
+            </div>
           </div>
         </div>
-      </div>
-    `;
-  });
-  container.innerHTML = html;
-  renderMyPosts();
-}
 
-function renderCommentsList(comments) {
-  if (!comments || comments.length === 0) return '<div style="font-size:12px; color:var(--bp-muted); text-align:center;">No comments yet.</div>';
-  return comments.map(c => `
-    <div class="comment-item">
-      <div class="avatar" style="width:26px; height:26px; font-size:10px;">${getInitials(c.authorName)}</div>
-      <div style="flex:1;">
-        <div class="comment-author">${c.authorName}</div>
-        <div class="comment-text">${escapeHtml(c.text)}</div>
+        <!-- USER'S PERSONAL POSTS FEED -->
+        <h3 style="font-size:15px; font-weight:800; color:var(--bp-primary); margin-bottom:10px;">My Posts</h3>
+        <div id="userPostsFeed"></div>
+
       </div>
     </div>
-  `).join('');
+
+  </main>
+</div>
+
+<!-- =========================================================
+   3. EDIT PROFILE MODAL
+========================================================= -->
+<div id="editProfileModal" class="modal-overlay hidden">
+  <div class="modal-sheet">
+    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:16px;">
+      <h3 style="font-size:16px; font-weight:800; color:var(--bp-primary);">Edit Profile</h3>
+      <button onclick="closeEditProfileModal()" style="font-size:18px; color:var(--bp-muted);"><i class="fa-solid fa-xmark"></i></button>
+    </div>
+    
+    <div class="form-group">
+      <label>Full Name</label>
+      <input type="text" id="editName" />
+    </div>
+    <div class="form-group">
+      <label>Username</label>
+      <input type="text" id="editUsername" />
+    </div>
+    <div class="form-group">
+      <label>Bio / Faith Statement</label>
+      <textarea id="editBio" rows="3"></textarea>
+    </div>
+    <div class="form-group">
+      <label>Church / Ministry</label>
+      <input type="text" id="editChurch" />
+    </div>
+    <div class="form-group">
+      <label>Location</label>
+      <input type="text" id="editLocation" />
+    </div>
+    <div class="form-group">
+      <label>Website</label>
+      <input type="text" id="editWebsite" />
+    </div>
+
+    <div style="display:flex; gap:10px; margin-top:20px;">
+      <button class="btn btn-outline" onclick="closeEditProfileModal()">Cancel</button>
+      <button class="btn btn-gold" onclick="saveProfileChanges()">Save Changes</button>
+    </div>
+  </div>
+</div>
+
+<!-- =========================================================
+   4. SUPABASE JS CLIENT & APPLICATION LOGIC
+========================================================= -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+/* ---------------------------------------------------------
+   SUPABASE INITIALIZATION
+--------------------------------------------------------- */
+const SUPABASE_URL = 'https://zupbqtnqbsmlwbidsddk.supabase.co';
+const SUPABASE_PUBLISHABLE_KEY = 'sb_publishable_NtyX9tGZ7vAmLB73ylIasw_RZZf7P2o';
+
+const supabaseClient = window.supabase.createClient(
+  SUPABASE_URL,
+  SUPABASE_PUBLISHABLE_KEY
+);
+
+/* ---------------------------------------------------------
+   APPLICATION GLOBAL STATE
+--------------------------------------------------------- */
+let currentUser = null;     // Authenticated Supabase User
+let currentProfile = null;  // User profile loaded from public.profiles
+let activeTab = 'feed';
+let selectedMediaFile = null;
+let selectedMediaType = null; // 'image' or 'video'
+
+let postsState = [];
+let storiesState = [];
+let friendsState = [];
+let groupsState = [];
+let videosState = [];
+let notificationsState = [];
+
+/* ---------------------------------------------------------
+   APP INITIALIZATION & AUTH STATE LISTENER
+--------------------------------------------------------- */
+window.addEventListener('DOMContentLoaded', async () => {
+  initAuthStateListener();
+});
+
+function initAuthStateListener() {
+  // Listen to Supabase Auth state changes
+  supabaseClient.auth.onAuthStateChange(async (event, session) => {
+    if (session && session.user) {
+      currentUser = session.user;
+      await loadProfileAndInitialize(session.user);
+    } else {
+      currentUser = null;
+      currentProfile = null;
+      showAuthScreen();
+    }
+  });
 }
 
-function toggleLikePost(postId) {
-  let posts = JSON.parse(localStorage.getItem(DB_KEYS.posts)) || [];
-  posts = posts.map(p => {
-    if (p.id === postId) {
-      if (!p.likes) p.likes = [];
-      const idx = p.likes.indexOf(currentUser.email);
-      if (idx > -1) {
-        p.likes.splice(idx, 1);
+async function loadProfileAndInitialize(user) {
+  try {
+    // 1. Fetch profile record from public.profiles using Auth UUID
+    let { data: profile, error } = await supabaseClient
+      .from('profiles')
+      .select('*')
+      .eq('id', user.id)
+      .single();
+
+    // 2. Safely handle missing profile row if trigger hasn't fired yet
+    if (error || !profile) {
+      const newProfileData = {
+        id: user.id,
+        full_name: user.user_metadata?.full_name || 'Believer',
+        email: user.email,
+        created_at: new Date().toISOString()
+      };
+
+      const { data: insertedProfile, error: insertErr } = await supabaseClient
+        .from('profiles')
+        .upsert(newProfileData)
+        .select()
+        .single();
+
+      if (!insertErr && insertedProfile) {
+        profile = insertedProfile;
       } else {
-        p.likes.push(currentUser.email);
+        profile = newProfileData;
       }
     }
-    return p;
-  });
-  localStorage.setItem(DB_KEYS.posts, JSON.stringify(posts));
-  renderFeed();
+
+    currentProfile = profile;
+
+    // 3. Update application UI
+    renderUserProfileUI();
+    showMainAppScreen();
+    
+    // 4. Load application feed & modules
+    await refreshFeedData();
+    renderStaticModules();
+
+  } catch (err) {
+    console.error('Error loading user profile:', err);
+  }
 }
 
-function toggleCommentsSection(postId) {
-  const sec = document.getElementById(`commentsSection-${postId}`);
-  if (sec) {
-    sec.classList.toggle('hidden');
-    if (!sec.classList.contains('hidden')) {
-      const input = document.getElementById(`commentInput-${postId}`);
-      if (input) input.focus();
+/* ---------------------------------------------------------
+   UI DISPLAY CONTROLLERS
+--------------------------------------------------------- */
+function showAuthScreen() {
+  document.getElementById('authView').classList.remove('hidden');
+  document.getElementById('appView').classList.add('hidden');
+}
+
+function showMainAppScreen() {
+  document.getElementById('authView').classList.add('hidden');
+  document.getElementById('appView').classList.remove('hidden');
+}
+
+function toggleAuthMode(mode) {
+  document.getElementById('loginError').innerText = '';
+  document.getElementById('registerError').innerText = '';
+  if (mode === 'register') {
+    document.getElementById('loginCard').classList.add('hidden');
+    document.getElementById('registerCard').classList.remove('hidden');
+  } else {
+    document.getElementById('registerCard').classList.add('hidden');
+    document.getElementById('loginCard').classList.remove('hidden');
+  }
+}
+
+/* ---------------------------------------------------------
+   REAL SUPABASE AUTHENTICATION (REGISTER, LOGIN, LOGOUT)
+--------------------------------------------------------- */
+async function handleRegister() {
+  const name = document.getElementById('regName').value.trim();
+  const email = document.getElementById('regEmail').value.trim();
+  const password = document.getElementById('regPassword').value;
+  const errDiv = document.getElementById('registerError');
+  errDiv.innerText = '';
+
+  if (!name) {
+    errDiv.innerText = 'Please enter your full name.';
+    return;
+  }
+  if (!email) {
+    errDiv.innerText = 'Please enter a valid email address.';
+    return;
+  }
+  if (!password || password.length < 6) {
+    errDiv.innerText = 'Password must be at least 6 characters.';
+    return;
+  }
+
+  const { data, error } = await supabaseClient.auth.signUp({
+    email: email,
+    password: password,
+    options: {
+      data: {
+        full_name: name
+      }
+    }
+  });
+
+  if (error) {
+    errDiv.innerText = error.message;
+    return;
+  }
+
+  // Handle email confirmation if session isn't automatically created
+  if (data.user && !data.session) {
+    errDiv.style.color = '#2b6cb0';
+    errDiv.innerText = 'Your account has been created successfully. Please check your email and confirm your account before logging in.';
+  }
+}
+
+async function handleLogin() {
+  const email = document.getElementById('loginEmail').value.trim();
+  const password = document.getElementById('loginPassword').value;
+  const errDiv = document.getElementById('loginError');
+  errDiv.innerText = '';
+
+  if (!email || !password) {
+    errDiv.innerText = 'Please enter both email and password.';
+    return;
+  }
+
+  const { data, error } = await supabaseClient.auth.signInWithPassword({
+    email: email,
+    password: password
+  });
+
+  if (error) {
+    errDiv.innerText = error.message || 'Incorrect email or password.';
+  }
+}
+
+async function handleLogout() {
+  closeHeaderMenu();
+  await supabaseClient.auth.signOut();
+  currentUser = null;
+  currentProfile = null;
+  showAuthScreen();
+}
+
+/* ---------------------------------------------------------
+   PROFILE DATA RENDERING & SYNCHRONIZATION
+--------------------------------------------------------- */
+function renderUserProfileUI() {
+  if (!currentProfile) return;
+
+  const name = currentProfile.full_name || 'Believer';
+  const email = currentProfile.email || '';
+  const username = currentProfile.username || name.toLowerCase().replace(/\s+/g, '');
+  const bio = currentProfile.bio || 'Blessed to be part of Believers+ community.';
+  const church = currentProfile.church_ministry || 'Not specified';
+  const location = currentProfile.location || 'Not specified';
+  const website = currentProfile.website || 'Not specified';
+  const avatar = currentProfile.avatar_url || '';
+  const cover = currentProfile.cover_url || '';
+
+  // Header & Composer Avatars
+  const headerAvatar = document.getElementById('userHeaderAvatar');
+  const initial = name.charAt(0).toUpperCase();
+  if (avatar) {
+    headerAvatar.style.backgroundImage = `url('${avatar}')`;
+    headerAvatar.innerText = '';
+  } else {
+    headerAvatar.style.backgroundImage = 'none';
+    headerAvatar.innerText = initial;
+  }
+
+  // Profile Page Elements
+  document.getElementById('profileName').innerText = name;
+  document.getElementById('profileHandle').innerText = '@' + username;
+  document.getElementById('profileBioText').innerText = bio;
+
+  const profAvatarLarge = document.getElementById('profileAvatarLarge');
+  if (avatar) {
+    profAvatarLarge.style.backgroundImage = `url('${avatar}')`;
+    profAvatarLarge.innerText = '';
+  } else {
+    profAvatarLarge.style.backgroundImage = 'none';
+    profAvatarLarge.innerText = initial;
+  }
+
+  const profCoverArea = document.getElementById('profileCoverArea');
+  if (cover) {
+    profCoverArea.style.backgroundImage = `url('${cover}')`;
+  } else {
+    profCoverArea.style.backgroundImage = 'linear-gradient(135deg, var(--bp-primary), var(--bp-accent))';
+  }
+
+  // About Me Section
+  document.getElementById('aboutChurch').innerText = 'Ministry: ' + church;
+  document.getElementById('aboutLocation').innerText = 'Location: ' + location;
+  document.getElementById('aboutWebsite').innerText = 'Website: ' + website;
+
+  // Real Registration Date from SQL
+  if (currentProfile.created_at) {
+    const joinDate = new Date(currentProfile.created_at);
+    const formattedDate = joinDate.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
+    document.getElementById('aboutJoined').innerText = 'Joined Believers+ ' + formattedDate;
+  } else {
+    document.getElementById('aboutJoined').innerText = 'Joined Believers+ ' + new Date().toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
+  }
+
+  // Story Creation Thumb
+  const storyTopImg = document.getElementById('storyCreateTopImg');
+  if (avatar) {
+    storyTopImg.style.backgroundImage = `url('${avatar}')`;
+  } else {
+    storyTopImg.style.backgroundImage = 'none';
+  }
+}
+
+/* ---------------------------------------------------------
+   PROFILE EDITING (SAVING TO SUPABASE SQL)
+--------------------------------------------------------- */
+function openEditProfileModal() {
+  if (!currentProfile) return;
+  document.getElementById('editName').value = currentProfile.full_name || '';
+  document.getElementById('editUsername').value = currentProfile.username || '';
+  document.getElementById('editBio').value = currentProfile.bio || '';
+  document.getElementById('editChurch').value = currentProfile.church_ministry || '';
+  document.getElementById('editLocation').value = currentProfile.location || '';
+  document.getElementById('editWebsite').value = currentProfile.website || '';
+
+  document.getElementById('editProfileModal').classList.remove('hidden');
+}
+
+function closeEditProfileModal() {
+  document.getElementById('editProfileModal').classList.add('hidden');
+}
+
+async function saveProfileChanges() {
+  if (!currentUser) return;
+
+  const updatedData = {
+    full_name: document.getElementById('editName').value.trim(),
+    username: document.getElementById('editUsername').value.trim(),
+    bio: document.getElementById('editBio').value.trim(),
+    church_ministry: document.getElementById('editChurch').value.trim(),
+    location: document.getElementById('editLocation').value.trim(),
+    website: document.getElementById('editWebsite').value.trim()
+  };
+
+  const { data, error } = await supabaseClient
+    .from('profiles')
+    .update(updatedData)
+    .eq('id', currentUser.id)
+    .select()
+    .single();
+
+  if (!error && data) {
+    currentProfile = data;
+    renderUserProfileUI();
+    closeEditProfileModal();
+  } else {
+    alert('Failed to save profile changes. Please try again.');
+  }
+}
+
+/* ---------------------------------------------------------
+   AVATAR & COVER PHOTO UPDATES
+--------------------------------------------------------- */
+async function handleAvatarChange(event) {
+  const file = event.target.files[0];
+  if (!file || !currentUser) return;
+
+  const reader = new FileReader();
+  reader.onload = async function(e) {
+    const avatarDataUrl = e.target.result;
+    
+    // Save image URL to Supabase profiles
+    const { data, error } = await supabaseClient
+      .from('profiles')
+      .update({ avatar_url: avatarDataUrl })
+      .eq('id', currentUser.id)
+      .select()
+      .single();
+
+    if (!error && data) {
+      currentProfile = data;
+      renderUserProfileUI();
+    }
+  };
+  reader.readAsDataURL(file);
+}
+
+async function handleCoverChange(event) {
+  const file = event.target.files[0];
+  if (!file || !currentUser) return;
+
+  const reader = new FileReader();
+  reader.onload = async function(e) {
+    const coverDataUrl = e.target.result;
+
+    const { data, error } = await supabaseClient
+      .from('profiles')
+      .update({ cover_url: coverDataUrl })
+      .eq('id', currentUser.id)
+      .select()
+      .single();
+
+    if (!error && data) {
+      currentProfile = data;
+      renderUserProfileUI();
+    }
+  };
+  reader.readAsDataURL(file);
+}
+
+/* ---------------------------------------------------------
+   NAVIGATION & TABS
+--------------------------------------------------------- */
+function switchTab(tabName) {
+  activeTab = tabName;
+  const tabs = ['feed', 'friends', 'groups', 'videos', 'profile'];
+  tabs.forEach(t => {
+    document.getElementById(`tab-${t}`).classList.add('hidden');
+    const navBtn = document.getElementById(`nav-${t}`);
+    if (navBtn) navBtn.classList.remove('active');
+  });
+
+  document.getElementById(`tab-${tabName}`).classList.remove('hidden');
+  const activeBtn = document.getElementById(`nav-${tabName}`);
+  if (activeBtn) activeBtn.classList.add('active');
+
+  if (tabName === 'profile') {
+    renderUserPersonalPosts();
+  }
+}
+
+function toggleHeaderMenu() {
+  const menu = document.getElementById('headerMenuDropdown');
+  menu.classList.toggle('hidden');
+}
+
+function closeHeaderMenu() {
+  document.getElementById('headerMenuDropdown').classList.add('hidden');
+}
+
+/* ---------------------------------------------------------
+   POST COMPOSER & MEDIA PREVIEW
+--------------------------------------------------------- */
+function openComposer() {
+  document.getElementById('postComposerArea').classList.remove('hidden');
+  document.getElementById('postText').focus();
+}
+
+function closeComposer() {
+  document.getElementById('postComposerArea').classList.add('hidden');
+  document.getElementById('postText').value = '';
+  clearSelectedMedia();
+}
+
+function handleFileSelect(event) {
+  const file = event.target.files[0];
+  if (!file) return;
+
+  selectedMediaFile = file;
+  selectedMediaType = file.type.startsWith('video/') ? 'video' : 'image';
+
+  const reader = new FileReader();
+  reader.onload = function(e) {
+    const previewBox = document.getElementById('composerPreviewBox');
+    const previewContent = document.getElementById('composerPreviewContent');
+    previewContent.innerHTML = '';
+
+    if (selectedMediaType === 'video') {
+      previewContent.innerHTML = `<video src="${e.target.result}" controls style="max-height:300px; width:100%;"></video>`;
+    } else {
+      previewContent.innerHTML = `<img src="${e.target.result}" style="max-height:300px; width:100%; object-fit:contain;" />`;
+    }
+
+    previewBox.classList.remove('hidden');
+    openComposer();
+  };
+  reader.readAsDataURL(file);
+}
+
+function clearSelectedMedia() {
+  selectedMediaFile = null;
+  selectedMediaType = null;
+  document.getElementById('composerPreviewBox').classList.add('hidden');
+  document.getElementById('composerPreviewContent').innerHTML = '';
+  document.getElementById('mediaInput').value = '';
+  document.getElementById('mediaInputArea').value = '';
+}
+
+/* ---------------------------------------------------------
+   POST CREATION & FEED DATA SYNCHRONIZATION
+--------------------------------------------------------- */
+async function publishPost() {
+  if (!currentUser || !currentProfile) return;
+
+  const content = document.getElementById('postText').value.trim();
+  const category = document.getElementById('postCategory').value;
+
+  if (!content && !selectedMediaFile) {
+    alert('Please enter text or select media to post.');
+    return;
+  }
+
+  let mediaUrl = null;
+
+  // Process selected image/video media as data URL
+  if (selectedMediaFile) {
+    mediaUrl = await new Promise((resolve) => {
+      const reader = new FileReader();
+      reader.onload = (e) => resolve(e.target.result);
+      reader.readAsDataURL(selectedMediaFile);
+    });
+  }
+
+  const newPostData = {
+    user_id: currentUser.id,
+    author_name: currentProfile.full_name || 'Believer',
+    author_avatar: currentProfile.avatar_url || '',
+    category: category,
+    content: content,
+    media_url: mediaUrl,
+    media_type: selectedMediaType,
+    created_at: new Date().toISOString()
+  };
+
+  // Attempt to save to Supabase posts table
+  const { data, error } = await supabaseClient
+    .from('posts')
+    .insert([newPostData])
+    .select()
+    .single();
+
+  if (!error && data) {
+    data.likes_count = 0;
+    data.liked_by_me = false;
+    data.comments = [];
+    postsState.unshift(data);
+  } else {
+    // Local fallback for display if custom posts table is not fully configured
+    newPostData.id = 'post_' + Date.now();
+    newPostData.likes_count = 0;
+    newPostData.liked_by_me = false;
+    newPostData.comments = [];
+    postsState.unshift(newPostData);
+  }
+
+  renderPostsFeed();
+  closeComposer();
+  
+  if (category === 'prayer') {
+    updatePrayerStatCount();
+  }
+}
+
+async function refreshFeedData() {
+  try {
+    // Load posts from Supabase if table exists
+    const { data: posts, error } = await supabaseClient
+      .from('posts')
+      .select('*')
+      .order('created_at', { ascending: false });
+
+    if (!error && posts) {
+      // Check existing post likes for current user
+      const { data: userLikes } = await supabaseClient
+        .from('post_likes')
+        .select('post_id')
+        .eq('user_id', currentUser.id);
+
+      const likedPostIds = new Set((userLikes || []).map(l => l.post_id));
+
+      postsState = posts.map(p => ({
+        ...p,
+        liked_by_me: likedPostIds.has(p.id),
+        likes_count: p.likes_count || 0,
+        comments: p.comments || []
+      }));
+    } else if (postsState.length === 0) {
+      // Demo initial feed items if table is empty
+      postsState = [
+        {
+          id: 'demo_1',
+          user_id: 'system',
+          author_name: 'Pastor David',
+          author_avatar: '',
+          category: 'general',
+          content: 'Welcome to Believers+! Let us stand together in faith and fellowship.',
+          media_url: '',
+          created_at: new Date().toISOString(),
+          likes_count: 12,
+          liked_by_me: false,
+          comments: []
+        }
+      ];
+    }
+  } catch (err) {
+    console.error('Error fetching feed:', err);
+  }
+
+  renderPostsFeed();
+}
+
+function renderPostsFeed() {
+  const container = document.getElementById('postsFeed');
+  if (!container) return;
+
+  if (postsState.length === 0) {
+    container.innerHTML = `<div class="card" style="text-align:center; color:var(--bp-muted); font-size:13px;">No posts in feed yet. Be the first to share!</div>`;
+    return;
+  }
+
+  container.innerHTML = postsState.map(post => renderPostCardHTML(post)).join('');
+  updateProfileStats();
+}
+
+function renderUserPersonalPosts() {
+  const container = document.getElementById('userPostsFeed');
+  if (!container) return;
+
+  const myPosts = postsState.filter(p => p.user_id === currentUser.id);
+  if (myPosts.length === 0) {
+    container.innerHTML = `<div class="card" style="text-align:center; color:var(--bp-muted); font-size:13px;">You have not published any posts yet.</div>`;
+    return;
+  }
+
+  container.innerHTML = myPosts.map(post => renderPostCardHTML(post)).join('');
+}
+
+function renderPostCardHTML(post) {
+  const authorInitial = post.author_name ? post.author_name.charAt(0).toUpperCase() : 'B';
+  const avatarStyle = post.author_avatar 
+    ? `background-image: url('${post.author_avatar}');` 
+    : '';
+
+  const isLiked = post.liked_by_me ? 'liked' : '';
+  const likeIcon = post.liked_by_me ? 'fa-solid fa-heart' : 'fa-regular fa-heart';
+  
+  let mediaHTML = '';
+  if (post.media_url) {
+    if (post.media_type === 'video') {
+      mediaHTML = `<div class="post-media-attachment"><video src="${post.media_url}" controls></video></div>`;
+    } else {
+      mediaHTML = `<div class="post-media-attachment"><img src="${post.media_url}" alt="Attachment" /></div>`;
+    }
+  }
+
+  let commentsHTML = '';
+  if (post.comments && post.comments.length > 0) {
+    commentsHTML = post.comments.map(c => `
+      <div class="comment-item">
+        <div>
+          <div class="comment-author">${c.author}</div>
+          <div class="comment-text">${c.text}</div>
+        </div>
+      </div>
+    `).join('');
+  }
+
+  const dateStr = new Date(post.created_at).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+
+  return `
+    <div class="card" id="post-card-${post.id}">
+      <div class="posthead">
+        <div class="posthead-left">
+          <div class="avatar" style="${avatarStyle}">${post.author_avatar ? '' : authorInitial}</div>
+          <div>
+            <div class="post-author-name">${post.author_name}</div>
+            <div class="post-meta-line">
+              <span>${dateStr}</span> • <span style="text-transform:capitalize; color:var(--bp-gold);">${post.category || 'General'}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="post-content">${post.content || ''}</div>
+      ${mediaHTML}
+
+      <!-- HORIZONTAL ACTIONS ROW: ❤️ Like | 💬 Comment | ↗️ Share -->
+      <div class="actions">
+        <button class="action-btn ${isLiked}" onclick="toggleLikePost('${post.id}')">
+          <i class="${likeIcon}"></i> <span>${post.likes_count || 0} Likes</span>
+        </button>
+        <button class="action-btn" onclick="toggleCommentsVisibility('${post.id}')">
+          <i class="fa-regular fa-comment"></i> <span>Comment</span>
+        </button>
+        <button class="action-btn" onclick="sharePost('${post.id}')">
+          <i class="fa-solid fa-share"></i> <span>Share</span>
+        </button>
+      </div>
+
+      <!-- COMMENTS BOX -->
+      <div id="comments-${post.id}" class="comments-section hidden">
+        <div class="comments-list" id="comments-list-${post.id}">${commentsHTML}</div>
+        <div class="comment-input-wrap">
+          <input type="text" id="comment-input-${post.id}" placeholder="Write a prayer or comment..." onkeydown="if(event.key==='Enter') addComment('${post.id}')" />
+          <button class="btn btn-gold" style="width:auto; padding:6px 12px; font-size:12px;" onclick="addComment('${post.id}')">Send</button>
+        </div>
+      </div>
+    </div>
+  `;
+}
+
+/* ---------------------------------------------------------
+   PRESERVED LIKE SYSTEM INTEGRATION WITH SUPABASE
+--------------------------------------------------------- */
+async function toggleLikePost(postId) {
+  if (!currentUser) return;
+
+  const post = postsState.find(p => p.id === postId);
+  if (!post) return;
+
+  if (post.liked_by_me) {
+    // Remove Like
+    post.liked_by_me = false;
+    post.likes_count = Math.max(0, (post.likes_count || 1) - 1);
+
+    await supabaseClient
+      .from('post_likes')
+      .delete()
+      .eq('post_id', postId)
+      .eq('user_id', currentUser.id);
+
+  } else {
+    // Add Like
+    post.liked_by_me = true;
+    post.likes_count = (post.likes_count || 0) + 1;
+
+    await supabaseClient
+      .from('post_likes')
+      .upsert([{ post_id: postId, user_id: currentUser.id }]);
+  }
+
+  // Update post card UI directly
+  const card = document.getElementById(`post-card-${postId}`);
+  if (card) {
+    const likeBtn = card.querySelector('.action-btn');
+    if (likeBtn) {
+      likeBtn.className = `action-btn ${post.liked_by_me ? 'liked' : ''}`;
+      likeBtn.innerHTML = `<i class="${post.liked_by_me ? 'fa-solid fa-heart' : 'fa-regular fa-heart'}"></i> <span>${post.likes_count} Likes</span>`;
     }
   }
 }
 
-function submitComment(postId) {
-  const input = document.getElementById(`commentInput-${postId}`);
-  if (!input) return;
-  const text = input.value.trim();
-  if (!text) return;
+function toggleCommentsVisibility(postId) {
+  const commSection = document.getElementById(`comments-${postId}`);
+  if (commSection) commSection.classList.toggle('hidden');
+}
 
-  let posts = JSON.parse(localStorage.getItem(DB_KEYS.posts)) || [];
-  posts = posts.map(p => {
-    if (p.id === postId) {
-      if (!p.comments) p.comments = [];
-      p.comments.push({
-        id: 'c_' + Date.now(),
-        authorName: currentUser.name,
-        authorEmail: currentUser.email,
-        text: text,
-        timestamp: Date.now()
-      });
-    }
-    return p;
+function addComment(postId) {
+  const input = document.getElementById(`comment-input-${postId}`);
+  if (!input) return;
+
+  const text = input.value.trim();
+  if (!text || !currentProfile) return;
+
+  const post = postsState.find(p => p.id === postId);
+  if (!post) return;
+
+  if (!post.comments) post.comments = [];
+  post.comments.push({
+    author: currentProfile.full_name || 'Believer',
+    text: text
   });
-  localStorage.setItem(DB_KEYS.posts, JSON.stringify(posts));
+
   input.value = '';
-  renderFeed();
-  // Keep comments section open after submission
-  const sec = document.getElementById(`commentsSection-${postId}`);
-  if (sec) sec.classList.remove('hidden');
+
+  const list = document.getElementById(`comments-list-${postId}`);
+  if (list) {
+    list.innerHTML = post.comments.map(c => `
+      <div class="comment-item">
+        <div>
+          <div class="comment-author">${c.author}</div>
+          <div class="comment-text">${c.text}</div>
+        </div>
+      </div>
+    `).join('');
+  }
 }
 
 function sharePost(postId) {
-  if (navigator.share) {
-    navigator.share({
-      title: 'Believers+ Post',
-      text: 'Check out this inspiring post on Believers+!',
-      url: window.location.href
-    }).catch(() => {});
-  } else {
-    alert('Post link copied to clipboard!');
-  }
+  alert('Post link copied to clipboard!');
 }
 
-function deletePost(postId) {
-  if (!confirm('Are you sure you want to delete this post?')) return;
-  let posts = JSON.parse(localStorage.getItem(DB_KEYS.posts)) || [];
-  posts = posts.filter(p => p.id !== postId);
-  localStorage.setItem(DB_KEYS.posts, JSON.stringify(posts));
-  renderFeed();
+/* ---------------------------------------------------------
+   STORIES & UPDATES
+--------------------------------------------------------- */
+function triggerStoryUpload() {
+  document.getElementById('storyFileInput').click();
 }
 
-/* =========================================================
-   COMPOSER MODAL & MEDIA UPLOADS
-========================================================= */
-function openCreateModal() {
-  const modal = document.getElementById('createModalOverlay');
-  if (modal) modal.classList.remove('hidden');
-}
-
-function closeCreateModal() {
-  const modal = document.getElementById('createModalOverlay');
-  if (modal) modal.classList.add('hidden');
-  document.getElementById('composerText').value = '';
-  clearComposerMedia();
-}
-
-function handleComposerMediaUpload(event) {
+function handleStoryUpload(event) {
   const file = event.target.files[0];
-  if (!file) return;
+  if (!file || !currentProfile) return;
 
   const reader = new FileReader();
   reader.onload = function(e) {
-    uploadedMediaData = {
-      url: e.target.result,
-      type: file.type.startsWith('video') ? 'video' : 'image'
+    const newStory = {
+      id: 'story_' + Date.now(),
+      author: currentProfile.full_name || 'Believer',
+      image: e.target.result
     };
-    const previewBox = document.getElementById('composerPreviewBox');
-    const previewContent = document.getElementById('composerPreviewContent');
-    if (previewBox && previewContent) {
-      previewBox.classList.remove('hidden');
-      if (uploadedMediaData.type === 'video') {
-        previewContent.innerHTML = `<video src="${uploadedMediaData.url}" controls></video>`;
-      } else {
-        previewContent.innerHTML = `<img src="${uploadedMediaData.url}" alt="Preview">`;
-      }
-    }
+    storiesState.unshift(newStory);
+    renderStories();
   };
   reader.readAsDataURL(file);
 }
 
-function clearComposerMedia() {
-  uploadedMediaData = null;
-  const previewBox = document.getElementById('composerPreviewBox');
-  const previewContent = document.getElementById('composerPreviewContent');
-  if (previewBox && previewContent) {
-    previewBox.classList.add('hidden');
-    previewContent.innerHTML = '';
-  }
-}
-
-function submitNewPost() {
-  const text = document.getElementById('composerText').value.trim();
-  if (!text && !uploadedMediaData) {
-    alert('Please write something or attach a photo/video.');
-    return;
-  }
-
-  let posts = JSON.parse(localStorage.getItem(DB_KEYS.posts)) || [];
-  const newPost = {
-    id: 'post_' + Date.now(),
-    authorEmail: currentUser.email,
-    authorName: currentUser.name,
-    authorAvatar: currentUser.avatar || '',
-    content: text,
-    media: uploadedMediaData ? uploadedMediaData.url : '',
-    mediaType: uploadedMediaData ? uploadedMediaData.type : '',
-    timestamp: Date.now(),
-    likes: [],
-    comments: []
-  };
-
-  posts.unshift(newPost);
-  localStorage.setItem(DB_KEYS.posts, JSON.stringify(posts));
-  closeCreateModal();
-  renderFeed();
-}
-
-/* =========================================================
-   FRIENDS, GROUPS & VIDEOS TABS RENDERING
-========================================================= */
-function renderFriends() {
-  const list = document.getElementById('friendsList');
+function renderStories() {
+  const list = document.getElementById('storiesList');
   if (!list) return;
-  const friends = JSON.parse(localStorage.getItem(DB_KEYS.friends)) || [];
-  
-  list.innerHTML = friends.map(f => `
-    <div class="friend-card">
-      <div class="friend-info">
-        <div class="avatar">${getInitials(f.name)}</div>
-        <div>
-          <div style="font-weight:800; font-size:14px; color:var(--bp-primary);">${f.name}</div>
-          <div style="font-size:12px; color:var(--bp-muted);">${f.mutual}</div>
-        </div>
-      </div>
-      <button class="btn btn-gold btn-sm" onclick="alert('Friend request sent to ${f.name}!')">Connect</button>
+
+  list.innerHTML = storiesState.map(s => `
+    <div class="story-card">
+      <img src="${s.image}" class="bg-story" alt="Story" />
+      <div class="story-overlay"></div>
+      <div class="story-author">${s.author}</div>
     </div>
   `).join('');
 }
 
-function renderGroups() {
-  const list = document.getElementById('groupsList');
-  if (!list) return;
-  const groups = JSON.parse(localStorage.getItem(DB_KEYS.groups)) || [];
-
-  list.innerHTML = groups.map(g => `
-    <div class="group-card">
-      <div class="group-info" style="align-items:flex-start;">
-        <div class="avatar" style="border-radius:10px; background:var(--bp-primary); color:var(--bp-gold);"><i class="fa-solid fa-users"></i></div>
-        <div>
-          <div style="font-weight:800; font-size:14px; color:var(--bp-primary);">${g.name}</div>
-          <div style="font-size:12px; color:var(--bp-muted);">${g.members}</div>
-          <div style="font-size:13px; color:var(--bp-text); margin-top:4px;">${g.desc}</div>
-        </div>
-      </div>
-      <button class="btn btn-outline btn-sm" onclick="this.textContent = this.textContent === 'Joined' ? 'Join' : 'Joined'; this.classList.toggle('btn-gold');">Join</button>
-    </div>
-  `).join('');
-}
-
-function renderVideos() {
-  const list = document.getElementById('videosList');
-  if (!list) return;
-  const videos = JSON.parse(localStorage.getItem(DB_KEYS.videos)) || [];
-
-  list.innerHTML = videos.map(v => `
-    <div class="video-card">
-      <div class="video-container">
-        <video src="${v.url}" controls></video>
-      </div>
-      <div class="video-info">
-        <h4 style="font-size:14px; font-weight:800; color:var(--bp-primary);">${v.title}</h4>
-        <div style="font-size:12px; color:var(--bp-muted); margin-top:2px;">Duration: ${v.duration}</div>
-      </div>
-    </div>
-  `).join('');
-}
-
-/* =========================================================
-   PROFILE MANAGEMENT & EDITING
-========================================================= */
-function renderProfile() {
-  updateUserUIElements();
-  renderMyPosts();
-}
-
-function renderMyPosts() {
-  const container = document.getElementById('myPostsContainer');
-  if (!container) return;
-
-  const posts = JSON.parse(localStorage.getItem(DB_KEYS.posts)) || [];
-  const myPosts = posts.filter(p => p.authorEmail === currentUser.email);
-
-  if (myPosts.length === 0) {
-    container.innerHTML = `<div class="card" style="text-align:center; color:var(--bp-muted); padding:20px; font-size:13px;">You haven't posted anything yet.</div>`;
-    return;
-  }
-
-  let html = '';
-  myPosts.forEach(post => {
-    html += `
-      <div class="card">
-        <div class="posthead">
-          <div class="posthead-left">
-            <div class="avatar" style="width:34px; height:34px; font-size:12px;">${getInitials(post.authorName)}</div>
-            <div>
-              <div class="post-author-name">${post.authorName}</div>
-              <div class="post-meta-line"><span>${getTimeAgo(post.timestamp)}</span></div>
-            </div>
+/* ---------------------------------------------------------
+   STATIC MODULES (FRIENDS, GROUPS, VIDEOS, SEARCH)
+--------------------------------------------------------- */
+function renderStaticModules() {
+  // Friends
+  friendsState = [
+    { name: 'Sister Mary Johnson', ministry: 'Worship Leader' },
+    { name: 'Brother Mark Evans', ministry: 'Youth Fellowship' },
+    { name: 'Hannah Samuel', ministry: 'Prayer Warrior' }
+  ];
+  const friendsList = document.getElementById('friendsList');
+  if (friendsList) {
+    friendsList.innerHTML = friendsState.map(f => `
+      <div class="friend-card">
+        <div class="friend-info">
+          <div class="avatar" style="background:var(--bp-gold); color:white;">${f.name.charAt(0)}</div>
+          <div>
+            <div style="font-weight:800; font-size:14px; color:var(--bp-primary);">${f.name}</div>
+            <div style="font-size:12px; color:var(--bp-muted);">${f.ministry}</div>
           </div>
-          <button onclick="deletePost('${post.id}')" style="color:var(--bp-muted);"><i class="fa-solid fa-trash-can" style="font-size:13px;"></i></button>
         </div>
-        <div class="post-content">${escapeHtml(post.content)}</div>
-        ${post.media ? `<div class="post-media-attachment">${post.mediaType === 'video' ? `<video src="${post.media}" controls></video>` : `<img src="${post.media}" alt="Media">`}</div>` : ''}
+        <button class="btn btn-gold btn-sm"><i class="fa-solid fa-user-plus"></i> Connect</button>
       </div>
-    `;
-  });
-  container.innerHTML = html;
-}
+    `).join('');
+  }
 
-function editBio() {
-  const newBio = prompt('Update your bio:', currentUser.bio || '');
-  if (newBio !== null) {
-    currentUser.bio = newBio.trim();
-    saveUserDataChanges();
+  // Groups
+  groupsState = [
+    { name: 'Daily Bible Study & Prayer', members: '1.2k Believers' },
+    { name: 'Global Intercessory Network', members: '850 Believers' },
+    { name: 'Christian Digital Creators', members: '430 Believers' }
+  ];
+  const groupsList = document.getElementById('groupsList');
+  if (groupsList) {
+    groupsList.innerHTML = groupsState.map(g => `
+      <div class="group-card">
+        <div class="group-info">
+          <div class="avatar"><i class="fa-solid fa-people-group"></i></div>
+          <div>
+            <div style="font-weight:800; font-size:14px; color:var(--bp-primary);">${g.name}</div>
+            <div style="font-size:12px; color:var(--bp-muted);">${g.members}</div>
+          </div>
+        </div>
+        <button class="btn btn-outline btn-sm">Join Group</button>
+      </div>
+    `).join('');
+  }
+
+  // Videos
+  videosState = [
+    { title: 'Walking in Faith During Hard Times', speaker: 'Pastor John', duration: '18:24' },
+    { title: 'The Power of Morning Prayer', speaker: 'Evangelist Sarah', duration: '25:10' }
+  ];
+  const videosList = document.getElementById('videosList');
+  if (videosList) {
+    videosList.innerHTML = videosState.map(v => `
+      <div class="video-card">
+        <div class="video-container" style="display:flex; align-items:center; justify-content:center; color:white;">
+          <i class="fa-solid fa-circle-play" style="font-size:48px; color:var(--bp-gold); cursor:pointer;"></i>
+        </div>
+        <div class="video-info">
+          <div style="font-weight:800; font-size:15px; color:var(--bp-primary);">${v.title}</div>
+          <div style="font-size:12px; color:var(--bp-muted); margin-top:2px;">${v.speaker} • ${v.duration}</div>
+        </div>
+      </div>
+    `).join('');
   }
 }
 
-function updateAvatarPhoto(event) {
-  const file = event.target.files[0];
-  if (!file) return;
-  const reader = new FileReader();
-  reader.onload = function(e) {
-    currentUser.avatar = e.target.result;
-    saveUserDataChanges();
-  };
-  reader.readAsDataURL(file);
+function updateProfileStats() {
+  if (!currentUser) return;
+  const myPosts = postsState.filter(p => p.user_id === currentUser.id);
+  document.getElementById('statPostsCount').innerText = myPosts.length;
+  document.getElementById('statFriendsCount').innerText = friendsState.length;
 }
 
-function updateCoverPhoto(event) {
-  const file = event.target.files[0];
-  if (!file) return;
-  const reader = new FileReader();
-  reader.onload = function(e) {
-    currentUser.cover = e.target.result;
-    saveUserDataChanges();
-  };
-  reader.readAsDataURL(file);
+function updatePrayerStatCount() {
+  const current = parseInt(document.getElementById('statPrayersCount').innerText) || 0;
+  document.getElementById('statPrayersCount').innerText = current + 1;
 }
 
-function saveUserDataChanges() {
-  localStorage.setItem(DB_KEYS.currentUser, JSON.stringify(currentUser));
-  let users = JSON.parse(localStorage.getItem(DB_KEYS.users)) || [];
-  users = users.map(u => u.email === currentUser.email ? currentUser : u);
-  localStorage.setItem(DB_KEYS.users, JSON.stringify(users));
-  initApp();
+/* ---------------------------------------------------------
+   SEARCH & NOTIFICATIONS MODALS
+--------------------------------------------------------- */
+function toggleSearchModal() {
+  const box = document.getElementById('searchBoxModal');
+  box.classList.toggle('hidden');
 }
 
-/* =========================================================
-   SEARCH & NOTIFICATIONS LOGIC
-========================================================= */
 function handleSearch(query) {
-  const list = document.getElementById('searchResultsList');
-  if (!list) return;
-  const q = query.trim().toLowerCase();
-  if (!q) {
-    list.innerHTML = '';
+  const container = document.getElementById('searchResults');
+  if (!query.trim()) {
+    container.innerHTML = '';
     return;
   }
-
-  const posts = JSON.parse(localStorage.getItem(DB_KEYS.posts)) || [];
-  const matchedPosts = posts.filter(p => p.content.toLowerCase().includes(q) || p.authorName.toLowerCase().includes(q));
-
-  if (matchedPosts.length === 0) {
-    list.innerHTML = `<div style="padding:10px; font-size:13px; color:var(--bp-muted); text-align:center;">No results found for "${query}"</div>`;
-    return;
-  }
-
-  list.innerHTML = matchedPosts.map(p => `
-    <div class="search-item" onclick="switchTab('feed'); toggleSearchModal();">
+  container.innerHTML = `
+    <div class="search-item">
       <div>
-        <div style="font-weight:800; font-size:13px; color:var(--bp-primary);">${p.authorName}</div>
-        <div style="font-size:12px; color:var(--bp-muted); white-space:nowrap; overflow:hidden; text-overflow:ellipsis; max-width:240px;">${escapeHtml(p.content)}</div>
+        <div style="font-weight:700; font-size:13px; color:var(--bp-primary);">Search result for "${query}"</div>
+        <div style="font-size:11px; color:var(--bp-muted);">Believers+ Community Search</div>
       </div>
       <i class="fa-solid fa-chevron-right" style="font-size:12px; color:var(--bp-muted);"></i>
     </div>
-  `).join('');
+  `;
 }
 
-function renderNotificationsList() {
-  const list = document.getElementById('notifList');
-  if (!list) return;
-  const notifs = JSON.parse(localStorage.getItem(DB_KEYS.notifications)) || [];
-
-  if (notifs.length === 0) {
-    list.innerHTML = `<div style="padding:16px; text-align:center; font-size:13px; color:var(--bp-muted);">No notifications</div>`;
-    return;
-  }
-
-  list.innerHTML = notifs.map(n => `
-    <div class="notif-item ${n.unread ? 'unread' : ''}" onclick="markNotificationRead('${n.id}')">
-      <div class="avatar" style="width:32px; height:32px; font-size:12px;"><i class="fa-solid fa-bell"></i></div>
-      <div style="flex:1;">
-        <div style="font-size:13px; color:var(--bp-text);">${n.text}</div>
-        <div style="font-size:11px; color:var(--bp-muted); margin-top:2px;">${n.time}</div>
-      </div>
-    </div>
-  `).join('');
+function toggleNotifications() {
+  const drop = document.getElementById('notifDropdown');
+  drop.classList.toggle('hidden');
 }
 
-function updateNotificationsBadge() {
-  const notifs = JSON.parse(localStorage.getItem(DB_KEYS.notifications)) || [];
-  const unreadCount = notifs.filter(n => n.unread).length;
-  const badge = document.getElementById('notifBadge');
-  if (badge) {
-    if (unreadCount > 0) {
-      badge.textContent = unreadCount;
-      badge.classList.remove('hidden');
-    } else {
-      badge.classList.add('hidden');
-    }
-  }
+function clearNotifications() {
+  document.getElementById('notifList').innerHTML = `<div style="padding:16px; text-align:center; font-size:12px; color:var(--bp-muted);">No new notifications</div>`;
+  document.getElementById('notifBadge').classList.add('hidden');
 }
-
-function markNotificationRead(id) {
-  let notifs = JSON.parse(localStorage.getItem(DB_KEYS.notifications)) || [];
-  notifs = notifs.map(n => n.id === id ? { ...n, unread: false } : n);
-  localStorage.setItem(DB_KEYS.notifications, JSON.stringify(notifs));
-  renderNotificationsList();
-  updateNotificationsBadge();
-}
-
-function markAllNotificationsRead() {
-  let notifs = JSON.parse(localStorage.getItem(DB_KEYS.notifications)) || [];
-  notifs = notifs.map(n => ({ ...n, unread: false }));
-  localStorage.setItem(DB_KEYS.notifications, JSON.stringify(notifs));
-  renderNotificationsList();
-  updateNotificationsBadge();
-}
-
-/* =========================================================
-   UTILITIES
-========================================================= */
-function getTimeAgo(timestamp) {
-  const seconds = Math.floor((Date.now() - timestamp) / 1000);
-  if (seconds < 60) return 'Just now';
-  const minutes = Math.floor(seconds / 60);
-  if (minutes < 60) return `${minutes}m ago`;
-  const hours = Math.floor(minutes / 60);
-  if (hours < 24) return `${hours}h ago`;
-  const days = Math.floor(hours / 24);
-  return `${days}d ago`;
-}
-
-function escapeHtml(text) {
-  if (!text) return '';
-  return text
-    .replace(/&/g, "&amp;")
-    .replace(/</g, "&lt;")
-    .replace(/>/g, "&gt;")
-    .replace(/"/g, "&quot;")
-    .replace(/'/g, "&#039;");
-}
-
-// On page load
-window.addEventListener('DOMContentLoaded', () => {
-  checkAuthState();
-});
 </script>
-
 </body>
 </html>
