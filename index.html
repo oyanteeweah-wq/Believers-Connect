@@ -1,604 +1,605 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Believers+</title>
-
-  <!-- Tailwind CSS -->
   <script src="https://cdn.tailwindcss.com"></script>
-  <!-- FontAwesome Icons -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
-  <!-- Supabase JS Client -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-
   <style>
-    .hide-scrollbar::-webkit-scrollbar { display: none; }
-    .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
-    .glass-effect { background: rgba(255, 255, 255, 0.85); backdrop-filter: blur(12px); }
+    .hide-scrollbar::-webkit-scrollbar{display:none}
+    .hide-scrollbar{-ms-overflow-style:none;scrollbar-width:none}
+    .glass-effect{background:rgba(255,255,255,.86);backdrop-filter:blur(12px)}
   </style>
 </head>
+<body class="bg-slate-100 text-slate-800 font-sans antialiased min-h-screen">
 
-<body class="bg-slate-100 text-slate-800 font-sans antialiased selection:bg-indigo-500 selection:text-white min-h-screen">
-
-  <!-- ========================================== -->
-  <!-- 1. AUTHENTICATION SCREEN                   -->
-  <!-- ========================================== -->
-  <div id="authScreen" class="min-h-screen flex items-center justify-center p-4 bg-gradient-to-br from-indigo-900 via-indigo-800 to-slate-900">
-    <div class="w-full max-w-md bg-white/95 backdrop-blur-md rounded-2xl shadow-2xl overflow-hidden border border-white/20 p-8 space-y-6">
-      
-      <!-- Logo Header -->
-      <div class="text-center space-y-2">
-        <div class="inline-flex items-center justify-center w-16 h-16 rounded-full bg-indigo-600 text-white shadow-lg mb-2">
-          <i class="fa-solid font-bold text-2xl">B+</i>
-        </div>
-        <h1 class="text-3xl font-extrabold text-slate-900 tracking-tight">Believers+</h1>
-        <p class="text-sm text-slate-500">Connect, Pray, and Grow Together in Faith</p>
-      </div>
-
-      <!-- Auth Tabs -->
-      <div class="flex border-b border-slate-200 text-center font-semibold text-slate-600">
-        <button id="tabLogin" onclick="switchAuthTab('login')" class="flex-1 py-3 border-b-2 border-indigo-600 text-indigo-600 focus:outline-none transition">Sign In</button>
-        <button id="tabRegister" onclick="switchAuthTab('register')" class="flex-1 py-3 border-b-2 border-transparent hover:text-slate-800 focus:outline-none transition">Create Account</button>
-      </div>
-
-      <!-- Auth Form -->
-      <form id="authForm" onsubmit="handleAuthSubmit(event)" class="space-y-4">
-        
-        <!-- Registration Full Name Field -->
-        <div id="fullNameGroup" class="hidden">
-          <label class="block text-xs font-bold uppercase tracking-wider text-slate-600 mb-1">Full Name</label>
-          <div class="relative">
-            <i class="fa-solid fa-user absolute left-3 top-3.5 text-slate-400"></i>
-            <input type="text" id="authFullName" class="w-full pl-10 pr-4 py-3 rounded-xl border border-slate-300 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 text-sm outline-none transition" placeholder="John Doe" />
-          </div>
-        </div>
-
-        <!-- Email Field -->
-        <div>
-          <label class="block text-xs font-bold uppercase tracking-wider text-slate-600 mb-1">Email Address</label>
-          <div class="relative">
-            <i class="fa-solid fa-envelope absolute left-3 top-3.5 text-slate-400"></i>
-            <input type="email" id="authEmail" required class="w-full pl-10 pr-4 py-3 rounded-xl border border-slate-300 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 text-sm outline-none transition" placeholder="believer@example.com" />
-          </div>
-        </div>
-
-        <!-- Password Field -->
-        <div>
-          <label class="block text-xs font-bold uppercase tracking-wider text-slate-600 mb-1">Password</label>
-          <div class="relative">
-            <i class="fa-solid fa-lock absolute left-3 top-3.5 text-slate-400"></i>
-            <input type="password" id="authPassword" required minlength="6" class="w-full pl-10 pr-4 py-3 rounded-xl border border-slate-300 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 text-sm outline-none transition" placeholder="••••••••" />
-          </div>
-        </div>
-
-        <!-- Feedback Message Display -->
-        <div id="authError" class="hidden text-sm text-red-600 bg-red-50 p-3 rounded-xl border border-red-200"></div>
-        <div id="authSuccess" class="hidden text-sm text-emerald-600 bg-emerald-50 p-3 rounded-xl border border-emerald-200"></div>
-
-        <!-- Submit Button -->
-        <button type="submit" id="authBtn" class="w-full py-3.5 bg-indigo-600 hover:bg-indigo-700 text-white font-bold rounded-xl shadow-lg transition duration-200 flex items-center justify-center gap-2">
-          <span id="authBtnText">Sign In</span>
-          <i id="authSpinner" class="fa-solid fa-circle-notch fa-spin hidden"></i>
-        </button>
-      </form>
-
+<!-- AUTH -->
+<section id="authScreen" class="min-h-screen flex items-center justify-center p-4 bg-gradient-to-br from-indigo-900 via-indigo-800 to-slate-900">
+  <div class="w-full max-w-md bg-white/95 rounded-2xl shadow-2xl overflow-hidden border border-white/20 p-8 space-y-6">
+    <div class="text-center space-y-2">
+      <div class="inline-flex items-center justify-center w-16 h-16 rounded-full bg-indigo-600 text-white shadow-lg mb-2 font-black text-xl">B+</div>
+      <h1 class="text-3xl font-extrabold text-slate-900">Believers+</h1>
+      <p class="text-sm text-slate-500">Connect, Pray, and Grow Together in Faith</p>
     </div>
-  </div>
 
-  <!-- ========================================== -->
-  <!-- 2. MAIN APPLICATION SCREEN                 -->
-  <!-- ========================================== -->
-  <div id="appScreen" class="hidden min-h-screen flex flex-col">
-    
-    <!-- Top Navigation Bar -->
-    <header class="sticky top-0 z-40 glass-effect border-b border-slate-200 shadow-sm">
-      <div class="max-w-7xl mx-auto px-4 h-16 flex items-center justify-between gap-4">
-        
-        <!-- Brand -->
-        <div class="flex items-center gap-3">
-          <div class="w-10 h-10 rounded-xl bg-indigo-600 text-white font-black flex items-center justify-center text-lg shadow-md">
-            B+
-          </div>
-          <span class="text-xl font-black text-indigo-900 tracking-tight hidden sm:inline">Believers+</span>
-        </div>
-
-        <!-- Global Search Bar -->
-        <div class="flex-1 max-w-md relative">
-          <i class="fa-solid fa-magnifying-glass absolute left-3 top-3 text-slate-400 text-sm"></i>
-          <input type="text" placeholder="Search posts, prayers, believers..." class="w-full pl-9 pr-4 py-2 bg-slate-100 focus:bg-white rounded-full text-sm border border-transparent focus:border-indigo-300 focus:ring-2 focus:ring-indigo-500/20 outline-none transition" />
-        </div>
-
-        <!-- Header Controls -->
-        <div class="flex items-center gap-2">
-          <button class="w-10 h-10 rounded-full bg-slate-100 hover:bg-slate-200 flex items-center justify-center text-slate-600 transition">
-            <i class="fa-solid fa-bell"></i>
-          </button>
-          
-          <!-- User Profile Dropdown / Logout -->
-          <div class="flex items-center gap-2 pl-2 border-l border-slate-200">
-            <img id="navAvatar" src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=120&q=80" class="w-9 h-9 rounded-full object-cover border border-indigo-200" alt="Avatar" />
-            <button onclick="handleLogout()" title="Logout" class="px-3 py-1.5 text-xs font-semibold text-red-600 hover:bg-red-50 rounded-lg transition border border-red-200 flex items-center gap-1">
-              <i class="fa-solid fa-right-from-bracket"></i>
-              <span class="hidden md:inline">Sign Out</span>
-            </button>
-          </div>
-        </div>
-
-      </div>
-    </header>
-
-    <!-- Main Workspace -->
-    <div class="flex-1 max-w-7xl w-full mx-auto px-4 py-6 grid grid-cols-1 md:grid-cols-4 gap-6">
-      
-      <!-- Left Sidebar (Navigation & Profile Brief) -->
-      <aside class="md:col-span-1 space-y-6">
-        <div class="bg-white rounded-2xl p-5 border border-slate-200/80 shadow-sm text-center">
-          <div class="relative inline-block mb-3">
-            <img id="profileAvatar" src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=120&q=80" class="w-20 h-20 rounded-full object-cover border-2 border-indigo-500 p-0.5" alt="Profile" />
-          </div>
-          <h2 id="profileName" class="font-extrabold text-slate-800 text-lg">Believer</h2>
-          <p id="profileJoined" class="text-xs text-slate-400 font-medium mt-1">Joined Believers+ ...</p>
-
-          <!-- Edit Profile Trigger -->
-          <button onclick="openEditProfileModal()" class="mt-4 w-full py-2 text-xs font-bold text-indigo-600 bg-indigo-50 hover:bg-indigo-100 rounded-xl transition">
-            Edit Profile
-          </button>
-        </div>
-
-        <!-- Navigation Menu -->
-        <nav class="bg-white rounded-2xl p-3 border border-slate-200/80 shadow-sm space-y-1 font-semibold text-sm text-slate-600">
-          <a href="#" class="flex items-center gap-3 px-4 py-3 bg-indigo-50 text-indigo-600 rounded-xl">
-            <i class="fa-solid fa-house text-indigo-600"></i> Feed
-          </a>
-          <a href="#" class="flex items-center gap-3 px-4 py-3 hover:bg-slate-50 rounded-xl transition">
-            <i class="fa-solid fa-hands-praying"></i> Prayer Requests
-          </a>
-          <a href="#" class="flex items-center gap-3 px-4 py-3 hover:bg-slate-50 rounded-xl transition">
-            <i class="fa-solid fa-user-group"></i> Fellowship Groups
-          </a>
-          <a href="#" class="flex items-center gap-3 px-4 py-3 hover:bg-slate-50 rounded-xl transition">
-            <i class="fa-solid fa-book-bible"></i> Bible Studies
-          </a>
-        </nav>
-      </aside>
-
-      <!-- Center Content Feed -->
-      <main class="md:col-span-2 space-y-6">
-        
-        <!-- Post Creator Box -->
-        <div class="bg-white rounded-2xl p-4 border border-slate-200/80 shadow-sm space-y-3">
-          <div class="flex gap-3">
-            <img id="postBoxAvatar" src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=120&q=80" class="w-10 h-10 rounded-full object-cover" alt="Avatar" />
-            <textarea id="newPostContent" rows="3" placeholder="Share a testimony, scripture, or prayer request..." class="w-full p-3 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:ring-2 focus:ring-indigo-500 focus:bg-white outline-none transition resize-none"></textarea>
-          </div>
-          <div class="flex items-center justify-between border-t border-slate-100 pt-3">
-            <div class="flex items-center gap-2 text-slate-500 text-xs font-semibold">
-              <button class="flex items-center gap-1.5 px-3 py-1.5 hover:bg-slate-100 rounded-lg transition"><i class="fa-solid fa-image text-emerald-500"></i> Photo</button>
-              <button class="flex items-center gap-1.5 px-3 py-1.5 hover:bg-slate-100 rounded-lg transition"><i class="fa-solid fa-hands-praying text-amber-500"></i> Prayer</button>
-            </div>
-            <button onclick="handleCreatePost()" class="px-5 py-2 bg-indigo-600 hover:bg-indigo-700 text-white font-bold text-xs rounded-xl shadow-md transition">
-              Publish
-            </button>
-          </div>
-        </div>
-
-        <!-- Feed List -->
-        <div id="postsFeed" class="space-y-4">
-          <!-- Dynamic Posts Injected Here -->
-        </div>
-      </main>
-
-      <!-- Right Sidebar (Prayers & Recommended Groups) -->
-      <aside class="md:col-span-1 space-y-6">
-        
-        <!-- Prayer Request Widget -->
-        <div class="bg-white rounded-2xl p-5 border border-slate-200/80 shadow-sm space-y-4">
-          <div class="flex items-center justify-between">
-            <h3 class="font-extrabold text-slate-800 text-sm flex items-center gap-2">
-              <i class="fa-solid fa-hands-praying text-indigo-600"></i> Active Prayers
-            </h3>
-          </div>
-          <div id="prayerRequestsList" class="space-y-3 text-xs">
-            <p class="text-slate-400 italic">Loading active prayer requests...</p>
-          </div>
-        </div>
-
-      </aside>
-
+    <div class="flex border-b border-slate-200 text-center font-semibold text-slate-600">
+      <button id="tabLogin" type="button" class="flex-1 py-3 border-b-2 border-indigo-600 text-indigo-600" onclick="switchAuthTab('login')">Sign In</button>
+      <button id="tabRegister" type="button" class="flex-1 py-3 border-b-2 border-transparent" onclick="switchAuthTab('register')">Create Account</button>
     </div>
-  </div>
 
-  <!-- Profile Edit Modal -->
-  <div id="editProfileModal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 flex items-center justify-center p-4 hidden">
-    <div class="bg-white rounded-2xl max-w-md w-full p-6 space-y-4 shadow-2xl">
-      <h3 class="text-lg font-extrabold text-slate-900">Edit Profile</h3>
-      
-      <div>
-        <label class="block text-xs font-bold uppercase text-slate-500 mb-1">Full Name</label>
-        <input type="text" id="editFullName" class="w-full p-3 border border-slate-300 rounded-xl text-sm outline-none focus:ring-2 focus:ring-indigo-500" />
+    <form id="authForm" class="space-y-4">
+      <div id="fullNameGroup" class="hidden">
+        <label class="block text-xs font-bold uppercase tracking-wider text-slate-600 mb-1">Full Name</label>
+        <div class="relative">
+          <i class="fa-solid fa-user absolute left-3 top-3.5 text-slate-400"></i>
+          <input id="authFullName" type="text" autocomplete="name" class="w-full pl-10 pr-4 py-3 rounded-xl border border-slate-300 focus:ring-2 focus:ring-indigo-500 outline-none" placeholder="John Doe">
+        </div>
       </div>
 
       <div>
-        <label class="block text-xs font-bold uppercase text-slate-500 mb-1">Avatar URL</label>
-        <input type="url" id="editAvatarUrl" class="w-full p-3 border border-slate-300 rounded-xl text-sm outline-none focus:ring-2 focus:ring-indigo-500" />
+        <label class="block text-xs font-bold uppercase tracking-wider text-slate-600 mb-1">Email Address</label>
+        <div class="relative">
+          <i class="fa-solid fa-envelope absolute left-3 top-3.5 text-slate-400"></i>
+          <input id="authEmail" type="email" required autocomplete="email" class="w-full pl-10 pr-4 py-3 rounded-xl border border-slate-300 focus:ring-2 focus:ring-indigo-500 outline-none" placeholder="believer@example.com">
+        </div>
       </div>
 
-      <div class="flex justify-end gap-2 pt-2">
-        <button onclick="closeEditProfileModal()" class="px-4 py-2 text-xs font-bold text-slate-600 bg-slate-100 hover:bg-slate-200 rounded-xl transition">Cancel</button>
-        <button onclick="handleSaveProfile()" class="px-4 py-2 text-xs font-bold text-white bg-indigo-600 hover:bg-indigo-700 rounded-xl transition">Save Changes</button>
+      <div>
+        <label class="block text-xs font-bold uppercase tracking-wider text-slate-600 mb-1">Password</label>
+        <div class="relative">
+          <i class="fa-solid fa-lock absolute left-3 top-3.5 text-slate-400"></i>
+          <input id="authPassword" type="password" required minlength="6" autocomplete="current-password" class="w-full pl-10 pr-4 py-3 rounded-xl border border-slate-300 focus:ring-2 focus:ring-indigo-500 outline-none" placeholder="••••••••">
+        </div>
+      </div>
+
+      <div id="authError" class="hidden text-sm text-red-600 bg-red-50 p-3 rounded-xl border border-red-200"></div>
+      <div id="authSuccess" class="hidden text-sm text-emerald-600 bg-emerald-50 p-3 rounded-xl border border-emerald-200"></div>
+
+      <button id="authBtn" type="submit" class="w-full py-3.5 bg-indigo-600 hover:bg-indigo-700 disabled:opacity-60 text-white font-bold rounded-xl shadow-lg flex items-center justify-center gap-2">
+        <span id="authBtnText">Sign In</span>
+        <i id="authSpinner" class="fa-solid fa-circle-notch fa-spin hidden"></i>
+      </button>
+    </form>
+  </div>
+</section>
+
+<!-- APP -->
+<section id="appScreen" class="hidden min-h-screen flex flex-col">
+  <header class="sticky top-0 z-40 glass-effect border-b border-slate-200 shadow-sm">
+    <div class="max-w-7xl mx-auto px-4 h-16 flex items-center justify-between gap-4">
+      <div class="flex items-center gap-3">
+        <div class="w-10 h-10 rounded-xl bg-indigo-600 text-white font-black flex items-center justify-center shadow-md">B+</div>
+        <span class="text-xl font-black text-indigo-900 hidden sm:inline">Believers+</span>
+      </div>
+      <div class="flex-1 max-w-md relative">
+        <i class="fa-solid fa-magnifying-glass absolute left-3 top-3 text-slate-400 text-sm"></i>
+        <input id="searchInput" type="text" placeholder="Search posts..." class="w-full pl-9 pr-4 py-2 bg-slate-100 focus:bg-white rounded-full text-sm border border-transparent focus:border-indigo-300 outline-none">
+      </div>
+      <div class="flex items-center gap-2">
+        <button type="button" class="w-10 h-10 rounded-full bg-slate-100 text-slate-600"><i class="fa-solid fa-bell"></i></button>
+        <div class="flex items-center gap-2 pl-2 border-l border-slate-200">
+          <img id="navAvatar" class="w-9 h-9 rounded-full object-cover border border-indigo-200" alt="Avatar">
+          <button type="button" onclick="handleLogout()" class="px-3 py-1.5 text-xs font-semibold text-red-600 hover:bg-red-50 rounded-lg border border-red-200">
+            <i class="fa-solid fa-right-from-bracket"></i> <span class="hidden md:inline">Sign Out</span>
+          </button>
+        </div>
       </div>
     </div>
+  </header>
+
+  <div class="flex-1 max-w-7xl w-full mx-auto px-4 py-6 grid grid-cols-1 md:grid-cols-4 gap-6">
+    <aside class="md:col-span-1 space-y-6">
+      <div class="bg-white rounded-2xl p-5 border border-slate-200 shadow-sm text-center">
+        <img id="profileAvatar" class="w-20 h-20 mx-auto rounded-full object-cover border-2 border-indigo-500 mb-3" alt="Profile">
+        <h2 id="profileName" class="font-extrabold text-slate-800 text-lg">Believer</h2>
+        <p id="profileJoined" class="text-xs text-slate-400 font-medium mt-1">Joined Believers+ ...</p>
+        <button type="button" onclick="openEditProfileModal()" class="mt-4 w-full py-2 text-xs font-bold text-indigo-600 bg-indigo-50 hover:bg-indigo-100 rounded-xl">Edit Profile</button>
+      </div>
+
+      <nav class="bg-white rounded-2xl p-3 border border-slate-200 shadow-sm space-y-1 font-semibold text-sm text-slate-600">
+        <a href="#" class="flex items-center gap-3 px-4 py-3 bg-indigo-50 text-indigo-600 rounded-xl"><i class="fa-solid fa-house"></i> Feed</a>
+        <a href="#prayers" class="flex items-center gap-3 px-4 py-3 hover:bg-slate-50 rounded-xl"><i class="fa-solid fa-hands-praying"></i> Prayer Requests</a>
+        <a href="#" onclick="return false" class="flex items-center gap-3 px-4 py-3 hover:bg-slate-50 rounded-xl"><i class="fa-solid fa-user-group"></i> Fellowship Groups</a>
+        <a href="#" onclick="return false" class="flex items-center gap-3 px-4 py-3 hover:bg-slate-50 rounded-xl"><i class="fa-solid fa-book-bible"></i> Bible Studies</a>
+      </nav>
+    </aside>
+
+    <main class="md:col-span-2 space-y-6">
+      <div class="bg-white rounded-2xl p-4 border border-slate-200 shadow-sm space-y-3">
+        <div class="flex gap-3">
+          <img id="postBoxAvatar" class="w-10 h-10 rounded-full object-cover" alt="Avatar">
+          <textarea id="newPostContent" rows="3" placeholder="Share a testimony, scripture, or prayer request..." class="w-full p-3 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:ring-2 focus:ring-indigo-500 outline-none resize-none"></textarea>
+        </div>
+        <div class="flex items-center justify-end border-t border-slate-100 pt-3">
+          <button type="button" onclick="handleCreatePost()" class="px-5 py-2 bg-indigo-600 hover:bg-indigo-700 text-white font-bold text-xs rounded-xl">Publish</button>
+        </div>
+      </div>
+      <div id="postsFeed" class="space-y-4"></div>
+    </main>
+
+    <aside id="prayers" class="md:col-span-1 space-y-6">
+      <div class="bg-white rounded-2xl p-5 border border-slate-200 shadow-sm space-y-4">
+        <h3 class="font-extrabold text-slate-800 text-sm flex items-center gap-2"><i class="fa-solid fa-hands-praying text-indigo-600"></i> Active Prayers</h3>
+        <div id="prayerRequestsList" class="space-y-3 text-xs"></div>
+      </div>
+    </aside>
   </div>
+</section>
 
-  <!-- ========================================== -->
-  <!-- 3. APPLICATION JAVASCRIPT LOGIC            -->
-  <!-- ========================================== -->
-  <script>
-    // --- SUPABASE CLIENT CONFIGURATION ---
-    const SUPABASE_URL = "https://your-supabase-project.supabase.co";
-    const SUPABASE_ANON_KEY = "your-anon-key";
-    
-    const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+<!-- EDIT PROFILE -->
+<div id="editProfileModal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 hidden items-center justify-center p-4">
+  <div class="bg-white rounded-2xl max-w-md w-full p-6 space-y-4 shadow-2xl">
+    <h3 class="text-lg font-extrabold text-slate-900">Edit Profile</h3>
+    <div>
+      <label class="block text-xs font-bold uppercase text-slate-500 mb-1">Full Name</label>
+      <input id="editFullName" type="text" class="w-full p-3 border border-slate-300 rounded-xl text-sm outline-none focus:ring-2 focus:ring-indigo-500">
+    </div>
+    <div>
+      <label class="block text-xs font-bold uppercase text-slate-500 mb-1">Avatar URL</label>
+      <input id="editAvatarUrl" type="url" class="w-full p-3 border border-slate-300 rounded-xl text-sm outline-none focus:ring-2 focus:ring-indigo-500">
+    </div>
+    <div id="profileSaveMessage" class="hidden text-sm p-3 rounded-xl"></div>
+    <div class="flex justify-end gap-2 pt-2">
+      <button type="button" onclick="closeEditProfileModal()" class="px-4 py-2 text-xs font-bold text-slate-600 bg-slate-100 rounded-xl">Cancel</button>
+      <button id="saveProfileBtn" type="button" onclick="handleSaveProfile()" class="px-4 py-2 text-xs font-bold text-white bg-indigo-600 rounded-xl">Save Changes</button>
+    </div>
+  </div>
+</div>
 
-    // Dynamic State Variable
-    let currentUser = null;
-    let authMode = 'login'; // 'login' or 'register'
+<script>
+  /* =========================================================
+     BELIEVERS+ SUPABASE CONFIG
+     ========================================================= */
+  const SUPABASE_URL = "https://zupbqtnqbsmlwbidsddk.supabase.co";
 
-    // Document Initialization
-    document.addEventListener('DOMContentLoaded', () => {
-      initAuth();
-    });
+  /*
+    Replace ONLY the value below with the publishable/anon key
+    from Supabase Dashboard > Project Settings > API.
+    Never put a service-role/secret key in browser code.
+  */
+  const SUPABASE_ANON_KEY = "PASTE_YOUR_SUPABASE_PUBLISHABLE_OR_ANON_KEY_HERE";
 
-    // --- AUTHENTICATION ENGINE ---
-    async function initAuth() {
-      // 1. Initial Session Retrieval
-      const { data: { session }, error } = await supabaseClient.auth.getSession();
-      
-      if (session && session.user) {
-        currentUser = session.user;
-        await loadProfileAndInitialize();
-      } else {
-        showAuthScreen();
-      }
+  const supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
-      // 2. Auth State Observer Listener
-      supabaseClient.auth.onAuthStateChange(async (event, session) => {
-        if (session && session.user) {
+  const DEFAULT_AVATAR = "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=120&q=80";
+  let currentUser = null;
+  let currentProfile = null;
+  let authMode = "login";
+  let authListenerStarted = false;
+
+  document.addEventListener("DOMContentLoaded", initAuth);
+
+  async function initAuth() {
+    if (!supabaseClient) {
+      showAuthError("Supabase could not be initialized.");
+      return;
+    }
+
+    const { data, error } = await supabaseClient.auth.getSession();
+    if (error) {
+      showAuthError(error.message);
+      showAuthScreen();
+      return;
+    }
+
+    if (data.session?.user) {
+      currentUser = data.session.user;
+      await loadProfileAndInitialize();
+    } else {
+      showAuthScreen();
+    }
+
+    if (!authListenerStarted) {
+      authListenerStarted = true;
+      supabaseClient.auth.onAuthStateChange((event, session) => {
+        if (event === "SIGNED_OUT") {
+          currentUser = null;
+          currentProfile = null;
+          showAuthScreen();
+          return;
+        }
+
+        if (session?.user) {
           currentUser = session.user;
+          // Avoid doing heavy async work inside the auth callback itself.
+          setTimeout(() => loadProfileAndInitialize(), 0);
+        }
+      });
+    }
+  }
+
+  function switchAuthTab(mode) {
+    authMode = mode;
+    hideAuthFeedback();
+
+    const login = document.getElementById("tabLogin");
+    const register = document.getElementById("tabRegister");
+    const nameGroup = document.getElementById("fullNameGroup");
+    const nameInput = document.getElementById("authFullName");
+    const password = document.getElementById("authPassword");
+    const button = document.getElementById("authBtnText");
+
+    if (mode === "register") {
+      register.className = "flex-1 py-3 border-b-2 border-indigo-600 text-indigo-600 font-semibold";
+      login.className = "flex-1 py-3 border-b-2 border-transparent text-slate-600 font-semibold";
+      nameGroup.classList.remove("hidden");
+      nameInput.required = true;
+      password.autocomplete = "new-password";
+      button.textContent = "Create Account";
+    } else {
+      login.className = "flex-1 py-3 border-b-2 border-indigo-600 text-indigo-600 font-semibold";
+      register.className = "flex-1 py-3 border-b-2 border-transparent text-slate-600 font-semibold";
+      nameGroup.classList.add("hidden");
+      nameInput.required = false;
+      password.autocomplete = "current-password";
+      button.textContent = "Sign In";
+    }
+  }
+
+  document.getElementById("authForm").addEventListener("submit", handleAuthSubmit);
+
+  async function handleAuthSubmit(event) {
+    event.preventDefault();
+    hideAuthFeedback();
+
+    const email = document.getElementById("authEmail").value.trim().toLowerCase();
+    const password = document.getElementById("authPassword").value;
+    const fullName = document.getElementById("authFullName").value.trim();
+
+    if (!email || !password) return showAuthError("Please enter your email and password.");
+    if (authMode === "register" && !fullName) return showAuthError("Please enter your full name.");
+    if (password.length < 6) return showAuthError("Password must be at least 6 characters.");
+
+    setAuthLoading(true);
+
+    try {
+      if (authMode === "register") {
+        const { data, error } = await supabaseClient.auth.signUp({
+          email,
+          password,
+          options: { data: { full_name: fullName } }
+        });
+
+        if (error) throw error;
+
+        if (data.session?.user) {
+          currentUser = data.session.user;
           await loadProfileAndInitialize();
         } else {
-          currentUser = null;
-          showAuthScreen();
+          showAuthSuccess("Account created successfully. Please check your email to confirm your account, then sign in.");
         }
-      });
-    }
-
-    function switchAuthTab(mode) {
-      authMode = mode;
-      const tabLogin = document.getElementById('tabLogin');
-      const tabRegister = document.getElementById('tabRegister');
-      const fullNameGroup = document.getElementById('fullNameGroup');
-      const authBtnText = document.getElementById('authBtnText');
-      
-      hideAuthFeedback();
-
-      if (mode === 'register') {
-        tabRegister.className = "flex-1 py-3 border-b-2 border-indigo-600 text-indigo-600 focus:outline-none transition font-semibold";
-        tabLogin.className = "flex-1 py-3 border-b-2 border-transparent hover:text-slate-800 focus:outline-none transition font-semibold";
-        fullNameGroup.classList.remove('hidden');
-        authBtnText.textContent = 'Create Account';
       } else {
-        tabLogin.className = "flex-1 py-3 border-b-2 border-indigo-600 text-indigo-600 focus:outline-none transition font-semibold";
-        tabRegister.className = "flex-1 py-3 border-b-2 border-transparent hover:text-slate-800 focus:outline-none transition font-semibold";
-        fullNameGroup.classList.add('hidden');
-        authBtnText.textContent = 'Sign In';
-      }
-    }
-
-    async function handleAuthSubmit(e) {
-      e.preventDefault();
-      hideAuthFeedback();
-
-      const email = document.getElementById('authEmail').value.trim();
-      const password = document.getElementById('authPassword').value;
-      const fullName = document.getElementById('authFullName').value.trim();
-
-      setAuthLoading(true);
-
-      try {
-        if (authMode === 'register') {
-          // Supabase Auth Registration
-          const { data, error } = await supabaseClient.auth.signUp({
-            email: email,
-            password: password,
-            options: {
-              data: {
-                full_name: fullName
-              }
-            }
-          });
-
-          if (error) throw error;
-
-          showAuthSuccess("Registration successful! Please check your email or log in.");
-        } else {
-          // Supabase Auth Login
-          const { data, error } = await supabaseClient.auth.signInWithPassword({
-            email: email,
-            password: password
-          });
-
-          if (error) throw error;
+        const { data, error } = await supabaseClient.auth.signInWithPassword({ email, password });
+        if (error) throw error;
+        if (data.session?.user) {
+          currentUser = data.session.user;
+          await loadProfileAndInitialize();
         }
-      } catch (err) {
-        showAuthError(err.message || "Authentication failed.");
-      } finally {
-        setAuthLoading(false);
       }
+    } catch (error) {
+      showAuthError(formatSupabaseError(error));
+    } finally {
+      setAuthLoading(false);
     }
+  }
 
-    async function handleLogout() {
-      await supabaseClient.auth.signOut();
-    }
+  async function handleLogout() {
+    const { error } = await supabaseClient.auth.signOut();
+    if (error) alert(formatSupabaseError(error));
+  }
 
-    // --- SCREEN STATE MANAGERS ---
-    function showAuthScreen() {
-      document.getElementById('authScreen').classList.remove('hidden');
-      document.getElementById('appScreen').classList.add('hidden');
-    }
+  async function loadProfileAndInitialize() {
+    if (!currentUser) return;
 
-    function showMainAppScreen() {
-      document.getElementById('authScreen').classList.add('hidden');
-      document.getElementById('appScreen').classList.remove('hidden');
-    }
+    try {
+      const { data: profile, error } = await supabaseClient
+        .from("profiles")
+        .select("*")
+        .eq("id", currentUser.id)
+        .maybeSingle();
 
-    // --- USER PROFILE INTEGRATION ---
-    async function loadProfileAndInitialize() {
-      if (!currentUser) return;
+      if (error) throw error;
 
-      try {
-        // Fetch or Initialize Profile record in public.profiles
-        let { data: profile, error } = await supabaseClient
-          .from('profiles')
-          .select('*')
-          .eq('id', currentUser.id)
+      if (!profile) {
+        // The database trigger should normally create this row.
+        // We only attempt a profile insert if it is genuinely missing.
+        const fallbackName = currentUser.user_metadata?.full_name || currentUser.email?.split("@")[0] || "Believer";
+
+        const { data: created, error: createError } = await supabaseClient
+          .from("profiles")
+          .insert({
+            id: currentUser.id,
+            full_name: fallbackName,
+            avatar_url: DEFAULT_AVATAR
+          })
+          .select("*")
           .single();
 
-        if (error && error.code === 'PGRST116') {
-          // Record missing; initialize missing profile row
-          const newProfile = {
-            id: currentUser.id,
-            full_name: currentUser.user_metadata?.full_name || currentUser.email.split('@')[0],
-            avatar_url: 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=120&q=80'
-          };
-
-          const { data: createdProfile, error: createErr } = await supabaseClient
-            .from('profiles')
-            .insert([newProfile])
-            .select()
-            .single();
-
-          if (!createErr) profile = createdProfile;
-        }
-
-        // Render UI with Profile details
-        if (profile) {
-          const name = profile.full_name || currentUser.email;
-          const avatar = profile.avatar_url || 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=120&q=80';
-          
-          document.getElementById('profileName').textContent = name;
-          document.getElementById('navAvatar').src = avatar;
-          document.getElementById('profileAvatar').src = avatar;
-          document.getElementById('postBoxAvatar').src = avatar;
-
-          // Format registration date from database created_at
-          if (profile.created_at) {
-            const date = new Date(profile.created_at);
-            document.getElementById('profileJoined').textContent = `Joined Believers+ ${date.toLocaleDateString('en-US', { month: 'short', year: 'numeric' })}`;
-          }
-        }
-
-        showMainAppScreen();
-        
-        // Load Core Application Feeds
-        await Promise.all([
-          loadPostsFeed(),
-          loadPrayerRequests()
-        ]);
-
-      } catch (err) {
-        console.error("Error loading application resources:", err);
-      }
-    }
-
-    // --- PROFILE MODAL ACTIONS ---
-    function openEditProfileModal() {
-      document.getElementById('editFullName').value = document.getElementById('profileName').textContent;
-      document.getElementById('editAvatarUrl').value = document.getElementById('profileAvatar').src;
-      document.getElementById('editProfileModal').classList.remove('hidden');
-    }
-
-    function closeEditProfileModal() {
-      document.getElementById('editProfileModal').classList.add('hidden');
-    }
-
-    async function handleSaveProfile() {
-      const newName = document.getElementById('editFullName').value.trim();
-      const newAvatar = document.getElementById('editAvatarUrl').value.trim();
-
-      const { error } = await supabaseClient
-        .from('profiles')
-        .update({
-          full_name: newName,
-          avatar_url: newAvatar
-        })
-        .eq('id', currentUser.id);
-
-      if (!error) {
-        closeEditProfileModal();
-        await loadProfileAndInitialize();
+        if (createError) throw createError;
+        currentProfile = created;
       } else {
-        alert("Error saving profile: " + error.message);
+        currentProfile = profile;
       }
+
+      renderProfile(currentProfile);
+      showMainAppScreen();
+
+      await Promise.all([loadPostsFeed(), loadPrayerRequests()]);
+    } catch (error) {
+      console.error(error);
+      showAuthError("Could not load your profile: " + formatSupabaseError(error));
+      showAuthScreen();
+    }
+  }
+
+  function renderProfile(profile) {
+    const name = profile?.full_name || currentUser?.email || "Believer";
+    const avatar = profile?.avatar_url || DEFAULT_AVATAR;
+
+    document.getElementById("profileName").textContent = name;
+    document.getElementById("navAvatar").src = avatar;
+    document.getElementById("profileAvatar").src = avatar;
+    document.getElementById("postBoxAvatar").src = avatar;
+
+    if (profile?.created_at) {
+      const date = new Date(profile.created_at);
+      document.getElementById("profileJoined").textContent =
+        `Joined Believers+ ${date.toLocaleDateString("en-US", { month: "short", year: "numeric" })}`;
+    } else {
+      document.getElementById("profileJoined").textContent = "Joined Believers+";
+    }
+  }
+
+  function openEditProfileModal() {
+    if (!currentProfile) return;
+    document.getElementById("editFullName").value = currentProfile.full_name || "";
+    document.getElementById("editAvatarUrl").value = currentProfile.avatar_url || "";
+    document.getElementById("profileSaveMessage").className = "hidden text-sm p-3 rounded-xl";
+    const modal = document.getElementById("editProfileModal");
+    modal.classList.remove("hidden");
+    modal.classList.add("flex");
+  }
+
+  function closeEditProfileModal() {
+    const modal = document.getElementById("editProfileModal");
+    modal.classList.add("hidden");
+    modal.classList.remove("flex");
+  }
+
+  async function handleSaveProfile() {
+    if (!currentUser) return;
+
+    const fullName = document.getElementById("editFullName").value.trim();
+    const avatarUrl = document.getElementById("editAvatarUrl").value.trim();
+    const button = document.getElementById("saveProfileBtn");
+    const message = document.getElementById("profileSaveMessage");
+
+    if (!fullName) {
+      showProfileMessage("Full name is required.", false);
+      return;
     }
 
-    // --- POSTS ENGINE ---
-    async function loadPostsFeed() {
-      const container = document.getElementById('postsFeed');
-      
-      const { data: posts, error } = await supabaseClient
-        .from('posts')
-        .select(`
-          *,
-          profiles:user_id (full_name, avatar_url),
-          post_likes (user_id)
-        `)
-        .order('created_at', { ascending: false });
+    button.disabled = true;
 
-      if (error) {
-        container.innerHTML = `<div class="p-4 bg-red-50 text-red-600 rounded-xl text-sm">Error loading posts: ${error.message}</div>`;
-        return;
-      }
+    try {
+      const { data, error } = await supabaseClient
+        .from("profiles")
+        .update({
+          full_name: fullName,
+          avatar_url: avatarUrl || DEFAULT_AVATAR
+        })
+        .eq("id", currentUser.id)
+        .select("*")
+        .single();
 
-      if (!posts || posts.length === 0) {
-        container.innerHTML = `<div class="p-8 text-center bg-white rounded-2xl border border-slate-200 text-slate-400 text-sm">No posts yet. Be the first to share!</div>`;
-        return;
-      }
+      if (error) throw error;
 
-      container.innerHTML = posts.map(post => {
-        const isLiked = post.post_likes?.some(like => like.user_id === currentUser.id);
-        const likeCount = post.post_likes?.length || 0;
-        const authorName = post.profiles?.full_name || 'Believer';
-        const authorAvatar = post.profiles?.avatar_url || 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=120&q=80';
+      currentProfile = data;
+      renderProfile(currentProfile);
+      closeEditProfileModal();
+      await loadPostsFeed();
+    } catch (error) {
+      showProfileMessage(formatSupabaseError(error), false);
+    } finally {
+      button.disabled = false;
+    }
+  }
 
-        return `
-          <div class="bg-white rounded-2xl p-5 border border-slate-200/80 shadow-sm space-y-4">
-            <div class="flex items-center gap-3">
-              <img src="${authorAvatar}" class="w-10 h-10 rounded-full object-cover" />
-              <div>
-                <h4 class="font-bold text-slate-800 text-sm">${authorName}</h4>
-                <p class="text-xs text-slate-400">${new Date(post.created_at).toLocaleDateString()}</p>
-              </div>
-            </div>
-            
-            <p class="text-slate-700 text-sm leading-relaxed">${escapeHtml(post.content)}</p>
+  async function loadPostsFeed() {
+    const container = document.getElementById("postsFeed");
+    if (!currentUser) return;
 
-            <div class="flex items-center gap-6 pt-3 border-t border-slate-100 text-xs font-semibold text-slate-500">
-              <button onclick="toggleLike('${post.id}', ${isLiked})" class="flex items-center gap-1.5 ${isLiked ? 'text-red-500 font-bold' : 'hover:text-red-500'} transition">
-                <i class="${isLiked ? 'fa-solid' : 'fa-regular'} fa-heart"></i>
-                <span>${likeCount} ${likeCount === 1 ? 'Like' : 'Likes'}</span>
-              </button>
+    container.innerHTML = `<div class="p-6 text-center bg-white rounded-2xl border border-slate-200 text-slate-400 text-sm"><i class="fa-solid fa-circle-notch fa-spin mr-2"></i>Loading posts...</div>`;
+
+    const { data: posts, error } = await supabaseClient
+      .from("posts")
+      .select(`
+        *,
+        profiles:user_id (full_name, avatar_url),
+        post_likes (user_id)
+      `)
+      .order("created_at", { ascending: false });
+
+    if (error) {
+      container.innerHTML = `<div class="p-4 bg-red-50 text-red-600 rounded-xl text-sm border border-red-200">Error loading posts: ${escapeHtml(error.message)}</div>`;
+      return;
+    }
+
+    const filtered = (posts || []).filter(post => {
+      const q = document.getElementById("searchInput").value.trim().toLowerCase();
+      if (!q) return true;
+      return String(post.content || "").toLowerCase().includes(q) ||
+             String(post.profiles?.full_name || "").toLowerCase().includes(q);
+    });
+
+    if (!filtered.length) {
+      container.innerHTML = `<div class="p-8 text-center bg-white rounded-2xl border border-slate-200 text-slate-400 text-sm">No posts found.</div>`;
+      return;
+    }
+
+    container.innerHTML = filtered.map(post => {
+      const likes = Array.isArray(post.post_likes) ? post.post_likes : [];
+      const isLiked = likes.some(like => like.user_id === currentUser.id);
+      const likeCount = likes.length;
+      const authorName = post.profiles?.full_name || "Believer";
+      const authorAvatar = post.profiles?.avatar_url || DEFAULT_AVATAR;
+      const postDate = post.created_at ? new Date(post.created_at).toLocaleString() : "";
+
+      return `
+        <article class="bg-white rounded-2xl p-5 border border-slate-200 shadow-sm space-y-4">
+          <div class="flex items-center gap-3">
+            <img src="${escapeAttribute(authorAvatar)}" class="w-10 h-10 rounded-full object-cover" alt="Avatar">
+            <div>
+              <h4 class="font-bold text-slate-800 text-sm">${escapeHtml(authorName)}</h4>
+              <p class="text-xs text-slate-400">${escapeHtml(postDate)}</p>
             </div>
           </div>
-        `;
-      }).join('');
+          <p class="text-slate-700 text-sm leading-relaxed whitespace-pre-wrap">${escapeHtml(post.content || "")}</p>
+          <div class="flex items-center gap-6 pt-3 border-t border-slate-100 text-xs font-semibold text-slate-500">
+            <button type="button" onclick="toggleLike('${escapeAttribute(post.id)}', ${isLiked})" class="flex items-center gap-1.5 ${isLiked ? "text-red-500 font-bold" : "hover:text-red-500"}">
+              <i class="${isLiked ? "fa-solid" : "fa-regular"} fa-heart"></i>
+              <span>${likeCount} ${likeCount === 1 ? "Like" : "Likes"}</span>
+            </button>
+          </div>
+        </article>
+      `;
+    }).join("");
+  }
+
+  async function handleCreatePost() {
+    if (!currentUser) return;
+
+    const textarea = document.getElementById("newPostContent");
+    const content = textarea.value.trim();
+
+    if (!content) {
+      alert("Please write something before publishing.");
+      return;
     }
 
-    async function handleCreatePost() {
-      const textarea = document.getElementById('newPostContent');
-      const content = textarea.value.trim();
+    const { error } = await supabaseClient
+      .from("posts")
+      .insert({ user_id: currentUser.id, content });
 
-      if (!content) return;
-
-      const { error } = await supabaseClient
-        .from('posts')
-        .insert([{
-          user_id: currentUser.id,
-          content: content
-        }]);
-
-      if (!error) {
-        textarea.value = '';
-        await loadPostsFeed();
-      } else {
-        alert("Could not create post: " + error.message);
-      }
+    if (error) {
+      alert("Could not create post: " + formatSupabaseError(error));
+      return;
     }
 
-    // --- LIKE SYSTEM ---
-    async function toggleLike(postId, isCurrentlyLiked) {
+    textarea.value = "";
+    await loadPostsFeed();
+  }
+
+  async function toggleLike(postId, isCurrentlyLiked) {
+    if (!currentUser) return;
+
+    try {
       if (isCurrentlyLiked) {
-        await supabaseClient
-          .from('post_likes')
+        const { error } = await supabaseClient
+          .from("post_likes")
           .delete()
-          .eq('post_id', postId)
-          .eq('user_id', currentUser.id);
+          .eq("post_id", postId)
+          .eq("user_id", currentUser.id);
+
+        if (error) throw error;
       } else {
-        await supabaseClient
-          .from('post_likes')
-          .insert([{
-            post_id: postId,
-            user_id: currentUser.id
-          }]);
+        const { error } = await supabaseClient
+          .from("post_likes")
+          .insert({ post_id: postId, user_id: currentUser.id });
+
+        if (error) throw error;
       }
+
       await loadPostsFeed();
+    } catch (error) {
+      alert("Could not update Like: " + formatSupabaseError(error));
+    }
+  }
+
+  async function loadPrayerRequests() {
+    const container = document.getElementById("prayerRequestsList");
+
+    const { data: prayers, error } = await supabaseClient
+      .from("prayer_requests")
+      .select("*")
+      .order("created_at", { ascending: false })
+      .limit(5);
+
+    if (error) {
+      container.innerHTML = `<p class="text-red-500">Could not load prayers: ${escapeHtml(error.message)}</p>`;
+      return;
     }
 
-    // --- PRAYER REQUESTS ENGINE ---
-    async function loadPrayerRequests() {
-      const container = document.getElementById('prayerRequestsList');
-
-      const { data: prayers, error } = await supabaseClient
-        .from('prayer_requests')
-        .select('*')
-        .order('created_at', { ascending: false })
-        .limit(5);
-
-      if (error || !prayers || prayers.length === 0) {
-        container.innerHTML = `<p class="text-slate-400 italic">No active prayer requests.</p>`;
-        return;
-      }
-
-      container.innerHTML = prayers.map(p => `
-        <div class="p-3 bg-slate-50 rounded-xl border border-slate-100 space-y-1">
-          <p class="font-semibold text-slate-700">${escapeHtml(p.title || 'Prayer Request')}</p>
-          <p class="text-slate-500 line-clamp-2">${escapeHtml(p.request)}</p>
-        </div>
-      `).join('');
+    if (!prayers?.length) {
+      container.innerHTML = `<p class="text-slate-400 italic">No active prayer requests.</p>`;
+      return;
     }
 
-    // --- UTILITIES & FEEDBACK HELPERS ---
-    function setAuthLoading(loading) {
-      const btn = document.getElementById('authBtn');
-      const spinner = document.getElementById('authSpinner');
-      btn.disabled = loading;
-      if (loading) {
-        spinner.classList.remove('hidden');
-      } else {
-        spinner.classList.add('hidden');
-      }
-    }
+    container.innerHTML = prayers.map(p => `
+      <div class="p-3 bg-slate-50 rounded-xl border border-slate-100 space-y-1">
+        <p class="font-semibold text-slate-700">${escapeHtml(p.title || "Prayer Request")}</p>
+        <p class="text-slate-500">${escapeHtml(p.request || "")}</p>
+      </div>
+    `).join("");
+  }
 
-    function showAuthError(msg) {
-      const errBox = document.getElementById('authError');
-      errBox.textContent = msg;
-      errBox.classList.remove('hidden');
-    }
+  document.getElementById("searchInput").addEventListener("input", () => loadPostsFeed());
 
-    function showAuthSuccess(msg) {
-      const successBox = document.getElementById('authSuccess');
-      successBox.textContent = msg;
-      successBox.classList.remove('hidden');
-    }
+  function showAuthScreen() {
+    document.getElementById("authScreen").classList.remove("hidden");
+    document.getElementById("appScreen").classList.add("hidden");
+  }
 
-    function hideAuthFeedback() {
-      document.getElementById('authError').classList.add('hidden');
-      document.getElementById('authSuccess').classList.add('hidden');
-    }
+  function showMainAppScreen() {
+    document.getElementById("authScreen").classList.add("hidden");
+    document.getElementById("appScreen").classList.remove("hidden");
+  }
 
-    function escapeHtml(text) {
-      if (!text) return '';
-      return text.replace(/[&<>"']/g, function(m) {
-        return {
-          '&': '&amp;',
-          '<': '&lt;',
-          '>': '&gt;',
-          '"': '&quot;',
-          "'": '&#039;'
-        }[m];
-      });
-    }
-  </script>
+  function setAuthLoading(loading) {
+    document.getElementById("authBtn").disabled = loading;
+    document.getElementById("authSpinner").classList.toggle("hidden", !loading);
+  }
+
+  function showAuthError(message) {
+    const box = document.getElementById("authError");
+    box.textContent = message;
+    box.classList.remove("hidden");
+    document.getElementById("authSuccess").classList.add("hidden");
+  }
+
+  function showAuthSuccess(message) {
+    const box = document.getElementById("authSuccess");
+    box.textContent = message;
+    box.classList.remove("hidden");
+    document.getElementById("authError").classList.add("hidden");
+  }
+
+  function hideAuthFeedback() {
+    document.getElementById("authError").classList.add("hidden");
+    document.getElementById("authSuccess").classList.add("hidden");
+  }
+
+  function showProfileMessage(message, success) {
+    const box = document.getElementById("profileSaveMessage");
+    box.textContent = message;
+    box.className = `text-sm p-3 rounded-xl ${success ? "bg-emerald-50 text-emerald-700" : "bg-red-50 text-red-700"}`;
+  }
+
+  function formatSupabaseError(error) {
+    return error?.message || error?.error_description || "An unexpected error occurred.";
+  }
+
+  function escapeHtml(value) {
+    return String(value ?? "").replace(/[&<>"']/g, char => ({
+      "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"
+    }[char]));
+  }
+
+  function escapeAttribute(value) {
+    return escapeHtml(value);
+  }
+</script>
 </body>
 </html>
