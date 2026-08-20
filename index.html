@@ -269,6 +269,70 @@ header {
   color: #e63946;
 }
 
+/* =========================================================
+   FACEBOOK-STYLE ☰ MENU OVERLAY & DROPDOWN STYLING
+========================================================= */
+.menu-dropdown {
+  position: absolute;
+  top: 50px;
+  right: 16px;
+  width: 280px;
+  max-width: 90vw;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+  border: 1px solid var(--bp-border);
+  z-index: 1002;
+  overflow: hidden;
+  animation: menuFadeIn 0.2s ease;
+}
+
+@keyframes menuFadeIn {
+  from { opacity: 0; transform: translateY(-8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.menu-list {
+  display: flex;
+  flex-direction: column;
+  padding: 6px;
+}
+
+.menu-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 14px;
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--bp-primary);
+  border-radius: 8px;
+  background: transparent;
+  cursor: pointer;
+  transition: background 0.2s;
+  text-align: left;
+  width: 100%;
+}
+
+.menu-item:hover {
+  background: #f8fafc;
+}
+
+.menu-item i {
+  font-size: 16px;
+  color: var(--bp-gold);
+  width: 20px;
+  text-align: center;
+}
+
+.menu-item.logout-menu-item {
+  color: #e63946;
+}
+
+.menu-item.logout-menu-item i {
+  color: #e63946;
+}
+
 .nav-wrap {
   background: #ffffff;
   border-bottom: 1px solid var(--bp-border);
@@ -1175,8 +1239,22 @@ header {
           <i class="fa-solid fa-bell"></i>
           <span id="notifBadge" class="badge hidden">0</span>
         </button>
+        <!-- ☰ MENU BUTTON -->
+        <button id="menuHamburgerBtn" class="header-circle-btn" title="Menu"><i class="fa-solid fa-bars"></i></button>
         <!-- LOGOUT BUTTON -->
         <button id="logoutBtn" class="logout-btn"><i class="fa-solid fa-right-from-bracket"></i> Exit</button>
+      </div>
+    </div>
+
+    <!-- ☰ MENU DROPDOWN PANEL -->
+    <div id="menuDropdown" class="menu-dropdown hidden">
+      <div class="menu-list">
+        <button class="menu-item" id="menuProfileItem"><i class="fa-solid fa-user"></i> Profile</button>
+        <button class="menu-item" id="menuSettingsItem"><i class="fa-solid fa-gear"></i> Settings</button>
+        <button class="menu-item" id="menuNotifsItem"><i class="fa-solid fa-bell"></i> Notifications</button>
+        <button class="menu-item" id="menuHelpItem"><i class="fa-solid fa-circle-question"></i> Help / Support</button>
+        <div class="divider" style="margin: 4px 0;"></div>
+        <button class="menu-item logout-menu-item" id="menuLogoutItem"><i class="fa-solid fa-right-from-bracket"></i> Logout / Exit</button>
       </div>
     </div>
 
@@ -1571,6 +1649,7 @@ document.addEventListener('DOMContentLoaded', () => {
   loadProfileFromStorage();
   bindAuthEvents();
   bindNavigationEvents();
+  bindMenuDropdownEvents();
   bindComposerEvents();
   bindSearchEvents();
   bindNotificationEvents();
@@ -1647,7 +1726,7 @@ function switchTab(viewId) {
 }
 
 /* =========================================================
-   2. AUTHENTICATION BINDINGS
+   2. AUTHENTICATION BINDINGS & ☰ MENU CONTROLS
 ========================================================= */
 function bindAuthEvents() {
   document.getElementById('loginBtn')?.addEventListener('click', () => showApp());
@@ -1660,9 +1739,57 @@ function bindAuthEvents() {
     document.getElementById('signupBox').classList.add('hidden');
     document.getElementById('loginBox').classList.remove('hidden');
   });
-  document.getElementById('logoutBtn')?.addEventListener('click', () => {
+  
+  const triggerLogout = () => {
     document.getElementById('app').classList.add('hidden');
     document.getElementById('auth').classList.remove('hidden');
+  };
+
+  document.getElementById('logoutBtn')?.addEventListener('click', triggerLogout);
+  document.getElementById('menuLogoutItem')?.addEventListener('click', triggerLogout);
+}
+
+function bindMenuDropdownEvents() {
+  const menuBtn = document.getElementById('menuHamburgerBtn');
+  const menuDropdown = document.getElementById('menuDropdown');
+  const notifDropdown = document.getElementById('notifDropdown');
+  const searchOverlay = document.getElementById('searchBarOverlay');
+
+  menuBtn?.addEventListener('click', (e) => {
+    e.stopPropagation();
+    notifDropdown?.classList.add('hidden');
+    searchOverlay?.classList.add('hidden');
+    menuDropdown.classList.toggle('hidden');
+  });
+
+  document.addEventListener('click', (e) => {
+    if (menuDropdown && !menuDropdown.contains(e.target) && !menuBtn?.contains(e.target)) {
+      menuDropdown.classList.add('hidden');
+    }
+  });
+
+  // Connect menu items to existing functions
+  document.getElementById('menuProfileItem')?.addEventListener('click', () => {
+    switchTab('viewProfile');
+    menuDropdown.classList.add('hidden');
+  });
+
+  document.getElementById('menuSettingsItem')?.addEventListener('click', () => {
+    switchTab('viewProfile');
+    const editBtn = document.getElementById('editProfileToggleBtn');
+    if (editBtn) editBtn.click();
+    menuDropdown.classList.add('hidden');
+  });
+
+  document.getElementById('menuNotifsItem')?.addEventListener('click', () => {
+    const bellBtn = document.getElementById('notifBellBtn');
+    if (bellBtn) bellBtn.click();
+    menuDropdown.classList.add('hidden');
+  });
+
+  document.getElementById('menuHelpItem')?.addEventListener('click', () => {
+    alert("Believers+ Help & Support:\nFor assistance or prayer requests, please reach out to your community fellowship leaders.");
+    menuDropdown.classList.add('hidden');
   });
 }
 
@@ -1679,16 +1806,13 @@ function bindComposerEvents() {
   const composerArea = document.getElementById('postComposerArea');
   const submitBtn = document.getElementById('submitPostBtn');
 
-  // Open composer area
   openBtn?.addEventListener('click', () => composerArea.classList.toggle('hidden'));
   
-  // Media button opens native file picker
   mediaBtn?.addEventListener('click', () => {
     composerArea.classList.remove('hidden');
     mediaFileInput?.click();
   });
 
-  // Handle selected image or video file
   mediaFileInput?.addEventListener('change', (e) => {
     const file = e.target.files[0];
     if (!file) return;
@@ -1710,7 +1834,6 @@ function bindComposerEvents() {
     previewContainer.classList.remove('hidden');
   });
 
-  // Clear selected media
   removeMediaBtn?.addEventListener('click', clearPostMedia);
 
   function clearPostMedia() {
@@ -1723,7 +1846,6 @@ function bindComposerEvents() {
     previewContainer?.classList.add('hidden');
   }
 
-  // Publish post with optional media attachment
   submitBtn?.addEventListener('click', () => {
     const textInput = document.getElementById('postText');
     const content = textInput.value.trim();
@@ -1786,7 +1908,6 @@ function bindComposerEvents() {
 
     feed.prepend(newPost);
 
-    // Reset inputs
     textInput.value = '';
     state.selectedPostMedia = { file: null, url: null, type: null };
     if (mediaFileInput) mediaFileInput.value = '';
@@ -1799,8 +1920,6 @@ function bindComposerEvents() {
 /* =========================================================
    4. POST CONTROLS: LIKE, COMMENT, SHARE FUNCTIONS
 ========================================================= */
-
-// 1. LIKE FUNCTIONALITY
 function toggleLike(btn) {
   const countSpan = btn.querySelector('.like-count');
   let count = parseInt(countSpan.textContent) || 0;
@@ -1814,7 +1933,6 @@ function toggleLike(btn) {
   }
 }
 
-// 2. COMMENT FUNCTIONALITY
 function toggleCommentSection(btn) {
   const card = btn.closest('.card');
   const commentsSection = card.querySelector('.comments-section');
@@ -1846,13 +1964,6 @@ function submitComment(btn) {
   const newComment = document.createElement('div');
   newComment.className = 'comment-item';
 
-  let avatarBg = state.currentUser.avatar;
-  let avatarStyle = '';
-  if (state.currentUser.photoUrl) {
-    avatarStyle = `style="background-image: url('${state.currentUser.photoUrl}'); color: transparent;"`;
-    avatarBg = '';
-  }
-
   newComment.innerHTML = `
     <div class="avatar" style="width: 28px; height: 28px; font-size: 12px; ${state.currentUser.photoUrl ? `background-image: url('${state.currentUser.photoUrl}'); color: transparent;` : ''}">${state.currentUser.photoUrl ? '' : state.currentUser.avatar}</div>
     <div style="flex: 1;">
@@ -1864,7 +1975,6 @@ function submitComment(btn) {
   commentsList.appendChild(newComment);
   inputField.value = '';
 
-  // Update comment count
   const countSpan = card.querySelector('.comment-count');
   let currentCount = parseInt(countSpan.textContent) || 0;
   countSpan.textContent = currentCount + 1;
@@ -1876,7 +1986,6 @@ function escapeHtml(text) {
   return div.innerHTML;
 }
 
-// 3. SHARE FUNCTIONALITY
 function sharePost(btn) {
   const card = btn.closest('.card');
   const postContentEl = card.querySelector('.post-content');
@@ -1960,8 +2069,10 @@ function bindSearchEvents() {
   const closeBtn = document.getElementById('closeSearchBtn');
   const searchInput = document.getElementById('globalSearchInput');
   const resultsPanel = document.getElementById('searchResultsPanel');
+  const menuDropdown = document.getElementById('menuDropdown');
 
   searchBtn?.addEventListener('click', () => {
+    menuDropdown?.classList.add('hidden');
     searchOverlay.classList.toggle('hidden');
     if (!searchOverlay.classList.contains('hidden')) {
       searchInput.focus();
@@ -2012,9 +2123,11 @@ function bindNotificationEvents() {
   const bellBtn = document.getElementById('notifBellBtn');
   const dropdown = document.getElementById('notifDropdown');
   const markAllBtn = document.getElementById('markAllReadBtn');
+  const menuDropdown = document.getElementById('menuDropdown');
 
   bellBtn?.addEventListener('click', (e) => {
     e.stopPropagation();
+    menuDropdown?.classList.add('hidden');
     dropdown.classList.toggle('hidden');
   });
 
@@ -2188,7 +2301,6 @@ function bindPhotoUploadEvents() {
           preview.style.backgroundImage = `url('${state.tempAvatarUrl}')`;
           preview.textContent = '';
         }
-        // Direct update if edited from header badge
         if (document.getElementById('profileEditFields').classList.contains('hidden')) {
           state.currentUser.photoUrl = state.tempAvatarUrl;
           saveProfileToStorage();
@@ -2210,7 +2322,6 @@ function bindPhotoUploadEvents() {
           preview.style.backgroundImage = `url('${state.tempCoverUrl}')`;
           preview.textContent = '';
         }
-        // Direct update if edited from cover badge
         if (document.getElementById('profileEditFields').classList.contains('hidden')) {
           state.currentUser.coverUrl = state.tempCoverUrl;
           saveProfileToStorage();
@@ -2305,7 +2416,6 @@ function renderProfile() {
   document.getElementById('valSchool').textContent = p.school || "Not specified";
   document.getElementById('valBio').textContent = p.bio || "Not specified";
 
-  // Update profile photo across app
   const avatarEl = document.getElementById('profileAvatarLarge');
   const composerAvatar = document.getElementById('composerUserAvatar');
   const storyBg = document.getElementById('storyUserBg');
@@ -2336,7 +2446,6 @@ function renderProfile() {
     }
   }
 
-  // Update cover photo
   const coverBg = document.getElementById('profileCoverBg');
   if (coverBg) {
     if (state.currentUser.coverUrl) {
