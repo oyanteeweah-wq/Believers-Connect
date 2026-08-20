@@ -1,3 +1,4 @@
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -19,9 +20,7 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
   -webkit-tap-highlight-color:transparent
 }
 
-html{
-  scroll-behavior:smooth
-}
+html{scroll-behavior:smooth}
 
 :root{
   --bp-primary:#0d1b2a;
@@ -46,30 +45,11 @@ body{
   padding-bottom:70px
 }
 
-button,input,textarea,select{
-  font:inherit
-}
-
-button{
-  border:0;
-  background:none;
-  cursor:pointer
-}
-
-img,video{
-  max-width:100%;
-  display:block
-}
-
-.hidden{
-  display:none!important
-}
-
-.wrap{
-  width:100%;
-  max-width:640px;
-  margin:0 auto
-}
+button,input,textarea,select{font:inherit}
+button{border:0;background:none;cursor:pointer}
+img,video{max-width:100%;display:block}
+.hidden{display:none!important}
+.wrap{width:100%;max-width:640px;margin:0 auto}
 
 /* AUTH */
 
@@ -105,9 +85,7 @@ img,video{
   color:#fff
 }
 
-.brand span{
-  color:var(--bp-gold)
-}
+.brand span{color:var(--bp-gold)}
 
 .auth-card{
   background:#fff;
@@ -117,9 +95,7 @@ img,video{
   box-shadow:0 10px 25px rgba(0,0,0,.2)
 }
 
-.form-group{
-  margin-bottom:14px
-}
+.form-group{margin-bottom:14px}
 
 .form-group label{
   display:block;
@@ -195,14 +171,6 @@ img,video{
   font-weight:600
 }
 
-.auth-note{
-  font-size:12px;
-  color:#6c757d;
-  text-align:center;
-  margin-top:12px;
-  line-height:1.5
-}
-
 /* HEADER */
 
 header{
@@ -241,9 +209,7 @@ header{
   color:var(--bp-primary)
 }
 
-.logo span{
-  color:var(--bp-gold)
-}
+.logo span{color:var(--bp-gold)}
 
 .header-actions{
   display:flex;
@@ -309,13 +275,8 @@ header{
   text-align:center
 }
 
-.logout-menu-item{
-  color:#e63946
-}
-
-.logout-menu-item i{
-  color:#e63946
-}
+.logout-menu-item{color:#e63946}
+.logout-menu-item i{color:#e63946}
 
 .nav-wrap{
   background:#fff;
@@ -517,9 +478,7 @@ header{
   scrollbar-width:none
 }
 
-.stories-container::-webkit-scrollbar{
-  display:none
-}
+.stories-container::-webkit-scrollbar{display:none}
 
 .stories-wrapper{
   display:inline-flex;
@@ -580,7 +539,7 @@ header{
   color:var(--bp-primary)
 }
 
-/* CARDS */
+/* POSTS */
 
 .card{
   background:#fff;
@@ -658,9 +617,7 @@ header{
   border-radius:6px
 }
 
-.action-btn.liked{
-  color:#e63946
-}
+.action-btn.liked{color:#e63946}
 
 /* FRIENDS */
 
@@ -736,9 +693,7 @@ header{
   background-position:center
 }
 
-.profile-details{
-  margin-top:10px
-}
+.profile-details{margin-top:10px}
 
 .profile-name{
   font-size:20px;
@@ -761,7 +716,7 @@ header{
   color:var(--bp-muted)
 }
 
-/* PRAYER */
+/* PRAYERS */
 
 .prayer-card{
   background:#fdfbf7;
@@ -811,44 +766,14 @@ header{
   max-height:85vh;
   overflow-y:auto
 }
-
-/* LOADING */
-
-.loading-screen{
-  position:fixed;
-  inset:0;
-  background:#0d1b2a;
-  color:#fff;
-  z-index:99999;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  flex-direction:column
-}
-
-.loading-screen i{
-  color:var(--bp-gold);
-  font-size:38px;
-  margin-bottom:12px
-}
-
-.loading-screen div{
-  font-weight:700
-}
 </style>
 </head>
 
 <body>
 
-<!-- LOADING -->
-<div id="loadingScreen" class="loading-screen">
-  <i class="fa-solid fa-cross"></i>
-  <div>Loading Believers+...</div>
-</div>
+<!-- ================= AUTH PAGE ================= -->
 
-
-<!-- AUTH PAGE -->
-<div id="authPage" class="auth-page hidden">
+<div id="authPage" class="auth-page">
 
 <div class="auth">
 
@@ -868,35 +793,34 @@ header{
 
 
 <!-- LOGIN -->
+
 <div id="loginCard" class="auth-card">
 
 <h3 style="font-size:18px;font-weight:800;margin-bottom:16px;color:var(--bp-primary)">
-  Log In
+Log In
 </h3>
 
 <div class="form-group">
-  <label>Full Name</label>
-  <input
-    type="text"
-    id="loginName"
-    placeholder="Enter your full name"
-    autocomplete="username"
-  >
+<label>Full Name</label>
+<input
+type="text"
+id="loginName"
+placeholder="Enter your full name"
+autocomplete="username">
 </div>
 
 <div class="form-group">
-  <label>Password</label>
-  <input
-    type="password"
-    id="loginPassword"
-    placeholder="Enter your password"
-    autocomplete="current-password"
-  >
+<label>Password</label>
+<input
+type="password"
+id="loginPassword"
+placeholder="••••••••"
+autocomplete="current-password">
 </div>
 
 <button class="btn btn-gold" id="btnLogin">
-  <i class="fa-solid fa-right-to-bracket"></i>
-  Log In
+<i class="fa-solid fa-right-to-bracket"></i>
+Log In
 </button>
 
 <div id="loginMsg" class="msg-error"></div>
@@ -904,72 +828,65 @@ header{
 <div class="divider"></div>
 
 <div style="text-align:center">
-  <span style="font-size:13px;color:var(--bp-muted)">
-    Don't have an account?
-  </span>
+<span style="font-size:13px;color:var(--bp-muted)">
+Don't have an account?
+</span>
 
-  <button
-    id="btnShowRegister"
-    style="font-size:13px;font-weight:800;color:var(--bp-primary);margin-left:4px"
-  >
-    Create New Account
-  </button>
+<button
+id="btnShowRegister"
+style="font-size:13px;font-weight:800;color:var(--bp-primary);margin-left:4px">
+Create New Account
+</button>
 </div>
 
 </div>
 
 
 <!-- REGISTER -->
+
 <div id="registerCard" class="auth-card hidden">
 
 <h3 style="font-size:18px;font-weight:800;margin-bottom:16px;color:var(--bp-primary)">
-  Create Account
+Create Account
 </h3>
 
 <div class="form-group">
-  <label>Full Name</label>
-  <input
-    type="text"
-    id="regFullName"
-    placeholder="Enter your full name"
-    autocomplete="name"
-  >
+<label>Full Name</label>
+<input
+type="text"
+id="regFullName"
+placeholder="Enter your full name"
+autocomplete="name">
 </div>
 
 <div class="form-group">
-  <label>Password</label>
-  <input
-    type="password"
-    id="regPassword"
-    placeholder="Minimum 6 characters"
-    autocomplete="new-password"
-  >
+<label>Password</label>
+<input
+type="password"
+id="regPassword"
+placeholder="Minimum 6 characters"
+autocomplete="new-password">
 </div>
 
 <button class="btn btn-gold" id="btnRegister">
-  <i class="fa-solid fa-user-plus"></i>
-  Create Account
+<i class="fa-solid fa-user-plus"></i>
+Create Account
 </button>
 
 <div id="regMsg" class="msg-error"></div>
 
-<div class="auth-note">
-  No email address is required. Your account uses your name and password.
-</div>
-
 <div class="divider"></div>
 
 <div style="text-align:center">
-  <span style="font-size:13px;color:var(--bp-muted)">
-    Already have an account?
-  </span>
+<span style="font-size:13px;color:var(--bp-muted)">
+Already have an account?
+</span>
 
-  <button
-    id="btnShowLogin"
-    style="font-size:13px;font-weight:800;color:var(--bp-primary);margin-left:4px"
-  >
-    Log In
-  </button>
+<button
+id="btnShowLogin"
+style="font-size:13px;font-weight:800;color:var(--bp-primary);margin-left:4px">
+Log In
+</button>
 </div>
 
 </div>
@@ -978,7 +895,8 @@ header{
 </div>
 
 
-<!-- APP -->
+<!-- ================= APP ================= -->
+
 <div id="appPage" class="hidden">
 
 <header>
@@ -986,22 +904,27 @@ header{
 <div class="header-inner">
 
 <div class="logo-area" id="appLogoBtn">
-  <i class="fa-solid fa-cross logo-icon"></i>
-  <div class="logo">Believers<span>+</span></div>
+
+<i class="fa-solid fa-cross logo-icon"></i>
+
+<div class="logo">
+Believers<span>+</span>
+</div>
+
 </div>
 
 <div class="header-actions">
 
 <button class="header-circle-btn" id="btnSearchToggle">
-  <i class="fa-solid fa-magnifying-glass"></i>
+<i class="fa-solid fa-magnifying-glass"></i>
 </button>
 
 <button class="header-circle-btn" id="btnNotifToggle">
-  <i class="fa-solid fa-bell"></i>
+<i class="fa-solid fa-bell"></i>
 </button>
 
 <button class="header-circle-btn" id="btnMenuToggle">
-  <i class="fa-solid fa-bars"></i>
+<i class="fa-solid fa-bars"></i>
 </button>
 
 
@@ -1010,20 +933,20 @@ header{
 <div class="menu-list">
 
 <button class="menu-item" id="menuBtnProfile">
-  <i class="fa-solid fa-user"></i>
-  View Profile
+<i class="fa-solid fa-user"></i>
+View Profile
 </button>
 
 <button class="menu-item" id="menuBtnEditProfile">
-  <i class="fa-solid fa-pen-to-square"></i>
-  Edit Profile
+<i class="fa-solid fa-pen-to-square"></i>
+Edit Profile
 </button>
 
 <div class="divider" style="margin:4px 0"></div>
 
 <button class="menu-item logout-menu-item" id="menuBtnLogout">
-  <i class="fa-solid fa-right-from-bracket"></i>
-  Log Out
+<i class="fa-solid fa-right-from-bracket"></i>
+Log Out
 </button>
 
 </div>
@@ -1033,15 +956,16 @@ header{
 <div id="notifDropdown" class="notif-dropdown hidden">
 
 <div class="notif-header">
-  <span>Notifications</span>
+<span>Notifications</span>
 </div>
 
 <div class="notif-list">
-  <div style="padding:16px;text-align:center;color:var(--bp-muted);font-size:13px">
-    No new notifications
-  </div>
+
+<div style="padding:16px;text-align:center;color:var(--bp-muted);font-size:13px">
+No new notifications
 </div>
 
+</div>
 </div>
 
 </div>
@@ -1051,13 +975,14 @@ header{
 <div id="searchModal" class="search-modal-box hidden">
 
 <div class="search-input-wrapper">
-  <i class="fa-solid fa-magnifying-glass"></i>
 
-  <input
-    type="text"
-    id="searchInput"
-    placeholder="Search posts, prayer requests, or members..."
-  >
+<i class="fa-solid fa-magnifying-glass"></i>
+
+<input
+type="text"
+id="searchInput"
+placeholder="Search posts, prayer requests, or members...">
+
 </div>
 
 </div>
@@ -1068,23 +993,23 @@ header{
 <nav class="nav">
 
 <button class="active" id="tabHome">
-  <i class="fa-solid fa-house"></i>
+<i class="fa-solid fa-house"></i>
 </button>
 
 <button id="tabVideos">
-  <i class="fa-solid fa-circle-play"></i>
+<i class="fa-solid fa-circle-play"></i>
 </button>
 
 <button id="tabFriends">
-  <i class="fa-solid fa-user-group"></i>
+<i class="fa-solid fa-user-group"></i>
 </button>
 
 <button id="tabPrayers">
-  <i class="fa-solid fa-hands-praying"></i>
+<i class="fa-solid fa-hands-praying"></i>
 </button>
 
 <button id="tabProfile">
-  <i class="fa-solid fa-user"></i>
+<i class="fa-solid fa-user"></i>
 </button>
 
 </nav>
@@ -1098,6 +1023,7 @@ header{
 
 
 <!-- FEED -->
+
 <section id="secFeed">
 
 <div class="stories-container">
@@ -1107,14 +1033,15 @@ header{
 <div class="story-card create-story" id="btnCreateStory">
 
 <div
-  class="top-img"
-  id="myStoryAvatarBg"
->
-  <div class="plus-btn">+</div>
+class="top-img"
+id="myStoryAvatarBg">
+
+<div class="plus-btn">+</div>
+
 </div>
 
 <div class="bottom-text">
-  Add Update
+Add Update
 </div>
 
 </div>
@@ -1126,24 +1053,26 @@ header{
 <div class="composer-card">
 
 <div class="avatar" id="composerAvatar">
-  B
+B
 </div>
 
 <button class="mind-button" id="btnOpenComposer">
-  What is on your heart today?
+What is on your heart today?
 </button>
 
 <label for="directMediaInput" class="photo-upload-btn">
-  <i class="fa-solid fa-image"></i>
-  <span>Media</span>
+
+<i class="fa-solid fa-image"></i>
+
+<span>Media</span>
+
 </label>
 
 <input
-  type="file"
-  id="directMediaInput"
-  accept="image/*,video/*"
-  hidden
->
+type="file"
+id="directMediaInput"
+accept="image/*,video/*"
+hidden>
 
 </div>
 
@@ -1151,18 +1080,16 @@ header{
 <div id="postComposerArea" class="hidden">
 
 <textarea
-  id="postContent"
-  class="composer-textarea"
-  placeholder="Share a testimony, scripture, or encouragement..."
-></textarea>
+id="postContent"
+class="composer-textarea"
+placeholder="Share a testimony, scripture, or encouragement..."></textarea>
 
 <div
-  id="mediaPreviewContainer"
-  class="composer-preview-box hidden"
->
+id="mediaPreviewContainer"
+class="composer-preview-box hidden">
 
 <button class="remove-media-btn" id="btnRemoveMedia">
-  <i class="fa-solid fa-xmark"></i>
+<i class="fa-solid fa-xmark"></i>
 </button>
 
 <div id="mediaPreviewContent"></div>
@@ -1173,38 +1100,41 @@ header{
 <div class="composer-actions">
 
 <label
-  for="composerMediaInput"
-  class="photo-upload-btn"
-  style="background:transparent;padding:0"
->
-  <i class="fa-solid fa-paperclip"></i>
-  <span>Attach File</span>
+for="composerMediaInput"
+class="photo-upload-btn"
+style="background:transparent;padding:0">
+
+<i class="fa-solid fa-paperclip"></i>
+
+<span>Attach File</span>
+
 </label>
 
 <input
-  type="file"
-  id="composerMediaInput"
-  accept="image/*,video/*"
-  hidden
->
+type="file"
+id="composerMediaInput"
+accept="image/*,video/*"
+hidden>
 
 
 <div style="display:flex;gap:8px">
 
 <button
-  class="btn btn-outline"
-  id="btnCancelPost"
-  style="width:auto;padding:6px 12px;font-size:13px"
->
-  Cancel
+class="btn btn-outline"
+id="btnCancelPost"
+style="width:auto;padding:6px 12px;font-size:13px">
+
+Cancel
+
 </button>
 
 <button
-  class="btn btn-gold"
-  id="btnSubmitPost"
-  style="width:auto;padding:6px 16px;font-size:13px"
->
-  Post
+class="btn btn-gold"
+id="btnSubmitPost"
+style="width:auto;padding:6px 16px;font-size:13px">
+
+Post
+
 </button>
 
 </div>
@@ -1219,24 +1149,26 @@ header{
 
 
 <!-- VIDEOS -->
+
 <section id="secVideos" class="hidden">
 
 <h3 style="font-size:16px;font-weight:800;margin-bottom:12px;color:var(--bp-primary)">
-  Christian Videos & Sermons
+Christian Videos & Sermons
 </h3>
 
 <div class="card">
-  Video module ready for the next stage.
+Video module ready for the next stage.
 </div>
 
 </section>
 
 
 <!-- FRIENDS -->
+
 <section id="secFriends" class="hidden">
 
 <h3 style="font-size:16px;font-weight:800;margin-bottom:12px;color:var(--bp-primary)">
-  Believers Community
+Believers Community
 </h3>
 
 <div class="friends-list" id="friendsList"></div>
@@ -1245,33 +1177,34 @@ header{
 
 
 <!-- PRAYERS -->
+
 <section id="secPrayers" class="hidden">
 
 <div class="card">
 
 <h3 style="font-size:16px;font-weight:800;margin-bottom:8px;color:var(--bp-primary)">
-  Submit Prayer Request
+Submit Prayer Request
 </h3>
 
 <textarea
-  id="prayerInput"
-  style="width:100%;min-height:70px;padding:10px;border-radius:10px;border:1px solid var(--bp-border);outline:none;resize:none"
-  placeholder="How can the community pray for you today?"
-></textarea>
+id="prayerInput"
+style="width:100%;min-height:70px;padding:10px;border-radius:10px;border:1px solid var(--bp-border);outline:none;resize:none"
+placeholder="How can the community pray for you today?"></textarea>
 
 <button
-  class="btn btn-gold"
-  id="btnSubmitPrayer"
-  style="margin-top:10px"
->
-  <i class="fa-solid fa-hands-praying"></i>
-  Submit Request
+class="btn btn-gold"
+id="btnSubmitPrayer"
+style="margin-top:10px">
+
+<i class="fa-solid fa-hands-praying"></i>
+Submit Request
+
 </button>
 
 </div>
 
 <h3 style="font-size:16px;font-weight:800;margin-bottom:12px;color:var(--bp-primary)">
-  Prayer Requests
+Prayer Requests
 </h3>
 
 <div id="prayersList"></div>
@@ -1280,6 +1213,7 @@ header{
 
 
 <!-- PROFILE -->
+
 <section id="secProfile" class="hidden">
 
 <div class="profile-header">
@@ -1289,46 +1223,46 @@ header{
 <div class="profile-main-info">
 
 <div class="profile-avatar-large" id="profileAvatarLarge">
-  B
+B
 </div>
 
 <div class="profile-details">
 
 <div class="profile-name" id="profileNameDisplay">
-  User
+User
 </div>
 
 <div class="profile-bio" id="profileBioDisplay">
-  No bio provided yet.
+No bio provided yet.
 </div>
 
 <div class="profile-meta">
 
 <div>
-  <i class="fa-solid fa-location-dot"></i>
-  <span id="profileLocationDisplay">Global</span>
+<i class="fa-solid fa-location-dot"></i>
+<span id="profileLocationDisplay">Global</span>
 </div>
 
 <div>
-  <i class="fa-solid fa-church"></i>
-  <span id="profileChurchDisplay">Believers+ Member</span>
+<i class="fa-solid fa-church"></i>
+<span id="profileChurchDisplay">Believers+ Member</span>
 </div>
 
 <div>
-  <i class="fa-solid fa-calendar-days"></i>
-  <span id="profileJoinedDisplay">Joined August 2026</span>
+<i class="fa-solid fa-calendar-days"></i>
+<span id="profileJoinedDisplay">Joined August 2026</span>
 </div>
 
 </div>
-
 
 <button
-  class="btn btn-outline"
-  id="btnOpenEditProfileModal"
-  style="margin-top:14px;padding:8px;font-size:13px"
->
-  <i class="fa-solid fa-pen-to-square"></i>
-  Edit Profile
+class="btn btn-outline"
+id="btnOpenEditProfileModal"
+style="margin-top:14px;padding:8px;font-size:13px">
+
+<i class="fa-solid fa-pen-to-square"></i>
+Edit Profile
+
 </button>
 
 </div>
@@ -1337,7 +1271,7 @@ header{
 
 
 <h3 style="font-size:16px;font-weight:800;margin-bottom:12px;color:var(--bp-primary)">
-  My Posts
+My Posts
 </h3>
 
 <div id="userPostsList"></div>
@@ -1349,6 +1283,7 @@ header{
 
 
 <!-- EDIT PROFILE -->
+
 <div id="editProfileModal" class="modal-overlay hidden">
 
 <div class="modal-sheet">
@@ -1356,11 +1291,11 @@ header{
 <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px">
 
 <h3 style="color:var(--bp-primary)">
-  Edit Profile
+Edit Profile
 </h3>
 
 <button id="btnCloseEditProfile">
-  <i class="fa-solid fa-xmark"></i>
+<i class="fa-solid fa-xmark"></i>
 </button>
 
 </div>
@@ -1402,7 +1337,7 @@ header{
 </div>
 
 <button class="btn btn-gold" id="btnSaveProfile">
-  Save Profile Changes
+Save Profile Changes
 </button>
 
 <div id="profileSaveMsg" class="msg-error"></div>
@@ -1413,9 +1348,9 @@ header{
 
 <script>
 
-/* ============================================================
+/* =========================================================
    SUPABASE
-============================================================ */
+========================================================= */
 
 const SUPABASE_URL =
 'https://zupbqtnqbsmlwbidsddk.supabase.co';
@@ -1426,20 +1361,13 @@ const SUPABASE_PUBLISHABLE_KEY =
 const supabaseClient =
 window.supabase.createClient(
   SUPABASE_URL,
-  SUPABASE_PUBLISHABLE_KEY,
-  {
-    auth:{
-      persistSession:true,
-      autoRefreshToken:true,
-      detectSessionInUrl:true
-    }
-  }
+  SUPABASE_PUBLISHABLE_KEY
 );
 
 
-/* ============================================================
+/* =========================================================
    GLOBAL STATE
-============================================================ */
+========================================================= */
 
 let currentUser = null;
 let currentProfile = null;
@@ -1447,291 +1375,47 @@ let currentProfile = null;
 let selectedMediaBase64 = null;
 let selectedMediaType = null;
 
-let authStarting = false;
 
-
-/* ============================================================
-   SHORTCUT
-============================================================ */
+/* =========================================================
+   HELPERS
+========================================================= */
 
 const $ = id => document.getElementById(id);
 
 
-/* ============================================================
-   AUTH LOADING
-============================================================ */
+/*
+  The user never sees this identifier.
 
-async function initAuth(){
+  Example:
 
-  if(authStarting) return;
+  John Doe
 
-  authStarting = true;
+  becomes something similar to:
 
-  try{
+  john.doe@believers.local
 
-    const {
-      data:{
-        session
-      },
-      error
-    } =
-    await supabaseClient.auth.getSession();
+  This means the application can use Supabase's
+  password authentication without asking the user
+  for an actual email address.
+*/
 
-    if(error){
-      console.error('Session error:',error);
-    }
+function makeInternalAuthEmail(fullName){
 
-    if(session && session.user){
-
-      await handleAuthenticatedUser(
-        session.user
-      );
-
-    }else{
-
-      showAuthPage();
-
-    }
-
-  }catch(error){
-
-    console.error(error);
-
-    showAuthPage();
-
-  }finally{
-
-    $('loadingScreen').classList.add('hidden');
-
-  }
-
-
-  supabaseClient.auth.onAuthStateChange(
-    async(event,session)=>{
-
-      console.log(
-        'AUTH EVENT:',
-        event,
-        session?.user?.id
-      );
-
-      if(
-        event === 'SIGNED_IN' &&
-        session?.user
-      ){
-
-        await handleAuthenticatedUser(
-          session.user
-        );
-
-      }
-
-      if(event === 'SIGNED_OUT'){
-
-        currentUser = null;
-        currentProfile = null;
-
-        showAuthPage();
-
-      }
-
-    }
-  );
+  return fullName
+    .trim()
+    .toLowerCase()
+    .replace(/\s+/g,'.')
+    .replace(/[^a-z0-9._-]/g,'')
+    .substring(0,60)
+    + '@believers.local';
 
 }
 
 
-/* ============================================================
-   SHOW AUTH / APP
-============================================================ */
-
-function showAuthPage(){
-
-  $('authPage').classList.remove('hidden');
-
-  $('appPage').classList.add('hidden');
-
-}
-
-
-function showAppPage(){
-
-  $('authPage').classList.add('hidden');
-
-  $('appPage').classList.remove('hidden');
-
-}
-
-
-/* ============================================================
-   HANDLE LOGGED-IN USER
-============================================================ */
-
-async function handleAuthenticatedUser(user){
-
-  if(!user) return;
-
-  console.log(
-    'CURRENT AUTH USER:',
-    user.id,
-    user.email
-  );
-
-  currentUser = user;
-
-  currentProfile =
-    await fetchOrCreateProfile(user);
-
-  showAppPage();
-
-  updateUIWithProfile();
-
-  /*
-    IMPORTANT:
-    Every reload is based on currentUser.id.
-  */
-
-  await loadFeedPosts();
-
-  await loadPrayers();
-
-  await loadMembers();
-
-}
-
-
-/* ============================================================
-   CREATE / GET PROFILE
-============================================================ */
-
-async function fetchOrCreateProfile(user){
-
-  if(!user) return null;
-
-
-  const {
-    data,
-    error
-  } =
-  await supabaseClient
-    .from('profiles')
-    .select('*')
-    .eq('id',user.id)
-    .maybeSingle();
-
-
-  if(data){
-
-    console.log(
-      'PROFILE FOUND FOR:',
-      user.id,
-      data.full_name
-    );
-
-    return data;
-
-  }
-
-
-  if(
-    error &&
-    error.code !== 'PGRST116'
-  ){
-
-    console.error(
-      'Profile lookup error:',
-      error
-    );
-
-  }
-
-
-  const fullName =
-    user.user_metadata?.full_name ||
-    'Believer';
-
-
-  const newProfile = {
-
-    id:user.id,
-
-    full_name:fullName,
-
-    email:user.email || null,
-
-    created_at:new Date().toISOString()
-
-  };
-
-
-  const {
-    data:created,
-    error:createError
-  } =
-  await supabaseClient
-    .from('profiles')
-    .insert([newProfile])
-    .select()
-    .maybeSingle();
-
-
-  if(createError){
-
-    console.error(
-      'Profile creation error:',
-      createError
-    );
-
-    /*
-      Return local profile so the new account
-      still displays correctly even if profile
-      RLS needs adjustment.
-    */
-
-    return newProfile;
-
-  }
-
-
-  return created || newProfile;
-
-}
-
-
-/* ============================================================
-   UNIQUE INTERNAL EMAIL
-   USER NEVER SEES THIS
-============================================================ */
-
-function createInternalEmail(fullName){
-
-  const cleanName =
-    String(fullName)
-      .trim()
-      .toLowerCase()
-      .replace(/[^a-z0-9]+/g,'.')
-      .replace(/^\.+|\.+$/g,'');
-
-
-  const randomPart =
-    crypto.randomUUID()
-      .replace(/-/g,'')
-      .substring(0,12);
-
-
-  return (
-    cleanName +
-    '.' +
-    randomPart +
-    '@believersplus.internal'
-  );
-
-}
-
-
-/* ============================================================
-   NORMALIZE NAME
-============================================================ */
+/*
+  Normalize names so login works even if the user
+  changes capitalization or adds spaces.
+*/
 
 function normalizeName(name){
 
@@ -1743,40 +1427,268 @@ function normalizeName(name){
 }
 
 
-/* ============================================================
-   REGISTER
-============================================================ */
+function escapeHtml(str){
 
-$('btnRegister').onclick =
-async function(){
+  return String(str || '').replace(
+    /[&<>"']/g,
+    m => ({
+      '&':'&amp;',
+      '<':'&lt;',
+      '>':'&gt;',
+      '"':'&quot;',
+      "'":'&#039;'
+    }[m])
+  );
+
+}
+
+
+function safeUrl(url){
+
+  const s = String(url || '').trim();
+
+  if(
+    /^https?:\/\//i.test(s) ||
+    /^data:image\//i.test(s) ||
+    /^data:video\//i.test(s)
+  ){
+
+    return s.replace(/"/g,'%22');
+
+  }
+
+  return '';
+
+}
+
+
+function setMessage(el,message,type='error'){
+
+  el.className =
+    type === 'success'
+      ? 'msg-success'
+      : 'msg-error';
+
+  el.innerText = message;
+
+}
+
+
+/* =========================================================
+   AUTH PAGE
+========================================================= */
+
+function showAuthPage(){
+
+  $('authPage').classList.remove('hidden');
+  $('appPage').classList.add('hidden');
+
+}
+
+
+function showAppPage(){
+
+  $('authPage').classList.add('hidden');
+  $('appPage').classList.remove('hidden');
+
+}
+
+
+/* =========================================================
+   LOAD PROFILE
+========================================================= */
+
+async function fetchOrCreateProfile(user){
+
+  const {
+    data,
+    error
+  } = await supabaseClient
+    .from('profiles')
+    .select('*')
+    .eq('id',user.id)
+    .maybeSingle();
+
+  if(error){
+
+    console.error('Profile lookup:',error);
+
+  }
+
+  if(data){
+
+    return data;
+
+  }
+
+
+  const fullName =
+    user.user_metadata?.full_name ||
+    'Believer';
+
+
+  const profile = {
+
+    id:user.id,
+
+    full_name:fullName,
+
+    /*
+      We intentionally don't expose a real email
+      because this application uses name/password
+      on the visible interface.
+    */
+
+    email:null,
+
+    created_at:new Date().toISOString()
+
+  };
+
+
+  const {
+    data:created,
+    error:createError
+  } = await supabaseClient
+    .from('profiles')
+    .insert([profile])
+    .select()
+    .maybeSingle();
+
+
+  if(createError){
+
+    console.error(
+      'Profile creation:',
+      createError
+    );
+
+  }
+
+
+  return created || profile;
+
+}
+
+
+/* =========================================================
+   AUTHENTICATED USER
+========================================================= */
+
+async function handleAuthenticatedUser(user){
+
+  if(!user)return;
+
+  currentUser = user;
+
+  currentProfile =
+    await fetchOrCreateProfile(user);
+
+  showAppPage();
+
+  updateUIWithProfile();
+
+  await Promise.all([
+    loadFeedPosts(),
+    loadPrayers(),
+    loadMembers()
+  ]);
+
+}
+
+
+/* =========================================================
+   INITIAL AUTH CHECK
+========================================================= */
+
+async function initAuth(){
+
+  try{
+
+    const {
+      data:{session},
+      error
+    } =
+      await supabaseClient.auth.getSession();
+
+
+    if(error){
+
+      console.error(error);
+
+    }
+
+
+    if(session?.user){
+
+      await handleAuthenticatedUser(
+        session.user
+      );
+
+    }else{
+
+      showAuthPage();
+
+    }
+
+
+    supabaseClient.auth.onAuthStateChange(
+      async(event,session)=>{
+
+        if(
+          ['SIGNED_IN','TOKEN_REFRESHED']
+          .includes(event) &&
+          session?.user
+        ){
+
+          setTimeout(
+            () => handleAuthenticatedUser(session.user),
+            0
+          );
+
+        }
+
+
+        if(event === 'SIGNED_OUT'){
+
+          currentUser = null;
+          currentProfile = null;
+
+          showAuthPage();
+
+        }
+
+      }
+    );
+
+  }catch(err){
+
+    console.error(err);
+
+    showAuthPage();
+
+  }
+
+}
+
+
+/* =========================================================
+   CREATE ACCOUNT
+========================================================= */
+
+$('btnRegister').onclick = async()=>{
 
   $('regMsg').innerText = '';
 
 
   const fullName =
-    $('regFullName')
-      .value
-      .trim();
-
+    $('regFullName').value.trim();
 
   const password =
-    $('regPassword')
-      .value;
+    $('regPassword').value;
 
 
   if(!fullName){
-
-    setMessage(
-      $('regMsg'),
-      'Please enter your full name.'
-    );
-
-    return;
-
-  }
-
-
-  if(fullName.length < 2){
 
     setMessage(
       $('regMsg'),
@@ -1792,7 +1704,7 @@ async function(){
 
     setMessage(
       $('regMsg'),
-      'Password must contain at least 6 characters.'
+      'Password must be at least 6 characters.'
     );
 
     return;
@@ -1801,11 +1713,13 @@ async function(){
 
 
   /*
-    FIRST:
-    Completely sign out the previous account.
+    Internal identifier.
+
+    The user does NOT see this.
   */
 
-  await supabaseClient.auth.signOut();
+  const internalEmail =
+    makeInternalAuthEmail(fullName);
 
 
   $('btnRegister').disabled = true;
@@ -1816,159 +1730,93 @@ async function(){
 
   try{
 
-    /*
-      Generate a DIFFERENT internal email
-      every time.
-
-      Example:
-
-      john.smith.a81f91c3@believersplus.internal
-      john.smith.72a991aa@believersplus.internal
-
-      Therefore two accounts with the same name
-      can still have different authentication IDs.
-    */
-
-    const internalEmail =
-      createInternalEmail(fullName);
-
-
-    console.log(
-      'Creating new internal identity:',
-      internalEmail
-    );
-
-
     const {
       data,
       error
     } =
-    await supabaseClient.auth.signUp({
+      await supabaseClient.auth.signUp({
 
-      email:internalEmail,
+        email:internalEmail,
 
-      password:password,
+        password:password,
 
-      options:{
-        data:{
-          full_name:fullName
-        },
+        options:{
+          data:{
+            full_name:fullName
+          }
+        }
 
-        /*
-          We do not want email verification
-          redirect behavior.
-        */
-
-        emailRedirectTo:undefined
-
-      }
-
-    });
+      });
 
 
     if(error){
 
-      console.error(
-        'REGISTER ERROR:',
-        error
-      );
+      /*
+        If this exact name already exists,
+        don't create another account.
+      */
 
-      setMessage(
-        $('regMsg'),
-        error.message
-      );
+      if(
+        error.message &&
+        (
+          error.message.toLowerCase().includes('already') ||
+          error.message.toLowerCase().includes('registered')
+        )
+      ){
+
+        setMessage(
+          $('regMsg'),
+          'An account with this full name already exists. Please log in.'
+        );
+
+      }else{
+
+        setMessage(
+          $('regMsg'),
+          error.message
+        );
+
+      }
 
       return;
 
     }
-
-
-    if(!data?.user){
-
-      setMessage(
-        $('regMsg'),
-        'Account could not be created. Please try again.'
-      );
-
-      return;
-
-    }
-
-
-    console.log(
-      'NEW ACCOUNT CREATED:',
-      data.user.id
-    );
 
 
     /*
-      If Supabase immediately returned a session,
-      use it.
-
-      If email confirmation is still enabled,
-      there will be no session.
+      When Confirm Email is disabled in Supabase,
+      a session is returned immediately.
     */
 
-    if(data.session){
+    if(data?.session && data?.user){
 
-      currentUser = data.user;
-
-      currentProfile =
-        await fetchOrCreateProfile(
-          data.user
-        );
-
-      setMessage(
-        $('regMsg'),
-        'Account created successfully!',
-        'success'
+      await handleAuthenticatedUser(
+        data.user
       );
 
-
-      setTimeout(
-        async()=>{
-          showAppPage();
-
-          updateUIWithProfile();
-
-          await loadFeedPosts();
-
-          await loadPrayers();
-
-          await loadMembers();
-
-        },
-        300
-      );
-
-    }else{
-
-      /*
-        This means Supabase is still requiring
-        email confirmation.
-
-        Because this app uses an internal email,
-        the user cannot complete that process.
-      */
-
-      setMessage(
-        $('regMsg'),
-        'Supabase is still requiring email confirmation. Turn OFF "Confirm email" in Supabase Authentication settings.',
-        'error'
-      );
+      return;
 
     }
 
-  }catch(error){
 
-    console.error(
-      'REGISTER EXCEPTION:',
-      error
-    );
+    /*
+      If no session is returned, Supabase is still
+      requiring confirmation.
+    */
 
     setMessage(
       $('regMsg'),
-      error.message || 'Account creation failed.'
+      'Account created, but Supabase is still requiring confirmation. Turn OFF "Confirm email" in Supabase Authentication settings.'
+    );
+
+
+  }catch(err){
+
+    console.error(err);
+
+    setMessage(
+      $('regMsg'),
+      err.message || 'Unable to create account.'
     );
 
   }finally{
@@ -1983,25 +1831,20 @@ async function(){
 };
 
 
-/* ============================================================
+/* =========================================================
    LOGIN
-============================================================ */
+========================================================= */
 
-$('btnLogin').onclick =
-async function(){
+$('btnLogin').onclick = async()=>{
 
   $('loginMsg').innerText = '';
 
 
   const fullName =
-    $('loginName')
-      .value
-      .trim();
-
+    $('loginName').value.trim();
 
   const password =
-    $('loginPassword')
-      .value;
+    $('loginPassword').value;
 
 
   if(!fullName || !password){
@@ -2016,6 +1859,10 @@ async function(){
   }
 
 
+  const internalEmail =
+    makeInternalAuthEmail(fullName);
+
+
   $('btnLogin').disabled = true;
 
   $('btnLogin').innerHTML =
@@ -2024,184 +1871,47 @@ async function(){
 
   try{
 
-    /*
-      IMPORTANT:
-      Before attempting another account,
-      destroy the old session.
-    */
-
-    await supabaseClient.auth.signOut();
-
-
-    /*
-      Find the profile belonging to this name.
-
-      The profile stores the unique internal
-      authentication email.
-    */
-
     const {
-      data:profiles,
-      error:profileError
+      data,
+      error
     } =
-    await supabaseClient
-      .from('profiles')
-      .select('id,email,full_name')
-      .ilike(
-        'full_name',
-        fullName
-      )
-      .limit(10);
-
-
-    if(profileError){
-
-      console.error(
-        'Profile search error:',
-        profileError
-      );
-
-      setMessage(
-        $('loginMsg'),
-        'Unable to find the account. Check your Supabase profiles read policy.'
-      );
-
-      return;
-
-    }
-
-
-    if(!profiles || profiles.length === 0){
-
-      setMessage(
-        $('loginMsg'),
-        'Full name or password is incorrect.'
-      );
-
-      return;
-
-    }
-
-
-    /*
-      Find exact case-insensitive match.
-    */
-
-    const matchingProfiles =
-      profiles.filter(
-        p =>
-          normalizeName(p.full_name) ===
-          normalizeName(fullName)
-      );
-
-
-    if(matchingProfiles.length === 0){
-
-      setMessage(
-        $('loginMsg'),
-        'Full name or password is incorrect.'
-      );
-
-      return;
-
-    }
-
-
-    /*
-      Try the possible accounts with this name.
-
-      This also allows two different accounts
-      to technically have the same full name.
-    */
-
-    let loggedIn = false;
-
-
-    for(const profile of matchingProfiles){
-
-      if(!profile.email) continue;
-
-
-      const {
-        data,
-        error
-      } =
       await supabaseClient.auth.signInWithPassword({
 
-        email:profile.email,
+        email:internalEmail,
 
         password:password
 
       });
 
 
-      if(
-        !error &&
-        data?.user
-      ){
-
-        console.log(
-          'SUCCESSFULLY LOGGED INTO:',
-          data.user.id,
-          data.user.email
-        );
-
-
-        currentUser = data.user;
-
-
-        currentProfile =
-          await fetchOrCreateProfile(
-            data.user
-          );
-
-
-        loggedIn = true;
-
-
-        showAppPage();
-
-        updateUIWithProfile();
-
-
-        /*
-          CRITICAL:
-          Reload data using THIS account's ID.
-        */
-
-        await loadFeedPosts();
-
-        await loadPrayers();
-
-        await loadMembers();
-
-
-        break;
-
-      }
-
-    }
-
-
-    if(!loggedIn){
+    if(error){
 
       setMessage(
         $('loginMsg'),
         'Full name or password is incorrect.'
       );
 
+      return;
+
     }
 
-  }catch(error){
 
-    console.error(
-      'LOGIN ERROR:',
-      error
-    );
+    if(data?.user){
+
+      await handleAuthenticatedUser(
+        data.user
+      );
+
+    }
+
+
+  }catch(err){
+
+    console.error(err);
 
     setMessage(
       $('loginMsg'),
-      error.message || 'Login failed.'
+      'Unable to log in right now.'
     );
 
   }finally{
@@ -2216,12 +1926,11 @@ async function(){
 };
 
 
-/* ============================================================
-   SWITCH LOGIN / REGISTER
-============================================================ */
+/* =========================================================
+   SWITCH AUTH FORMS
+========================================================= */
 
-$('btnShowRegister').onclick =
-function(){
+$('btnShowRegister').onclick = ()=>{
 
   $('loginCard').classList.add('hidden');
 
@@ -2232,8 +1941,7 @@ function(){
 };
 
 
-$('btnShowLogin').onclick =
-function(){
+$('btnShowLogin').onclick = ()=>{
 
   $('registerCard').classList.add('hidden');
 
@@ -2244,80 +1952,46 @@ function(){
 };
 
 
-/* ============================================================
+/* =========================================================
    LOGOUT
-============================================================ */
+========================================================= */
 
-$('menuBtnLogout').onclick =
-async function(){
+$('menuBtnLogout').onclick = async()=>{
 
-  await supabaseClient.auth.signOut();
+  const {error} =
+    await supabaseClient.auth.signOut();
 
-  currentUser = null;
+  if(error){
 
-  currentProfile = null;
+    alert(error.message);
 
-  /*
-    Clear all visible user-specific content.
-  */
-
-  $('feedPostsList').innerHTML = '';
-
-  $('userPostsList').innerHTML = '';
-
-  $('friendsList').innerHTML = '';
-
-  $('prayersList').innerHTML = '';
-
-  $('profileNameDisplay').innerText = 'User';
-
-  $('loginName').value = '';
-
-  $('loginPassword').value = '';
-
-  $('menuDropdown').classList.add('hidden');
-
-  showAuthPage();
+  }
 
 };
 
 
-/* ============================================================
+/* =========================================================
    PROFILE UI
-============================================================ */
+========================================================= */
 
 function updateUIWithProfile(){
 
-  if(!currentProfile) return;
+  if(!currentProfile)return;
 
 
   const name =
-    currentProfile.full_name ||
-    'Believer';
-
+    currentProfile.full_name || 'Believer';
 
   const initial =
-    name
-      .trim()
-      .charAt(0)
-      .toUpperCase() ||
-    'B';
+    name.charAt(0).toUpperCase();
 
 
-  const avatarElements = [
-
+  [
     $('composerAvatar'),
-
     $('profileAvatarLarge')
+  ].forEach(el=>{
 
-  ];
-
-
-  avatarElements.forEach(el=>{
-
-    if(
-      currentProfile.avatar_url
-    ){
+    if(currentProfile.avatar_url){
 
       el.style.backgroundImage =
         `url("${safeUrl(currentProfile.avatar_url)}")`;
@@ -2326,11 +2000,9 @@ function updateUIWithProfile(){
 
     }else{
 
-      el.style.backgroundImage =
-        'none';
+      el.style.backgroundImage = 'none';
 
-      el.innerText =
-        initial;
+      el.innerText = initial;
 
     }
 
@@ -2396,124 +2068,106 @@ function updateUIWithProfile(){
 }
 
 
-/* ============================================================
+/* =========================================================
    EDIT PROFILE
-============================================================ */
+========================================================= */
 
-$('btnOpenEditProfileModal').onclick =
-function(){
-
-  if(!currentProfile) return;
-
+$('btnOpenEditProfileModal').onclick = ()=>{
 
   $('editFullName').value =
-    currentProfile.full_name || '';
+    currentProfile?.full_name || '';
 
   $('editBio').value =
-    currentProfile.bio || '';
+    currentProfile?.bio || '';
 
   $('editChurch').value =
-    currentProfile.church_ministry || '';
+    currentProfile?.church_ministry || '';
 
   $('editLocation').value =
-    currentProfile.location || '';
+    currentProfile?.location || '';
 
   $('editPhone').value =
-    currentProfile.phone || '';
+    currentProfile?.phone || '';
 
   $('editAvatarUrl').value =
-    currentProfile.avatar_url || '';
+    currentProfile?.avatar_url || '';
 
   $('editCoverUrl').value =
-    currentProfile.cover_url || '';
+    currentProfile?.cover_url || '';
 
   $('profileSaveMsg').innerText = '';
 
-  $('editProfileModal')
-    .classList
-    .remove('hidden');
+  $('editProfileModal').classList.remove(
+    'hidden'
+  );
 
 };
 
 
-$('menuBtnEditProfile').onclick =
-function(){
+$('menuBtnEditProfile').onclick = ()=>{
 
-  $('menuDropdown')
-    .classList
-    .add('hidden');
+  $('menuDropdown').classList.add('hidden');
 
   $('btnOpenEditProfileModal').click();
 
 };
 
 
-$('btnCloseEditProfile').onclick =
-function(){
+$('btnCloseEditProfile').onclick = ()=>{
 
-  $('editProfileModal')
-    .classList
-    .add('hidden');
+  $('editProfileModal').classList.add('hidden');
 
 };
 
 
-$('btnSaveProfile').onclick =
-async function(){
+$('editProfileModal').addEventListener(
+  'click',
+  e=>{
 
-  if(!currentUser) return;
+    if(
+      e.target ===
+      $('editProfileModal')
+    ){
 
+      $('editProfileModal').classList.add(
+        'hidden'
+      );
 
-  const update = {
-
-    full_name:
-      $('editFullName')
-        .value
-        .trim(),
-
-    bio:
-      $('editBio')
-        .value
-        .trim(),
-
-    church_ministry:
-      $('editChurch')
-        .value
-        .trim(),
-
-    location:
-      $('editLocation')
-        .value
-        .trim(),
-
-    phone:
-      $('editPhone')
-        .value
-        .trim(),
-
-    avatar_url:
-      $('editAvatarUrl')
-        .value
-        .trim(),
-
-    cover_url:
-      $('editCoverUrl')
-        .value
-        .trim()
-
-  };
-
-
-  if(!update.full_name){
-
-    setMessage(
-      $('profileSaveMsg'),
-      'Full name cannot be empty.'
-    );
-
-    return;
+    }
 
   }
+);
+
+
+$('btnSaveProfile').onclick = async()=>{
+
+  if(!currentUser)return;
+
+
+  const updates = {
+
+    full_name:
+      $('editFullName').value.trim(),
+
+    bio:
+      $('editBio').value.trim(),
+
+    church_ministry:
+      $('editChurch').value.trim(),
+
+    location:
+      $('editLocation').value.trim(),
+
+    phone:
+      $('editPhone').value.trim(),
+
+    avatar_url:
+      $('editAvatarUrl').value.trim(),
+
+    cover_url:
+      $('editCoverUrl').value.trim()
+
+  };
 
 
   $('btnSaveProfile').disabled = true;
@@ -2523,23 +2177,18 @@ async function(){
     data,
     error
   } =
-  await supabaseClient
-    .from('profiles')
-    .update(update)
-    .eq(
-      'id',
-      currentUser.id
-    )
-    .select()
-    .maybeSingle();
+    await supabaseClient
+      .from('profiles')
+      .update(updates)
+      .eq('id',currentUser.id)
+      .select()
+      .maybeSingle();
 
 
   $('btnSaveProfile').disabled = false;
 
 
   if(error){
-
-    console.error(error);
 
     setMessage(
       $('profileSaveMsg'),
@@ -2551,47 +2200,22 @@ async function(){
   }
 
 
-  currentProfile = {
-
-    ...currentProfile,
-
-    ...(data || update)
-
-  };
+  currentProfile =
+    {...currentProfile,...(data || updates)};
 
 
   updateUIWithProfile();
 
-
-  $('editProfileModal')
-    .classList
-    .add('hidden');
+  $('editProfileModal').classList.add(
+    'hidden'
+  );
 
 };
 
 
-$('editProfileModal').addEventListener(
-  'click',
-  function(e){
-
-    if(
-      e.target ===
-      $('editProfileModal')
-    ){
-
-      $('editProfileModal')
-        .classList
-        .add('hidden');
-
-    }
-
-  }
-);
-
-
-/* ============================================================
-   TABS
-============================================================ */
+/* =========================================================
+   NAVIGATION
+========================================================= */
 
 const tabs = [
 
@@ -2608,172 +2232,147 @@ const tabs = [
 ];
 
 
-tabs.forEach(
-  ([buttonId,sectionId])=>{
+tabs.forEach(([button,section])=>{
 
-    $(buttonId).onclick =
-    async function(){
+  $(button).onclick = ()=>{
 
-      tabs.forEach(
-        ([b,s])=>{
+    tabs.forEach(([b,s])=>{
 
-          $(b)
-            .classList
-            .remove('active');
+      $(b).classList.remove('active');
 
-          $(s)
-            .classList
-            .add('hidden');
+      $(s).classList.add('hidden');
 
-        }
-      );
+    });
 
 
-      $(buttonId)
-        .classList
-        .add('active');
+    $(button).classList.add('active');
+
+    $(section).classList.remove('hidden');
 
 
-      $(sectionId)
-        .classList
-        .remove('hidden');
+    if(section === 'secProfile'){
+
+      loadUserPosts();
+
+    }
+
+  };
+
+});
 
 
-      if(
-        sectionId ===
-        'secProfile'
-      ){
+$('menuBtnProfile').onclick = ()=>{
 
-        await loadUserPosts();
-
-      }
-
-    };
-
-  }
-);
-
-
-$('menuBtnProfile').onclick =
-function(){
-
-  $('menuDropdown')
-    .classList
-    .add('hidden');
+  $('menuDropdown').classList.add('hidden');
 
   $('tabProfile').click();
 
 };
 
 
-$('appLogoBtn').onclick =
-function(){
+$('appLogoBtn').onclick = ()=>{
 
   $('tabHome').click();
 
 };
 
 
-/* ============================================================
+/* =========================================================
    HEADER MENUS
-============================================================ */
+========================================================= */
 
-$('btnMenuToggle').onclick =
-function(e){
+$('btnMenuToggle').onclick = e=>{
 
   e.stopPropagation();
 
-  $('menuDropdown')
-    .classList
-    .toggle('hidden');
+  $('menuDropdown').classList.toggle(
+    'hidden'
+  );
 
-  $('notifDropdown')
-    .classList
-    .add('hidden');
+  $('notifDropdown').classList.add(
+    'hidden'
+  );
 
-  $('searchModal')
-    .classList
-    .add('hidden');
+  $('searchModal').classList.add(
+    'hidden'
+  );
 
 };
 
 
-$('btnNotifToggle').onclick =
-function(e){
+$('btnNotifToggle').onclick = e=>{
 
   e.stopPropagation();
 
-  $('notifDropdown')
-    .classList
-    .toggle('hidden');
+  $('notifDropdown').classList.toggle(
+    'hidden'
+  );
 
-  $('menuDropdown')
-    .classList
-    .add('hidden');
+  $('menuDropdown').classList.add(
+    'hidden'
+  );
 
-  $('searchModal')
-    .classList
-    .add('hidden');
+  $('searchModal').classList.add(
+    'hidden'
+  );
 
 };
 
 
-$('btnSearchToggle').onclick =
-function(e){
+$('btnSearchToggle').onclick = e=>{
 
   e.stopPropagation();
 
-  $('searchModal')
-    .classList
-    .toggle('hidden');
+  $('searchModal').classList.toggle(
+    'hidden'
+  );
 
-  $('menuDropdown')
-    .classList
-    .add('hidden');
+  $('menuDropdown').classList.add(
+    'hidden'
+  );
 
-  $('notifDropdown')
-    .classList
-    .add('hidden');
+  $('notifDropdown').classList.add(
+    'hidden'
+  );
 
 };
 
 
 $('menuDropdown').onclick =
-e => e.stopPropagation();
+e=>e.stopPropagation();
 
 $('notifDropdown').onclick =
-e => e.stopPropagation();
+e=>e.stopPropagation();
 
 $('searchModal').onclick =
-e => e.stopPropagation();
+e=>e.stopPropagation();
 
 
 document.addEventListener(
   'click',
-  function(){
+  ()=>{
 
-    $('menuDropdown')
-      .classList
-      .add('hidden');
+    $('menuDropdown').classList.add(
+      'hidden'
+    );
 
-    $('notifDropdown')
-      .classList
-      .add('hidden');
+    $('notifDropdown').classList.add(
+      'hidden'
+    );
 
   }
 );
 
 
-/* ============================================================
+/* =========================================================
    POST COMPOSER
-============================================================ */
+========================================================= */
 
-$('btnOpenComposer').onclick =
-function(){
+$('btnOpenComposer').onclick = ()=>{
 
-  $('postComposerArea')
-    .classList
-    .remove('hidden');
+  $('postComposerArea').classList.remove(
+    'hidden'
+  );
 
   $('postContent').focus();
 
@@ -2792,31 +2391,26 @@ function resetComposer(){
 
   selectedMediaType = null;
 
-  $('mediaPreviewContainer')
-    .classList
-    .add('hidden');
+  $('mediaPreviewContainer').classList.add(
+    'hidden'
+  );
 
-  $('mediaPreviewContent')
-    .innerHTML = '';
+  $('mediaPreviewContent').innerHTML = '';
 
   $('directMediaInput').value = '';
 
   $('composerMediaInput').value = '';
 
-  $('postComposerArea')
-    .classList
-    .add('hidden');
+  $('postComposerArea').classList.add(
+    'hidden'
+  );
 
 }
 
 
-/* ============================================================
-   MEDIA
-============================================================ */
-
 function handleFileSelect(file){
 
-  if(!file) return;
+  if(!file)return;
 
 
   const maxSize =
@@ -2838,8 +2432,7 @@ function handleFileSelect(file){
     new FileReader();
 
 
-  reader.onload =
-  function(e){
+  reader.onload = e=>{
 
     selectedMediaBase64 =
       e.target.result;
@@ -2851,34 +2444,22 @@ function handleFileSelect(file){
         : 'image';
 
 
-    $('mediaPreviewContent')
-      .innerHTML =
+    $('mediaPreviewContent').innerHTML =
 
       selectedMediaType === 'video'
 
-        ?
+        ? `<video src="${selectedMediaBase64}" controls></video>`
 
-        `<video
-          src="${selectedMediaBase64}"
-          controls
-        ></video>`
-
-        :
-
-        `<img
-          src="${selectedMediaBase64}"
-          alt="Preview"
-        >`;
+        : `<img src="${selectedMediaBase64}" alt="Preview">`;
 
 
-    $('mediaPreviewContainer')
-      .classList
-      .remove('hidden');
+    $('mediaPreviewContainer').classList.remove(
+      'hidden'
+    );
 
-
-    $('postComposerArea')
-      .classList
-      .remove('hidden');
+    $('postComposerArea').classList.remove(
+      'hidden'
+    );
 
   };
 
@@ -2889,32 +2470,24 @@ function handleFileSelect(file){
 
 
 $('directMediaInput').onchange =
-e =>
-handleFileSelect(
-  e.target.files[0]
-);
+e=>handleFileSelect(e.target.files[0]);
 
 
 $('composerMediaInput').onchange =
-e =>
-handleFileSelect(
-  e.target.files[0]
-);
+e=>handleFileSelect(e.target.files[0]);
 
 
-$('btnRemoveMedia').onclick =
-function(){
+$('btnRemoveMedia').onclick = ()=>{
 
   selectedMediaBase64 = null;
 
   selectedMediaType = null;
 
-  $('mediaPreviewContainer')
-    .classList
-    .add('hidden');
+  $('mediaPreviewContainer').classList.add(
+    'hidden'
+  );
 
-  $('mediaPreviewContent')
-    .innerHTML = '';
+  $('mediaPreviewContent').innerHTML = '';
 
   $('directMediaInput').value = '';
 
@@ -2923,154 +2496,91 @@ function(){
 };
 
 
-/* ============================================================
+/* =========================================================
    CREATE POST
-============================================================ */
+========================================================= */
 
-$('btnSubmitPost').onclick =
-async function(){
+$('btnSubmitPost').onclick = async()=>{
 
-  if(!currentUser){
-
-    alert('Please log in first.');
-
-    return;
-
-  }
+  if(!currentUser)return;
 
 
   const content =
-    $('postContent')
-      .value
-      .trim();
+    $('postContent').value.trim();
 
 
-  if(
-    !content &&
-    !selectedMediaBase64
-  ){
-
-    return;
-
-  }
+  if(!content && !selectedMediaBase64)return;
 
 
   $('btnSubmitPost').disabled = true;
 
 
-  try{
-
-    /*
-      VERY IMPORTANT:
-
-      user_id is ALWAYS currentUser.id.
-
-      Never use profile name or another
-      account's ID.
-    */
-
-    const post = {
-
-      user_id:currentUser.id,
-
-      content:content,
-
-      media_url:
-        selectedMediaBase64 ||
-        null,
-
-      media_type:
-        selectedMediaType ||
-        null,
-
-      created_at:
-        new Date().toISOString()
-
-    };
-
-
-    console.log(
-      'CREATING POST FOR USER:',
-      currentUser.id
-    );
-
-
-    const {
-      error
-    } =
+  const {error} =
     await supabaseClient
       .from('posts')
-      .insert([post]);
+      .insert([{
+
+        user_id:
+          currentUser.id,
+
+        content:
+          content,
+
+        media_url:
+          selectedMediaBase64 || null,
+
+        media_type:
+          selectedMediaType || null,
+
+        created_at:
+          new Date().toISOString()
+
+      }]);
 
 
-    if(error){
-
-      console.error(error);
-
-      alert(error.message);
-
-      return;
-
-    }
+  $('btnSubmitPost').disabled = false;
 
 
-    resetComposer();
+  if(error){
 
-    await loadFeedPosts();
-
-  }finally{
-
-    $('btnSubmitPost').disabled = false;
-
-  }
-
-};
-
-
-/* ============================================================
-   LOAD FEED
-============================================================ */
-
-async function loadFeedPosts(){
-
-  if(!currentUser){
-
-    $('feedPostsList').innerHTML = '';
+    alert(error.message);
 
     return;
 
   }
 
 
-  console.log(
-    'LOADING FEED FOR USER:',
-    currentUser.id
-  );
+  resetComposer();
 
+  await loadFeedPosts();
+
+};
+
+
+/* =========================================================
+   LOAD FEED
+========================================================= */
+
+async function loadFeedPosts(){
 
   const {
     data,
     error
   } =
-  await supabaseClient
-    .from('posts')
-    .select(
-      '*, profiles:user_id(full_name,avatar_url), post_likes(user_id)'
-    )
-    .order(
-      'created_at',
-      {
-        ascending:false
-      }
-    );
+    await supabaseClient
+      .from('posts')
+      .select(
+        '*, profiles:user_id(full_name,avatar_url), post_likes(user_id)'
+      )
+      .order(
+        'created_at',
+        {ascending:false}
+      );
 
 
   if(error){
 
-    console.error(
-      'FEED ERROR:',
-      error
-    );
+    console.error(error);
 
     $('feedPostsList').innerHTML =
       '<div class="card">Unable to load posts right now.</div>';
@@ -3088,54 +2598,38 @@ async function loadFeedPosts(){
 }
 
 
-/* ============================================================
-   LOAD ONLY MY POSTS
-============================================================ */
+/* =========================================================
+   LOAD USER POSTS
+========================================================= */
 
 async function loadUserPosts(){
 
-  if(!currentUser){
-
-    $('userPostsList').innerHTML = '';
-
-    return;
-
-  }
-
-
-  console.log(
-    'LOADING MY POSTS:',
-    currentUser.id
-  );
+  if(!currentUser)return;
 
 
   const {
     data,
     error
   } =
-  await supabaseClient
-    .from('posts')
-    .select(
-      '*, profiles:user_id(full_name,avatar_url), post_likes(user_id)'
-    )
-    .eq(
-      'user_id',
-      currentUser.id
-    )
-    .order(
-      'created_at',
-      {
-        ascending:false
-      }
-    );
+    await supabaseClient
+      .from('posts')
+      .select(
+        '*, profiles:user_id(full_name,avatar_url), post_likes(user_id)'
+      )
+      .eq(
+        'user_id',
+        currentUser.id
+      )
+      .order(
+        'created_at',
+        {ascending:false}
+      );
 
 
   $('userPostsList').innerHTML = '';
 
 
   if(error){
-
-    console.error(error);
 
     $('userPostsList').innerHTML =
       '<div class="card">Unable to load your posts.</div>';
@@ -3145,14 +2639,7 @@ async function loadUserPosts(){
   }
 
 
-  if(!data || data.length === 0){
-
-    /*
-      THIS IS THE IMPORTANT PART:
-
-      A new account with no posts gets
-      NO previous user's posts.
-    */
+  if(!data?.length){
 
     $('userPostsList').innerHTML =
       '<div class="card">You have not posted anything yet.</div>';
@@ -3170,14 +2657,11 @@ async function loadUserPosts(){
 }
 
 
-/* ============================================================
+/* =========================================================
    RENDER POSTS
-============================================================ */
+========================================================= */
 
-function renderPosts(
-  posts,
-  container
-){
+function renderPosts(posts,container){
 
   container.innerHTML = '';
 
@@ -3192,211 +2676,192 @@ function renderPosts(
   }
 
 
-  posts.forEach(
-    post=>{
+  posts.forEach(post=>{
 
-      const name =
-        post.profiles?.full_name ||
-        'Believer';
-
-
-      const avatar =
-        post.profiles?.avatar_url;
+    const name =
+      post.profiles?.full_name ||
+      'Believer';
 
 
-      const liked =
-        (post.post_likes || [])
-          .some(
-            like =>
-              like.user_id ===
-              currentUser?.id
-          );
+    const avatar =
+      post.profiles?.avatar_url;
 
 
-      const count =
-        (post.post_likes || [])
-          .length;
-
-
-      const date =
-        new Date(
-          post.created_at
-        ).toLocaleDateString(
-          undefined,
-          {
-            month:'short',
-            day:'numeric'
-          }
+    const liked =
+      (post.post_likes || [])
+        .some(
+          x =>
+            x.user_id ===
+            currentUser?.id
         );
 
 
-      const card =
-        document.createElement('div');
+    const count =
+      (post.post_likes || []).length;
 
 
-      card.className = 'card';
-
-
-      let media = '';
-
-
-      if(post.media_url){
-
-        if(
-          post.media_type ===
-          'video'
-        ){
-
-          media =
-          `<div class="post-media-attachment">
-            <video
-              src="${safeUrl(post.media_url)}"
-              controls
-            ></video>
-          </div>`;
-
-        }else{
-
-          media =
-          `<div class="post-media-attachment">
-            <img
-              src="${safeUrl(post.media_url)}"
-              alt="Post media"
-            >
-          </div>`;
-
+    const date =
+      new Date(
+        post.created_at
+      ).toLocaleDateString(
+        undefined,
+        {
+          month:'short',
+          day:'numeric'
         }
-
-      }
-
-
-      const avatarStyle =
-        avatar
-          ? `background-image:url("${safeUrl(avatar)}")`
-          : '';
+      );
 
 
-      card.innerHTML = `
+    const card =
+      document.createElement('div');
 
-        <div class="posthead">
 
-          <div class="posthead-left">
+    card.className = 'card';
 
-            <div
-              class="avatar"
-              style="${avatarStyle}"
-            >
-              ${
-                avatar
-                  ? ''
-                  : escapeHtml(
-                      name
-                        .charAt(0)
-                        .toUpperCase()
-                    )
-              }
+
+    let media = '';
+
+
+    if(post.media_url){
+
+      media =
+        post.media_type === 'video'
+
+          ? `
+          <div class="post-media-attachment">
+          <video
+          src="${safeUrl(post.media_url)}"
+          controls></video>
+          </div>
+          `
+
+          : `
+          <div class="post-media-attachment">
+          <img
+          src="${safeUrl(post.media_url)}"
+          alt="Post media">
+          </div>
+          `;
+
+    }
+
+
+    const avatarStyle =
+      avatar
+        ? `background-image:url("${safeUrl(avatar)}")`
+        : '';
+
+
+    card.innerHTML = `
+
+      <div class="posthead">
+
+        <div class="posthead-left">
+
+          <div
+          class="avatar"
+          style="${avatarStyle}">
+
+          ${
+            avatar
+              ? ''
+              : escapeHtml(
+                  name[0].toUpperCase()
+                )
+          }
+
+          </div>
+
+          <div>
+
+            <div class="post-author-name">
+              ${escapeHtml(name)}
             </div>
 
-            <div>
-
-              <div class="post-author-name">
-                ${escapeHtml(name)}
-              </div>
-
-              <div class="post-meta-line">
-                ${date}
-              </div>
-
+            <div class="post-meta-line">
+              ${date}
             </div>
 
           </div>
 
         </div>
 
-
-        <div class="post-content">
-          ${escapeHtml(post.content || '')}
-        </div>
+      </div>
 
 
-        ${media}
+      <div class="post-content">
+        ${escapeHtml(post.content || '')}
+      </div>
+
+      ${media}
 
 
-        <div class="actions">
+      <div class="actions">
 
-          <button
-            class="action-btn ${liked ? 'liked' : ''}"
-            onclick="toggleLike('${post.id}',${liked})"
-          >
+        <button
+        class="action-btn ${liked ? 'liked' : ''}"
+        onclick="toggleLike('${post.id}',${liked})">
 
-            <i
-              class="fa-${liked ? 'solid' : 'regular'} fa-heart"
-            ></i>
+          <i
+          class="fa-${liked ? 'solid' : 'regular'} fa-heart">
+          </i>
 
-            <span>
-              ${count ? count + ' ' : ''}Like
-            </span>
+          <span>
+            ${count ? count + ' ' : ''}Like
+          </span>
 
-          </button>
-
-
-          <button class="action-btn">
-
-            <i class="fa-regular fa-comment"></i>
-
-            <span>Comment</span>
-
-          </button>
+        </button>
 
 
-          <button class="action-btn">
+        <button class="action-btn">
 
-            <i class="fa-solid fa-share"></i>
+          <i class="fa-regular fa-comment"></i>
 
-            <span>Share</span>
+          <span>Comment</span>
 
-          </button>
-
-        </div>
-      `;
+        </button>
 
 
-      container.appendChild(card);
+        <button class="action-btn">
 
-    }
-  );
+          <i class="fa-solid fa-share"></i>
+
+          <span>Share</span>
+
+        </button>
+
+      </div>
+
+    `;
+
+
+    container.appendChild(card);
+
+  });
 
 }
 
 
-/* ============================================================
+/* =========================================================
    LIKE
-============================================================ */
+========================================================= */
 
-async function toggleLike(
-  postId,
-  liked
-){
+async function toggleLike(id,liked){
 
-  if(!currentUser) return;
+  if(!currentUser)return;
 
 
   if(liked){
 
-    const {
-      error
-    } =
-    await supabaseClient
-      .from('post_likes')
-      .delete()
-      .eq(
-        'post_id',
-        postId
-      )
-      .eq(
-        'user_id',
-        currentUser.id
-      );
+    const {error} =
+      await supabaseClient
+        .from('post_likes')
+        .delete()
+        .eq('post_id',id)
+        .eq(
+          'user_id',
+          currentUser.id
+        );
 
 
     if(error){
@@ -3409,17 +2874,17 @@ async function toggleLike(
 
   }else{
 
-    const {
-      error
-    } =
-    await supabaseClient
-      .from('post_likes')
-      .insert([
-        {
-          post_id:postId,
-          user_id:currentUser.id
-        }
-      ]);
+    const {error} =
+      await supabaseClient
+        .from('post_likes')
+        .insert([{
+
+          post_id:id,
+
+          user_id:
+            currentUser.id
+
+        }]);
 
 
     if(error){
@@ -3435,16 +2900,6 @@ async function toggleLike(
 
   await loadFeedPosts();
 
-  if(
-    !$('secProfile')
-      .classList
-      .contains('hidden')
-  ){
-
-    await loadUserPosts();
-
-  }
-
 }
 
 
@@ -3452,49 +2907,38 @@ window.toggleLike =
 toggleLike;
 
 
-/* ============================================================
-   PRAYER
-============================================================ */
+/* =========================================================
+   PRAYERS
+========================================================= */
 
 $('btnSubmitPrayer').onclick =
-async function(){
-
-  if(!currentUser){
-
-    alert('Please log in first.');
-
-    return;
-
-  }
-
+async()=>{
 
   const text =
-    $('prayerInput')
-      .value
-      .trim();
+    $('prayerInput').value.trim();
 
 
-  if(!text) return;
+  if(!text || !currentUser)return;
 
 
   $('btnSubmitPrayer').disabled = true;
 
 
-  const {
-    error
-  } =
-  await supabaseClient
-    .from('prayer_requests')
-    .insert([
-      {
-        user_id:currentUser.id,
+  const {error} =
+    await supabaseClient
+      .from('prayer_requests')
+      .insert([{
 
-        request:text,
+        user_id:
+          currentUser.id,
+
+        request:
+          text,
 
         created_at:
           new Date().toISOString()
-      }
-    ]);
+
+      }]);
 
 
   $('btnSubmitPrayer').disabled = false;
@@ -3516,45 +2960,27 @@ async function(){
 };
 
 
-/* ============================================================
-   LOAD PRAYERS
-============================================================ */
-
 async function loadPrayers(){
 
   const {
     data,
     error
   } =
-  await supabaseClient
-    .from('prayer_requests')
-    .select(
-      '*, profiles:user_id(full_name)'
-    )
-    .order(
-      'created_at',
-      {
-        ascending:false
-      }
-    );
+    await supabaseClient
+      .from('prayer_requests')
+      .select(
+        '*, profiles:user_id(full_name)'
+      )
+      .order(
+        'created_at',
+        {ascending:false}
+      );
 
 
   $('prayersList').innerHTML = '';
 
 
-  if(error){
-
-    console.error(error);
-
-    $('prayersList').innerHTML =
-      '<div class="card">Unable to load prayer requests.</div>';
-
-    return;
-
-  }
-
-
-  if(!data || !data.length){
+  if(error || !data?.length){
 
     $('prayersList').innerHTML =
       '<div class="card">No prayer requests yet.</div>';
@@ -3564,66 +2990,63 @@ async function loadPrayers(){
   }
 
 
-  data.forEach(
-    prayer=>{
+  data.forEach(prayer=>{
 
-      const card =
-        document.createElement('div');
-
-
-      card.className =
-        'prayer-card';
+    const card =
+      document.createElement('div');
 
 
-      card.innerHTML = `
-
-        <div class="author">
-
-          <i
-            class="fa-solid fa-hands-praying"
-            style="color:var(--bp-gold)"
-          ></i>
-
-          ${escapeHtml(
-            prayer.profiles?.full_name ||
-            'Anonymous Believer'
-          )}
-
-        </div>
+    card.className =
+      'prayer-card';
 
 
-        <div class="request-text">
+    card.innerHTML = `
 
-          ${escapeHtml(
-            prayer.request || ''
-          )}
+      <div class="author">
 
-        </div>
+        <i
+        class="fa-solid fa-hands-praying"
+        style="color:var(--bp-gold)">
+        </i>
 
+        ${escapeHtml(
+          prayer.profiles?.full_name ||
+          'Anonymous Believer'
+        )}
 
-        <div class="amen-count">
-
-          <i class="fa-regular fa-heart"></i>
-
-          Praying for this
-
-        </div>
-
-      `;
+      </div>
 
 
-      $('prayersList')
-        .appendChild(card);
+      <div class="request-text">
 
-    }
-  );
+        ${escapeHtml(
+          prayer.request || ''
+        )}
+
+      </div>
+
+
+      <div class="amen-count">
+
+        <i class="fa-regular fa-heart"></i>
+
+        Praying for this
+
+      </div>
+
+    `;
+
+
+    $('prayersList').appendChild(card);
+
+  });
 
 }
 
 
-/* ============================================================
+/* =========================================================
    MEMBERS
-============================================================ */
+========================================================= */
 
 async function loadMembers(){
 
@@ -3631,205 +3054,118 @@ async function loadMembers(){
     data,
     error
   } =
-  await supabaseClient
-    .from('profiles')
-    .select('*')
-    .limit(20);
+    await supabaseClient
+      .from('profiles')
+      .select('*')
+      .limit(20);
 
 
-  if(error){
-
-    console.error(error);
-
-    return;
-
-  }
-
-
-  if(!data) return;
+  if(error || !data)return;
 
 
   $('friendsList').innerHTML = '';
 
 
-  data.forEach(
-    member=>{
+  data.forEach(member=>{
 
-      /*
-        Don't show current account
-        as another member.
-      */
+    if(
+      member.id ===
+      currentUser?.id
+    ){
 
-      if(
-        member.id ===
-        currentUser?.id
-      ){
+      return;
 
-        return;
-
-      }
+    }
 
 
-      const card =
-        document.createElement('div');
+    const card =
+      document.createElement('div');
 
 
-      card.className =
-        'friend-card';
+    card.className =
+      'friend-card';
 
 
-      const avatar =
-        member.avatar_url;
+    const avatar =
+      member.avatar_url;
 
 
-      const style =
-        avatar
-          ? `background-image:url("${safeUrl(avatar)}")`
-          : '';
+    const style =
+      avatar
+        ? `background-image:url("${safeUrl(avatar)}")`
+        : '';
 
 
-      const initial =
-        (member.full_name || 'B')
-          .charAt(0)
-          .toUpperCase();
+    card.innerHTML = `
+
+      <div class="friend-info">
+
+        <div
+        class="avatar"
+        style="${style}">
+
+        ${
+          avatar
+            ? ''
+            : escapeHtml(
+                (
+                  member.full_name ||
+                  'B'
+                )[0].toUpperCase()
+              )
+        }
+
+        </div>
 
 
-      card.innerHTML = `
-
-        <div class="friend-info">
+        <div>
 
           <div
-            class="avatar"
-            style="${style}"
-          >
-            ${
-              avatar
-                ? ''
-                : escapeHtml(initial)
-            }
+          style="font-weight:800;font-size:14px;color:var(--bp-primary)">
+
+            ${escapeHtml(
+              member.full_name ||
+              'Believer'
+            )}
+
           </div>
 
 
-          <div>
+          <div
+          style="font-size:11px;color:var(--bp-muted)">
 
-            <div
-              style="font-weight:800;font-size:14px;color:var(--bp-primary)"
-            >
-              ${escapeHtml(
-                member.full_name ||
-                'Believer'
-              )}
-            </div>
-
-
-            <div
-              style="font-size:11px;color:var(--bp-muted)"
-            >
-              ${escapeHtml(
-                member.church_ministry ||
-                'Believers+ Member'
-              )}
-            </div>
+            ${escapeHtml(
+              member.church_ministry ||
+              'Believers+ Member'
+            )}
 
           </div>
 
         </div>
 
-
-        <button
-          class="btn btn-gold btn-sm"
-        >
-          Connect
-        </button>
-
-      `;
+      </div>
 
 
-      $('friendsList')
-        .appendChild(card);
+      <button
+      class="btn btn-gold btn-sm">
 
-    }
-  );
+        Connect
 
-}
+      </button>
 
-
-/* ============================================================
-   SECURITY HELPERS
-============================================================ */
-
-function safeUrl(url){
-
-  const value =
-    String(url || '')
-      .trim();
+    `;
 
 
-  if(
-    /^https?:\/\//i.test(value) ||
-    /^data:image\//i.test(value) ||
-    /^data:video\//i.test(value)
-  ){
+    $('friendsList').appendChild(card);
 
-    return value
-      .replace(/"/g,'%22');
-
-  }
-
-
-  return '';
+  });
 
 }
 
 
-function escapeHtml(value){
-
-  return String(value)
-    .replace(
-      /[&<>"']/g,
-      function(match){
-
-        return {
-
-          '&':'&amp;',
-          '<':'&lt;',
-          '>':'&gt;',
-          '"':'&quot;',
-          "'":'&#039;'
-
-        }[match];
-
-      }
-    );
-
-}
-
-
-/* ============================================================
-   MESSAGE
-============================================================ */
-
-function setMessage(
-  element,
-  message,
-  type='error'
-){
-
-  element.className =
-    type === 'success'
-      ? 'msg-success'
-      : 'msg-error';
-
-
-  element.innerText =
-    message;
-
-}
-
-
-/* ============================================================
+/* =========================================================
    START
-============================================================ */
+========================================================= */
 
 document.addEventListener(
   'DOMContentLoaded',
@@ -3840,3 +3176,4 @@ document.addEventListener(
 
 </body>
 </html>
+```
