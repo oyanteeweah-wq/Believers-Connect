@@ -260,17 +260,8 @@ header {
   position: relative;
 }
 
-.logout-btn {
-  font-size: 12px;
-  font-weight: 700;
-  padding: 6px 12px;
-  border-radius: 8px;
-  background: rgba(230, 57, 70, 0.1);
-  color: #e63946;
-}
-
 /* =========================================================
-   HEADER MENU DROPDOWN (ADDED)
+   HEADER MENU DROPDOWN
 ========================================================= */
 .menu-dropdown {
   position: absolute;
@@ -333,18 +324,6 @@ header {
   border-bottom: 3px solid var(--bp-gold);
 }
 
-.badge {
-  position: absolute;
-  top: 2px;
-  right: 6px;
-  background: #e63946;
-  color: white;
-  font-size: 10px;
-  font-weight: bold;
-  padding: 2px 6px;
-  border-radius: 10px;
-}
-
 /* =========================================================
    SEARCH BAR & NOTIFICATIONS
 ========================================================= */
@@ -370,77 +349,6 @@ header {
   outline: none;
   width: 100%;
   font-size: 14px;
-}
-
-.search-results-list {
-  margin-top: 10px;
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-  max-height: 250px;
-  overflow-y: auto;
-}
-
-.search-item {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 10px 12px;
-  background: white;
-  border-radius: 10px;
-  border: 1px solid var(--bp-border);
-  cursor: pointer;
-}
-
-.notif-dropdown {
-  position: absolute;
-  top: 50px;
-  right: 16px;
-  width: 320px;
-  max-width: 90vw;
-  background: white;
-  border-radius: 12px;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.15);
-  border: 1px solid var(--bp-border);
-  z-index: 1001;
-  overflow: hidden;
-}
-
-.notif-header {
-  padding: 12px 14px;
-  background: #f8fafc;
-  border-bottom: 1px solid var(--bp-border);
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  font-weight: 800;
-  font-size: 14px;
-  color: var(--bp-primary);
-}
-
-.notif-header button {
-  font-size: 11px;
-  color: var(--bp-gold-hover);
-  font-weight: 700;
-}
-
-.notif-list {
-  max-height: 320px;
-  overflow-y: auto;
-}
-
-.notif-item {
-  padding: 12px;
-  border-bottom: 1px solid var(--bp-border);
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  cursor: pointer;
-  background: white;
-}
-
-.notif-item.unread {
-  background: #f0f7ff;
 }
 
 /* =========================================================
@@ -533,9 +441,6 @@ header {
   padding-top: 10px;
 }
 
-/* =========================================================
-   IN-COMPOSER MEDIA PREVIEW CONTAINER STYLING
-========================================================= */
 .composer-preview-box {
   position: relative;
   margin: 10px 0;
@@ -685,7 +590,7 @@ header {
 }
 
 /* =========================================================
-   FEED POST CARDS & HORIZONTAL ACTIONS (LIKE, COMMENT, SHARE)
+   FEED POST CARDS & ACTIONS
 ========================================================= */
 .card {
   background: var(--bp-card-bg);
@@ -745,7 +650,6 @@ header {
   display: block;
 }
 
-/* Horizontal Actions Row: ❤️ Like | 💬 Comment | ↗️ Share */
 .actions {
   display: flex;
   align-items: center;
@@ -779,7 +683,6 @@ header {
   color: #e63946;
 }
 
-/* Comments Section Styling */
 .comments-section {
   margin-top: 10px;
   border-top: 1px dashed var(--bp-border);
@@ -839,7 +742,7 @@ header {
 }
 
 /* =========================================================
-   FRIENDS, GROUPS & VIDEO MODULES
+   FRIENDS, GROUPS & PROFILE MODULES
 ========================================================= */
 .friends-list, .groups-list {
   display: flex;
@@ -872,56 +775,6 @@ header {
   font-weight: 700;
 }
 
-.video-card {
-  background: white;
-  border-radius: var(--bp-radius);
-  border: 1px solid var(--bp-border);
-  overflow: hidden;
-  margin-bottom: 14px;
-  box-shadow: var(--bp-shadow);
-}
-
-.video-container {
-  position: relative;
-  background: black;
-  width: 100%;
-  aspect-ratio: 16/9;
-}
-
-.video-container video {
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
-}
-
-.video-info {
-  padding: 12px;
-}
-
-.modal-overlay {
-  position: fixed;
-  inset: 0;
-  background: rgba(13, 27, 42, 0.6);
-  z-index: 3000;
-  display: flex;
-  align-items: flex-end;
-  justify-content: center;
-  backdrop-filter: blur(3px);
-}
-
-.modal-sheet {
-  background: white;
-  width: 100%;
-  max-width: 640px;
-  border-top-left-radius: 20px;
-  border-top-right-radius: 20px;
-  padding: 20px;
-  box-shadow: 0 -4px 20px rgba(0,0,0,0.15);
-}
-
-/* =========================================================
-   RESTORED PROFILE, COVER PHOTO & ABOUT ME STYLES
-========================================================= */
 .profile-card {
   background: white;
   border-radius: var(--bp-radius);
@@ -938,24 +791,6 @@ header {
   background-size: cover;
   background-position: center;
   position: relative;
-}
-
-.cover-upload-badge {
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  background: rgba(13, 27, 42, 0.75);
-  color: white;
-  border-radius: 20px;
-  padding: 6px 12px;
-  font-size: 11px;
-  font-weight: 700;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  backdrop-filter: blur(4px);
-  border: 1px solid rgba(255,255,255,0.2);
 }
 
 .profile-header-content {
@@ -988,24 +823,6 @@ header {
   overflow: hidden;
   background-size: cover;
   background-position: center;
-}
-
-.avatar-upload-badge {
-  position: absolute;
-  bottom: 0;
-  right: 0;
-  width: 28px;
-  height: 28px;
-  border-radius: 50%;
-  background: var(--bp-gold);
-  color: var(--bp-primary);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 13px;
-  border: 2px solid white;
-  cursor: pointer;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.2);
 }
 
 .about-me-card {
@@ -1074,22 +891,6 @@ header {
   color: var(--bp-primary);
   margin-top: 2px;
 }
-
-.photo-preview-box {
-  width: 100%;
-  height: 120px;
-  border-radius: 10px;
-  border: 2px dashed var(--bp-border);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  overflow: hidden;
-  background-size: cover;
-  background-position: center;
-  margin-top: 6px;
-  color: var(--bp-muted);
-  font-size: 12px;
-}
 </style>
 </head>
 <body>
@@ -1097,13 +898,13 @@ header {
   <!-- ================= HEADER SECTION ================= -->
   <header>
     <div class="header-inner">
-      <div class="logo-area">
+      <div class="logo-area" onclick="switchTab('feed')">
         <i class="fa-solid fa-dove logo-icon"></i>
         <div class="logo">Believers<span>+</span></div>
       </div>
       
       <div class="header-actions">
-        <!-- Added Menu Button & Dropdown -->
+        <!-- Menu Button & Dropdown -->
         <button class="header-circle-btn" id="menuToggleBtn" title="Menu" onclick="toggleHeaderMenu(event)">
           <i class="fa-solid fa-bars"></i>
         </button>
@@ -1117,13 +918,78 @@ header {
     </div>
   </header>
 
-  <!-- ================= MAIN CONTENT WRAPPER ================= -->
-  <main class="wrap">
-    <!-- Your feed, stories, profile, components, and views load here -->
+  <!-- Navigation Bar (Hidden when logged out) -->
+  <div id="navWrap" class="nav-wrap hidden">
+    <nav class="nav">
+      <button id="navFeed" class="active" onclick="switchTab('feed')"><i class="fa-solid fa-house"></i></button>
+      <button id="navFriends" onclick="switchTab('friends')"><i class="fa-solid fa-user-group"></i></button>
+      <button id="navGroups" onclick="switchTab('groups')"><i class="fa-solid fa-users-rectangle"></i></button>
+      <button id="navProfile" onclick="switchTab('profile')"><i class="fa-solid fa-user"></i></button>
+    </nav>
+  </div>
+
+  <!-- ================= MAIN CONTENT CONTAINER ================= -->
+  <main class="wrap" id="mainContent">
+    <!-- Dynamic views render here -->
   </main>
 
   <script>
-    // Toggle Header Menu Dropdown
+    /* =========================================================
+       APPLICATION STATE & MOCK DATA
+    ========================================================= */
+    let currentUser = JSON.parse(localStorage.getItem('bp_user')) || null;
+    let currentTab = 'feed';
+    let composerMedia = null; // { type: 'image'|'video', url: string }
+
+    let posts = JSON.parse(localStorage.getItem('bp_posts')) || [
+      {
+        id: 1,
+        author: 'Pastor Samuel',
+        avatar: '',
+        time: '2 hours ago',
+        content: 'Faith is taking the first step even when you don’t see the whole staircase. Keep trusting the journey today! 🙏✨',
+        media: null,
+        likes: 24,
+        liked: false,
+        comments: [
+          { author: 'Sister Grace', text: 'Amen! Truly needed to hear this today.' }
+        ]
+      },
+      {
+        id: 2,
+        author: 'Oyantee Weah',
+        avatar: '',
+        time: '5 hours ago',
+        content: 'Working on some amazing custom branding designs and layouts today. Grateful for creativity and inspiration! 💻🎨',
+        media: null,
+        likes: 15,
+        liked: true,
+        comments: []
+      }
+    ];
+
+    let stories = [
+      { id: 1, author: 'Create Story', isCreate: true, bg: '' },
+      { id: 2, author: 'Bishop David', bg: 'https://images.unsplash.com/photo-1544717305-2782549b5136?w=300' },
+      { id: 3, author: 'Choir Fellowship', bg: 'https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=300' },
+      { id: 4, author: 'Youth Outreach', bg: 'https://images.unsplash.com/photo-1529156069898-49953e39b3ac?w=300' }
+    ];
+
+    let friends = [
+      { name: 'Sister Grace', role: 'Prayer Group Lead', online: true },
+      { name: 'Deacon John', role: 'Media Department', online: false },
+      { name: 'Brother Emmanuel', role: 'Youth Ministry', online: true }
+    ];
+
+    let groups = [
+      { name: 'Daily Scripture & Devotion', members: '1.2k members', joined: true },
+      { name: 'Believers Worship Team', members: '340 members', joined: false },
+      { name: 'Community Entrepreneurs', members: '850 members', joined: true }
+    ];
+
+    /* =========================================================
+       HEADER MENU TOGGLE LOGIC
+    ========================================================= */
     function toggleHeaderMenu(event) {
       event.stopPropagation();
       const dropdown = document.getElementById('headerMenuDropdown');
@@ -1132,7 +998,6 @@ header {
       }
     }
 
-    // Close menu when clicking outside
     window.addEventListener('click', function(event) {
       const dropdown = document.getElementById('headerMenuDropdown');
       const toggleBtn = document.getElementById('menuToggleBtn');
@@ -1142,6 +1007,426 @@ header {
         }
       }
     });
+
+    function logout() {
+      localStorage.removeItem('bp_user');
+      currentUser = null;
+      document.getElementById('headerMenuDropdown').classList.add('hidden');
+      renderApp();
+    }
+
+    /* =========================================================
+       RENDER ROUTER
+    ========================================================= */
+    function renderApp() {
+      const main = document.getElementById('mainContent');
+      const navWrap = document.getElementById('navWrap');
+
+      if (!currentUser) {
+        navWrap.classList.add('hidden');
+        main.innerHTML = renderAuthView();
+        return;
+      }
+
+      navWrap.classList.remove('hidden');
+      
+      // Update active nav buttons
+      document.querySelectorAll('.nav button').forEach(btn => btn.classList.remove('active'));
+      const activeBtn = document.getElementById('nav' + currentTab.charAt(0).toUpperCase() + currentTab.slice(1));
+      if (activeBtn) activeBtn.classList.add('active');
+
+      if (currentTab === 'feed') {
+        main.innerHTML = renderFeedView();
+      } else if (currentTab === 'friends') {
+        main.innerHTML = renderFriendsView();
+      } else if (currentTab === 'groups') {
+        main.innerHTML = renderGroupsView();
+      } else if (currentTab === 'profile') {
+        main.innerHTML = renderProfileView();
+      }
+    }
+
+    function switchTab(tab) {
+      currentTab = tab;
+      renderApp();
+      window.scrollTo(0,0);
+    }
+
+    /* =========================================================
+       AUTH VIEW
+    ========================================================= */
+    function renderAuthView() {
+      return `
+        <div class="auth-page">
+          <div class="auth">
+            <div class="auth-brand">
+              <div class="auth-logo"><i class="fa-solid fa-dove"></i></div>
+              <div class="brand">Believers<span>+</span></div>
+            </div>
+            <div class="auth-card">
+              <div class="form-group">
+                <label>Your Full Name</label>
+                <input type="text" id="authName" placeholder="Enter your name (e.g. Oyantee Weah)">
+              </div>
+              <div class="form-group">
+                <label>Email Address</label>
+                <input type="email" id="authEmail" placeholder="you@example.com">
+              </div>
+              <button class="btn btn-gold" onclick="handleLogin()">Enter Community</button>
+              <div id="authError" class="msg-error hidden">Please fill in all fields.</div>
+            </div>
+          </div>
+        </div>
+      `;
+    }
+
+    function handleLogin() {
+      const name = document.getElementById('authName').value.trim();
+      const email = document.getElementById('authEmail').value.trim();
+      if (!name || !email) {
+        document.getElementById('authError').classList.remove('hidden');
+        return;
+      }
+      currentUser = { name, email, avatar: '' };
+      localStorage.setItem('bp_user', JSON.stringify(currentUser));
+      currentTab = 'feed';
+      renderApp();
+    }
+
+    /* =========================================================
+       FEED VIEW
+    ========================================================= */
+    function renderFeedView() {
+      return `
+        <!-- Stories / Community Updates -->
+        <div class="stories-container">
+          <div class="stories-wrapper">
+            ${stories.map(s => {
+              if (s.isCreate) {
+                return `
+                  <div class="story-card create-story" onclick="triggerStoryUpload()">
+                    <div class="top-img" style="background-image: url('${currentUser.avatar || ''}')">
+                      <div class="plus-btn">+</div>
+                    </div>
+                    <div class="bottom-text">Create Story</div>
+                  </div>
+                `;
+              }
+              return `
+                <div class="story-card" style="background-image: url('${s.bg}'); background-size: cover; background-position: center;">
+                  <div class="story-overlay"></div>
+                  <div class="story-author">${s.author}</div>
+                </div>
+              `;
+            }).join('')}
+          </div>
+        </div>
+
+        <!-- Composer Box -->
+        <div class="composer-card">
+          <div class="avatar" style="${currentUser.avatar ? 'background-image: url('+currentUser.avatar+')' : ''}">
+            ${!currentUser.avatar ? currentUser.name.charAt(0).toUpperCase() : ''}
+          </div>
+          <div class="mind-button" onclick="openExpandedComposer()">What is on your heart today, ${currentUser.name.split(' ')[0]}?</div>
+          <label class="photo-upload-btn" title="Attach Media">
+            <i class="fa-solid fa-image"></i>
+            <input type="file" accept="image/*,video/*" class="hidden" onchange="handleComposerMedia(event)">
+          </label>
+        </div>
+
+        <div id="expandedComposerContainer"></div>
+
+        <!-- Feed Posts List -->
+        <div id="postsList">
+          ${posts.map(post => renderPostCard(post)).join('')}
+        </div>
+      `;
+    }
+
+    function openExpandedComposer() {
+      const container = document.getElementById('expandedComposerContainer');
+      container.innerHTML = `
+        <div id="postComposerArea">
+          <textarea class="composer-textarea" id="composerText" placeholder="Share your thoughts, scriptures, or updates..."></textarea>
+          <div id="composerPreviewContainer"></div>
+          <div class="composer-actions">
+            <label class="photo-upload-btn">
+              <i class="fa-solid fa-photo-film"></i> <span>Add Photo/Video</span>
+              <input type="file" accept="image/*,video/*" class="hidden" onchange="handleComposerMedia(event)">
+            </label>
+            <button class="btn btn-gold btn-sm" onclick="submitPost()">Post Update</button>
+          </div>
+        </div>
+      `;
+      document.getElementById('composerText').focus();
+    }
+
+    function handleComposerMedia(event) {
+      const file = event.target.files[0];
+      if (!file) return;
+      const url = URL.createObjectURL(file);
+      const type = file.type.startsWith('video') ? 'video' : 'image';
+      composerMedia = { type, url };
+
+      // If expanded composer is open, render preview
+      const previewContainer = document.getElementById('composerPreviewContainer');
+      if (previewContainer) {
+        previewContainer.innerHTML = `
+          <div class="composer-preview-box">
+            <button class="remove-media-btn" onclick="removeComposerMedia()"><i class="fa-solid fa-xmark"></i></button>
+            ${type === 'video' ? `<video src="${url}" controls></video>` : `<img src="${url}" alt="Preview">`}
+          </div>
+        `;
+      } else {
+        // Automatically open expanded composer if triggered from small input
+        openExpandedComposer();
+        document.getElementById('composerPreviewContainer').innerHTML = `
+          <div class="composer-preview-box">
+            <button class="remove-media-btn" onclick="removeComposerMedia()"><i class="fa-solid fa-xmark"></i></button>
+            ${type === 'video' ? `<video src="${url}" controls></video>` : `<img src="${url}" alt="Preview">`}
+          </div>
+        `;
+      }
+    }
+
+    function removeComposerMedia() {
+      composerMedia = null;
+      const previewContainer = document.getElementById('composerPreviewContainer');
+      if (previewContainer) previewContainer.innerHTML = '';
+    }
+
+    function submitPost() {
+      const text = document.getElementById('composerText').value.trim();
+      if (!text && !composerMedia) return;
+
+      const newPost = {
+        id: Date.now(),
+        author: currentUser.name,
+        avatar: currentUser.avatar,
+        time: 'Just now',
+        content: text,
+        media: composerMedia ? { ...composerMedia } : null,
+        likes: 0,
+        liked: false,
+        comments: []
+      };
+
+      posts.unshift(newPost);
+      localStorage.setItem('bp_posts', JSON.stringify(posts));
+      composerMedia = null;
+      renderApp();
+    }
+
+    function triggerStoryUpload() {
+      const input = document.createElement('input');
+      input.type = 'file';
+      input.accept = 'image/*';
+      input.onchange = e => {
+        const file = e.target.files[0];
+        if (file) {
+          const url = URL.createObjectURL(file);
+          stories.push({ id: Date.now(), author: currentUser.name, bg: url });
+          renderApp();
+        }
+      };
+      input.click();
+    }
+
+    function renderPostCard(post) {
+      return `
+        <div class="card" id="post-${post.id}">
+          <div class="posthead">
+            <div class="posthead-left">
+              <div class="avatar" style="${post.avatar ? 'background-image: url('+post.avatar+')' : ''}">
+                ${!post.avatar ? post.author.charAt(0).toUpperCase() : ''}
+              </div>
+              <div>
+                <div class="post-author-name">${post.author}</div>
+                <div class="post-meta-line"><i class="fa-solid fa-clock"></i> ${post.time}</div>
+              </div>
+            </div>
+            <button style="color: var(--bp-muted);"><i class="fa-solid fa-ellipsis"></i></button>
+          </div>
+
+          <div class="post-content">${post.content}</div>
+
+          ${post.media ? `
+            <div class="post-media-attachment">
+              ${post.media.type === 'video' ? `<video src="${post.media.url}" controls></video>` : `<img src="${post.media.url}" alt="Post attachment">`}
+            </div>
+          ` : ''}
+
+          <div class="actions">
+            <button class="action-btn ${post.liked ? 'liked' : ''}" onclick="toggleLike(${post.id})">
+              <i class="${post.liked ? 'fa-solid' : 'fa-regular'} fa-heart"></i> <span>${post.likes}</span>
+            </button>
+            <button class="action-btn" onclick="toggleComments(${post.id})">
+              <i class="fa-regular fa-comment"></i> <span>${post.comments.length}</span>
+            </button>
+            <button class="action-btn" onclick="alert('Post link copied to clipboard!')">
+              <i class="fa-solid fa-share"></i> <span>Share</span>
+            </button>
+          </div>
+
+          <div class="comments-section" id="comments-box-${post.id}">
+            <div class="comments-list">
+              ${post.comments.map(c => `
+                <div class="comment-item">
+                  <div class="avatar" style="width:28px; height:28px; font-size:12px;">${c.author.charAt(0)}</div>
+                  <div style="flex:1;">
+                    <div class="comment-author">${c.author}</div>
+                    <div class="comment-text">${c.text}</div>
+                  </div>
+                </div>
+              `).join('')}
+            </div>
+            <div class="comment-input-wrap">
+              <input type="text" id="comment-input-${post.id}" placeholder="Write a comment..." onkeydown="if(event.key==='Enter') submitComment(${post.id})">
+              <button class="btn btn-gold btn-sm" onclick="submitComment(${post.id})"><i class="fa-solid fa-paper-plane"></i></button>
+            </div>
+          </div>
+        </div>
+      `;
+    }
+
+    function toggleLike(postId) {
+      const post = posts.find(p => p.id === postId);
+      if (post) {
+        if (post.liked) {
+          post.liked = false;
+          post.likes--;
+        } else {
+          post.liked = true;
+          post.likes++;
+        }
+        localStorage.setItem('bp_posts', JSON.stringify(posts));
+        renderApp();
+      }
+    }
+
+    function toggleComments(postId) {
+      // Focus comment input
+      const input = document.getElementById(`comment-input-${postId}`);
+      if (input) input.focus();
+    }
+
+    function submitComment(postId) {
+      const input = document.getElementById(`comment-input-${postId}`);
+      const text = input ? input.value.trim() : '';
+      if (!text) return;
+
+      const post = posts.find(p => p.id === postId);
+      if (post) {
+        post.comments.push({ author: currentUser.name, text });
+        localStorage.setItem('bp_posts', JSON.stringify(posts));
+        renderApp();
+      }
+    }
+
+    /* =========================================================
+       FRIENDS VIEW
+    ========================================================= */
+    function renderFriendsView() {
+      return `
+        <div class="card">
+          <h2 style="font-size: 18px; font-weight: 800; color: var(--bp-primary); margin-bottom: 4px;">Fellowship Members</h2>
+          <p style="font-size: 13px; color: var(--bp-muted);">Connect and pray with other members of your community.</p>
+          <div class="friends-list">
+            ${friends.map(f => `
+              <div class="friend-card">
+                <div class="friend-info">
+                  <div class="avatar">${f.name.charAt(0)}</div>
+                  <div>
+                    <div style="font-weight: 800; font-size: 14px; color: var(--bp-primary);">${f.name}</div>
+                    <div style="font-size: 11px; color: var(--bp-muted);">${f.role}</div>
+                  </div>
+                </div>
+                <button class="btn btn-gold btn-sm" onclick="alert('Connection request sent to ${f.name}!')">Connect</button>
+              </div>
+            `).join('')}
+          </div>
+        </div>
+      `;
+    }
+
+    /* =========================================================
+       GROUPS VIEW
+    ========================================================= */
+    function renderGroupsView() {
+      return `
+        <div class="card">
+          <h2 style="font-size: 18px; font-weight: 800; color: var(--bp-primary); margin-bottom: 4px;">Community Groups</h2>
+          <p style="font-size: 13px; color: var(--bp-muted);">Join focused circles for prayer, study, and collaboration.</p>
+          <div class="groups-list">
+            ${groups.map(g => `
+              <div class="group-card">
+                <div class="group-info">
+                  <div class="avatar" style="background:var(--bp-accent); color:var(--bp-gold);"><i class="fa-solid fa-users"></i></div>
+                  <div>
+                    <div style="font-weight: 800; font-size: 14px; color: var(--bp-primary);">${g.name}</div>
+                    <div style="font-size: 11px; color: var(--bp-muted);">${g.members}</div>
+                  </div>
+                </div>
+                <button class="btn ${g.joined ? 'btn-outline' : 'btn-gold'} btn-sm" onclick="toggleGroupJoin('${g.name}')">
+                  ${g.joined ? 'Joined' : 'Join'}
+                </button>
+              </div>
+            `).join('')}
+          </div>
+        </div>
+      `;
+    }
+
+    function toggleGroupJoin(groupName) {
+      const g = groups.find(item => item.name === groupName);
+      if (g) {
+        g.joined = !g.joined;
+        renderApp();
+      }
+    }
+
+    /* =========================================================
+       PROFILE VIEW
+    ========================================================= */
+    function renderProfileView() {
+      return `
+        <div class="profile-card">
+          <div class="profile-cover-area"></div>
+          <div class="profile-header-content">
+            <div class="profile-avatar-wrapper">
+              <div class="profile-avatar-large" style="${currentUser.avatar ? 'background-image: url('+currentUser.avatar+')' : ''}">
+                ${!currentUser.avatar ? currentUser.name.charAt(0).toUpperCase() : ''}
+              </div>
+            </div>
+            <h1 style="font-size: 20px; font-weight: 800; color: var(--bp-primary);">${currentUser.name}</h1>
+            <p style="font-size: 13px; color: var(--bp-muted); margin-top: 2px;">Active Believers+ Member</p>
+          </div>
+        </div>
+
+        <div class="about-me-card">
+          <div class="about-me-header">
+            <div class="about-me-title"><i class="fa-solid fa-id-card"></i> Account Information</div>
+          </div>
+          <div class="profile-field-item">
+            <div class="profile-field-icon"><i class="fa-solid fa-user"></i></div>
+            <div class="profile-field-content">
+              <label>Full Name</label>
+              <div>${currentUser.name}</div>
+            </div>
+          </div>
+          <div class="profile-field-item">
+            <div class="profile-field-icon"><i class="fa-solid fa-envelope"></i></div>
+            <div class="profile-field-content">
+              <label>Email Address</label>
+              <div>${currentUser.email}</div>
+            </div>
+          </div>
+        </div>
+      `;
+    }
+
+    // Initialize application on load
+    renderApp();
   </script>
 </body>
 </html>
