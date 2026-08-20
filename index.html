@@ -9,6 +9,9 @@
 <!-- Font Awesome Icons -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
+<!-- Supabase JS Client -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
 <style>
 /* =========================================================
    ORIGINAL BELIEVERS+ DESIGN SYSTEM & THEME
@@ -189,6 +192,14 @@ img, video {
 
 .msg-error {
   color: #e63946;
+  margin-top: 10px;
+  font-size: 13px;
+  text-align: center;
+  font-weight: 600;
+}
+
+.msg-success {
+  color: #2a9d8f;
   margin-top: 10px;
   font-size: 13px;
   text-align: center;
@@ -937,23 +948,29 @@ header {
   border-top-left-radius: 20px;
   border-top-right-radius: 20px;
   padding: 20px;
-  box-shadow: 0 -4px 20px rgba(0,0,0,0.15);
+  max-height: 85vh;
+  overflow-y: auto;
+  animation: slideUp 0.3s ease;
+}
+
+@keyframes slideUp {
+  from { transform: translateY(100%); }
+  to { transform: translateY(0); }
 }
 
 /* =========================================================
-   RESTORED PROFILE, COVER PHOTO & ABOUT ME STYLES
+   PROFILE VIEW
 ========================================================= */
-.profile-card {
+.profile-header {
   background: white;
   border-radius: var(--bp-radius);
   border: 1px solid var(--bp-border);
-  box-shadow: var(--bp-shadow);
   overflow: hidden;
-  margin-bottom: 12px;
-  position: relative;
+  margin-bottom: 14px;
+  box-shadow: var(--bp-shadow);
 }
 
-.profile-cover-area {
+.cover-photo {
   height: 140px;
   background: linear-gradient(135deg, var(--bp-primary), var(--bp-accent));
   background-size: cover;
@@ -961,513 +978,401 @@ header {
   position: relative;
 }
 
-.cover-upload-badge {
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  background: rgba(13, 27, 42, 0.75);
-  color: white;
-  border-radius: 20px;
-  padding: 6px 12px;
-  font-size: 11px;
-  font-weight: 700;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  backdrop-filter: blur(4px);
-  border: 1px solid rgba(255,255,255,0.2);
-}
-
-.profile-header-content {
+.profile-main-info {
   padding: 0 16px 16px 16px;
-  text-align: center;
   position: relative;
-  margin-top: -40px;
-}
-
-.profile-avatar-wrapper {
-  position: relative;
-  width: 84px;
-  height: 84px;
-  margin: 0 auto 8px auto;
 }
 
 .profile-avatar-large {
-  width: 84px;
-  height: 84px;
+  width: 90px;
+  height: 90px;
   border-radius: 50%;
-  background: linear-gradient(135deg, var(--bp-primary), var(--bp-accent));
+  border: 4px solid white;
+  margin-top: -45px;
+  background: var(--bp-primary);
   color: var(--bp-gold);
   display: flex;
   align-items: center;
   justify-content: center;
-  font-weight: 800;
   font-size: 32px;
-  border: 3px solid white;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+  font-weight: 800;
   overflow: hidden;
   background-size: cover;
   background-position: center;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
 }
 
-.avatar-upload-badge {
-  position: absolute;
-  bottom: 0;
-  right: 0;
-  width: 28px;
-  height: 28px;
-  border-radius: 50%;
-  background: var(--bp-gold);
+.profile-details {
+  margin-top: 10px;
+}
+
+.profile-name {
+  font-size: 20px;
+  font-weight: 900;
   color: var(--bp-primary);
+}
+
+.profile-bio {
+  font-size: 13px;
+  color: var(--bp-muted);
+  margin-top: 4px;
+}
+
+.profile-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 10px;
+  font-size: 12px;
+  color: var(--bp-muted);
+}
+
+.profile-meta-item {
   display: flex;
   align-items: center;
-  justify-content: center;
-  font-size: 13px;
-  border: 2px solid white;
-  cursor: pointer;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+  gap: 4px;
 }
 
-.about-me-card {
-  background: white;
+/* =========================================================
+   PRAYER WALL
+========================================================= */
+.prayer-card {
+  background: #fdfbf7;
+  border: 1px solid #f3e8d3;
   border-radius: var(--bp-radius);
-  border: 1px solid var(--bp-border);
-  box-shadow: var(--bp-shadow);
   padding: 16px;
   margin-bottom: 12px;
+  box-shadow: var(--bp-shadow);
 }
 
-.about-me-title {
-  font-size: 15px;
+.prayer-card .author {
   font-weight: 800;
   color: var(--bp-primary);
-  margin-bottom: 12px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
+  font-size: 14px;
 }
 
-.about-info-grid {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 10px;
+.prayer-card .request-text {
+  font-size: 14px;
+  margin: 8px 0 12px 0;
+  color: #2b2d42;
 }
 
-.about-info-item {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  font-size: 13px;
-  color: var(--bp-text);
-}
-
-.about-info-item i {
-  color: var(--bp-gold);
-  width: 18px;
-  text-align: center;
-}
-
-.profile-stats-row {
-  display: flex;
-  justify-content: space-around;
-  border-top: 1px solid var(--bp-border);
-  border-bottom: 1px solid var(--bp-border);
-  padding: 10px 0;
-  margin: 12px 0;
-}
-
-.stat-item {
-  text-align: center;
-}
-
-.stat-num {
+.amen-count {
+  font-size: 12px;
+  color: var(--bp-gold-hover);
   font-weight: 800;
-  font-size: 16px;
-  color: var(--bp-primary);
-}
-
-.stat-label {
-  font-size: 11px;
-  color: var(--bp-muted);
-  text-transform: uppercase;
 }
 </style>
 </head>
 <body>
 
-<!-- =========================================================
-   1. AUTHENTICATION VIEW (LOGIN & REGISTRATION)
-========================================================= -->
-<div id="authView" class="auth-page">
+<!-- AUTHENTICATION PAGE (HIDDEN WHEN LOGGED IN) -->
+<div id="authPage" class="auth-page">
   <div class="auth">
     <div class="auth-brand">
-      <div class="auth-logo"><i class="fa-solid font-awesome-logo-full"></i><i class="fa-solid fa-cross"></i></div>
+      <div class="auth-logo"><i class="fa-solid fa-cross"></i></div>
       <div class="brand">Believers<span>+</span></div>
-      <p style="font-size:13px; color:#a0aec0; margin-top:4px;">Connecting Believers Worldwide</p>
+      <div style="font-size: 13px; opacity: 0.8; margin-top: 4px;">Connecting Believers Worldwide</div>
     </div>
 
-    <!-- LOGIN FORM CARD -->
+    <!-- LOGIN FORM -->
     <div id="loginCard" class="auth-card">
-      <h2 style="font-size:18px; font-weight:800; color:var(--bp-primary); margin-bottom:16px; text-align:center;">Log In to Believers+</h2>
+      <h3 style="font-size: 18px; font-weight: 800; margin-bottom: 16px; color: var(--bp-primary);">Log In</h3>
+      
       <div class="form-group">
-        <label>Email</label>
-        <input type="email" id="loginEmail" placeholder="you@example.com" />
+        <label>Email Address</label>
+        <input type="email" id="loginEmail" placeholder="you@example.com" autocomplete="email">
       </div>
+
       <div class="form-group">
         <label>Password</label>
-        <input type="password" id="loginPassword" placeholder="••••••••" />
+        <input type="password" id="loginPassword" placeholder="••••••••" autocomplete="current-password">
       </div>
-      <button class="btn btn-gold" onclick="handleLogin()" style="margin-top:10px;">
+
+      <button type="button" class="btn btn-gold" id="btnLogin" style="margin-top: 8px;">
         <i class="fa-solid fa-right-to-bracket"></i> Log In
       </button>
-      <div id="loginError" class="msg-error"></div>
+
+      <div id="loginMsg" class="msg-error"></div>
+
       <div class="divider"></div>
-      <button class="btn btn-outline" onclick="toggleAuthMode('register')">
-        Create New Account
-      </button>
+
+      <div style="text-align: center;">
+        <span style="font-size: 13px; color: var(--bp-muted);">Don't have an account?</span>
+        <button type="button" id="btnShowRegister" style="font-size: 13px; font-weight: 800; color: var(--bp-primary); margin-left: 4px;">Create New Account</button>
+      </div>
     </div>
 
-    <!-- REGISTRATION FORM CARD -->
+    <!-- REGISTER FORM -->
     <div id="registerCard" class="auth-card hidden">
-      <h2 style="font-size:18px; font-weight:800; color:var(--bp-primary); margin-bottom:16px; text-align:center;">Join Believers+</h2>
+      <h3 style="font-size: 18px; font-weight: 800; margin-bottom: 16px; color: var(--bp-primary);">Create Account</h3>
+      
       <div class="form-group">
         <label>Full Name</label>
-        <input type="text" id="regName" placeholder="e.g. John Doe" />
+        <input type="text" id="regFullName" placeholder="e.g. Musa Swaray">
       </div>
+
       <div class="form-group">
-        <label>Email</label>
-        <input type="email" id="regEmail" placeholder="you@example.com" />
+        <label>Email Address</label>
+        <input type="email" id="regEmail" placeholder="you@example.com" autocomplete="email">
       </div>
+
       <div class="form-group">
         <label>Password</label>
-        <input type="password" id="regPassword" placeholder="Minimum 6 characters" />
+        <input type="password" id="regPassword" placeholder="Minimum 6 characters" autocomplete="new-password">
       </div>
-      <button class="btn btn-gold" onclick="handleRegister()" style="margin-top:10px;">
-        <i class="fa-solid fa-user-plus"></i> Create Account
+
+      <button type="button" class="btn btn-gold" id="btnRegister" style="margin-top: 8px;">
+        <i class="fa-solid fa-user-plus"></i> Register
       </button>
-      <div id="registerError" class="msg-error"></div>
+
+      <div id="regMsg" class="msg-error"></div>
+
       <div class="divider"></div>
-      <button class="btn btn-outline" onclick="toggleAuthMode('login')">
-        Already have an account? Log In
-      </button>
+
+      <div style="text-align: center;">
+        <span style="font-size: 13px; color: var(--bp-muted);">Already have an account?</span>
+        <button type="button" id="btnShowLogin" style="font-size: 13px; font-weight: 800; color: var(--bp-primary); margin-left: 4px;">Log In</button>
+      </div>
     </div>
   </div>
 </div>
 
-<!-- =========================================================
-   2. MAIN APPLICATION VIEW
-========================================================= -->
-<div id="appView" class="hidden">
-  
-  <!-- STICKY TOP HEADER -->
+<!-- MAIN APP VIEW (HIDDEN WHEN LOGGED OUT) -->
+<div id="appPage" class="hidden">
   <header>
     <div class="header-inner">
-      <div class="logo-area" onclick="switchTab('feed')">
+      <div class="logo-area" id="appLogoBtn">
         <i class="fa-solid fa-cross logo-icon"></i>
         <div class="logo">Believers<span>+</span></div>
       </div>
+
       <div class="header-actions">
-        <button class="header-circle-btn" onclick="toggleSearchModal()">
+        <button class="header-circle-btn" id="btnSearchToggle" title="Search">
           <i class="fa-solid fa-magnifying-glass"></i>
         </button>
-        <button class="header-circle-btn" onclick="toggleNotifications()">
+
+        <button class="header-circle-btn" id="btnNotifToggle" title="Notifications">
           <i class="fa-solid fa-bell"></i>
-          <span id="notifBadge" class="badge hidden">0</span>
+          <span class="badge hidden" id="notifBadge">0</span>
         </button>
-        <!-- FACEBOOK-STYLE ☰ MENU BUTTON -->
-        <button class="header-circle-btn" onclick="toggleHeaderMenu()">
+
+        <button class="header-circle-btn" id="btnMenuToggle" title="Menu">
           <i class="fa-solid fa-bars"></i>
         </button>
+
+        <!-- MENU DROPDOWN OVERLAY -->
+        <div id="menuDropdown" class="menu-dropdown hidden">
+          <div class="menu-list">
+            <button class="menu-item" id="menuBtnProfile">
+              <i class="fa-solid fa-user"></i> View Profile
+            </button>
+            <button class="menu-item" id="menuBtnEditProfile">
+              <i class="fa-solid fa-pen-to-square"></i> Edit Profile
+            </button>
+            <div class="divider" style="margin: 4px 0;"></div>
+            <button class="menu-item logout-menu-item" id="menuBtnLogout">
+              <i class="fa-solid fa-right-from-bracket"></i> Log Out
+            </button>
+          </div>
+        </div>
+
+        <!-- NOTIFICATIONS DROPDOWN -->
+        <div id="notifDropdown" class="notif-dropdown hidden">
+          <div class="notif-header">
+            <span>Notifications</span>
+            <button type="button" id="btnClearNotifs">Mark all read</button>
+          </div>
+          <div class="notif-list" id="notifList">
+            <div style="padding: 16px; text-align: center; color: var(--bp-muted); font-size: 13px;">No new notifications</div>
+          </div>
+        </div>
       </div>
     </div>
 
-    <!-- FACEBOOK-STYLE ☰ DROPDOWN MENU -->
-    <div id="headerMenuDropdown" class="menu-dropdown hidden">
-      <div class="menu-list">
-        <button class="menu-item" onclick="switchTab('profile'); closeHeaderMenu();">
-          <i class="fa-solid fa-user"></i> View Profile
-        </button>
-        <button class="menu-item" onclick="switchTab('friends'); closeHeaderMenu();">
-          <i class="fa-solid fa-user-group"></i> Friends
-        </button>
-        <button class="menu-item" onclick="switchTab('groups'); closeHeaderMenu();">
-          <i class="fa-solid fa-people-group"></i> Groups & Fellowship
-        </button>
-        <button class="menu-item" onclick="switchTab('videos'); closeHeaderMenu();">
-          <i class="fa-solid fa-video"></i> Watch Sermons
-        </button>
-        <button class="menu-item" onclick="openEditProfileModal(); closeHeaderMenu();">
-          <i class="fa-solid fa-pen-to-square"></i> Edit Profile
-        </button>
-        <div class="divider" style="margin: 4px 0;"></div>
-        <button class="menu-item logout-menu-item" onclick="handleLogout()">
-          <i class="fa-solid fa-right-from-bracket"></i> Log Out
-        </button>
-      </div>
-    </div>
-
-    <!-- NOTIFICATION DROPDOWN OVERLAY -->
-    <div id="notifDropdown" class="notif-dropdown hidden">
-      <div class="notif-header">
-        <span>Notifications</span>
-        <button onclick="clearNotifications()">Clear All</button>
-      </div>
-      <div id="notifList" class="notif-list">
-        <div style="padding:16px; text-align:center; font-size:12px; color:var(--bp-muted);">No new notifications</div>
-      </div>
-    </div>
-
-    <!-- SEARCH OVERLAY BOX -->
-    <div id="searchBoxModal" class="search-modal-box hidden">
+    <!-- SEARCH MODAL BOX -->
+    <div id="searchModal" class="search-modal-box hidden">
       <div class="search-input-wrapper">
-        <i class="fa-solid fa-magnifying-glass" style="color:var(--bp-muted);"></i>
-        <input type="text" id="searchInput" placeholder="Search Believers, Prayers, Videos..." oninput="handleSearch(this.value)" />
-        <i class="fa-solid fa-xmark" style="color:var(--bp-muted); cursor:pointer;" onclick="toggleSearchModal()"></i>
+        <i class="fa-solid fa-magnifying-glass" style="color: var(--bp-muted);"></i>
+        <input type="text" id="searchInput" placeholder="Search posts, prayer requests, or members...">
       </div>
-      <div id="searchResults" class="search-results-list"></div>
+      <div class="search-results-list" id="searchResultsList"></div>
     </div>
 
     <!-- MAIN NAVIGATION TABS -->
     <div class="nav-wrap">
-      <div class="nav">
-        <button id="nav-feed" class="active" onclick="switchTab('feed')" title="Feed"><i class="fa-solid fa-house"></i></button>
-        <button id="nav-friends" onclick="switchTab('friends')" title="Friends"><i class="fa-solid fa-user-group"></i></button>
-        <button id="nav-groups" onclick="switchTab('groups')" title="Groups"><i class="fa-solid fa-people-group"></i></button>
-        <button id="nav-videos" onclick="switchTab('videos')" title="Videos"><i class="fa-solid fa-circle-play"></i></button>
-        <button id="nav-profile" onclick="switchTab('profile')" title="Profile"><i class="fa-solid fa-user"></i></button>
-      </div>
+      <nav class="nav">
+        <button class="active" id="tabHome" title="Feed"><i class="fa-solid fa-house"></i></button>
+        <button id="tabVideos" title="Videos"><i class="fa-solid fa-circle-play"></i></button>
+        <button id="tabFriends" title="Believers"><i class="fa-solid fa-user-group"></i></button>
+        <button id="tabPrayers" title="Prayer Wall"><i class="fa-solid fa-hands-praying"></i></button>
+        <button id="tabProfile" title="My Profile"><i class="fa-solid fa-user"></i></button>
+      </nav>
     </div>
   </header>
 
-  <!-- MAIN CONTAINER -->
-  <main class="wrap" style="padding: 0 12px;">
+  <main class="wrap" style="padding: 12px 10px;">
+    <!-- SECTION: FEED (HOME) -->
+    <section id="secFeed">
+      <!-- STORY / COMMUNITY UPDATES CONTAINER -->
+      <div class="stories-container">
+        <div class="stories-wrapper" id="storiesWrapper">
+          <div class="story-card create-story" id="btnCreateStory">
+            <div class="top-img" id="myStoryAvatarBg">
+              <div class="plus-btn">+</div>
+            </div>
+            <div class="bottom-text">Add Update</div>
+          </div>
+          <!-- Dynamic updates will be injected here -->
+        </div>
+      </div>
 
-    <!-- TAB 1: NEWS FEED & COMMUNITY UPDATES -->
-    <div id="tab-feed">
-      
       <!-- COMPOSER BAR -->
       <div class="composer-card">
-        <div id="userHeaderAvatar" class="avatar" onclick="switchTab('profile')"></div>
-        <button class="mind-button" onclick="openComposer()">What is on your heart today?</button>
-        <label for="mediaInput" class="photo-upload-btn">
+        <div class="avatar" id="composerAvatar">B</div>
+        <button type="button" class="mind-button" id="btnOpenComposer">What is on your heart today?</button>
+        <label for="directMediaInput" class="photo-upload-btn">
           <i class="fa-solid fa-image"></i>
           <span>Media</span>
         </label>
-        <input type="file" id="mediaInput" accept="image/*,video/*" class="hidden" onchange="handleFileSelect(event)">
+        <input type="file" id="directMediaInput" accept="image/*,video/*" style="display: none;">
       </div>
 
-      <!-- IN-COMPOSER DYNAMIC AREA (HIDDEN UNTIL EXPANDED) -->
+      <!-- EXPANDABLE POST COMPOSER AREA -->
       <div id="postComposerArea" class="hidden">
-        <textarea id="postText" class="composer-textarea" placeholder="Share a prayer request, testimony, or scripture..."></textarea>
+        <textarea id="postContent" class="composer-textarea" placeholder="Share a testimony, scripture, or encouragement..."></textarea>
         
-        <!-- IN-COMPOSER MEDIA PREVIEW BOX -->
-        <div id="composerPreviewBox" class="composer-preview-box hidden">
-          <button class="remove-media-btn" onclick="clearSelectedMedia()" title="Remove Media">
-            <i class="fa-solid fa-xmark"></i>
-          </button>
-          <div id="composerPreviewContent"></div>
+        <div id="mediaPreviewContainer" class="composer-preview-box hidden">
+          <button type="button" class="remove-media-btn" id="btnRemoveMedia"><i class="fa-solid fa-xmark"></i></button>
+          <div id="mediaPreviewContent"></div>
         </div>
 
         <div class="composer-actions">
-          <div style="display:flex; gap:10px; align-items:center;">
-            <label for="mediaInputArea" class="photo-upload-btn" style="margin:0;">
-              <i class="fa-solid fa-photo-film"></i>
-              <span>Photo/Video</span>
-            </label>
-            <input type="file" id="mediaInputArea" accept="image/*,video/*" class="hidden" onchange="handleFileSelect(event)">
-            <select id="postCategory" style="padding:4px 8px; border-radius:6px; border:1px solid var(--bp-border); font-size:12px;">
-              <option value="general">General</option>
-              <option value="prayer">Prayer Request</option>
-              <option value="testimony">Testimony</option>
-            </select>
-          </div>
-          <div style="display:flex; gap:6px;">
-            <button class="btn btn-outline" style="padding:6px 12px; font-size:12px; width:auto;" onclick="closeComposer()">Cancel</button>
-            <button class="btn btn-gold" style="padding:6px 16px; font-size:12px; width:auto;" onclick="publishPost()">Post</button>
+          <label for="composerMediaInput" class="photo-upload-btn" style="background: transparent; padding: 0;">
+            <i class="fa-solid fa-paperclip"></i>
+            <span>Attach File</span>
+          </label>
+          <input type="file" id="composerMediaInput" accept="image/*,video/*" style="display: none;">
+
+          <div style="display: flex; gap: 8px;">
+            <button type="button" class="btn btn-outline" id="btnCancelPost" style="width: auto; padding: 6px 12px; font-size: 13px;">Cancel</button>
+            <button type="button" class="btn btn-gold" id="btnSubmitPost" style="width: auto; padding: 6px 16px; font-size: 13px;">Post</button>
           </div>
         </div>
       </div>
 
-      <!-- COMMUNITY UPDATES / STORIES ROW -->
-      <div class="stories-container">
-        <div class="stories-wrapper">
-          <div class="story-card create-story" onclick="triggerStoryUpload()">
-            <div id="storyCreateTopImg" class="top-img">
-              <div class="plus-btn"><i class="fa-solid fa-plus"></i></div>
-            </div>
-            <div class="bottom-text">Add Update</div>
-            <input type="file" id="storyFileInput" accept="image/*" class="hidden" onchange="handleStoryUpload(event)">
-          </div>
-          <div id="storiesList" style="display:inline-flex; gap:10px;"></div>
-        </div>
+      <!-- FEED POSTS CONTAINER -->
+      <div id="feedPostsList"></div>
+    </section>
+
+    <!-- SECTION: VIDEOS -->
+    <section id="secVideos" class="hidden">
+      <h3 style="font-size: 16px; font-weight: 800; margin-bottom: 12px; color: var(--bp-primary);">Christian Videos & Sermons</h3>
+      <div id="videoFeedList"></div>
+    </section>
+
+    <!-- SECTION: FRIENDS / MEMBERS -->
+    <section id="secFriends" class="hidden">
+      <h3 style="font-size: 16px; font-weight: 800; margin-bottom: 12px; color: var(--bp-primary);">Believers Community</h3>
+      <div class="friends-list" id="friendsList"></div>
+    </section>
+
+    <!-- SECTION: PRAYER WALL -->
+    <section id="secPrayers" class="hidden">
+      <div class="card" style="margin-bottom: 14px;">
+        <h3 style="font-size: 16px; font-weight: 800; margin-bottom: 8px; color: var(--bp-primary);">Submit Prayer Request</h3>
+        <textarea id="prayerInput" class="form-group" style="width: 100%; min-height: 70px; padding: 10px; border-radius: 10px; border: 1px solid var(--bp-border); outline: none; resize: none;" placeholder="How can the community pray for you today?"></textarea>
+        <button type="button" class="btn btn-gold" id="btnSubmitPrayer" style="width: 100%;">
+          <i class="fa-solid fa-hands-praying"></i> Submit Request
+        </button>
       </div>
 
-      <!-- POSTS FEED CONTAINER -->
-      <div id="postsFeed"></div>
-    </div>
+      <h3 style="font-size: 16px; font-weight: 800; margin-bottom: 12px; color: var(--bp-primary);">Prayer Requests</h3>
+      <div id="prayersList"></div>
+    </section>
 
-    <!-- TAB 2: FRIENDS & FELLOWSHIP -->
-    <div id="tab-friends" class="hidden">
-      <div style="padding: 12px 0;">
-        <h2 style="font-size:18px; font-weight:800; color:var(--bp-primary);">Friends & Believers</h2>
-        <p style="font-size:13px; color:var(--bp-muted);">Connect with brothers and sisters in Christ</p>
-        <div class="friends-list" id="friendsList"></div>
-      </div>
-    </div>
-
-    <!-- TAB 3: GROUPS & FELLOWSHIP -->
-    <div id="tab-groups" class="hidden">
-      <div style="padding: 12px 0;">
-        <h2 style="font-size:18px; font-weight:800; color:var(--bp-primary);">Fellowship Groups</h2>
-        <p style="font-size:13px; color:var(--bp-muted);">Join communities around ministry and scripture</p>
-        <div class="groups-list" id="groupsList"></div>
-      </div>
-    </div>
-
-    <!-- TAB 4: WATCH SERMONS & VIDEOS -->
-    <div id="tab-videos" class="hidden">
-      <div style="padding: 12px 0;">
-        <h2 style="font-size:18px; font-weight:800; color:var(--bp-primary);">Sermons & Spiritual Videos</h2>
-        <p style="font-size:13px; color:var(--bp-muted); margin-bottom:12px;">Watch teachings, worship, and testimonies</p>
-        <div id="videosList"></div>
-      </div>
-    </div>
-
-    <!-- TAB 5: PROFILE PAGE -->
-    <div id="tab-profile" class="hidden">
-      <div style="padding: 12px 0;">
-        
-        <!-- PROFILE HEADER CARD -->
-        <div class="profile-card">
-          <div id="profileCoverArea" class="profile-cover-area">
-            <label for="coverInput" class="cover-upload-badge">
-              <i class="fa-solid fa-camera"></i> Edit Cover
-            </label>
-            <input type="file" id="coverInput" accept="image/*" class="hidden" onchange="handleCoverChange(event)" />
-          </div>
-          
-          <div class="profile-header-content">
-            <div class="profile-avatar-wrapper">
-              <div id="profileAvatarLarge" class="profile-avatar-large"></div>
-              <label for="avatarInput" class="avatar-upload-badge">
-                <i class="fa-solid fa-camera"></i>
-              </label>
-              <input type="file" id="avatarInput" accept="image/*" class="hidden" onchange="handleAvatarChange(event)" />
+    <!-- SECTION: USER PROFILE -->
+    <section id="secProfile" class="hidden">
+      <div class="profile-header">
+        <div class="cover-photo" id="profileCoverBg"></div>
+        <div class="profile-main-info">
+          <div class="profile-avatar-large" id="profileAvatarLarge">B</div>
+          <div class="profile-details">
+            <div class="profile-name" id="profileNameDisplay">User</div>
+            <div class="profile-bio" id="profileBioDisplay">No bio provided yet.</div>
+            
+            <div class="profile-meta">
+              <div class="profile-meta-item"><i class="fa-solid fa-location-dot"></i> <span id="profileLocationDisplay">Global</span></div>
+              <div class="profile-meta-item"><i class="fa-solid fa-church"></i> <span id="profileChurchDisplay">Believers+ Member</span></div>
+              <div class="profile-meta-item"><i class="fa-solid fa-calendar-days"></i> <span id="profileJoinedDisplay">Joined August 2026</span></div>
             </div>
 
-            <h2 id="profileName" style="font-size:20px; font-weight:800; color:var(--bp-primary); margin-bottom:2px;">---</h2>
-            <p id="profileHandle" style="font-size:13px; color:var(--bp-muted); font-weight:600; margin-bottom:8px;">@---</p>
-            <p id="profileBioText" style="font-size:14px; color:var(--bp-text); margin-bottom:12px; white-space:pre-wrap;">---</p>
-
-            <button class="btn btn-outline" style="width:auto; padding:6px 16px; font-size:13px; margin:0 auto 12px auto;" onclick="openEditProfileModal()">
-              <i class="fa-solid fa-pen-to-square"></i> Edit Profile
-            </button>
-
-            <!-- PROFILE STATS ROW -->
-            <div class="profile-stats-row">
-              <div class="stat-item">
-                <div id="statPostsCount" class="stat-num">0</div>
-                <div class="stat-label">Posts</div>
-              </div>
-              <div class="stat-item">
-                <div id="statFriendsCount" class="stat-num">0</div>
-                <div class="stat-label">Friends</div>
-              </div>
-              <div class="stat-item">
-                <div id="statPrayersCount" class="stat-num">0</div>
-                <div class="stat-label">Prayers</div>
-              </div>
+            <div style="margin-top: 14px; display: flex; gap: 8px;">
+              <button type="button" class="btn btn-outline" id="btnOpenEditProfileModal" style="flex: 1; padding: 8px; font-size: 13px;">
+                <i class="fa-solid fa-pen-to-square"></i> Edit Profile
+              </button>
             </div>
           </div>
         </div>
-
-        <!-- ABOUT ME CARD -->
-        <div class="about-me-card">
-          <div class="about-me-title">
-            <span>About Believer</span>
-            <i class="fa-solid fa-circle-info" style="color:var(--bp-gold);"></i>
-          </div>
-          <div class="about-info-grid">
-            <div class="about-info-item">
-              <i class="fa-solid fa-church"></i>
-              <span id="aboutChurch">Ministry: Not specified</span>
-            </div>
-            <div class="about-info-item">
-              <i class="fa-solid fa-location-dot"></i>
-              <span id="aboutLocation">Location: Not specified</span>
-            </div>
-            <div class="about-info-item">
-              <i class="fa-solid fa-globe"></i>
-              <span id="aboutWebsite">Website: Not specified</span>
-            </div>
-            <div class="about-info-item">
-              <i class="fa-solid fa-calendar-days"></i>
-              <span id="aboutJoined">Joined Believers+ ---</span>
-            </div>
-          </div>
-        </div>
-
-        <!-- USER'S PERSONAL POSTS FEED -->
-        <h3 style="font-size:15px; font-weight:800; color:var(--bp-primary); margin-bottom:10px;">My Posts</h3>
-        <div id="userPostsFeed"></div>
-
       </div>
-    </div>
 
+      <h3 style="font-size: 16px; font-weight: 800; margin-bottom: 12px; color: var(--bp-primary);">My Posts</h3>
+      <div id="userPostsList"></div>
+    </section>
   </main>
 </div>
 
-<!-- =========================================================
-   3. EDIT PROFILE MODAL
-========================================================= -->
+<!-- EDIT PROFILE MODAL SHEET -->
 <div id="editProfileModal" class="modal-overlay hidden">
   <div class="modal-sheet">
-    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:16px;">
-      <h3 style="font-size:16px; font-weight:800; color:var(--bp-primary);">Edit Profile</h3>
-      <button onclick="closeEditProfileModal()" style="font-size:18px; color:var(--bp-muted);"><i class="fa-solid fa-xmark"></i></button>
-    </div>
-    
-    <div class="form-group">
-      <label>Full Name</label>
-      <input type="text" id="editName" />
-    </div>
-    <div class="form-group">
-      <label>Username</label>
-      <input type="text" id="editUsername" />
-    </div>
-    <div class="form-group">
-      <label>Bio / Faith Statement</label>
-      <textarea id="editBio" rows="3"></textarea>
-    </div>
-    <div class="form-group">
-      <label>Church / Ministry</label>
-      <input type="text" id="editChurch" />
-    </div>
-    <div class="form-group">
-      <label>Location</label>
-      <input type="text" id="editLocation" />
-    </div>
-    <div class="form-group">
-      <label>Website</label>
-      <input type="text" id="editWebsite" />
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
+      <h3 style="font-size: 16px; font-weight: 800; color: var(--bp-primary);">Edit Profile</h3>
+      <button type="button" id="btnCloseEditProfile" style="font-size: 18px; color: var(--bp-muted);"><i class="fa-solid fa-xmark"></i></button>
     </div>
 
-    <div style="display:flex; gap:10px; margin-top:20px;">
-      <button class="btn btn-outline" onclick="closeEditProfileModal()">Cancel</button>
-      <button class="btn btn-gold" onclick="saveProfileChanges()">Save Changes</button>
+    <div class="form-group">
+      <label>Full Name</label>
+      <input type="text" id="editFullName">
     </div>
+
+    <div class="form-group">
+      <label>Bio</label>
+      <textarea id="editBio" rows="2"></textarea>
+    </div>
+
+    <div class="form-group">
+      <label>Church / Ministry</label>
+      <input type="text" id="editChurch">
+    </div>
+
+    <div class="form-group">
+      <label>Location / Country</label>
+      <input type="text" id="editLocation">
+    </div>
+
+    <div class="form-group">
+      <label>Phone Number</label>
+      <input type="text" id="editPhone">
+    </div>
+
+    <div class="form-group">
+      <label>Avatar URL</label>
+      <input type="text" id="editAvatarUrl" placeholder="https://example.com/avatar.jpg">
+    </div>
+
+    <div class="form-group">
+      <label>Cover Image URL</label>
+      <input type="text" id="editCoverUrl" placeholder="https://example.com/cover.jpg">
+    </div>
+
+    <button type="button" class="btn btn-gold" id="btnSaveProfile" style="margin-top: 10px;">Save Profile Changes</button>
   </div>
 </div>
 
-<!-- =========================================================
-   4. SUPABASE JS CLIENT & APPLICATION LOGIC
-========================================================= -->
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script>
-/* ---------------------------------------------------------
+/* =========================================================
    SUPABASE INITIALIZATION
---------------------------------------------------------- */
+========================================================= */
 const SUPABASE_URL = 'https://zupbqtnqbsmlwbidsddk.supabase.co';
 const SUPABASE_PUBLISHABLE_KEY = 'sb_publishable_NtyX9tGZ7vAmLB73ylIasw_RZZf7P2o';
 
@@ -1476,167 +1381,109 @@ const supabaseClient = window.supabase.createClient(
   SUPABASE_PUBLISHABLE_KEY
 );
 
-/* ---------------------------------------------------------
-   APPLICATION GLOBAL STATE
---------------------------------------------------------- */
-let currentUser = null;     // Authenticated Supabase User
-let currentProfile = null;  // User profile loaded from public.profiles
-let activeTab = 'feed';
-let selectedMediaFile = null;
-let selectedMediaType = null; // 'image' or 'video'
+/* =========================================================
+   APPLICATION STATE
+========================================================= */
+let currentUser = null;
+let currentProfile = null;
+let selectedMediaBase64 = null;
+let selectedMediaType = null;
 
-let postsState = [];
-let storiesState = [];
-let friendsState = [];
-let groupsState = [];
-let videosState = [];
-let notificationsState = [];
+/* =========================================================
+   CORE AUTHENTICATION LOGIC
+========================================================= */
+async function initAuth() {
+  const { data: { session }, error } = await supabaseClient.auth.getSession();
+  if (session && session.user) {
+    await handleAuthenticatedUser(session.user);
+  } else {
+    showAuthPage();
+  }
 
-/* ---------------------------------------------------------
-   APP INITIALIZATION & AUTH STATE LISTENER
---------------------------------------------------------- */
-window.addEventListener('DOMContentLoaded', async () => {
-  initAuthStateListener();
-});
-
-function initAuthStateListener() {
-  // Listen to Supabase Auth state changes
   supabaseClient.auth.onAuthStateChange(async (event, session) => {
-    if (session && session.user) {
-      currentUser = session.user;
-      await loadProfileAndInitialize(session.user);
-    } else {
+    if (event === 'SIGNED_IN' || event === 'TOKEN_REFRESHED' || event === 'INITIAL_SESSION') {
+      if (session && session.user) {
+        await handleAuthenticatedUser(session.user);
+      }
+    } else if (event === 'SIGNED_OUT') {
       currentUser = null;
       currentProfile = null;
-      showAuthScreen();
+      showAuthPage();
     }
   });
 }
 
-async function loadProfileAndInitialize(user) {
+async function handleAuthenticatedUser(user) {
+  currentUser = user;
+  currentProfile = await fetchOrCreateProfile(user);
+  showAppPage();
+  updateUIWithProfile();
+  loadFeedPosts();
+  loadPrayers();
+  loadMembers();
+}
+
+async function fetchOrCreateProfile(user) {
   try {
-    // 1. Fetch profile record from public.profiles using Auth UUID
-    let { data: profile, error } = await supabaseClient
+    const { data: profile, error } = await supabaseClient
       .from('profiles')
       .select('*')
       .eq('id', user.id)
       .single();
 
-    // 2. Safely handle missing profile row if trigger hasn't fired yet
-    if (error || !profile) {
-      const newProfileData = {
-        id: user.id,
-        full_name: user.user_metadata?.full_name || 'Believer',
-        email: user.email,
-        created_at: new Date().toISOString()
-      };
-
-      const { data: insertedProfile, error: insertErr } = await supabaseClient
-        .from('profiles')
-        .upsert(newProfileData)
-        .select()
-        .single();
-
-      if (!insertErr && insertedProfile) {
-        profile = insertedProfile;
-      } else {
-        profile = newProfileData;
-      }
+    if (profile && !error) {
+      return profile;
     }
 
-    currentProfile = profile;
+    // Fallback profile creation if database trigger hasn't completed
+    const defaultName = user.user_metadata?.full_name || user.email?.split('@')[0] || 'Believer';
+    const newProfile = {
+      id: user.id,
+      full_name: defaultName,
+      email: user.email,
+      created_at: new Date().toISOString()
+    };
 
-    // 3. Update application UI
-    renderUserProfileUI();
-    showMainAppScreen();
-    
-    // 4. Load application feed & modules
-    await refreshFeedData();
-    renderStaticModules();
+    const { data: created, error: createError } = await supabaseClient
+      .from('profiles')
+      .upsert(newProfile)
+      .select()
+      .single();
 
+    return created || newProfile;
   } catch (err) {
-    console.error('Error loading user profile:', err);
+    console.error("Profile load error:", err);
+    return {
+      id: user.id,
+      full_name: user.email?.split('@')[0] || 'Believer',
+      email: user.email,
+      created_at: new Date().toISOString()
+    };
   }
 }
 
-/* ---------------------------------------------------------
-   UI DISPLAY CONTROLLERS
---------------------------------------------------------- */
-function showAuthScreen() {
-  document.getElementById('authView').classList.remove('hidden');
-  document.getElementById('appView').classList.add('hidden');
+function showAuthPage() {
+  document.getElementById('authPage').classList.remove('hidden');
+  document.getElementById('appPage').classList.add('hidden');
 }
 
-function showMainAppScreen() {
-  document.getElementById('authView').classList.add('hidden');
-  document.getElementById('appView').classList.remove('hidden');
+function showAppPage() {
+  document.getElementById('authPage').classList.add('hidden');
+  document.getElementById('appPage').classList.remove('hidden');
 }
 
-function toggleAuthMode(mode) {
-  document.getElementById('loginError').innerText = '';
-  document.getElementById('registerError').innerText = '';
-  if (mode === 'register') {
-    document.getElementById('loginCard').classList.add('hidden');
-    document.getElementById('registerCard').classList.remove('hidden');
-  } else {
-    document.getElementById('registerCard').classList.add('hidden');
-    document.getElementById('loginCard').classList.remove('hidden');
-  }
-}
-
-/* ---------------------------------------------------------
-   REAL SUPABASE AUTHENTICATION (REGISTER, LOGIN, LOGOUT)
---------------------------------------------------------- */
-async function handleRegister() {
-  const name = document.getElementById('regName').value.trim();
-  const email = document.getElementById('regEmail').value.trim();
-  const password = document.getElementById('regPassword').value;
-  const errDiv = document.getElementById('registerError');
-  errDiv.innerText = '';
-
-  if (!name) {
-    errDiv.innerText = 'Please enter your full name.';
-    return;
-  }
-  if (!email) {
-    errDiv.innerText = 'Please enter a valid email address.';
-    return;
-  }
-  if (!password || password.length < 6) {
-    errDiv.innerText = 'Password must be at least 6 characters.';
-    return;
-  }
-
-  const { data, error } = await supabaseClient.auth.signUp({
-    email: email,
-    password: password,
-    options: {
-      data: {
-        full_name: name
-      }
-    }
-  });
-
-  if (error) {
-    errDiv.innerText = error.message;
-    return;
-  }
-
-  // Handle email confirmation if session isn't automatically created
-  if (data.user && !data.session) {
-    errDiv.style.color = '#2b6cb0';
-    errDiv.innerText = 'Your account has been created successfully. Please check your email and confirm your account before logging in.';
-  }
-}
-
-async function handleLogin() {
+/* =========================================================
+   LOGIN & REGISTRATION EVENT HANDLERS
+========================================================= */
+document.getElementById('btnLogin').addEventListener('click', async () => {
   const email = document.getElementById('loginEmail').value.trim();
-  const password = document.getElementById('loginPassword').value;
-  const errDiv = document.getElementById('loginError');
-  errDiv.innerText = '';
+  const password = document.getElementById('loginPassword').value.trim();
+  const msg = document.getElementById('loginMsg');
+  msg.className = 'msg-error';
+  msg.innerText = '';
 
   if (!email || !password) {
-    errDiv.innerText = 'Please enter both email and password.';
+    msg.innerText = 'Please enter both email and password.';
     return;
   }
 
@@ -1646,710 +1493,543 @@ async function handleLogin() {
   });
 
   if (error) {
-    errDiv.innerText = error.message || 'Incorrect email or password.';
+    msg.innerText = error.message || 'Incorrect email or password.';
   }
-}
+});
+
+document.getElementById('btnRegister').addEventListener('click', async () => {
+  const fullName = document.getElementById('regFullName').value.trim();
+  const email = document.getElementById('regEmail').value.trim();
+  const password = document.getElementById('regPassword').value.trim();
+  const msg = document.getElementById('regMsg');
+  msg.className = 'msg-error';
+  msg.innerText = '';
+
+  if (!fullName) {
+    msg.innerText = 'Please enter your full name.';
+    return;
+  }
+  if (!email) {
+    msg.innerText = 'Please enter a valid email address.';
+    return;
+  }
+  if (password.length < 6) {
+    msg.innerText = 'Password must be at least 6 characters.';
+    return;
+  }
+
+  const { data, error } = await supabaseClient.auth.signUp({
+    email: email,
+    password: password,
+    options: {
+      data: {
+        full_name: fullName
+      }
+    }
+  });
+
+  if (error) {
+    msg.innerText = error.message;
+  } else {
+    msg.className = 'msg-success';
+    msg.innerText = 'Your account has been created successfully. Please check your email to confirm your account.';
+  }
+});
+
+document.getElementById('btnShowRegister').addEventListener('click', () => {
+  document.getElementById('loginCard').classList.add('hidden');
+  document.getElementById('registerCard').classList.remove('hidden');
+});
+
+document.getElementById('btnShowLogin').addEventListener('click', () => {
+  document.getElementById('registerCard').classList.add('hidden');
+  document.getElementById('loginCard').classList.remove('hidden');
+});
 
 async function handleLogout() {
-  closeHeaderMenu();
   await supabaseClient.auth.signOut();
   currentUser = null;
   currentProfile = null;
-  showAuthScreen();
+  showAuthPage();
 }
 
-/* ---------------------------------------------------------
-   PROFILE DATA RENDERING & SYNCHRONIZATION
---------------------------------------------------------- */
-function renderUserProfileUI() {
+document.getElementById('menuBtnLogout').addEventListener('click', handleLogout);
+
+/* =========================================================
+   UI & PROFILE RENDERING
+========================================================= */
+function updateUIWithProfile() {
   if (!currentProfile) return;
 
   const name = currentProfile.full_name || 'Believer';
-  const email = currentProfile.email || '';
-  const username = currentProfile.username || name.toLowerCase().replace(/\s+/g, '');
-  const bio = currentProfile.bio || 'Blessed to be part of Believers+ community.';
-  const church = currentProfile.church_ministry || 'Not specified';
-  const location = currentProfile.location || 'Not specified';
-  const website = currentProfile.website || 'Not specified';
-  const avatar = currentProfile.avatar_url || '';
-  const cover = currentProfile.cover_url || '';
-
-  // Header & Composer Avatars
-  const headerAvatar = document.getElementById('userHeaderAvatar');
   const initial = name.charAt(0).toUpperCase();
-  if (avatar) {
-    headerAvatar.style.backgroundImage = `url('${avatar}')`;
-    headerAvatar.innerText = '';
-  } else {
-    headerAvatar.style.backgroundImage = 'none';
-    headerAvatar.innerText = initial;
+
+  const avatarElements = [
+    document.getElementById('composerAvatar'),
+    document.getElementById('profileAvatarLarge')
+  ];
+
+  avatarElements.forEach(el => {
+    if (el) {
+      if (currentProfile.avatar_url) {
+        el.style.backgroundImage = `url('${currentProfile.avatar_url}')`;
+        el.innerText = '';
+      } else {
+        el.style.backgroundImage = 'none';
+        el.innerText = initial;
+      }
+    }
+  });
+
+  if (currentProfile.cover_url) {
+    document.getElementById('profileCoverBg').style.backgroundImage = `url('${currentProfile.cover_url}')`;
   }
 
-  // Profile Page Elements
-  document.getElementById('profileName').innerText = name;
-  document.getElementById('profileHandle').innerText = '@' + username;
-  document.getElementById('profileBioText').innerText = bio;
+  document.getElementById('profileNameDisplay').innerText = name;
+  document.getElementById('profileBioDisplay').innerText = currentProfile.bio || 'No bio provided yet.';
+  document.getElementById('profileLocationDisplay').innerText = currentProfile.location || currentProfile.country || 'Global';
+  document.getElementById('profileChurchDisplay').innerText = currentProfile.church_ministry || 'Believers+ Member';
 
-  const profAvatarLarge = document.getElementById('profileAvatarLarge');
-  if (avatar) {
-    profAvatarLarge.style.backgroundImage = `url('${avatar}')`;
-    profAvatarLarge.innerText = '';
-  } else {
-    profAvatarLarge.style.backgroundImage = 'none';
-    profAvatarLarge.innerText = initial;
-  }
-
-  const profCoverArea = document.getElementById('profileCoverArea');
-  if (cover) {
-    profCoverArea.style.backgroundImage = `url('${cover}')`;
-  } else {
-    profCoverArea.style.backgroundImage = 'linear-gradient(135deg, var(--bp-primary), var(--bp-accent))';
-  }
-
-  // About Me Section
-  document.getElementById('aboutChurch').innerText = 'Ministry: ' + church;
-  document.getElementById('aboutLocation').innerText = 'Location: ' + location;
-  document.getElementById('aboutWebsite').innerText = 'Website: ' + website;
-
-  // Real Registration Date from SQL
   if (currentProfile.created_at) {
-    const joinDate = new Date(currentProfile.created_at);
-    const formattedDate = joinDate.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
-    document.getElementById('aboutJoined').innerText = 'Joined Believers+ ' + formattedDate;
-  } else {
-    document.getElementById('aboutJoined').innerText = 'Joined Believers+ ' + new Date().toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
-  }
-
-  // Story Creation Thumb
-  const storyTopImg = document.getElementById('storyCreateTopImg');
-  if (avatar) {
-    storyTopImg.style.backgroundImage = `url('${avatar}')`;
-  } else {
-    storyTopImg.style.backgroundImage = 'none';
+    const d = new Date(currentProfile.created_at);
+    const dateStr = d.toLocaleDateString('en-US', { month: 'long', year: 'numeric' });
+    document.getElementById('profileJoinedDisplay').innerText = `Joined ${dateStr}`;
   }
 }
 
-/* ---------------------------------------------------------
-   PROFILE EDITING (SAVING TO SUPABASE SQL)
---------------------------------------------------------- */
-function openEditProfileModal() {
+/* =========================================================
+   PROFILE EDITING
+========================================================= */
+document.getElementById('btnOpenEditProfileModal').addEventListener('click', () => {
   if (!currentProfile) return;
-  document.getElementById('editName').value = currentProfile.full_name || '';
-  document.getElementById('editUsername').value = currentProfile.username || '';
+
+  document.getElementById('editFullName').value = currentProfile.full_name || '';
   document.getElementById('editBio').value = currentProfile.bio || '';
   document.getElementById('editChurch').value = currentProfile.church_ministry || '';
-  document.getElementById('editLocation').value = currentProfile.location || '';
-  document.getElementById('editWebsite').value = currentProfile.website || '';
+  document.getElementById('editLocation').value = currentProfile.location || currentProfile.country || '';
+  document.getElementById('editPhone').value = currentProfile.phone || '';
+  document.getElementById('editAvatarUrl').value = currentProfile.avatar_url || '';
+  document.getElementById('editCoverUrl').value = currentProfile.cover_url || '';
 
   document.getElementById('editProfileModal').classList.remove('hidden');
-}
+});
 
-function closeEditProfileModal() {
+document.getElementById('menuBtnEditProfile').addEventListener('click', () => {
+  document.getElementById('menuDropdown').classList.add('hidden');
+  document.getElementById('btnOpenEditProfileModal').click();
+});
+
+document.getElementById('btnCloseEditProfile').addEventListener('click', () => {
   document.getElementById('editProfileModal').classList.add('hidden');
-}
+});
 
-async function saveProfileChanges() {
+document.getElementById('btnSaveProfile').addEventListener('click', async () => {
   if (!currentUser) return;
 
-  const updatedData = {
-    full_name: document.getElementById('editName').value.trim(),
-    username: document.getElementById('editUsername').value.trim(),
+  const updates = {
+    full_name: document.getElementById('editFullName').value.trim(),
     bio: document.getElementById('editBio').value.trim(),
     church_ministry: document.getElementById('editChurch').value.trim(),
     location: document.getElementById('editLocation').value.trim(),
-    website: document.getElementById('editWebsite').value.trim()
+    phone: document.getElementById('editPhone').value.trim(),
+    avatar_url: document.getElementById('editAvatarUrl').value.trim(),
+    cover_url: document.getElementById('editCoverUrl').value.trim(),
   };
 
-  const { data, error } = await supabaseClient
+  const { error } = await supabaseClient
     .from('profiles')
-    .update(updatedData)
-    .eq('id', currentUser.id)
-    .select()
-    .single();
+    .update(updates)
+    .eq('id', currentUser.id);
 
-  if (!error && data) {
-    currentProfile = data;
-    renderUserProfileUI();
-    closeEditProfileModal();
+  if (!error) {
+    currentProfile = { ...currentProfile, ...updates };
+    updateUIWithProfile();
+    document.getElementById('editProfileModal').classList.add('hidden');
   } else {
-    alert('Failed to save profile changes. Please try again.');
+    alert('Failed to update profile. Please try again.');
   }
-}
+});
 
-/* ---------------------------------------------------------
-   AVATAR & COVER PHOTO UPDATES
---------------------------------------------------------- */
-async function handleAvatarChange(event) {
-  const file = event.target.files[0];
-  if (!file || !currentUser) return;
+/* =========================================================
+   NAVIGATION & UI TABS
+========================================================= */
+const tabs = [
+  { btn: 'tabHome', sec: 'secFeed' },
+  { btn: 'tabVideos', sec: 'secVideos' },
+  { btn: 'tabFriends', sec: 'secFriends' },
+  { btn: 'tabPrayers', sec: 'secPrayers' },
+  { btn: 'tabProfile', sec: 'secProfile' }
+];
 
-  const reader = new FileReader();
-  reader.onload = async function(e) {
-    const avatarDataUrl = e.target.result;
-    
-    // Save image URL to Supabase profiles
-    const { data, error } = await supabaseClient
-      .from('profiles')
-      .update({ avatar_url: avatarDataUrl })
-      .eq('id', currentUser.id)
-      .select()
-      .single();
+tabs.forEach(t => {
+  document.getElementById(t.btn).addEventListener('click', () => {
+    tabs.forEach(item => {
+      document.getElementById(item.btn).classList.remove('active');
+      document.getElementById(item.sec).classList.add('hidden');
+    });
+    document.getElementById(t.btn).classList.add('active');
+    document.getElementById(t.sec).classList.remove('hidden');
 
-    if (!error && data) {
-      currentProfile = data;
-      renderUserProfileUI();
+    if (t.sec === 'secProfile') {
+      loadUserPosts();
     }
-  };
-  reader.readAsDataURL(file);
-}
-
-async function handleCoverChange(event) {
-  const file = event.target.files[0];
-  if (!file || !currentUser) return;
-
-  const reader = new FileReader();
-  reader.onload = async function(e) {
-    const coverDataUrl = e.target.result;
-
-    const { data, error } = await supabaseClient
-      .from('profiles')
-      .update({ cover_url: coverDataUrl })
-      .eq('id', currentUser.id)
-      .select()
-      .single();
-
-    if (!error && data) {
-      currentProfile = data;
-      renderUserProfileUI();
-    }
-  };
-  reader.readAsDataURL(file);
-}
-
-/* ---------------------------------------------------------
-   NAVIGATION & TABS
---------------------------------------------------------- */
-function switchTab(tabName) {
-  activeTab = tabName;
-  const tabs = ['feed', 'friends', 'groups', 'videos', 'profile'];
-  tabs.forEach(t => {
-    document.getElementById(`tab-${t}`).classList.add('hidden');
-    const navBtn = document.getElementById(`nav-${t}`);
-    if (navBtn) navBtn.classList.remove('active');
   });
+});
 
-  document.getElementById(`tab-${tabName}`).classList.remove('hidden');
-  const activeBtn = document.getElementById(`nav-${tabName}`);
-  if (activeBtn) activeBtn.classList.add('active');
+document.getElementById('menuBtnProfile').addEventListener('click', () => {
+  document.getElementById('menuDropdown').classList.add('hidden');
+  document.getElementById('tabProfile').click();
+});
 
-  if (tabName === 'profile') {
-    renderUserPersonalPosts();
-  }
-}
+document.getElementById('appLogoBtn').addEventListener('click', () => {
+  document.getElementById('tabHome').click();
+});
 
-function toggleHeaderMenu() {
-  const menu = document.getElementById('headerMenuDropdown');
-  menu.classList.toggle('hidden');
-}
+/* DROPDOWN TOGGLES */
+document.getElementById('btnMenuToggle').addEventListener('click', (e) => {
+  e.stopPropagation();
+  document.getElementById('menuDropdown').classList.toggle('hidden');
+  document.getElementById('notifDropdown').classList.add('hidden');
+  document.getElementById('searchModal').classList.add('hidden');
+});
 
-function closeHeaderMenu() {
-  document.getElementById('headerMenuDropdown').classList.add('hidden');
-}
+document.getElementById('btnNotifToggle').addEventListener('click', (e) => {
+  e.stopPropagation();
+  document.getElementById('notifDropdown').classList.toggle('hidden');
+  document.getElementById('menuDropdown').classList.add('hidden');
+  document.getElementById('searchModal').classList.add('hidden');
+});
 
-/* ---------------------------------------------------------
-   POST COMPOSER & MEDIA PREVIEW
---------------------------------------------------------- */
-function openComposer() {
+document.getElementById('btnSearchToggle').addEventListener('click', (e) => {
+  e.stopPropagation();
+  document.getElementById('searchModal').classList.toggle('hidden');
+  document.getElementById('menuDropdown').classList.add('hidden');
+  document.getElementById('notifDropdown').classList.add('hidden');
+});
+
+document.addEventListener('click', () => {
+  document.getElementById('menuDropdown').classList.add('hidden');
+  document.getElementById('notifDropdown').classList.add('hidden');
+});
+
+/* =========================================================
+   MEDIA & COMPOSER LOGIC
+========================================================= */
+document.getElementById('btnOpenComposer').addEventListener('click', () => {
   document.getElementById('postComposerArea').classList.remove('hidden');
-  document.getElementById('postText').focus();
-}
+  document.getElementById('postContent').focus();
+});
 
-function closeComposer() {
+document.getElementById('btnCancelPost').addEventListener('click', () => {
+  resetComposer();
+});
+
+function resetComposer() {
+  document.getElementById('postContent').value = '';
+  selectedMediaBase64 = null;
+  selectedMediaType = null;
+  document.getElementById('mediaPreviewContainer').classList.add('hidden');
+  document.getElementById('mediaPreviewContent').innerHTML = '';
   document.getElementById('postComposerArea').classList.add('hidden');
-  document.getElementById('postText').value = '';
-  clearSelectedMedia();
 }
 
-function handleFileSelect(event) {
-  const file = event.target.files[0];
+function handleFileSelect(file) {
   if (!file) return;
 
-  selectedMediaFile = file;
-  selectedMediaType = file.type.startsWith('video/') ? 'video' : 'image';
-
   const reader = new FileReader();
-  reader.onload = function(e) {
-    const previewBox = document.getElementById('composerPreviewBox');
-    const previewContent = document.getElementById('composerPreviewContent');
-    previewContent.innerHTML = '';
+  reader.onload = function (e) {
+    selectedMediaBase64 = e.target.result;
+    selectedMediaType = file.type.startsWith('video') ? 'video' : 'image';
 
+    const container = document.getElementById('mediaPreviewContent');
     if (selectedMediaType === 'video') {
-      previewContent.innerHTML = `<video src="${e.target.result}" controls style="max-height:300px; width:100%;"></video>`;
+      container.innerHTML = `<video src="${selectedMediaBase64}" controls></video>`;
     } else {
-      previewContent.innerHTML = `<img src="${e.target.result}" style="max-height:300px; width:100%; object-fit:contain;" />`;
+      container.innerHTML = `<img src="${selectedMediaBase64}" alt="Preview">`;
     }
 
-    previewBox.classList.remove('hidden');
-    openComposer();
+    document.getElementById('mediaPreviewContainer').classList.remove('hidden');
+    document.getElementById('postComposerArea').classList.remove('hidden');
   };
   reader.readAsDataURL(file);
 }
 
-function clearSelectedMedia() {
-  selectedMediaFile = null;
+document.getElementById('directMediaInput').addEventListener('change', (e) => {
+  handleFileSelect(e.target.files[0]);
+});
+
+document.getElementById('composerMediaInput').addEventListener('change', (e) => {
+  handleFileSelect(e.target.files[0]);
+});
+
+document.getElementById('btnRemoveMedia').addEventListener('click', () => {
+  selectedMediaBase64 = null;
   selectedMediaType = null;
-  document.getElementById('composerPreviewBox').classList.add('hidden');
-  document.getElementById('composerPreviewContent').innerHTML = '';
-  document.getElementById('mediaInput').value = '';
-  document.getElementById('mediaInputArea').value = '';
-}
+  document.getElementById('mediaPreviewContainer').classList.add('hidden');
+  document.getElementById('mediaPreviewContent').innerHTML = '';
+});
 
-/* ---------------------------------------------------------
-   POST CREATION & FEED DATA SYNCHRONIZATION
---------------------------------------------------------- */
-async function publishPost() {
-  if (!currentUser || !currentProfile) return;
+/* =========================================================
+   POST CREATION & FEED SYSTEM
+========================================================= */
+document.getElementById('btnSubmitPost').addEventListener('click', async () => {
+  if (!currentUser) return;
 
-  const content = document.getElementById('postText').value.trim();
-  const category = document.getElementById('postCategory').value;
+  const content = document.getElementById('postContent').value.trim();
+  if (!content && !selectedMediaBase64) return;
 
-  if (!content && !selectedMediaFile) {
-    alert('Please enter text or select media to post.');
-    return;
-  }
-
-  let mediaUrl = null;
-
-  // Process selected image/video media as data URL
-  if (selectedMediaFile) {
-    mediaUrl = await new Promise((resolve) => {
-      const reader = new FileReader();
-      reader.onload = (e) => resolve(e.target.result);
-      reader.readAsDataURL(selectedMediaFile);
-    });
-  }
-
-  const newPostData = {
+  const postData = {
     user_id: currentUser.id,
-    author_name: currentProfile.full_name || 'Believer',
-    author_avatar: currentProfile.avatar_url || '',
-    category: category,
     content: content,
-    media_url: mediaUrl,
-    media_type: selectedMediaType,
+    media_url: selectedMediaBase64 || null,
+    media_type: selectedMediaType || null,
     created_at: new Date().toISOString()
   };
 
-  // Attempt to save to Supabase posts table
-  const { data, error } = await supabaseClient
+  const { error } = await supabaseClient
     .from('posts')
-    .insert([newPostData])
-    .select()
-    .single();
+    .insert([postData]);
 
-  if (!error && data) {
-    data.likes_count = 0;
-    data.liked_by_me = false;
-    data.comments = [];
-    postsState.unshift(data);
+  if (!error) {
+    resetComposer();
+    loadFeedPosts();
   } else {
-    // Local fallback for display if custom posts table is not fully configured
-    newPostData.id = 'post_' + Date.now();
-    newPostData.likes_count = 0;
-    newPostData.liked_by_me = false;
-    newPostData.comments = [];
-    postsState.unshift(newPostData);
+    alert('Failed to share post. Please try again.');
   }
+});
 
-  renderPostsFeed();
-  closeComposer();
-  
-  if (category === 'prayer') {
-    updatePrayerStatCount();
-  }
-}
-
-async function refreshFeedData() {
-  try {
-    // Load posts from Supabase if table exists
-    const { data: posts, error } = await supabaseClient
-      .from('posts')
-      .select('*')
-      .order('created_at', { ascending: false });
-
-    if (!error && posts) {
-      // Check existing post likes for current user
-      const { data: userLikes } = await supabaseClient
-        .from('post_likes')
-        .select('post_id')
-        .eq('user_id', currentUser.id);
-
-      const likedPostIds = new Set((userLikes || []).map(l => l.post_id));
-
-      postsState = posts.map(p => ({
-        ...p,
-        liked_by_me: likedPostIds.has(p.id),
-        likes_count: p.likes_count || 0,
-        comments: p.comments || []
-      }));
-    } else if (postsState.length === 0) {
-      // Demo initial feed items if table is empty
-      postsState = [
-        {
-          id: 'demo_1',
-          user_id: 'system',
-          author_name: 'Pastor David',
-          author_avatar: '',
-          category: 'general',
-          content: 'Welcome to Believers+! Let us stand together in faith and fellowship.',
-          media_url: '',
-          created_at: new Date().toISOString(),
-          likes_count: 12,
-          liked_by_me: false,
-          comments: []
-        }
-      ];
-    }
-  } catch (err) {
-    console.error('Error fetching feed:', err);
-  }
-
-  renderPostsFeed();
-}
-
-function renderPostsFeed() {
-  const container = document.getElementById('postsFeed');
+async function loadFeedPosts() {
+  const container = document.getElementById('feedPostsList');
   if (!container) return;
 
-  if (postsState.length === 0) {
-    container.innerHTML = `<div class="card" style="text-align:center; color:var(--bp-muted); font-size:13px;">No posts in feed yet. Be the first to share!</div>`;
+  const { data: posts, error } = await supabaseClient
+    .from('posts')
+    .select(`
+      *,
+      profiles:user_id (full_name, avatar_url),
+      post_likes (user_id)
+    `)
+    .order('created_at', { ascending: false });
+
+  if (error || !posts) {
+    container.innerHTML = '<div class="card" style="text-align:center; color: var(--bp-muted);">No posts available.</div>';
     return;
   }
 
-  container.innerHTML = postsState.map(post => renderPostCardHTML(post)).join('');
-  updateProfileStats();
+  renderPosts(posts, container);
 }
 
-function renderUserPersonalPosts() {
-  const container = document.getElementById('userPostsFeed');
-  if (!container) return;
+async function loadUserPosts() {
+  const container = document.getElementById('userPostsList');
+  if (!container || !currentUser) return;
 
-  const myPosts = postsState.filter(p => p.user_id === currentUser.id);
-  if (myPosts.length === 0) {
-    container.innerHTML = `<div class="card" style="text-align:center; color:var(--bp-muted); font-size:13px;">You have not published any posts yet.</div>`;
+  const { data: posts, error } = await supabaseClient
+    .from('posts')
+    .select(`
+      *,
+      profiles:user_id (full_name, avatar_url),
+      post_likes (user_id)
+    `)
+    .eq('user_id', currentUser.id)
+    .order('created_at', { ascending: false });
+
+  if (error || !posts || posts.length === 0) {
+    container.innerHTML = '<div class="card" style="text-align:center; color: var(--bp-muted);">You have not posted anything yet.</div>';
     return;
   }
 
-  container.innerHTML = myPosts.map(post => renderPostCardHTML(post)).join('');
+  renderPosts(posts, container);
 }
 
-function renderPostCardHTML(post) {
-  const authorInitial = post.author_name ? post.author_name.charAt(0).toUpperCase() : 'B';
-  const avatarStyle = post.author_avatar 
-    ? `background-image: url('${post.author_avatar}');` 
-    : '';
+function renderPosts(posts, container) {
+  container.innerHTML = '';
 
-  const isLiked = post.liked_by_me ? 'liked' : '';
-  const likeIcon = post.liked_by_me ? 'fa-solid fa-heart' : 'fa-regular fa-heart';
-  
-  let mediaHTML = '';
-  if (post.media_url) {
-    if (post.media_type === 'video') {
-      mediaHTML = `<div class="post-media-attachment"><video src="${post.media_url}" controls></video></div>`;
-    } else {
-      mediaHTML = `<div class="post-media-attachment"><img src="${post.media_url}" alt="Attachment" /></div>`;
+  posts.forEach(post => {
+    const authorName = post.profiles?.full_name || 'Believer';
+    const authorAvatar = post.profiles?.avatar_url;
+    const initial = authorName.charAt(0).toUpperCase();
+
+    const likes = post.post_likes || [];
+    const isLiked = likes.some(l => l.user_id === currentUser?.id);
+    const likeCount = likes.length;
+
+    const dateStr = post.created_at ? new Date(post.created_at).toLocaleDateString(undefined, { month: 'short', day: 'numeric' }) : '';
+
+    const card = document.createElement('div');
+    card.className = 'card';
+
+    let mediaHtml = '';
+    if (post.media_url) {
+      if (post.media_type === 'video') {
+        mediaHtml = `<div class="post-media-attachment"><video src="${post.media_url}" controls></video></div>`;
+      } else {
+        mediaHtml = `<div class="post-media-attachment"><img src="${post.media_url}" alt="Attachment"></div>`;
+      }
     }
-  }
 
-  let commentsHTML = '';
-  if (post.comments && post.comments.length > 0) {
-    commentsHTML = post.comments.map(c => `
-      <div class="comment-item">
-        <div>
-          <div class="comment-author">${c.author}</div>
-          <div class="comment-text">${c.text}</div>
-        </div>
-      </div>
-    `).join('');
-  }
-
-  const dateStr = new Date(post.created_at).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
-
-  return `
-    <div class="card" id="post-card-${post.id}">
+    card.innerHTML = `
       <div class="posthead">
         <div class="posthead-left">
-          <div class="avatar" style="${avatarStyle}">${post.author_avatar ? '' : authorInitial}</div>
+          <div class="avatar" style="${authorAvatar ? `background-image: url('${authorAvatar}')` : ''}">
+            ${authorAvatar ? '' : initial}
+          </div>
           <div>
-            <div class="post-author-name">${post.author_name}</div>
-            <div class="post-meta-line">
-              <span>${dateStr}</span> • <span style="text-transform:capitalize; color:var(--bp-gold);">${post.category || 'General'}</span>
-            </div>
+            <div class="post-author-name">${authorName}</div>
+            <div class="post-meta-line"><span>${dateStr}</span></div>
           </div>
         </div>
       </div>
+      
+      <div class="post-content">${escapeHtml(post.content || '')}</div>
+      ${mediaHtml}
 
-      <div class="post-content">${post.content || ''}</div>
-      ${mediaHTML}
-
-      <!-- HORIZONTAL ACTIONS ROW: ❤️ Like | 💬 Comment | ↗️ Share -->
       <div class="actions">
-        <button class="action-btn ${isLiked}" onclick="toggleLikePost('${post.id}')">
-          <i class="${likeIcon}"></i> <span>${post.likes_count || 0} Likes</span>
+        <button class="action-btn ${isLiked ? 'liked' : ''}" onclick="toggleLike('${post.id}', ${isLiked})">
+          <i class="fa-${isLiked ? 'solid' : 'regular'} fa-heart"></i>
+          <span>${likeCount > 0 ? likeCount : ''} Like</span>
         </button>
-        <button class="action-btn" onclick="toggleCommentsVisibility('${post.id}')">
-          <i class="fa-regular fa-comment"></i> <span>Comment</span>
+        <button class="action-btn">
+          <i class="fa-regular fa-comment"></i>
+          <span>Comment</span>
         </button>
-        <button class="action-btn" onclick="sharePost('${post.id}')">
-          <i class="fa-solid fa-share"></i> <span>Share</span>
+        <button class="action-btn">
+          <i class="fa-solid fa-share"></i>
+          <span>Share</span>
         </button>
       </div>
+    `;
 
-      <!-- COMMENTS BOX -->
-      <div id="comments-${post.id}" class="comments-section hidden">
-        <div class="comments-list" id="comments-list-${post.id}">${commentsHTML}</div>
-        <div class="comment-input-wrap">
-          <input type="text" id="comment-input-${post.id}" placeholder="Write a prayer or comment..." onkeydown="if(event.key==='Enter') addComment('${post.id}')" />
-          <button class="btn btn-gold" style="width:auto; padding:6px 12px; font-size:12px;" onclick="addComment('${post.id}')">Send</button>
-        </div>
-      </div>
-    </div>
-  `;
+    container.appendChild(card);
+  });
 }
 
-/* ---------------------------------------------------------
-   PRESERVED LIKE SYSTEM INTEGRATION WITH SUPABASE
---------------------------------------------------------- */
-async function toggleLikePost(postId) {
+/* LIKE SYSTEM INTEGRATION */
+async function toggleLike(postId, currentlyLiked) {
   if (!currentUser) return;
 
-  const post = postsState.find(p => p.id === postId);
-  if (!post) return;
-
-  if (post.liked_by_me) {
-    // Remove Like
-    post.liked_by_me = false;
-    post.likes_count = Math.max(0, (post.likes_count || 1) - 1);
-
+  if (currentlyLiked) {
     await supabaseClient
       .from('post_likes')
       .delete()
       .eq('post_id', postId)
       .eq('user_id', currentUser.id);
-
   } else {
-    // Add Like
-    post.liked_by_me = true;
-    post.likes_count = (post.likes_count || 0) + 1;
-
     await supabaseClient
       .from('post_likes')
-      .upsert([{ post_id: postId, user_id: currentUser.id }]);
+      .insert([{ post_id: postId, user_id: currentUser.id }]);
   }
 
-  // Update post card UI directly
-  const card = document.getElementById(`post-card-${postId}`);
-  if (card) {
-    const likeBtn = card.querySelector('.action-btn');
-    if (likeBtn) {
-      likeBtn.className = `action-btn ${post.liked_by_me ? 'liked' : ''}`;
-      likeBtn.innerHTML = `<i class="${post.liked_by_me ? 'fa-solid fa-heart' : 'fa-regular fa-heart'}"></i> <span>${post.likes_count} Likes</span>`;
-    }
-  }
+  loadFeedPosts();
 }
 
-function toggleCommentsVisibility(postId) {
-  const commSection = document.getElementById(`comments-${postId}`);
-  if (commSection) commSection.classList.toggle('hidden');
-}
-
-function addComment(postId) {
-  const input = document.getElementById(`comment-input-${postId}`);
-  if (!input) return;
-
-  const text = input.value.trim();
-  if (!text || !currentProfile) return;
-
-  const post = postsState.find(p => p.id === postId);
-  if (!post) return;
-
-  if (!post.comments) post.comments = [];
-  post.comments.push({
-    author: currentProfile.full_name || 'Believer',
-    text: text
-  });
-
-  input.value = '';
-
-  const list = document.getElementById(`comments-list-${postId}`);
-  if (list) {
-    list.innerHTML = post.comments.map(c => `
-      <div class="comment-item">
-        <div>
-          <div class="comment-author">${c.author}</div>
-          <div class="comment-text">${c.text}</div>
-        </div>
-      </div>
-    `).join('');
-  }
-}
-
-function sharePost(postId) {
-  alert('Post link copied to clipboard!');
-}
-
-/* ---------------------------------------------------------
-   STORIES & UPDATES
---------------------------------------------------------- */
-function triggerStoryUpload() {
-  document.getElementById('storyFileInput').click();
-}
-
-function handleStoryUpload(event) {
-  const file = event.target.files[0];
-  if (!file || !currentProfile) return;
-
-  const reader = new FileReader();
-  reader.onload = function(e) {
-    const newStory = {
-      id: 'story_' + Date.now(),
-      author: currentProfile.full_name || 'Believer',
-      image: e.target.result
-    };
-    storiesState.unshift(newStory);
-    renderStories();
-  };
-  reader.readAsDataURL(file);
-}
-
-function renderStories() {
-  const list = document.getElementById('storiesList');
-  if (!list) return;
-
-  list.innerHTML = storiesState.map(s => `
-    <div class="story-card">
-      <img src="${s.image}" class="bg-story" alt="Story" />
-      <div class="story-overlay"></div>
-      <div class="story-author">${s.author}</div>
-    </div>
-  `).join('');
-}
-
-/* ---------------------------------------------------------
-   STATIC MODULES (FRIENDS, GROUPS, VIDEOS, SEARCH)
---------------------------------------------------------- */
-function renderStaticModules() {
-  // Friends
-  friendsState = [
-    { name: 'Sister Mary Johnson', ministry: 'Worship Leader' },
-    { name: 'Brother Mark Evans', ministry: 'Youth Fellowship' },
-    { name: 'Hannah Samuel', ministry: 'Prayer Warrior' }
-  ];
-  const friendsList = document.getElementById('friendsList');
-  if (friendsList) {
-    friendsList.innerHTML = friendsState.map(f => `
-      <div class="friend-card">
-        <div class="friend-info">
-          <div class="avatar" style="background:var(--bp-gold); color:white;">${f.name.charAt(0)}</div>
-          <div>
-            <div style="font-weight:800; font-size:14px; color:var(--bp-primary);">${f.name}</div>
-            <div style="font-size:12px; color:var(--bp-muted);">${f.ministry}</div>
-          </div>
-        </div>
-        <button class="btn btn-gold btn-sm"><i class="fa-solid fa-user-plus"></i> Connect</button>
-      </div>
-    `).join('');
-  }
-
-  // Groups
-  groupsState = [
-    { name: 'Daily Bible Study & Prayer', members: '1.2k Believers' },
-    { name: 'Global Intercessory Network', members: '850 Believers' },
-    { name: 'Christian Digital Creators', members: '430 Believers' }
-  ];
-  const groupsList = document.getElementById('groupsList');
-  if (groupsList) {
-    groupsList.innerHTML = groupsState.map(g => `
-      <div class="group-card">
-        <div class="group-info">
-          <div class="avatar"><i class="fa-solid fa-people-group"></i></div>
-          <div>
-            <div style="font-weight:800; font-size:14px; color:var(--bp-primary);">${g.name}</div>
-            <div style="font-size:12px; color:var(--bp-muted);">${g.members}</div>
-          </div>
-        </div>
-        <button class="btn btn-outline btn-sm">Join Group</button>
-      </div>
-    `).join('');
-  }
-
-  // Videos
-  videosState = [
-    { title: 'Walking in Faith During Hard Times', speaker: 'Pastor John', duration: '18:24' },
-    { title: 'The Power of Morning Prayer', speaker: 'Evangelist Sarah', duration: '25:10' }
-  ];
-  const videosList = document.getElementById('videosList');
-  if (videosList) {
-    videosList.innerHTML = videosState.map(v => `
-      <div class="video-card">
-        <div class="video-container" style="display:flex; align-items:center; justify-content:center; color:white;">
-          <i class="fa-solid fa-circle-play" style="font-size:48px; color:var(--bp-gold); cursor:pointer;"></i>
-        </div>
-        <div class="video-info">
-          <div style="font-weight:800; font-size:15px; color:var(--bp-primary);">${v.title}</div>
-          <div style="font-size:12px; color:var(--bp-muted); margin-top:2px;">${v.speaker} • ${v.duration}</div>
-        </div>
-      </div>
-    `).join('');
-  }
-}
-
-function updateProfileStats() {
+/* =========================================================
+   PRAYER WALL SYSTEM
+========================================================= */
+document.getElementById('btnSubmitPrayer').addEventListener('click', async () => {
   if (!currentUser) return;
-  const myPosts = postsState.filter(p => p.user_id === currentUser.id);
-  document.getElementById('statPostsCount').innerText = myPosts.length;
-  document.getElementById('statFriendsCount').innerText = friendsState.length;
-}
 
-function updatePrayerStatCount() {
-  const current = parseInt(document.getElementById('statPrayersCount').innerText) || 0;
-  document.getElementById('statPrayersCount').innerText = current + 1;
-}
+  const input = document.getElementById('prayerInput');
+  const text = input.value.trim();
+  if (!text) return;
 
-/* ---------------------------------------------------------
-   SEARCH & NOTIFICATIONS MODALS
---------------------------------------------------------- */
-function toggleSearchModal() {
-  const box = document.getElementById('searchBoxModal');
-  box.classList.toggle('hidden');
-}
+  const { error } = await supabaseClient
+    .from('prayer_requests')
+    .insert([{
+      user_id: currentUser.id,
+      request: text,
+      created_at: new Date().toISOString()
+    }]);
 
-function handleSearch(query) {
-  const container = document.getElementById('searchResults');
-  if (!query.trim()) {
-    container.innerHTML = '';
+  if (!error) {
+    input.value = '';
+    loadPrayers();
+  }
+});
+
+async function loadPrayers() {
+  const container = document.getElementById('prayersList');
+  if (!container) return;
+
+  const { data: prayers, error } = await supabaseClient
+    .from('prayer_requests')
+    .select(`
+      *,
+      profiles:user_id (full_name)
+    `)
+    .order('created_at', { ascending: false });
+
+  if (error || !prayers || prayers.length === 0) {
+    container.innerHTML = '<div class="card" style="text-align:center; color: var(--bp-muted);">No prayer requests yet. Be the first to share.</div>';
     return;
   }
-  container.innerHTML = `
-    <div class="search-item">
-      <div>
-        <div style="font-weight:700; font-size:13px; color:var(--bp-primary);">Search result for "${query}"</div>
-        <div style="font-size:11px; color:var(--bp-muted);">Believers+ Community Search</div>
+
+  container.innerHTML = '';
+  prayers.forEach(p => {
+    const name = p.profiles?.full_name || 'Anonymous Believer';
+    const card = document.createElement('div');
+    card.className = 'prayer-card';
+    card.innerHTML = `
+      <div class="author"><i class="fa-solid fa-hands-praying" style="color: var(--bp-gold); margin-right: 6px;"></i> ${name}</div>
+      <div class="request-text">${escapeHtml(p.request || '')}</div>
+      <div class="amen-count"><i class="fa-regular fa-heart"></i> Praying for this</div>
+    `;
+    container.appendChild(card);
+  });
+}
+
+/* =========================================================
+   MEMBERS LIST
+========================================================= */
+async function loadMembers() {
+  const container = document.getElementById('friendsList');
+  if (!container) return;
+
+  const { data: members, error } = await supabaseClient
+    .from('profiles')
+    .select('*')
+    .limit(20);
+
+  if (error || !members) return;
+
+  container.innerHTML = '';
+  members.forEach(m => {
+    if (m.id === currentUser?.id) return;
+
+    const card = document.createElement('div');
+    card.className = 'friend-card';
+    card.innerHTML = `
+      <div class="friend-info">
+        <div class="avatar" style="${m.avatar_url ? `background-image: url('${m.avatar_url}')` : ''}">
+          ${m.avatar_url ? '' : (m.full_name || 'B').charAt(0).toUpperCase()}
+        </div>
+        <div>
+          <div style="font-weight: 800; font-size: 14px; color: var(--bp-primary);">${m.full_name || 'Believer'}</div>
+          <div style="font-size: 11px; color: var(--bp-muted);">${m.church_ministry || 'Believers+ Member'}</div>
+        </div>
       </div>
-      <i class="fa-solid fa-chevron-right" style="font-size:12px; color:var(--bp-muted);"></i>
-    </div>
-  `;
+      <button class="btn btn-gold btn-sm"><i class="fa-solid fa-user-plus"></i> Connect</button>
+    `;
+    container.appendChild(card);
+  });
 }
 
-function toggleNotifications() {
-  const drop = document.getElementById('notifDropdown');
-  drop.classList.toggle('hidden');
+/* UTILITY FUNCTIONS */
+function escapeHtml(str) {
+  return str.replace(/[&<>"']/g, function (m) {
+    return {
+      '&': '&amp;',
+      '<': '&lt;',
+      '>': '&gt;',
+      '"': '&quot;',
+      "'": '&#039;'
+    }[m];
+  });
 }
 
-function clearNotifications() {
-  document.getElementById('notifList').innerHTML = `<div style="padding:16px; text-align:center; font-size:12px; color:var(--bp-muted);">No new notifications</div>`;
-  document.getElementById('notifBadge').classList.add('hidden');
-}
+/* INITIALIZE AUTH ON DOM LOAD */
+document.addEventListener('DOMContentLoaded', () => {
+  initAuth();
+});
 </script>
 </body>
 </html>
