@@ -270,13 +270,13 @@ header {
 }
 
 /* =========================================================
-   HEADER MENU DROPDOWN
+   HEADER MENU DROPDOWN (ADDED)
 ========================================================= */
 .menu-dropdown {
   position: absolute;
-  top: 50px;
+  top: 48px;
   right: 0;
-  width: 200px;
+  width: 210px;
   background: white;
   border-radius: 12px;
   box-shadow: 0 10px 30px rgba(0,0,0,0.15);
@@ -1103,9 +1103,7 @@ header {
       </div>
       
       <div class="header-actions">
-        <!-- Existing header buttons/actions can be placed here -->
-
-        <!-- NEW: Facebook-Style Menu Button & Dropdown -->
+        <!-- Added Menu Button & Dropdown -->
         <button class="header-circle-btn" id="menuToggleBtn" title="Menu" onclick="toggleHeaderMenu(event)">
           <i class="fa-solid fa-bars"></i>
         </button>
@@ -1119,13 +1117,13 @@ header {
     </div>
   </header>
 
-  <!-- ================= YOUR MAIN CONTENT ================= -->
+  <!-- ================= MAIN CONTENT WRAPPER ================= -->
   <main class="wrap">
-    <!-- Your existing feed, posts, and views remain intact here -->
+    <!-- Your feed, stories, profile, components, and views load here -->
   </main>
 
   <script>
-    // Toggle Header Menu
+    // Toggle Header Menu Dropdown
     function toggleHeaderMenu(event) {
       event.stopPropagation();
       const dropdown = document.getElementById('headerMenuDropdown');
@@ -1144,12 +1142,6 @@ header {
         }
       }
     });
-
-    // Existing logout function placeholder (connects to your project's authentication system)
-    function logout() {
-      // Calls your existing logout logic or endpoint here
-      console.log('Logging out...');
-    }
   </script>
 </body>
 </html>
