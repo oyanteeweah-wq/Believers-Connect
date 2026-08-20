@@ -260,38 +260,13 @@ header {
   position: relative;
 }
 
-/* =========================================================
-   HEADER MENU DROPDOWN
-========================================================= */
-.menu-dropdown {
-  position: absolute;
-  top: 48px;
-  right: 0;
-  width: 210px;
-  background: white;
-  border-radius: 12px;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.15);
-  border: 1px solid var(--bp-border);
-  z-index: 1001;
-  overflow: hidden;
-}
-
-.menu-item {
-  width: 100%;
-  padding: 12px 16px;
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  font-size: 14px;
+.logout-btn {
+  font-size: 12px;
   font-weight: 700;
+  padding: 6px 12px;
+  border-radius: 8px;
+  background: rgba(230, 57, 70, 0.1);
   color: #e63946;
-  background: white;
-  text-align: left;
-  transition: background 0.2s;
-}
-
-.menu-item:hover {
-  background: #f8fafc;
 }
 
 .nav-wrap {
@@ -324,6 +299,18 @@ header {
   border-bottom: 3px solid var(--bp-gold);
 }
 
+.badge {
+  position: absolute;
+  top: 2px;
+  right: 6px;
+  background: #e63946;
+  color: white;
+  font-size: 10px;
+  font-weight: bold;
+  padding: 2px 6px;
+  border-radius: 10px;
+}
+
 /* =========================================================
    SEARCH BAR & NOTIFICATIONS
 ========================================================= */
@@ -349,6 +336,77 @@ header {
   outline: none;
   width: 100%;
   font-size: 14px;
+}
+
+.search-results-list {
+  margin-top: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  max-height: 250px;
+  overflow-y: auto;
+}
+
+.search-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 12px;
+  background: white;
+  border-radius: 10px;
+  border: 1px solid var(--bp-border);
+  cursor: pointer;
+}
+
+.notif-dropdown {
+  position: absolute;
+  top: 50px;
+  right: 16px;
+  width: 320px;
+  max-width: 90vw;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+  border: 1px solid var(--bp-border);
+  z-index: 1001;
+  overflow: hidden;
+}
+
+.notif-header {
+  padding: 12px 14px;
+  background: #f8fafc;
+  border-bottom: 1px solid var(--bp-border);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-weight: 800;
+  font-size: 14px;
+  color: var(--bp-primary);
+}
+
+.notif-header button {
+  font-size: 11px;
+  color: var(--bp-gold-hover);
+  font-weight: 700;
+}
+
+.notif-list {
+  max-height: 320px;
+  overflow-y: auto;
+}
+
+.notif-item {
+  padding: 12px;
+  border-bottom: 1px solid var(--bp-border);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+  background: white;
+}
+
+.notif-item.unread {
+  background: #f0f7ff;
 }
 
 /* =========================================================
@@ -441,6 +499,9 @@ header {
   padding-top: 10px;
 }
 
+/* =========================================================
+   IN-COMPOSER MEDIA PREVIEW CONTAINER STYLING
+========================================================= */
 .composer-preview-box {
   position: relative;
   margin: 10px 0;
@@ -590,7 +651,7 @@ header {
 }
 
 /* =========================================================
-   FEED POST CARDS & ACTIONS
+   FEED POST CARDS & HORIZONTAL ACTIONS (LIKE, COMMENT, SHARE)
 ========================================================= */
 .card {
   background: var(--bp-card-bg);
@@ -650,6 +711,7 @@ header {
   display: block;
 }
 
+/* Horizontal Actions Row: ❤️ Like | 💬 Comment | ↗️ Share */
 .actions {
   display: flex;
   align-items: center;
@@ -683,6 +745,7 @@ header {
   color: #e63946;
 }
 
+/* Comments Section Styling */
 .comments-section {
   margin-top: 10px;
   border-top: 1px dashed var(--bp-border);
@@ -742,7 +805,7 @@ header {
 }
 
 /* =========================================================
-   FRIENDS, GROUPS & PROFILE MODULES
+   FRIENDS, GROUPS & VIDEO MODULES
 ========================================================= */
 .friends-list, .groups-list {
   display: flex;
@@ -775,6 +838,56 @@ header {
   font-weight: 700;
 }
 
+.video-card {
+  background: white;
+  border-radius: var(--bp-radius);
+  border: 1px solid var(--bp-border);
+  overflow: hidden;
+  margin-bottom: 14px;
+  box-shadow: var(--bp-shadow);
+}
+
+.video-container {
+  position: relative;
+  background: black;
+  width: 100%;
+  aspect-ratio: 16/9;
+}
+
+.video-container video {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.video-info {
+  padding: 12px;
+}
+
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(13, 27, 42, 0.6);
+  z-index: 3000;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  backdrop-filter: blur(3px);
+}
+
+.modal-sheet {
+  background: white;
+  width: 100%;
+  max-width: 640px;
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
+  padding: 20px;
+  box-shadow: 0 -4px 20px rgba(0,0,0,0.15);
+}
+
+/* =========================================================
+   RESTORED PROFILE, COVER PHOTO & ABOUT ME STYLES
+========================================================= */
 .profile-card {
   background: white;
   border-radius: var(--bp-radius);
@@ -791,6 +904,24 @@ header {
   background-size: cover;
   background-position: center;
   position: relative;
+}
+
+.cover-upload-badge {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: rgba(13, 27, 42, 0.75);
+  color: white;
+  border-radius: 20px;
+  padding: 6px 12px;
+  font-size: 11px;
+  font-weight: 700;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  backdrop-filter: blur(4px);
+  border: 1px solid rgba(255,255,255,0.2);
 }
 
 .profile-header-content {
@@ -823,6 +954,24 @@ header {
   overflow: hidden;
   background-size: cover;
   background-position: center;
+}
+
+.avatar-upload-badge {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: var(--bp-gold);
+  color: var(--bp-primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 13px;
+  border: 2px solid white;
+  cursor: pointer;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.2);
 }
 
 .about-me-card {
@@ -891,542 +1040,1312 @@ header {
   color: var(--bp-primary);
   margin-top: 2px;
 }
+
+.photo-preview-box {
+  width: 100%;
+  height: 120px;
+  border-radius: 10px;
+  border: 2px dashed var(--bp-border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  background-size: cover;
+  background-position: center;
+  margin-top: 6px;
+  color: var(--bp-muted);
+  font-size: 12px;
+}
+
+/* =========================================================
+   BOTTOM NAVIGATION BAR
+========================================================= */
+.bottom-nav {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 54px;
+  background: var(--bp-primary);
+  border-top: 1px solid rgba(255,255,255,0.1);
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  z-index: 2000;
+}
+
+.bottom-nav button {
+  flex: 1;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: rgba(255,255,255,0.6);
+  font-size: 18px;
+}
+
+.bottom-nav button.active {
+  color: var(--bp-gold);
+}
+
+@media (min-width: 641px) {
+  body { padding-bottom: 0; }
+  .bottom-nav { display: none; }
+}
 </style>
 </head>
+
 <body>
 
-  <!-- ================= HEADER SECTION ================= -->
+<!-- HIDDEN FILE INPUTS FOR PHOTOS -->
+<input type="file" id="profilePhotoPicker" accept="image/*" class="hidden">
+<input type="file" id="coverPhotoPicker" accept="image/*" class="hidden">
+
+<!-- HIDDEN FILE INPUT FOR POST COMPOSER MEDIA -->
+<input type="file" id="postMediaFileInput" accept="image/jpeg, image/jpg, image/png, image/webp, video/mp4, video/webm, video/quicktime" class="hidden">
+
+<!-- =======================================================
+     AUTHENTICATION PAGE
+======================================================= -->
+<div id="auth" class="auth-page">
+  <div class="auth">
+    <div class="auth-brand">
+      <div class="auth-logo"><i class="fa-solid fa-cross"></i></div>
+      <div class="brand">Believers<span>+</span></div>
+      <div style="color: rgba(255,255,255,0.7); font-size: 13px; margin-top: 2px;">One Faith • One Community</div>
+    </div>
+
+    <div class="auth-card">
+      <div id="loginBox">
+        <h2 style="margin-bottom: 14px; font-size: 18px; color: var(--bp-primary);">Welcome Back</h2>
+        <div class="form-group">
+          <label>Email Address</label>
+          <input id="loginEmail" type="email" placeholder="name@domain.com">
+        </div>
+        <div class="form-group">
+          <label>Password</label>
+          <input id="loginPass" type="password" placeholder="••••••••">
+        </div>
+        <button id="loginBtn" class="btn btn-gold" type="button">Log In to Believers+</button>
+        <p id="loginMsg" class="msg-error"></p>
+        <div class="divider"></div>
+        <button id="showSignupBtn" class="btn" type="button">Create Believers+ Account</button>
+      </div>
+
+      <div id="signupBox" class="hidden">
+        <h2 style="margin-bottom: 14px; font-size: 18px; color: var(--bp-primary);">Join Believers+</h2>
+        <div class="form-group">
+          <label>Full Name</label>
+          <input id="name" type="text" placeholder="John Doe">
+        </div>
+        <div class="form-group">
+          <label>Email Address</label>
+          <input id="email" type="email" placeholder="name@domain.com">
+        </div>
+        <div class="form-group">
+          <label>Password</label>
+          <input id="pass" type="password" placeholder="••••••••">
+        </div>
+        <button id="signupBtn" class="btn btn-gold" type="button">Register Account</button>
+        <p id="signupMsg" class="msg-error"></p>
+        <div class="divider"></div>
+        <button id="showLoginBtn" class="btn" type="button">Back to Log In</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- =======================================================
+     MAIN APPLICATION VIEW (ORIGINAL LAYOUT PRESERVED)
+======================================================= -->
+<div id="app" class="hidden">
   <header>
     <div class="header-inner">
-      <div class="logo-area" onclick="switchTab('feed')">
-        <i class="fa-solid fa-dove logo-icon"></i>
+      <div class="logo-area" id="brandLogoBtn">
+        <div class="logo-icon"><i class="fa-solid fa-cross"></i></div>
         <div class="logo">Believers<span>+</span></div>
       </div>
-      
       <div class="header-actions">
-        <!-- Menu Button & Dropdown -->
-        <button class="header-circle-btn" id="menuToggleBtn" title="Menu" onclick="toggleHeaderMenu(event)">
-          <i class="fa-solid fa-bars"></i>
+        <!-- TOP + BUTTON -->
+        <button id="topPlusBtn" class="header-circle-btn" title="Create Group"><i class="fa-solid fa-plus"></i></button>
+        <!-- SEARCH BUTTON -->
+        <button id="topSearchBtn" class="header-circle-btn" title="Search"><i class="fa-solid fa-magnifying-glass"></i></button>
+        <!-- NOTIFICATION BELL -->
+        <button id="notifBellBtn" class="header-circle-btn" title="Notifications">
+          <i class="fa-solid fa-bell"></i>
+          <span id="notifBadge" class="badge hidden">0</span>
         </button>
-        
-        <div id="headerMenuDropdown" class="menu-dropdown hidden">
-          <button class="menu-item" onclick="logout()">
-            <i class="fa-solid fa-right-from-bracket"></i> Logout / Exit
-          </button>
-        </div>
+        <!-- LOGOUT BUTTON -->
+        <button id="logoutBtn" class="logout-btn"><i class="fa-solid fa-right-from-bracket"></i> Exit</button>
       </div>
+    </div>
+
+    <!-- NOTIFICATION DROPDOWN PANEL -->
+    <div id="notifDropdown" class="notif-dropdown hidden">
+      <div class="notif-header">
+        <span>Notifications</span>
+        <button id="markAllReadBtn">Mark all as read</button>
+      </div>
+      <div id="notifList" class="notif-list"></div>
+    </div>
+
+    <!-- SEARCH PANEL OVERLAY -->
+    <div id="searchBarOverlay" class="search-modal-box hidden">
+      <div class="search-input-wrapper">
+        <i class="fa-solid fa-magnifying-glass" style="color: var(--bp-muted);"></i>
+        <input type="text" id="globalSearchInput" placeholder="Search friends by name...">
+        <button id="closeSearchBtn"><i class="fa-solid fa-xmark"></i></button>
+      </div>
+      <div id="searchResultsPanel" class="search-results-list hidden"></div>
+    </div>
+
+    <!-- TOP NAVIGATION MENU -->
+    <div class="nav-wrap">
+      <nav class="nav">
+        <button id="tabHome" class="active" title="Home Feed"><i class="fa-solid fa-house"></i></button>
+        <button id="tabFriends" title="Find Friends"><i class="fa-solid fa-user-plus"></i></button>
+        <button id="tabVideos" title="Watch Videos"><i class="fa-solid fa-tv"></i></button>
+        <button id="tabGroups" title="Groups"><i class="fa-solid fa-users"></i></button>
+        <button id="tabProfile" title="Profile & Bio"><i class="fa-solid fa-user"></i></button>
+      </nav>
     </div>
   </header>
 
-  <!-- Navigation Bar (Hidden when logged out) -->
-  <div id="navWrap" class="nav-wrap hidden">
-    <nav class="nav">
-      <button id="navFeed" class="active" onclick="switchTab('feed')"><i class="fa-solid fa-house"></i></button>
-      <button id="navFriends" onclick="switchTab('friends')"><i class="fa-solid fa-user-group"></i></button>
-      <button id="navGroups" onclick="switchTab('groups')"><i class="fa-solid fa-users-rectangle"></i></button>
-      <button id="navProfile" onclick="switchTab('profile')"><i class="fa-solid fa-user"></i></button>
-    </nav>
-  </div>
+  <main class="wrap" style="padding: 10px 12px;">
 
-  <!-- ================= MAIN CONTENT CONTAINER ================= -->
-  <main class="wrap" id="mainContent">
-    <!-- Dynamic views render here -->
-  </main>
+    <!-- HOME TAB FEED VIEW -->
+    <div id="viewHome">
+      <!-- POST / ENCOURAGEMENT COMPOSER -->
+      <div class="composer-card">
+        <div class="avatar currentUserAvatar" id="composerUserAvatar" title="View Profile">O</div>
+        <button id="openComposerBtn" class="mind-button">What is on your heart today?</button>
+        <div class="photo-upload-btn" id="mediaUploadTrigger">
+          <i class="fa-solid fa-image"></i>
+          <span>Media</span>
+        </div>
+      </div>
 
-  <script>
-    /* =========================================================
-       APPLICATION STATE & MOCK DATA
-    ========================================================= */
-    let currentUser = JSON.parse(localStorage.getItem('bp_user')) || null;
-    let currentTab = 'feed';
-    let composerMedia = null; // { type: 'image'|'video', url: string }
+      <div id="postComposerArea" class="hidden">
+        <textarea id="postText" class="composer-textarea" placeholder="Share a testimony, prayer request, or encouragement..."></textarea>
+        
+        <!-- IN-COMPOSER MEDIA PREVIEW AREA -->
+        <div id="postMediaPreviewContainer" class="composer-preview-box hidden">
+          <button type="button" id="removePostMediaBtn" class="remove-media-btn" title="Remove Media">
+            <i class="fa-solid fa-xmark"></i>
+          </button>
+          <div id="postMediaPreviewContent" style="width: 100%;"></div>
+        </div>
 
-    let posts = JSON.parse(localStorage.getItem('bp_posts')) || [
-      {
-        id: 1,
-        author: 'Pastor Samuel',
-        avatar: '',
-        time: '2 hours ago',
-        content: 'Faith is taking the first step even when you don’t see the whole staircase. Keep trusting the journey today! 🙏✨',
-        media: null,
-        likes: 24,
-        liked: false,
-        comments: [
-          { author: 'Sister Grace', text: 'Amen! Truly needed to hear this today.' }
-        ]
-      },
-      {
-        id: 2,
-        author: 'Oyantee Weah',
-        avatar: '',
-        time: '5 hours ago',
-        content: 'Working on some amazing custom branding designs and layouts today. Grateful for creativity and inspiration! 💻🎨',
-        media: null,
-        likes: 15,
-        liked: true,
-        comments: []
-      }
-    ];
+        <div class="composer-actions">
+          <div style="font-size: 12px; color: var(--bp-muted);"><i class="fa-solid fa-earth-americas"></i> Public</div>
+          <button id="submitPostBtn" class="btn btn-gold btn-sm"><i class="fa-solid fa-paper-plane"></i> Publish</button>
+        </div>
+      </div>
 
-    let stories = [
-      { id: 1, author: 'Create Story', isCreate: true, bg: '' },
-      { id: 2, author: 'Bishop David', bg: 'https://images.unsplash.com/photo-1544717305-2782549b5136?w=300' },
-      { id: 3, author: 'Choir Fellowship', bg: 'https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=300' },
-      { id: 4, author: 'Youth Outreach', bg: 'https://images.unsplash.com/photo-1529156069898-49953e39b3ac?w=300' }
-    ];
-
-    let friends = [
-      { name: 'Sister Grace', role: 'Prayer Group Lead', online: true },
-      { name: 'Deacon John', role: 'Media Department', online: false },
-      { name: 'Brother Emmanuel', role: 'Youth Ministry', online: true }
-    ];
-
-    let groups = [
-      { name: 'Daily Scripture & Devotion', members: '1.2k members', joined: true },
-      { name: 'Believers Worship Team', members: '340 members', joined: false },
-      { name: 'Community Entrepreneurs', members: '850 members', joined: true }
-    ];
-
-    /* =========================================================
-       HEADER MENU TOGGLE LOGIC
-    ========================================================= */
-    function toggleHeaderMenu(event) {
-      event.stopPropagation();
-      const dropdown = document.getElementById('headerMenuDropdown');
-      if (dropdown) {
-        dropdown.classList.toggle('hidden');
-      }
-    }
-
-    window.addEventListener('click', function(event) {
-      const dropdown = document.getElementById('headerMenuDropdown');
-      const toggleBtn = document.getElementById('menuToggleBtn');
-      if (dropdown && !dropdown.classList.contains('hidden')) {
-        if (!dropdown.contains(event.target) && !toggleBtn.contains(event.target)) {
-          dropdown.classList.add('hidden');
-        }
-      }
-    });
-
-    function logout() {
-      localStorage.removeItem('bp_user');
-      currentUser = null;
-      document.getElementById('headerMenuDropdown').classList.add('hidden');
-      renderApp();
-    }
-
-    /* =========================================================
-       RENDER ROUTER
-    ========================================================= */
-    function renderApp() {
-      const main = document.getElementById('mainContent');
-      const navWrap = document.getElementById('navWrap');
-
-      if (!currentUser) {
-        navWrap.classList.add('hidden');
-        main.innerHTML = renderAuthView();
-        return;
-      }
-
-      navWrap.classList.remove('hidden');
-      
-      // Update active nav buttons
-      document.querySelectorAll('.nav button').forEach(btn => btn.classList.remove('active'));
-      const activeBtn = document.getElementById('nav' + currentTab.charAt(0).toUpperCase() + currentTab.slice(1));
-      if (activeBtn) activeBtn.classList.add('active');
-
-      if (currentTab === 'feed') {
-        main.innerHTML = renderFeedView();
-      } else if (currentTab === 'friends') {
-        main.innerHTML = renderFriendsView();
-      } else if (currentTab === 'groups') {
-        main.innerHTML = renderGroupsView();
-      } else if (currentTab === 'profile') {
-        main.innerHTML = renderProfileView();
-      }
-    }
-
-    function switchTab(tab) {
-      currentTab = tab;
-      renderApp();
-      window.scrollTo(0,0);
-    }
-
-    /* =========================================================
-       AUTH VIEW
-    ========================================================= */
-    function renderAuthView() {
-      return `
-        <div class="auth-page">
-          <div class="auth">
-            <div class="auth-brand">
-              <div class="auth-logo"><i class="fa-solid fa-dove"></i></div>
-              <div class="brand">Believers<span>+</span></div>
+      <!-- STORIES / COMMUNITY UPDATES SECTION -->
+      <div class="stories-container">
+        <div class="stories-wrapper" id="storiesList">
+          <!-- Update Story Card -->
+          <div class="story-card create-story">
+            <div class="top-img" id="storyUserBg">
+              <div class="plus-btn"><i class="fa-solid fa-plus"></i></div>
             </div>
-            <div class="auth-card">
-              <div class="form-group">
-                <label>Your Full Name</label>
-                <input type="text" id="authName" placeholder="Enter your name (e.g. Oyantee Weah)">
+            <div class="bottom-text">Update Story</div>
+          </div>
+          <!-- Friend Story Cards -->
+          <div class="story-card">
+            <div class="story-overlay"></div>
+            <div class="story-author">Sarah Jenkins</div>
+          </div>
+          <div class="story-card">
+            <div class="story-overlay"></div>
+            <div class="story-author">David Miller</div>
+          </div>
+          <div class="story-card">
+            <div class="story-overlay"></div>
+            <div class="story-author">Grace Taylor</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- FEED POSTS LIST -->
+      <div id="feedList">
+        <div class="card" data-post-id="sample_1">
+          <div class="posthead">
+            <div class="posthead-left">
+              <div class="avatar">G</div>
+              <div>
+                <div class="post-author-name">Grace Taylor</div>
+                <div class="post-meta-line"><span>2 hours ago</span> • <i class="fa-solid fa-cross"></i></div>
               </div>
-              <div class="form-group">
-                <label>Email Address</label>
-                <input type="email" id="authEmail" placeholder="you@example.com">
-              </div>
-              <button class="btn btn-gold" onclick="handleLogin()">Enter Community</button>
-              <div id="authError" class="msg-error hidden">Please fill in all fields.</div>
+            </div>
+          </div>
+          <div class="post-content">Welcoming everyone to our weekly digital fellowship! Let's uplift each other in prayer today.</div>
+          
+          <!-- HORIZONTAL ACTIONS ROW: LIKE, COMMENT, SHARE -->
+          <div class="actions">
+            <button class="action-btn like-btn" onclick="toggleLike(this)"><i class="fa-solid fa-heart"></i> Like (<span class="like-count">12</span>)</button>
+            <button class="action-btn comment-btn" onclick="toggleCommentSection(this)"><i class="fa-solid fa-comment"></i> Comment (<span class="comment-count">0</span>)</button>
+            <button class="action-btn share-btn" onclick="sharePost(this)"><i class="fa-solid fa-share"></i> Share</button>
+          </div>
+
+          <!-- COMMENT CONTAINER -->
+          <div class="comments-section hidden">
+            <div class="comments-list"></div>
+            <div class="comment-input-wrap">
+              <input type="text" class="comment-input-field" placeholder="Write a comment..." onkeydown="handleCommentKeydown(event, this)">
+              <button class="btn btn-gold btn-sm" style="width: auto;" onclick="submitComment(this)"><i class="fa-solid fa-paper-plane"></i></button>
             </div>
           </div>
         </div>
-      `;
-    }
+      </div>
+    </div>
 
-    function handleLogin() {
-      const name = document.getElementById('authName').value.trim();
-      const email = document.getElementById('authEmail').value.trim();
-      if (!name || !email) {
-        document.getElementById('authError').classList.remove('hidden');
-        return;
-      }
-      currentUser = { name, email, avatar: '' };
-      localStorage.setItem('bp_user', JSON.stringify(currentUser));
-      currentTab = 'feed';
-      renderApp();
-    }
+    <!-- COMMUNITY / FRIENDS TAB -->
+    <div id="viewFriends" class="hidden">
+      <h3 style="font-size: 16px; font-weight: 800; color: var(--bp-primary); margin: 10px 0;">Find & Connect with Friends</h3>
+      <div id="friendsList" class="friends-list"></div>
+    </div>
 
-    /* =========================================================
-       FEED VIEW
-    ========================================================= */
-    function renderFeedView() {
-      return `
-        <!-- Stories / Community Updates -->
-        <div class="stories-container">
-          <div class="stories-wrapper">
-            ${stories.map(s => {
-              if (s.isCreate) {
-                return `
-                  <div class="story-card create-story" onclick="triggerStoryUpload()">
-                    <div class="top-img" style="background-image: url('${currentUser.avatar || ''}')">
-                      <div class="plus-btn">+</div>
-                    </div>
-                    <div class="bottom-text">Create Story</div>
-                  </div>
-                `;
-              }
-              return `
-                <div class="story-card" style="background-image: url('${s.bg}'); background-size: cover; background-position: center;">
-                  <div class="story-overlay"></div>
-                  <div class="story-author">${s.author}</div>
-                </div>
-              `;
-            }).join('')}
-          </div>
-        </div>
+    <!-- VIDEO HUB TAB -->
+    <div id="viewVideos" class="hidden">
+      <h3 style="font-size: 16px; font-weight: 800; color: var(--bp-primary); margin: 10px 0;">Community Video Hub</h3>
+      <div id="videoFeedList"></div>
+    </div>
 
-        <!-- Composer Box -->
-        <div class="composer-card">
-          <div class="avatar" style="${currentUser.avatar ? 'background-image: url('+currentUser.avatar+')' : ''}">
-            ${!currentUser.avatar ? currentUser.name.charAt(0).toUpperCase() : ''}
-          </div>
-          <div class="mind-button" onclick="openExpandedComposer()">What is on your heart today, ${currentUser.name.split(' ')[0]}?</div>
-          <label class="photo-upload-btn" title="Attach Media">
-            <i class="fa-solid fa-image"></i>
-            <input type="file" accept="image/*,video/*" class="hidden" onchange="handleComposerMedia(event)">
+    <!-- GROUPS TAB -->
+    <div id="viewGroups" class="hidden">
+      <div style="display: flex; align-items: center; justify-content: space-between; margin: 10px 0;">
+        <h3 style="font-size: 16px; font-weight: 800; color: var(--bp-primary);">Community Groups</h3>
+        <button id="openCreateGroupBtn" class="btn btn-gold btn-sm"><i class="fa-solid fa-plus"></i> Create Group</button>
+      </div>
+
+      <div id="groupsList" class="groups-list"></div>
+    </div>
+
+    <!-- RESTORED PROFILE, COVER & BIO TAB -->
+    <div id="viewProfile" class="hidden">
+      <div class="profile-card">
+        <!-- COVER PHOTO CONTAINER -->
+        <div id="profileCoverBg" class="profile-cover-area">
+          <label for="coverPhotoPicker" class="cover-upload-badge">
+            <i class="fa-solid fa-camera"></i> Change Cover
           </label>
         </div>
 
-        <div id="expandedComposerContainer"></div>
-
-        <!-- Feed Posts List -->
-        <div id="postsList">
-          ${posts.map(post => renderPostCard(post)).join('')}
-        </div>
-      `;
-    }
-
-    function openExpandedComposer() {
-      const container = document.getElementById('expandedComposerContainer');
-      container.innerHTML = `
-        <div id="postComposerArea">
-          <textarea class="composer-textarea" id="composerText" placeholder="Share your thoughts, scriptures, or updates..."></textarea>
-          <div id="composerPreviewContainer"></div>
-          <div class="composer-actions">
-            <label class="photo-upload-btn">
-              <i class="fa-solid fa-photo-film"></i> <span>Add Photo/Video</span>
-              <input type="file" accept="image/*,video/*" class="hidden" onchange="handleComposerMedia(event)">
+        <div class="profile-header-content">
+          <!-- PROFILE PHOTO CONTAINER -->
+          <div class="profile-avatar-wrapper">
+            <div id="profileAvatarLarge" class="profile-avatar-large currentUserAvatar">O</div>
+            <label for="profilePhotoPicker" class="avatar-upload-badge" title="Change Profile Photo">
+              <i class="fa-solid fa-camera"></i>
             </label>
-            <button class="btn btn-gold btn-sm" onclick="submitPost()">Post Update</button>
+          </div>
+
+          <h2 id="profDisplayFullName" style="font-size: 20px; font-weight: 800; color: var(--bp-primary);">Oyantee Weah</h2>
+          <div id="profDisplayHandle" style="font-size: 13px; color: var(--bp-muted); margin-top: 2px;">@oyantee</div>
+        </div>
+      </div>
+
+      <!-- ABOUT ME SECTION WITH RESTORED FIELDS -->
+      <div class="about-me-card">
+        <div class="about-me-header">
+          <div class="about-me-title">
+            <i class="fa-solid fa-address-card" style="color: var(--bp-gold);"></i>
+            About Me
+          </div>
+          <button id="editProfileToggleBtn" class="btn btn-outline btn-sm">
+            <i class="fa-solid fa-pen-to-square"></i> Edit Profile
+          </button>
+        </div>
+
+        <!-- READ-ONLY BIO DISPLAY -->
+        <div id="profileViewFields">
+          <div class="profile-field-item">
+            <div class="profile-field-icon"><i class="fa-solid fa-location-dot"></i></div>
+            <div class="profile-field-content">
+              <label>Current Address</label>
+              <div id="valAddress">Not specified</div>
+            </div>
+          </div>
+
+          <div class="profile-field-item">
+            <div class="profile-field-icon"><i class="fa-solid fa-briefcase"></i></div>
+            <div class="profile-field-content">
+              <label>Working Place / Workplace</label>
+              <div id="valWorkplace">Not specified</div>
+            </div>
+          </div>
+
+          <div class="profile-field-item">
+            <div class="profile-field-icon"><i class="fa-solid fa-phone"></i></div>
+            <div class="profile-field-content">
+              <label>Contact Information</label>
+              <div id="valContact">Not specified</div>
+            </div>
+          </div>
+
+          <div class="profile-field-item">
+            <div class="profile-field-icon"><i class="fa-solid fa-graduation-cap"></i></div>
+            <div class="profile-field-content">
+              <label>Educational Level</label>
+              <div id="valEduLevel">Not specified</div>
+            </div>
+          </div>
+
+          <div class="profile-field-item">
+            <div class="profile-field-icon"><i class="fa-solid fa-school"></i></div>
+            <div class="profile-field-content">
+              <label>Education / School Information</label>
+              <div id="valSchool">Not specified</div>
+            </div>
+          </div>
+
+          <div class="profile-field-item">
+            <div class="profile-field-icon"><i class="fa-solid fa-quote-left"></i></div>
+            <div class="profile-field-content">
+              <label>Personal Bio / Encouragement Note</label>
+              <div id="valBio">Not specified</div>
+            </div>
           </div>
         </div>
-      `;
-      document.getElementById('composerText').focus();
+
+        <!-- EDIT FORM FOR PROFILE FIELDS & PHOTOS -->
+        <div id="profileEditFields" class="hidden" style="margin-top: 10px;">
+          <div class="form-group">
+            <label>Profile Photo</label>
+            <div style="display: flex; gap: 10px; align-items: center;">
+              <button type="button" class="btn btn-outline btn-sm" onclick="document.getElementById('profilePhotoPicker').click();" style="width: auto;">
+                <i class="fa-solid fa-upload"></i> Select Profile Image
+              </button>
+            </div>
+            <div id="avatarPreviewBox" class="photo-preview-box">No new avatar selected</div>
+          </div>
+
+          <div class="form-group">
+            <label>Cover Photo</label>
+            <div style="display: flex; gap: 10px; align-items: center;">
+              <button type="button" class="btn btn-outline btn-sm" onclick="document.getElementById('coverPhotoPicker').click();" style="width: auto;">
+                <i class="fa-solid fa-upload"></i> Select Cover Image
+              </button>
+            </div>
+            <div id="coverPreviewBox" class="photo-preview-box">No new cover selected</div>
+          </div>
+
+          <div class="form-group">
+            <label>Current Address</label>
+            <input type="text" id="editAddress" placeholder="City, Country or Street Address">
+          </div>
+
+          <div class="form-group">
+            <label>Working Place / Workplace</label>
+            <input type="text" id="editWorkplace" placeholder="Company, Ministry, or Industry">
+          </div>
+
+          <div class="form-group">
+            <label>Contact Information</label>
+            <input type="text" id="editContact" placeholder="Phone Number or Alternate Email">
+          </div>
+
+          <div class="form-group">
+            <label>Educational Level</label>
+            <select id="editEduLevel">
+              <option value="">Select Educational Level</option>
+              <option value="High School">High School</option>
+              <option value="Associate Degree">Associate Degree</option>
+              <option value="Bachelor's Degree">Bachelor's Degree</option>
+              <option value="Master's Degree">Master's Degree</option>
+              <option value="Doctorate / PhD">Doctorate / PhD</option>
+              <option value="Other / Professional Certification">Other / Professional Certification</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label>Education / School Information</label>
+            <input type="text" id="editSchool" placeholder="University, College, or High School Name">
+          </div>
+
+          <div class="form-group">
+            <label>Personal Bio / Encouragement Note</label>
+            <textarea id="editBio" rows="3" placeholder="Share a verse, statement of faith, or brief bio..."></textarea>
+          </div>
+
+          <div style="display: flex; gap: 8px; margin-top: 14px;">
+            <button id="saveProfileBtn" class="btn btn-gold btn-sm" style="flex: 1;"><i class="fa-solid fa-floppy-disk"></i> Save Changes</button>
+            <button id="cancelProfileBtn" class="btn btn-outline btn-sm" style="flex: 1;">Cancel</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- CREATE GROUP MODAL CONTAINER -->
+  <div id="createGroupModal" class="modal-overlay hidden">
+    <div class="modal-sheet">
+      <div style="font-size: 16px; font-weight: 800; color: var(--bp-primary); margin-bottom: 14px; text-align: center;">Create New Group</div>
+      <div class="form-group">
+        <label>Group Name</label>
+        <input type="text" id="newGroupName" placeholder="e.g. Youth Fellowship">
+      </div>
+      <div class="form-group">
+        <label>Description</label>
+        <textarea id="newGroupDesc" rows="3" placeholder="What is this group about?"></textarea>
+      </div>
+      <button id="saveGroupBtn" class="btn btn-gold" style="margin-bottom: 8px;">Create Group</button>
+      <button id="closeGroupModalBtn" class="btn btn-outline">Cancel</button>
+    </div>
+  </div>
+
+  <!-- BOTTOM NAVIGATION BAR -->
+  <div class="bottom-nav">
+    <button id="bNavHome" class="active"><i class="fa-solid fa-house"></i></button>
+    <button id="bNavFriends"><i class="fa-solid fa-user-plus"></i></button>
+    <button id="bNavVideos"><i class="fa-solid fa-tv"></i></button>
+    <button id="bNavGroups"><i class="fa-solid fa-users"></i></button>
+    <button id="bNavProfile"><i class="fa-solid fa-user"></i></button>
+  </div>
+</div>
+
+<!-- =======================================================
+     APPLICATION LOGIC & BEHAVIOR
+======================================================= -->
+<script>
+const state = {
+  currentUser: {
+    id: "u_101",
+    name: "Oyantee Weah",
+    handle: "@oyantee",
+    avatar: "O",
+    photoUrl: "",
+    coverUrl: "",
+    profile: {
+      address: "",
+      workplace: "",
+      contact: "",
+      eduLevel: "",
+      school: "",
+      bio: ""
+    }
+  },
+  tempAvatarUrl: null,
+  tempCoverUrl: null,
+  selectedPostMedia: {
+    file: null,
+    url: null,
+    type: null
+  },
+  users: [
+    { id: "u_101", name: "Oyantee Weah", handle: "@oyantee", avatar: "O" },
+    { id: "u_102", name: "Sarah Jenkins", handle: "@sjenkins", avatar: "S" },
+    { id: "u_103", name: "David Miller", handle: "@dmiller", avatar: "D" },
+    { id: "u_104", name: "Grace Taylor", handle: "@gtaylor", avatar: "G" }
+  ],
+  friends: [],
+  friendRequests: ["u_102"],
+  notifications: [
+    { id: 1, text: "Sarah Jenkins sent you a friend request.", read: false, time: "10m ago" },
+    { id: 2, text: "David Miller supported your encouraging message.", read: false, time: "1h ago" }
+  ],
+  groups: [
+    { id: "g_1", name: "Morning Prayer Warriors", desc: "Daily devotions and fellowship." },
+    { id: "g_2", name: "Choir & Worship", desc: "Rehearsal schedules and media sharing." }
+  ],
+  videos: [
+    {
+      id: "v_1",
+      title: "Sunday Morning Fellowship & Devotion",
+      author: "Grace Taylor",
+      url: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4"
+    },
+    {
+      id: "v_2",
+      title: "Community Outreach Highlights",
+      author: "David Miller",
+      url: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4"
+    }
+  ]
+};
+
+document.addEventListener('DOMContentLoaded', () => {
+  loadProfileFromStorage();
+  bindAuthEvents();
+  bindNavigationEvents();
+  bindComposerEvents();
+  bindSearchEvents();
+  bindNotificationEvents();
+  bindFriendEvents();
+  bindGroupEvents();
+  bindVideoEvents();
+  bindProfileEvents();
+  bindPhotoUploadEvents();
+  showApp();
+});
+
+function showApp() {
+  document.getElementById('auth').classList.add('hidden');
+  document.getElementById('app').classList.remove('hidden');
+  renderNotifications();
+  renderFriends();
+  renderGroups();
+  renderVideos();
+  renderProfile();
+}
+
+/* =========================================================
+   1. NAVIGATION & TAB SWITCHING
+========================================================= */
+function bindNavigationEvents() {
+  const tabs = {
+    tabHome: 'viewHome',
+    tabFriends: 'viewFriends',
+    tabVideos: 'viewVideos',
+    tabGroups: 'viewGroups',
+    tabProfile: 'viewProfile',
+    bNavHome: 'viewHome',
+    bNavFriends: 'viewFriends',
+    bNavVideos: 'viewVideos',
+    bNavGroups: 'viewGroups',
+    bNavProfile: 'viewProfile'
+  };
+
+  Object.keys(tabs).forEach(btnId => {
+    document.getElementById(btnId)?.addEventListener('click', () => switchTab(tabs[btnId]));
+  });
+
+  document.getElementById('brandLogoBtn')?.addEventListener('click', () => switchTab('viewHome'));
+
+  document.querySelectorAll('.currentUserAvatar').forEach(avatarEl => {
+    avatarEl.addEventListener('click', () => switchTab('viewProfile'));
+  });
+}
+
+function switchTab(viewId) {
+  ['viewHome', 'viewFriends', 'viewVideos', 'viewGroups', 'viewProfile'].forEach(id => {
+    document.getElementById(id).classList.add('hidden');
+  });
+  document.getElementById(viewId).classList.remove('hidden');
+
+  const navMap = {
+    viewHome: 'tabHome',
+    viewFriends: 'tabFriends',
+    viewVideos: 'tabVideos',
+    viewGroups: 'tabGroups',
+    viewProfile: 'tabProfile'
+  };
+  const bNavMap = {
+    viewHome: 'bNavHome',
+    viewFriends: 'bNavFriends',
+    viewVideos: 'bNavVideos',
+    viewGroups: 'bNavGroups',
+    viewProfile: 'bNavProfile'
+  };
+
+  document.querySelectorAll('.nav button, .bottom-nav button').forEach(btn => btn.classList.remove('active'));
+  if (navMap[viewId]) document.getElementById(navMap[viewId])?.classList.add('active');
+  if (bNavMap[viewId]) document.getElementById(bNavMap[viewId])?.classList.add('active');
+}
+
+/* =========================================================
+   2. AUTHENTICATION BINDINGS
+========================================================= */
+function bindAuthEvents() {
+  document.getElementById('loginBtn')?.addEventListener('click', () => showApp());
+  document.getElementById('signupBtn')?.addEventListener('click', () => showApp());
+  document.getElementById('showSignupBtn')?.addEventListener('click', () => {
+    document.getElementById('loginBox').classList.add('hidden');
+    document.getElementById('signupBox').classList.remove('hidden');
+  });
+  document.getElementById('showLoginBtn')?.addEventListener('click', () => {
+    document.getElementById('signupBox').classList.add('hidden');
+    document.getElementById('loginBox').classList.remove('hidden');
+  });
+  document.getElementById('logoutBtn')?.addEventListener('click', () => {
+    document.getElementById('app').classList.add('hidden');
+    document.getElementById('auth').classList.remove('hidden');
+  });
+}
+
+/* =========================================================
+   3. COMPOSER & POSTING LOGIC WITH MEDIA UPLOAD
+========================================================= */
+function bindComposerEvents() {
+  const openBtn = document.getElementById('openComposerBtn');
+  const mediaBtn = document.getElementById('mediaUploadTrigger');
+  const mediaFileInput = document.getElementById('postMediaFileInput');
+  const previewContainer = document.getElementById('postMediaPreviewContainer');
+  const previewContent = document.getElementById('postMediaPreviewContent');
+  const removeMediaBtn = document.getElementById('removePostMediaBtn');
+  const composerArea = document.getElementById('postComposerArea');
+  const submitBtn = document.getElementById('submitPostBtn');
+
+  // Open composer area
+  openBtn?.addEventListener('click', () => composerArea.classList.toggle('hidden'));
+  
+  // Media button opens native file picker
+  mediaBtn?.addEventListener('click', () => {
+    composerArea.classList.remove('hidden');
+    mediaFileInput?.click();
+  });
+
+  // Handle selected image or video file
+  mediaFileInput?.addEventListener('change', (e) => {
+    const file = e.target.files[0];
+    if (!file) return;
+
+    if (state.selectedPostMedia.url) {
+      URL.revokeObjectURL(state.selectedPostMedia.url);
     }
 
-    function handleComposerMedia(event) {
-      const file = event.target.files[0];
-      if (!file) return;
-      const url = URL.createObjectURL(file);
-      const type = file.type.startsWith('video') ? 'video' : 'image';
-      composerMedia = { type, url };
+    state.selectedPostMedia.file = file;
+    state.selectedPostMedia.url = URL.createObjectURL(file);
+    state.selectedPostMedia.type = file.type.startsWith('video/') ? 'video' : 'image';
 
-      // If expanded composer is open, render preview
-      const previewContainer = document.getElementById('composerPreviewContainer');
-      if (previewContainer) {
-        previewContainer.innerHTML = `
-          <div class="composer-preview-box">
-            <button class="remove-media-btn" onclick="removeComposerMedia()"><i class="fa-solid fa-xmark"></i></button>
-            ${type === 'video' ? `<video src="${url}" controls></video>` : `<img src="${url}" alt="Preview">`}
-          </div>
-        `;
-      } else {
-        // Automatically open expanded composer if triggered from small input
-        openExpandedComposer();
-        document.getElementById('composerPreviewContainer').innerHTML = `
-          <div class="composer-preview-box">
-            <button class="remove-media-btn" onclick="removeComposerMedia()"><i class="fa-solid fa-xmark"></i></button>
-            ${type === 'video' ? `<video src="${url}" controls></video>` : `<img src="${url}" alt="Preview">`}
-          </div>
-        `;
+    if (state.selectedPostMedia.type === 'image') {
+      previewContent.innerHTML = `<img src="${state.selectedPostMedia.url}" alt="Post Preview">`;
+    } else {
+      previewContent.innerHTML = `<video src="${state.selectedPostMedia.url}" controls playsinline></video>`;
+    }
+
+    previewContainer.classList.remove('hidden');
+  });
+
+  // Clear selected media
+  removeMediaBtn?.addEventListener('click', clearPostMedia);
+
+  function clearPostMedia() {
+    if (state.selectedPostMedia.url) {
+      URL.revokeObjectURL(state.selectedPostMedia.url);
+    }
+    state.selectedPostMedia = { file: null, url: null, type: null };
+    if (mediaFileInput) mediaFileInput.value = '';
+    if (previewContent) previewContent.innerHTML = '';
+    previewContainer?.classList.add('hidden');
+  }
+
+  // Publish post with optional media attachment
+  submitBtn?.addEventListener('click', () => {
+    const textInput = document.getElementById('postText');
+    const content = textInput.value.trim();
+
+    if (!content && !state.selectedPostMedia.file) return;
+
+    const feed = document.getElementById('feedList');
+    const newPost = document.createElement('div');
+    newPost.className = 'card';
+    const postId = 'post_' + Date.now();
+    newPost.setAttribute('data-post-id', postId);
+    
+    let avatarStyle = '';
+    let avatarText = state.currentUser.avatar;
+    if (state.currentUser.photoUrl) {
+      avatarStyle = `style="background-image: url('${state.currentUser.photoUrl}'); color: transparent;"`;
+      avatarText = '';
+    }
+
+    let mediaHTML = '';
+    if (state.selectedPostMedia.url) {
+      if (state.selectedPostMedia.type === 'image') {
+        mediaHTML = `<div class="post-media-attachment"><img src="${state.selectedPostMedia.url}" alt="Post Image"></div>`;
+      } else if (state.selectedPostMedia.type === 'video') {
+        mediaHTML = `<div class="post-media-attachment"><video src="${state.selectedPostMedia.url}" controls playsinline></video></div>`;
       }
     }
 
-    function removeComposerMedia() {
-      composerMedia = null;
-      const previewContainer = document.getElementById('composerPreviewContainer');
-      if (previewContainer) previewContainer.innerHTML = '';
+    let textHTML = content ? `<div class="post-content">${content}</div>` : '';
+
+    newPost.innerHTML = `
+      <div class="posthead">
+        <div class="posthead-left">
+          <div class="avatar currentUserAvatar" ${avatarStyle}>${avatarText}</div>
+          <div>
+            <div class="post-author-name">${state.currentUser.name}</div>
+            <div class="post-meta-line"><span>Just now</span> • <i class="fa-solid fa-cross"></i></div>
+          </div>
+        </div>
+      </div>
+      ${textHTML}
+      ${mediaHTML}
+      
+      <!-- HORIZONTAL ACTIONS ROW: LIKE, COMMENT, SHARE -->
+      <div class="actions">
+        <button class="action-btn like-btn" onclick="toggleLike(this)"><i class="fa-solid fa-heart"></i> Like (<span class="like-count">0</span>)</button>
+        <button class="action-btn comment-btn" onclick="toggleCommentSection(this)"><i class="fa-solid fa-comment"></i> Comment (<span class="comment-count">0</span>)</button>
+        <button class="action-btn share-btn" onclick="sharePost(this)"><i class="fa-solid fa-share"></i> Share</button>
+      </div>
+
+      <!-- COMMENT CONTAINER -->
+      <div class="comments-section hidden">
+        <div class="comments-list"></div>
+        <div class="comment-input-wrap">
+          <input type="text" class="comment-input-field" placeholder="Write a comment..." onkeydown="handleCommentKeydown(event, this)">
+          <button class="btn btn-gold btn-sm" style="width: auto;" onclick="submitComment(this)"><i class="fa-solid fa-paper-plane"></i></button>
+        </div>
+      </div>
+    `;
+
+    feed.prepend(newPost);
+
+    // Reset inputs
+    textInput.value = '';
+    state.selectedPostMedia = { file: null, url: null, type: null };
+    if (mediaFileInput) mediaFileInput.value = '';
+    if (previewContent) previewContent.innerHTML = '';
+    previewContainer.classList.add('hidden');
+    composerArea.classList.add('hidden');
+  });
+}
+
+/* =========================================================
+   4. POST CONTROLS: LIKE, COMMENT, SHARE FUNCTIONS
+========================================================= */
+
+// 1. LIKE FUNCTIONALITY
+function toggleLike(btn) {
+  const countSpan = btn.querySelector('.like-count');
+  let count = parseInt(countSpan.textContent) || 0;
+
+  if (btn.classList.contains('liked')) {
+    btn.classList.remove('liked');
+    countSpan.textContent = Math.max(0, count - 1);
+  } else {
+    btn.classList.add('liked');
+    countSpan.textContent = count + 1;
+  }
+}
+
+// 2. COMMENT FUNCTIONALITY
+function toggleCommentSection(btn) {
+  const card = btn.closest('.card');
+  const commentsSection = card.querySelector('.comments-section');
+  if (commentsSection) {
+    commentsSection.classList.toggle('hidden');
+    if (!commentsSection.classList.contains('hidden')) {
+      const inputField = commentsSection.querySelector('.comment-input-field');
+      if (inputField) inputField.focus();
+    }
+  }
+}
+
+function handleCommentKeydown(event, inputEl) {
+  if (event.key === 'Enter') {
+    event.preventDefault();
+    const submitBtn = inputEl.nextElementSibling;
+    if (submitBtn) submitBtn.click();
+  }
+}
+
+function submitComment(btn) {
+  const card = btn.closest('.card');
+  const inputField = card.querySelector('.comment-input-field');
+  const commentText = inputField.value.trim();
+
+  if (!commentText) return;
+
+  const commentsList = card.querySelector('.comments-list');
+  const newComment = document.createElement('div');
+  newComment.className = 'comment-item';
+
+  let avatarBg = state.currentUser.avatar;
+  let avatarStyle = '';
+  if (state.currentUser.photoUrl) {
+    avatarStyle = `style="background-image: url('${state.currentUser.photoUrl}'); color: transparent;"`;
+    avatarBg = '';
+  }
+
+  newComment.innerHTML = `
+    <div class="avatar" style="width: 28px; height: 28px; font-size: 12px; ${state.currentUser.photoUrl ? `background-image: url('${state.currentUser.photoUrl}'); color: transparent;` : ''}">${state.currentUser.photoUrl ? '' : state.currentUser.avatar}</div>
+    <div style="flex: 1;">
+      <div class="comment-author">${state.currentUser.name}</div>
+      <div class="comment-text">${escapeHtml(commentText)}</div>
+    </div>
+  `;
+
+  commentsList.appendChild(newComment);
+  inputField.value = '';
+
+  // Update comment count
+  const countSpan = card.querySelector('.comment-count');
+  let currentCount = parseInt(countSpan.textContent) || 0;
+  countSpan.textContent = currentCount + 1;
+}
+
+function escapeHtml(text) {
+  const div = document.createElement('div');
+  div.textContent = text;
+  return div.innerHTML;
+}
+
+// 3. SHARE FUNCTIONALITY
+function sharePost(btn) {
+  const card = btn.closest('.card');
+  const postContentEl = card.querySelector('.post-content');
+  const shareText = postContentEl ? postContentEl.textContent : "Check out this uplifting post on Believers+!";
+
+  if (navigator.share) {
+    navigator.share({
+      title: 'Believers+ Post',
+      text: shareText,
+      url: window.location.href
+    }).catch((err) => {
+      if (err.name !== 'AbortError') {
+        fallbackShare(shareText);
+      }
+    });
+  } else {
+    fallbackShare(shareText);
+  }
+}
+
+function fallbackShare(text) {
+  navigator.clipboard.writeText(window.location.href).then(() => {
+    alert("Post link copied to clipboard!");
+  }).catch(() => {
+    prompt("Copy link to share:", window.location.href);
+  });
+}
+
+/* =========================================================
+   5. FIND FRIENDS SYSTEM
+========================================================= */
+function bindFriendEvents() {}
+
+function renderFriends() {
+  const container = document.getElementById('friendsList');
+  if (!container) return;
+
+  const availableUsers = state.users.filter(u => u.id !== state.currentUser.id);
+
+  container.innerHTML = availableUsers.map(user => {
+    const isFriend = state.friends.includes(user.id);
+    const isRequested = state.friendRequests.includes(user.id);
+
+    let btnHtml = '';
+    if (isFriend) {
+      btnHtml = `<button class="btn btn-outline btn-sm" disabled><i class="fa-solid fa-check"></i> Friends</button>`;
+    } else if (isRequested) {
+      btnHtml = `<button class="btn btn-outline btn-sm" disabled><i class="fa-solid fa-clock"></i> Requested</button>`;
+    } else {
+      btnHtml = `<button class="btn btn-gold btn-sm" onclick="sendFriendRequest('${user.id}')"><i class="fa-solid fa-user-plus"></i> Add Friend</button>`;
     }
 
-    function submitPost() {
-      const text = document.getElementById('composerText').value.trim();
-      if (!text && !composerMedia) return;
+    return `
+      <div class="friend-card">
+        <div class="friend-info">
+          <div class="avatar">${user.avatar}</div>
+          <div>
+            <div style="font-weight: 800; font-size: 14px; color: var(--bp-primary);">${user.name}</div>
+            <div style="font-size: 12px; color: var(--bp-muted);">${user.handle}</div>
+          </div>
+        </div>
+        <div>${btnHtml}</div>
+      </div>
+    `;
+  }).join('');
+}
 
-      const newPost = {
-        id: Date.now(),
-        author: currentUser.name,
-        avatar: currentUser.avatar,
-        time: 'Just now',
-        content: text,
-        media: composerMedia ? { ...composerMedia } : null,
-        likes: 0,
-        liked: false,
-        comments: []
-      };
+function sendFriendRequest(userId) {
+  if (!state.friendRequests.includes(userId) && !state.friends.includes(userId)) {
+    state.friendRequests.push(userId);
+    renderFriends();
+  }
+}
 
-      posts.unshift(newPost);
-      localStorage.setItem('bp_posts', JSON.stringify(posts));
-      composerMedia = null;
-      renderApp();
+/* =========================================================
+   6. SEARCH FUNCTIONALITY
+========================================================= */
+function bindSearchEvents() {
+  const searchBtn = document.getElementById('topSearchBtn');
+  const searchOverlay = document.getElementById('searchBarOverlay');
+  const closeBtn = document.getElementById('closeSearchBtn');
+  const searchInput = document.getElementById('globalSearchInput');
+  const resultsPanel = document.getElementById('searchResultsPanel');
+
+  searchBtn?.addEventListener('click', () => {
+    searchOverlay.classList.toggle('hidden');
+    if (!searchOverlay.classList.contains('hidden')) {
+      searchInput.focus();
+    }
+  });
+
+  closeBtn?.addEventListener('click', () => {
+    searchOverlay.classList.add('hidden');
+    searchInput.value = '';
+    resultsPanel.classList.add('hidden');
+  });
+
+  searchInput?.addEventListener('input', (e) => {
+    const query = e.target.value.trim().toLowerCase();
+    if (!query) {
+      resultsPanel.classList.add('hidden');
+      resultsPanel.innerHTML = '';
+      return;
     }
 
-    function triggerStoryUpload() {
-      const input = document.createElement('input');
-      input.type = 'file';
-      input.accept = 'image/*';
-      input.onchange = e => {
-        const file = e.target.files[0];
-        if (file) {
-          const url = URL.createObjectURL(file);
-          stories.push({ id: Date.now(), author: currentUser.name, bg: url });
-          renderApp();
+    const matched = state.users.filter(u => u.name.toLowerCase().includes(query) || u.handle.toLowerCase().includes(query));
+    resultsPanel.classList.remove('hidden');
+
+    if (matched.length === 0) {
+      resultsPanel.innerHTML = `<div style="text-align: center; padding: 12px; color: var(--bp-muted); font-size: 13px;">No friends found matching "${query}"</div>`;
+      return;
+    }
+
+    resultsPanel.innerHTML = matched.map(u => `
+      <div class="search-item" onclick="switchTab('viewFriends'); document.getElementById('searchBarOverlay').classList.add('hidden');">
+        <div style="display: flex; align-items: center; gap: 10px;">
+          <div class="avatar">${u.avatar}</div>
+          <div>
+            <div style="font-weight: 700; font-size: 13px; color: var(--bp-primary);">${u.name}</div>
+            <div style="font-size: 11px; color: var(--bp-muted);">${u.handle}</div>
+          </div>
+        </div>
+        <i class="fa-solid fa-chevron-right" style="font-size: 12px; color: var(--bp-muted);"></i>
+      </div>
+    `).join('');
+  });
+}
+
+/* =========================================================
+   7. NOTIFICATIONS BELL & DROPDOWN
+========================================================= */
+function bindNotificationEvents() {
+  const bellBtn = document.getElementById('notifBellBtn');
+  const dropdown = document.getElementById('notifDropdown');
+  const markAllBtn = document.getElementById('markAllReadBtn');
+
+  bellBtn?.addEventListener('click', (e) => {
+    e.stopPropagation();
+    dropdown.classList.toggle('hidden');
+  });
+
+  document.addEventListener('click', (e) => {
+    if (!dropdown.contains(e.target) && !bellBtn.contains(e.target)) {
+      dropdown.classList.add('hidden');
+    }
+  });
+
+  markAllBtn?.addEventListener('click', () => {
+    state.notifications.forEach(n => n.read = true);
+    renderNotifications();
+  });
+}
+
+function renderNotifications() {
+  const list = document.getElementById('notifList');
+  const badge = document.getElementById('notifBadge');
+  if (!list || !badge) return;
+
+  const unreadCount = state.notifications.filter(n => !n.read).length;
+  if (unreadCount > 0) {
+    badge.textContent = unreadCount;
+    badge.classList.remove('hidden');
+  } else {
+    badge.classList.add('hidden');
+  }
+
+  list.innerHTML = state.notifications.map(n => `
+    <div class="notif-item ${n.read ? '' : 'unread'}" onclick="markNotifRead(${n.id})">
+      <i class="fa-solid fa-circle-info" style="color: var(--bp-gold);"></i>
+      <div style="flex: 1;">
+        <div style="font-size: 12px; color: var(--bp-text);">${n.text}</div>
+        <div style="font-size: 10px; color: var(--bp-muted); margin-top: 2px;">${n.time}</div>
+      </div>
+    </div>
+  `).join('');
+}
+
+function markNotifRead(id) {
+  const notif = state.notifications.find(n => n.id === id);
+  if (notif) {
+    notif.read = true;
+    renderNotifications();
+  }
+}
+
+/* =========================================================
+   8. CREATE GROUP (+) MODAL SYSTEM
+========================================================= */
+function bindGroupEvents() {
+  const topPlusBtn = document.getElementById('topPlusBtn');
+  const openBtn = document.getElementById('openCreateGroupBtn');
+  const closeBtn = document.getElementById('closeGroupModalBtn');
+  const saveBtn = document.getElementById('saveGroupBtn');
+  const modal = document.getElementById('createGroupModal');
+
+  const openModal = () => {
+    switchTab('viewGroups');
+    modal.classList.remove('hidden');
+  };
+
+  topPlusBtn?.addEventListener('click', openModal);
+  openBtn?.addEventListener('click', openModal);
+  closeBtn?.addEventListener('click', () => modal.classList.add('hidden'));
+
+  saveBtn?.addEventListener('click', () => {
+    const name = document.getElementById('newGroupName').value.trim();
+    const desc = document.getElementById('newGroupDesc').value.trim();
+
+    if (!name) return;
+
+    state.groups.push({
+      id: `g_${Date.now()}`,
+      name,
+      desc: desc || "Community Group"
+    });
+
+    document.getElementById('newGroupName').value = '';
+    document.getElementById('newGroupDesc').value = '';
+    modal.classList.add('hidden');
+    renderGroups();
+  });
+}
+
+function renderGroups() {
+  const container = document.getElementById('groupsList');
+  if (!container) return;
+
+  container.innerHTML = state.groups.map(g => `
+    <div class="group-card">
+      <div class="group-info">
+        <div class="avatar" style="border-radius: 10px;"><i class="fa-solid fa-users"></i></div>
+        <div>
+          <div style="font-weight: 800; font-size: 14px; color: var(--bp-primary);">${g.name}</div>
+          <div style="font-size: 12px; color: var(--bp-muted);">${g.desc}</div>
+        </div>
+      </div>
+      <button class="btn btn-outline btn-sm">Join Group</button>
+    </div>
+  `).join('');
+}
+
+/* =========================================================
+   9. VIDEO HUB PLAYBACK
+========================================================= */
+function bindVideoEvents() {}
+
+function renderVideos() {
+  const container = document.getElementById('videoFeedList');
+  if (!container) return;
+
+  container.innerHTML = state.videos.map(v => `
+    <div class="video-card">
+      <div class="video-container">
+        <video controls preload="metadata">
+          <source src="${v.url}" type="video/mp4">
+          Your browser does not support video playback.
+        </video>
+      </div>
+      <div class="video-info">
+        <div style="font-size: 15px; font-weight: 800; color: var(--bp-primary); margin-bottom: 4px;">${v.title}</div>
+        <div style="font-size: 12px; color: var(--bp-muted);">Shared by ${v.author}</div>
+      </div>
+    </div>
+  `).join('');
+}
+
+/* =========================================================
+   10. RESTORED PROFILE, PHOTOS & BIO MANAGEMENT
+========================================================= */
+function loadProfileFromStorage() {
+  try {
+    const saved = localStorage.getItem('believers_user_profile');
+    if (saved) {
+      const parsed = JSON.parse(saved);
+      state.currentUser.photoUrl = parsed.photoUrl || '';
+      state.currentUser.coverUrl = parsed.coverUrl || '';
+      state.currentUser.profile = { ...state.currentUser.profile, ...(parsed.profile || {}) };
+    }
+  } catch(e) {
+    console.error("Could not load profile from localStorage", e);
+  }
+}
+
+function saveProfileToStorage() {
+  try {
+    const dataToSave = {
+      photoUrl: state.currentUser.photoUrl,
+      coverUrl: state.currentUser.coverUrl,
+      profile: state.currentUser.profile
+    };
+    localStorage.setItem('believers_user_profile', JSON.stringify(dataToSave));
+  } catch(e) {
+    console.error("Could not save profile to localStorage", e);
+  }
+}
+
+function bindPhotoUploadEvents() {
+  const profileInput = document.getElementById('profilePhotoPicker');
+  const coverInput = document.getElementById('coverPhotoPicker');
+
+  profileInput?.addEventListener('change', (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = function(evt) {
+        state.tempAvatarUrl = evt.target.result;
+        const preview = document.getElementById('avatarPreviewBox');
+        if (preview) {
+          preview.style.backgroundImage = `url('${state.tempAvatarUrl}')`;
+          preview.textContent = '';
+        }
+        // Direct update if edited from header badge
+        if (document.getElementById('profileEditFields').classList.contains('hidden')) {
+          state.currentUser.photoUrl = state.tempAvatarUrl;
+          saveProfileToStorage();
+          renderProfile();
         }
       };
-      input.click();
+      reader.readAsDataURL(file);
     }
+  });
 
-    function renderPostCard(post) {
-      return `
-        <div class="card" id="post-${post.id}">
-          <div class="posthead">
-            <div class="posthead-left">
-              <div class="avatar" style="${post.avatar ? 'background-image: url('+post.avatar+')' : ''}">
-                ${!post.avatar ? post.author.charAt(0).toUpperCase() : ''}
-              </div>
-              <div>
-                <div class="post-author-name">${post.author}</div>
-                <div class="post-meta-line"><i class="fa-solid fa-clock"></i> ${post.time}</div>
-              </div>
-            </div>
-            <button style="color: var(--bp-muted);"><i class="fa-solid fa-ellipsis"></i></button>
-          </div>
-
-          <div class="post-content">${post.content}</div>
-
-          ${post.media ? `
-            <div class="post-media-attachment">
-              ${post.media.type === 'video' ? `<video src="${post.media.url}" controls></video>` : `<img src="${post.media.url}" alt="Post attachment">`}
-            </div>
-          ` : ''}
-
-          <div class="actions">
-            <button class="action-btn ${post.liked ? 'liked' : ''}" onclick="toggleLike(${post.id})">
-              <i class="${post.liked ? 'fa-solid' : 'fa-regular'} fa-heart"></i> <span>${post.likes}</span>
-            </button>
-            <button class="action-btn" onclick="toggleComments(${post.id})">
-              <i class="fa-regular fa-comment"></i> <span>${post.comments.length}</span>
-            </button>
-            <button class="action-btn" onclick="alert('Post link copied to clipboard!')">
-              <i class="fa-solid fa-share"></i> <span>Share</span>
-            </button>
-          </div>
-
-          <div class="comments-section" id="comments-box-${post.id}">
-            <div class="comments-list">
-              ${post.comments.map(c => `
-                <div class="comment-item">
-                  <div class="avatar" style="width:28px; height:28px; font-size:12px;">${c.author.charAt(0)}</div>
-                  <div style="flex:1;">
-                    <div class="comment-author">${c.author}</div>
-                    <div class="comment-text">${c.text}</div>
-                  </div>
-                </div>
-              `).join('')}
-            </div>
-            <div class="comment-input-wrap">
-              <input type="text" id="comment-input-${post.id}" placeholder="Write a comment..." onkeydown="if(event.key==='Enter') submitComment(${post.id})">
-              <button class="btn btn-gold btn-sm" onclick="submitComment(${post.id})"><i class="fa-solid fa-paper-plane"></i></button>
-            </div>
-          </div>
-        </div>
-      `;
-    }
-
-    function toggleLike(postId) {
-      const post = posts.find(p => p.id === postId);
-      if (post) {
-        if (post.liked) {
-          post.liked = false;
-          post.likes--;
-        } else {
-          post.liked = true;
-          post.likes++;
+  coverInput?.addEventListener('change', (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = function(evt) {
+        state.tempCoverUrl = evt.target.result;
+        const preview = document.getElementById('coverPreviewBox');
+        if (preview) {
+          preview.style.backgroundImage = `url('${state.tempCoverUrl}')`;
+          preview.textContent = '';
         }
-        localStorage.setItem('bp_posts', JSON.stringify(posts));
-        renderApp();
-      }
+        // Direct update if edited from cover badge
+        if (document.getElementById('profileEditFields').classList.contains('hidden')) {
+          state.currentUser.coverUrl = state.tempCoverUrl;
+          saveProfileToStorage();
+          renderProfile();
+        }
+      };
+      reader.readAsDataURL(file);
+    }
+  });
+}
+
+function bindProfileEvents() {
+  const editBtn = document.getElementById('editProfileToggleBtn');
+  const cancelBtn = document.getElementById('cancelProfileBtn');
+  const saveBtn = document.getElementById('saveProfileBtn');
+  const viewPanel = document.getElementById('profileViewFields');
+  const editPanel = document.getElementById('profileEditFields');
+
+  editBtn?.addEventListener('click', () => {
+    const p = state.currentUser.profile;
+    document.getElementById('editAddress').value = p.address || '';
+    document.getElementById('editWorkplace').value = p.workplace || '';
+    document.getElementById('editContact').value = p.contact || '';
+    document.getElementById('editEduLevel').value = p.eduLevel || '';
+    document.getElementById('editSchool').value = p.school || '';
+    document.getElementById('editBio').value = p.bio || '';
+
+    state.tempAvatarUrl = null;
+    state.tempCoverUrl = null;
+
+    const avatarPrev = document.getElementById('avatarPreviewBox');
+    const coverPrev = document.getElementById('coverPreviewBox');
+
+    if (state.currentUser.photoUrl) {
+      avatarPrev.style.backgroundImage = `url('${state.currentUser.photoUrl}')`;
+      avatarPrev.textContent = '';
+    } else {
+      avatarPrev.style.backgroundImage = 'none';
+      avatarPrev.textContent = 'No avatar selected';
     }
 
-    function toggleComments(postId) {
-      // Focus comment input
-      const input = document.getElementById(`comment-input-${postId}`);
-      if (input) input.focus();
+    if (state.currentUser.coverUrl) {
+      coverPrev.style.backgroundImage = `url('${state.currentUser.coverUrl}')`;
+      coverPrev.textContent = '';
+    } else {
+      coverPrev.style.backgroundImage = 'none';
+      coverPrev.textContent = 'No cover selected';
     }
 
-    function submitComment(postId) {
-      const input = document.getElementById(`comment-input-${postId}`);
-      const text = input ? input.value.trim() : '';
-      if (!text) return;
+    viewPanel.classList.add('hidden');
+    editPanel.classList.remove('hidden');
+  });
 
-      const post = posts.find(p => p.id === postId);
-      if (post) {
-        post.comments.push({ author: currentUser.name, text });
-        localStorage.setItem('bp_posts', JSON.stringify(posts));
-        renderApp();
-      }
+  cancelBtn?.addEventListener('click', () => {
+    editPanel.classList.add('hidden');
+    viewPanel.classList.remove('hidden');
+  });
+
+  saveBtn?.addEventListener('click', () => {
+    if (state.tempAvatarUrl) {
+      state.currentUser.photoUrl = state.tempAvatarUrl;
+    }
+    if (state.tempCoverUrl) {
+      state.currentUser.coverUrl = state.tempCoverUrl;
     }
 
-    /* =========================================================
-       FRIENDS VIEW
-    ========================================================= */
-    function renderFriendsView() {
-      return `
-        <div class="card">
-          <h2 style="font-size: 18px; font-weight: 800; color: var(--bp-primary); margin-bottom: 4px;">Fellowship Members</h2>
-          <p style="font-size: 13px; color: var(--bp-muted);">Connect and pray with other members of your community.</p>
-          <div class="friends-list">
-            ${friends.map(f => `
-              <div class="friend-card">
-                <div class="friend-info">
-                  <div class="avatar">${f.name.charAt(0)}</div>
-                  <div>
-                    <div style="font-weight: 800; font-size: 14px; color: var(--bp-primary);">${f.name}</div>
-                    <div style="font-size: 11px; color: var(--bp-muted);">${f.role}</div>
-                  </div>
-                </div>
-                <button class="btn btn-gold btn-sm" onclick="alert('Connection request sent to ${f.name}!')">Connect</button>
-              </div>
-            `).join('')}
-          </div>
-        </div>
-      `;
+    state.currentUser.profile.address = document.getElementById('editAddress').value.trim();
+    state.currentUser.profile.workplace = document.getElementById('editWorkplace').value.trim();
+    state.currentUser.profile.contact = document.getElementById('editContact').value.trim();
+    state.currentUser.profile.eduLevel = document.getElementById('editEduLevel').value.trim();
+    state.currentUser.profile.school = document.getElementById('editSchool').value.trim();
+    state.currentUser.profile.bio = document.getElementById('editBio').value.trim();
+
+    saveProfileToStorage();
+    renderProfile();
+
+    editPanel.classList.add('hidden');
+    viewPanel.classList.remove('hidden');
+  });
+}
+
+function renderProfile() {
+  const p = state.currentUser.profile;
+
+  document.getElementById('profDisplayFullName').textContent = state.currentUser.name;
+  document.getElementById('profDisplayHandle').textContent = state.currentUser.handle;
+
+  document.getElementById('valAddress').textContent = p.address || "Not specified";
+  document.getElementById('valWorkplace').textContent = p.workplace || "Not specified";
+  document.getElementById('valContact').textContent = p.contact || "Not specified";
+  document.getElementById('valEduLevel').textContent = p.eduLevel || "Not specified";
+  document.getElementById('valSchool').textContent = p.school || "Not specified";
+  document.getElementById('valBio').textContent = p.bio || "Not specified";
+
+  // Update profile photo across app
+  const avatarEl = document.getElementById('profileAvatarLarge');
+  const composerAvatar = document.getElementById('composerUserAvatar');
+  const storyBg = document.getElementById('storyUserBg');
+
+  if (state.currentUser.photoUrl) {
+    if (avatarEl) {
+      avatarEl.style.backgroundImage = `url('${state.currentUser.photoUrl}')`;
+      avatarEl.textContent = '';
     }
-
-    /* =========================================================
-       GROUPS VIEW
-    ========================================================= */
-    function renderGroupsView() {
-      return `
-        <div class="card">
-          <h2 style="font-size: 18px; font-weight: 800; color: var(--bp-primary); margin-bottom: 4px;">Community Groups</h2>
-          <p style="font-size: 13px; color: var(--bp-muted);">Join focused circles for prayer, study, and collaboration.</p>
-          <div class="groups-list">
-            ${groups.map(g => `
-              <div class="group-card">
-                <div class="group-info">
-                  <div class="avatar" style="background:var(--bp-accent); color:var(--bp-gold);"><i class="fa-solid fa-users"></i></div>
-                  <div>
-                    <div style="font-weight: 800; font-size: 14px; color: var(--bp-primary);">${g.name}</div>
-                    <div style="font-size: 11px; color: var(--bp-muted);">${g.members}</div>
-                  </div>
-                </div>
-                <button class="btn ${g.joined ? 'btn-outline' : 'btn-gold'} btn-sm" onclick="toggleGroupJoin('${g.name}')">
-                  ${g.joined ? 'Joined' : 'Join'}
-                </button>
-              </div>
-            `).join('')}
-          </div>
-        </div>
-      `;
+    if (composerAvatar) {
+      composerAvatar.style.backgroundImage = `url('${state.currentUser.photoUrl}')`;
+      composerAvatar.textContent = '';
     }
-
-    function toggleGroupJoin(groupName) {
-      const g = groups.find(item => item.name === groupName);
-      if (g) {
-        g.joined = !g.joined;
-        renderApp();
-      }
+    if (storyBg) {
+      storyBg.style.backgroundImage = `url('${state.currentUser.photoUrl}')`;
     }
-
-    /* =========================================================
-       PROFILE VIEW
-    ========================================================= */
-    function renderProfileView() {
-      return `
-        <div class="profile-card">
-          <div class="profile-cover-area"></div>
-          <div class="profile-header-content">
-            <div class="profile-avatar-wrapper">
-              <div class="profile-avatar-large" style="${currentUser.avatar ? 'background-image: url('+currentUser.avatar+')' : ''}">
-                ${!currentUser.avatar ? currentUser.name.charAt(0).toUpperCase() : ''}
-              </div>
-            </div>
-            <h1 style="font-size: 20px; font-weight: 800; color: var(--bp-primary);">${currentUser.name}</h1>
-            <p style="font-size: 13px; color: var(--bp-muted); margin-top: 2px;">Active Believers+ Member</p>
-          </div>
-        </div>
-
-        <div class="about-me-card">
-          <div class="about-me-header">
-            <div class="about-me-title"><i class="fa-solid fa-id-card"></i> Account Information</div>
-          </div>
-          <div class="profile-field-item">
-            <div class="profile-field-icon"><i class="fa-solid fa-user"></i></div>
-            <div class="profile-field-content">
-              <label>Full Name</label>
-              <div>${currentUser.name}</div>
-            </div>
-          </div>
-          <div class="profile-field-item">
-            <div class="profile-field-icon"><i class="fa-solid fa-envelope"></i></div>
-            <div class="profile-field-content">
-              <label>Email Address</label>
-              <div>${currentUser.email}</div>
-            </div>
-          </div>
-        </div>
-      `;
+  } else {
+    if (avatarEl) {
+      avatarEl.style.backgroundImage = 'none';
+      avatarEl.textContent = state.currentUser.avatar;
     }
+    if (composerAvatar) {
+      composerAvatar.style.backgroundImage = 'none';
+      composerAvatar.textContent = state.currentUser.avatar;
+    }
+    if (storyBg) {
+      storyBg.style.backgroundImage = 'none';
+    }
+  }
 
-    // Initialize application on load
-    renderApp();
-  </script>
+  // Update cover photo
+  const coverBg = document.getElementById('profileCoverBg');
+  if (coverBg) {
+    if (state.currentUser.coverUrl) {
+      coverBg.style.backgroundImage = `url('${state.currentUser.coverUrl}')`;
+    } else {
+      coverBg.style.backgroundImage = 'linear-gradient(135deg, var(--bp-primary), var(--bp-accent))';
+    }
+  }
+}
+</script>
 </body>
 </html>
