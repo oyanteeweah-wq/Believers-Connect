@@ -1,9 +1,315 @@
-index.html
-style.css
-supabase.js
-auth.js
-login.html
-register.html
-profile.html
-friends.html
-videos.html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Videos - Believer Connect</title>
+
+<link rel="stylesheet" href="style.css">
+
+<style>
+.videos-page {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 15px;
+}
+
+.videos-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.videos-header h1 {
+    margin: 0;
+    font-size: 28px;
+    color: #222;
+}
+
+.home-link {
+    color: #0756d9;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.video-list {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+
+.video-card {
+    background: #fff;
+    border-radius: 14px;
+    overflow: hidden;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+}
+
+.video-player {
+    width: 100%;
+    display: block;
+    background: #000;
+    max-height: 520px;
+}
+
+.video-info {
+    padding: 14px;
+}
+
+.video-title {
+    margin: 0 0 7px;
+    font-size: 18px;
+    font-weight: 700;
+    color: #222;
+}
+
+.video-description {
+    margin: 0;
+    color: #666;
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+.video-actions {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 0 14px 14px;
+}
+
+.video-action {
+    border: none;
+    background: #edf2f8;
+    color: #333;
+    border-radius: 8px;
+    padding: 9px 13px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.video-action:hover {
+    background: #dfe7f2;
+}
+
+.empty-videos {
+    text-align: center;
+    padding: 60px 20px;
+    color: #777;
+}
+
+.empty-videos h2 {
+    color: #333;
+    margin-bottom: 8px;
+}
+
+.loading {
+    text-align: center;
+    padding: 40px;
+    color: #777;
+}
+
+@media (max-width: 600px) {
+    .videos-page {
+        padding: 10px;
+    }
+
+    .videos-header h1 {
+        font-size: 24px;
+    }
+
+    .video-title {
+        font-size: 16px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="videos-page">
+
+    <div class="videos-header">
+        <h1>Videos</h1>
+
+        <a href="index.html" class="home-link">
+            ← Home
+        </a>
+    </div>
+
+    <div id="videoList" class="video-list">
+
+        <div class="loading">
+            Loading videos...
+        </div>
+
+    </div>
+
+</div>
+
+<script src="supabase.js"></script>
+<script src="auth.js"></script>
+
+<script>
+
+document.addEventListener("DOMContentLoaded", function () {
+    loadVideos();
+});
+
+
+async function loadVideos() {
+
+    const videoList = document.getElementById("videoList");
+
+    /*
+     * Videos can be connected to Supabase later.
+     * For now the page is ready to display video posts.
+     */
+
+    videoList.innerHTML = `
+        <div class="empty-videos">
+
+            <h2>No videos yet</h2>
+
+            <p>
+                Videos shared by believers will appear here.
+            </p>
+
+        </div>
+    `;
+}
+
+
+function createVideoCard(video) {
+
+    const title = video.title || "Believer Connect Video";
+
+    const description =
+        video.description || "";
+
+    const videoUrl =
+        video.video_url || video.url || "";
+
+    return `
+        <article class="video-card">
+
+            <video
+                class="video-player"
+                controls
+                playsinline
+                preload="metadata"
+            >
+                <source src="${videoUrl}" type="video/mp4">
+                Your browser does not support video playback.
+            </video>
+
+            <div class="video-info">
+
+                <h2 class="video-title">
+                    ${escapeHTML(title)}
+                </h2>
+
+                <p class="video-description">
+                    ${escapeHTML(description)}
+                </p>
+
+            </div>
+
+            <div class="video-actions">
+
+                <button
+                    class="video-action"
+                    onclick="likeVideo('${video.id || ""}')"
+                >
+                    👍 Like
+                </button>
+
+                <button
+                    class="video-action"
+                    onclick="commentVideo('${video.id || ""}')"
+                >
+                    💬 Comment
+                </button>
+
+                <button
+                    class="video-action"
+                    onclick="shareVideo('${video.id || ""}')"
+                >
+                    ↗ Share
+                </button>
+
+            </div>
+
+        </article>
+    `;
+}
+
+
+function escapeHTML(text) {
+
+    const div = document.createElement("div");
+
+    div.textContent = text;
+
+    return div.innerHTML;
+}
+
+
+function likeVideo(videoId) {
+
+    if (!videoId) {
+        alert("Video like feature will be connected soon.");
+        return;
+    }
+
+    console.log("Like video:", videoId);
+}
+
+
+function commentVideo(videoId) {
+
+    if (!videoId) {
+        alert("Video comments will be connected soon.");
+        return;
+    }
+
+    console.log("Comment on video:", videoId);
+}
+
+
+async function shareVideo(videoId) {
+
+    const shareData = {
+        title: "Believer Connect",
+        text: "Check out this video on Believer Connect.",
+        url: window.location.href
+    };
+
+    try {
+
+        if (navigator.share) {
+
+            await navigator.share(shareData);
+
+        } else {
+
+            await navigator.clipboard.writeText(
+                window.location.href
+            );
+
+            alert("Video link copied!");
+
+        }
+
+    } catch (error) {
+
+        console.log("Share cancelled.");
+
+    }
+}
+
+</script>
+
+</body>
+</html>
