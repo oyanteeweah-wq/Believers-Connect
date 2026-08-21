@@ -1,7 +1,299 @@
-index.html
-style.css
-supabase.js
-auth.js
-login.html
-register.html
-profile.html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#0756d9">
+
+  <title>Believers+ - Profile</title>
+
+  <link rel="stylesheet" href="style.css">
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+
+<body>
+
+  <div class="auth-page">
+
+    <div class="auth">
+
+      <!-- BRAND -->
+      <div class="auth-brand">
+
+        <div class="auth-logo">✝</div>
+
+        <div class="brand">
+          Believers<span>+</span>
+        </div>
+
+        <div style="font-size:13px;opacity:.8;margin-top:4px">
+          One Community • One Faith
+        </div>
+
+      </div>
+
+
+      <!-- PROFILE CARD -->
+      <div class="auth-card">
+
+        <div style="text-align:center">
+
+          <!-- Profile picture -->
+          <div id="profileAvatar"
+               style="
+                 width:90px;
+                 height:90px;
+                 border-radius:50%;
+                 margin:0 auto 15px;
+                 background:#0756d9;
+                 color:white;
+                 display:flex;
+                 align-items:center;
+                 justify-content:center;
+                 font-size:36px;
+                 font-weight:800;
+                 overflow:hidden;
+               ">
+            👤
+          </div>
+
+          <h2 id="profileName"
+              style="
+                margin:0;
+                color:var(--bp-primary);
+                font-size:21px;
+                font-weight:800;
+              ">
+            Loading...
+          </h2>
+
+          <p id="profileEmail"
+             style="
+               margin-top:6px;
+               color:var(--bp-muted);
+               font-size:13px;
+             ">
+            Loading...
+          </p>
+
+        </div>
+
+
+        <div class="divider"></div>
+
+
+        <!-- Profile information -->
+
+        <div class="form-group">
+
+          <label>Full Name</label>
+
+          <div id="profileFullName"
+               style="
+                 padding:12px;
+                 border:1px solid #ddd;
+                 border-radius:8px;
+                 font-size:14px;
+               ">
+            Loading...
+          </div>
+
+        </div>
+
+
+        <div class="form-group">
+
+          <label>Email Address</label>
+
+          <div id="profileEmailBox"
+               style="
+                 padding:12px;
+                 border:1px solid #ddd;
+                 border-radius:8px;
+                 font-size:14px;
+               ">
+            Loading...
+          </div>
+
+        </div>
+
+
+        <div class="divider"></div>
+
+
+        <!-- Navigation -->
+
+        <a href="index.html"
+           class="btn btn-gold"
+           style="
+             display:block;
+             text-align:center;
+             text-decoration:none;
+             box-sizing:border-box;
+           ">
+          Back to Believers+
+        </a>
+
+
+        <button
+          id="profileLogout"
+          type="button"
+          class="btn"
+          style="
+            width:100%;
+            margin-top:10px;
+          ">
+          Log Out
+        </button>
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <!-- Supabase -->
+
+  <script src="supabase.js"></script>
+  <script src="auth.js"></script>
+
+
+  <!-- Profile page -->
+
+  <script>
+
+    document.addEventListener("DOMContentLoaded", async function () {
+
+      try {
+
+        const {
+          data: {
+            session
+          }
+        } = await supabaseClient.auth.getSession();
+
+
+        if (!session || !session.user) {
+
+          window.location.href = "login.html";
+
+          return;
+
+        }
+
+
+        const user = session.user;
+
+
+        /*
+         * Get the name from the profile created
+         * during registration.
+         */
+
+        let fullName =
+          user.user_metadata?.full_name ||
+          user.email?.split("@")[0] ||
+          "Believer";
+
+
+        try {
+
+          const {
+            data: profile
+          } = await supabaseClient
+            .from("profiles")
+            .select("*")
+            .eq("id", user.id)
+            .single();
+
+
+          if (profile) {
+
+            fullName =
+              profile.full_name ||
+              profile.name ||
+              fullName;
+
+          }
+
+        } catch (error) {
+
+          console.log("Profile table lookup skipped:", error);
+
+        }
+
+
+        /*
+         * Display information
+         */
+
+        document.getElementById("profileName").textContent =
+          fullName;
+
+        document.getElementById("profileFullName").textContent =
+          fullName;
+
+        document.getElementById("profileEmail").textContent =
+          user.email || "";
+
+        document.getElementById("profileEmailBox").textContent =
+          user.email || "";
+
+
+        /*
+         * Create initials for the avatar
+         */
+
+        const words = fullName.trim().split(/\s+/);
+
+        let initials = "";
+
+        if (words.length >= 2) {
+
+          initials =
+            words[0].charAt(0) +
+            words[words.length - 1].charAt(0);
+
+        } else {
+
+          initials =
+            fullName.substring(0, 2);
+
+        }
+
+
+        document.getElementById("profileAvatar").textContent =
+          initials.toUpperCase();
+
+
+        /*
+         * Logout
+         */
+
+        document.getElementById("profileLogout").onclick =
+          async function () {
+
+            await supabaseClient.auth.signOut();
+
+            window.location.href = "login.html";
+
+          };
+
+
+      } catch (error) {
+
+        console.error(error);
+
+        document.getElementById("profileName").textContent =
+          "Unable to load profile";
+
+      }
+
+    });
+
+  </script>
+
+</body>
+</html>
